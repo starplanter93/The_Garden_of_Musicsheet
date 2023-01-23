@@ -16,9 +16,11 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+        working-directory: ./client
 
       - name: Build
         run: npm run build
+        working-directory: ./client
 
       - name: Deploy
         env:
@@ -29,3 +31,4 @@ jobs:
             --recursive \
             --region ap-northeast-2 \
             dist s3://gardenmusic
+        working-directory: ./client
