@@ -1,5 +1,5 @@
-import React from "react";
-import "./App.scss";
+import React from 'react';
+import './App.scss';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React test1234
+          Learn React test1234567
         </a>
       </header>
     </div>
