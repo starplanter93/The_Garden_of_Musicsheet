@@ -51,13 +51,5 @@ jobs:
         aws deploy push \
         --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
         --ignore-hidden-files \
-        --s3-location s3://sheet-action-s3-bucket/$GITHUB_SHA.zip \
+        --s3-location s3://$GITHUB_SHA.zip \
         --source .
-
-    - name: Deploy to AWS EC2 from S3
-      run: |
-        aws deploy create-deployment \
-          --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
-          --deployment-config-name CodeDeployDefault.AllAtOnce \
-          --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
-          --s3-location bucket= ${{ env.S3_BUCKET_NAME }},key=Garden_MusicSheet/$GITHUB_SHA.zip,bundleType=zip
