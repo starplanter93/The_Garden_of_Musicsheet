@@ -47,6 +47,7 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Upload to S3
-      run: | 
+      run: |
+        ls -al \
         aws s3 cp --region ${{ env.AWS_REGION }} ./$GITHUB_SHA.zip s3://sheet-action-s3-bucket/$GITHUB_SHA.zip
 
