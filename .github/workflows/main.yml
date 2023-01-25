@@ -47,6 +47,7 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
 
     - run: ls -al
+    - run: pwd
     - name: Upload to S3
       run: |
-        aws s3 cp --region ${{ env.AWS_REGION }} ./home/runner/work/The_Garden_of_Musicsheet/$GITHUB_SHA.zip s3://sheet-action-s3-bucket/$GITHUB_SHA.zip
+        aws s3 cp --region ${{ env.AWS_REGION }} ./backend/$GITHUB_SHA.zip s3://sheet-action-s3-bucket/$GITHUB_SHA.zip
