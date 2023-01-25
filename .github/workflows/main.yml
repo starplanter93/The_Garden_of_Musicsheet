@@ -23,7 +23,7 @@ jobs:
 
 
     - name: Setup Node.js environment
-      uses: actions/setup-node@3.4.1
+      uses: actions/setup-node@3.6.0
       with:
         node-version: 18.12.1
         
