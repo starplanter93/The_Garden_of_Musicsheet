@@ -46,7 +46,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.BACK_AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
+    - run: ls -al
     - name: Upload to S3
       run: |
         aws s3 cp --region ${{ env.AWS_REGION }} ./home/runner/work/The_Garden_of_Musicsheet/$GITHUB_SHA.zip s3://sheet-action-s3-bucket/$GITHUB_SHA.zip
-    - run: ls -al
