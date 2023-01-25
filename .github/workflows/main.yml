@@ -11,6 +11,7 @@ env:
   S3_BUCKET_NAME: sheet-action-s3-bucket
   CODE_DEPLOY_APPLICATION_NAME: sheet-codedeploy-app
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: sheet-codedeploy-group
+  AWS_EC2_METADATA_DISABLED: true
 
 jobs:
   deploy:
@@ -45,7 +46,6 @@ jobs:
         aws-access-key-id: ${{ secrets.BACK_AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.BACK_AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
-        AWS_EC2_METADATA_DISABLED: true
 
     - name: Upload to S3
       run: aws s3 cp --region ${{ env.AWS_REGION }} ./$GITHUB_SHA.zip s3://${{ env.S3_BUCKET_NAME }}/Garden_MusicSheet/$GITHUB_SHA.zip
