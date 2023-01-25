@@ -46,8 +46,14 @@ jobs:
         aws-secret-access-key: ${{ secrets.BACK_AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
-    - run: ls -al
-    - run: pwd
     - name: Upload to S3
       run: |
         aws s3 cp --region ${{ env.AWS_REGION }} ./backend/$GITHUB_SHA.zip s3://sheet-action-s3-bucket/$GITHUB_SHA.zip
+        
+    - name: Deploy to AWS EC2 from S3
+      run: |
+        aws deploy create-deployment \
+          --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
+          --s3-location bucket= ${{ env.S3_BUCKET_NAME }},key=$GITHUB_SHA.zip,bundleType=zip
