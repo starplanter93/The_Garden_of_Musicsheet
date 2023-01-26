@@ -1,4 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { User } from '@prisma/client';
 
@@ -20,5 +25,17 @@ export class AuthService {
     }
 
     return this.PrismaService.user.create({ data: newUser });
+  }
+
+  //로그인
+  async validateUser(user: User): Promise<User> {
+    const userValidation: User = await this.PrismaService.user.findUnique({
+      where: { userEmail: user.userEmail },
+    });
+
+    if (!userValidation || user.password !== userValidation.password) {
+      throw new UnauthorizedException();
+    }
+    return userValidation;
   }
 }
