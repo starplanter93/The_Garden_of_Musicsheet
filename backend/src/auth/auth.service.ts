@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { User } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -24,18 +25,27 @@ export class AuthService {
       );
     }
 
+    newUser.password = await bcrypt.hash(newUser.password, 10);
+
     return this.PrismaService.user.create({ data: newUser });
   }
 
   //로그인
-  async validateUser(user: User): Promise<User> {
+  async validateUser(user: User): Promise<string> {
     const userValidation: User = await this.PrismaService.user.findUnique({
       where: { userEmail: user.userEmail },
     });
 
-    if (!userValidation || user.password !== userValidation.password) {
+    const passwordValidation = await bcrypt.compare(
+      user.password,
+      userValidation.password,
+    );
+
+    console.log(passwordValidation);
+
+    if (!userValidation || !passwordValidation) {
       throw new UnauthorizedException();
     }
-    return userValidation;
+    return '로그인에 성공했습니다.';
   }
 }

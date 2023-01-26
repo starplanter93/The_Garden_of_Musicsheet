@@ -14,7 +14,7 @@ export class AuthController {
   }
 
   @Post('/login')
-  async loginAccount(@Body() user: User): Promise<User> {
+  async loginAccount(@Body() user: User): Promise<string> {
     return await this.authService.validateUser(user);
   }
 }
