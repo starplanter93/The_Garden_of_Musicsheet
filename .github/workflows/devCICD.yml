@@ -1,4 +1,4 @@
-name: mainCICD
+name: devCICD
 
 on:
   push:
