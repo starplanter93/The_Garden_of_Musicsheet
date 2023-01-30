@@ -1,4 +1,5 @@
 import * as icons from './icons';
+import './icon.scss';
 
 interface IconProps {
   icon: keyof typeof icons;
