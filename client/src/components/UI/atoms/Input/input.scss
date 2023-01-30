@@ -1,0 +1,20 @@
+@import '../../../../utils/utils';
+
+.input {
+  position: absolute;
+  top: 0;
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+  padding-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  background-color: transparent;
+  outline: 0;
+  border-radius: 0.5rem;
+  color: $black;
+  border: 2px solid $gray;
+}
+
+.input:focus {
+  border: 2px solid $deep-green;
+}

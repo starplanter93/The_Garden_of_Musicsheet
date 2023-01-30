@@ -1,22 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.scss';
+import { test } from './firebase/firebase';
+import { Document, Page } from 'react-pdf';
+import { pdfjs } from 'react-pdf';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 function App() {
+  const [data, setData] = useState<any>([]);
+
+  useEffect(() => {
+    test().then((data) => data.forEach((doc) => setData(doc.data())));
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React test1234567
-        </a>
-      </header>
+      {/* <embed src={data.image} width="800px" height="2100px" /> */}
+      <Document file={data.image}>
+        <Page pageNumber={1} />
+      </Document>
     </div>
   );
 }

@@ -1,0 +1,16 @@
+@import '../../../../utils/utils';
+
+.label {
+  position: absolute;
+  left: 74px;
+  top: 10px;
+  pointer-events: none;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  color: $gray;
+}
+
+.label--focused {
+  top: 2.5px;
+  font-size: 0.75rem;
+}
