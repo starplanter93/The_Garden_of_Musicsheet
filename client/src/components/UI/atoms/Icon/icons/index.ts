@@ -16,6 +16,8 @@ import {
   MdUpload,
   MdInfoOutline,
   MdOutlineRemoveCircle,
+  MdOutlineFileDownload,
+  MdOutlineArrowDropDown,
 } from 'react-icons/md';
 import { BiUserCircle, BiCoin, BiPencil, BiSearch } from 'react-icons/bi';
 import {
@@ -47,6 +49,8 @@ export {
   MdUpload,
   MdInfoOutline,
   MdOutlineRemoveCircle,
+  MdOutlineFileDownload,
+  MdOutlineArrowDropDown,
   BiUserCircle,
   BiCoin,
   BiPencil,
