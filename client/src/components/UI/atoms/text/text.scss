@@ -1,0 +1,67 @@
+@import '../../../../utils/_utils';
+
+.text {
+  font-size: 1rem;
+  font-weight: 400;
+  color: $black;
+}
+
+.text--xs {
+  font-size: 0.75rem;
+}
+
+.text--s {
+  font-size: 0.875rem;
+}
+
+.text--m {
+  font-size: 1rem;
+}
+
+.text--lg {
+  font-size: 1.25rem;
+}
+
+.text--xlg {
+  font-size: 1.5rem;
+}
+
+.text--2xlg {
+  font-size: 1.75rem;
+}
+
+.text--regular {
+  font-weight: 400;
+}
+
+.text--medium {
+  font-weight: 500;
+}
+
+.text--semibold {
+  font-weight: 600;
+}
+
+.text--bold {
+  font-weight: 700;
+}
+
+.text--black {
+  color: $black;
+}
+
+.text--green {
+  color: $deep-green;
+}
+
+.text--white {
+  color: $white;
+}
+
+.text--blue {
+  color: $blue;
+}
+
+.text--red {
+  color: $red;
+}
