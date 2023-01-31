@@ -10,14 +10,21 @@
   height: 3.5rem;
   position: relative;
   border-radius: 0.25rem;
+  display: flex;
+}
+.textInput__icon {
+  position: absolute;
+  top: 12px;
+  left: 12px;
 }
 
 .textInput__invalid {
   display: flex;
   position: relative;
-  color: #dc2626;
-  font-size: 0.875rem;
   line-height: 1.25rem;
   align-items: center;
   pointer-events: none;
+  padding-left: 24px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }

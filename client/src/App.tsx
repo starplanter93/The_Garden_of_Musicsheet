@@ -3,7 +3,7 @@ import './App.scss';
 import { test } from './firebase/firebase';
 import { Document, Page } from 'react-pdf';
 
-import Login from './components/UI/organisms/Login/Login';
+import UserAuth from './components/UI/organisms/UserAuth/UserAuth';
 
 function App() {
   const [data, setData] = useState<any>([]);
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <Login />
+      <UserAuth />
     </div>
   );
 }

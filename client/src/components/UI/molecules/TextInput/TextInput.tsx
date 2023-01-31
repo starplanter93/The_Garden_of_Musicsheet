@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Label } from '../../atoms';
-import { Input } from '../../atoms';
-import { Text } from '../../atoms';
+import { Label, Input, Text, Icon } from '../../atoms';
+
 import { emailRegex, passwordRegex } from '../../../../utils/Regex';
 import './textInput.scss';
 
@@ -25,6 +24,13 @@ const TextInput = ({ placeholder }: TextInputProps) => {
     <>
       <form className="textInput__form">
         <div className="textInput__input">
+          <div className="textInput__icon">
+            {placeholder === 'Email' ? (
+              <Icon icon="MdMailOutline" color="gray" />
+            ) : (
+              <Icon icon="MdOutlineLock" color="gray" />
+            )}
+          </div>
           <Input
             setIsFocused={setIsFocused}
             setUserInput={setUserInput}
@@ -38,10 +44,25 @@ const TextInput = ({ placeholder }: TextInputProps) => {
       </form>
       <div className="textInput__invalid">
         {placeholder === 'Email' &&
-        userInput.length > 5 &&
-        handleInput(userInput) ? (
-          <Text color="red">유효한 이메일 주소가 아닙니다.</Text>
-        ) : null}
+          userInput.length > 5 &&
+          !handleInput(userInput) && (
+            <>
+              <Icon icon="MdInfoOutline" color="red" size="xs" />
+              <Text color="red" size="xs">
+                유효한 이메일 주소가 아닙니다.
+              </Text>
+            </>
+          )}
+        {placeholder === 'Password' &&
+          userInput.length > 5 &&
+          !handleInput(userInput) && (
+            <>
+              <Icon icon="MdInfoOutline" color="red" size="xs" />
+              <Text color="red" size="xs">
+                유효한 비밀번호가 아닙니다..
+              </Text>
+            </>
+          )}
       </div>
     </>
   );

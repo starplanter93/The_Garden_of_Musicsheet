@@ -1,12 +1,12 @@
 import TextInput from '../../molecules/TextInput/TextInput';
-import './login.scss';
-const Login = () => {
+import './userAuth.scss';
+const UserAuth = () => {
   return (
-    <div className="login">
+    <div className="userAuth">
       <TextInput placeholder="Email"></TextInput>
       <TextInput placeholder="Password"></TextInput>
     </div>
   );
 };
 
-export default Login;
+export default UserAuth;

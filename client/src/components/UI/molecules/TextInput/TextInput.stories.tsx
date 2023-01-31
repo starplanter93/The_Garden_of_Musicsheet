@@ -13,3 +13,4 @@ const Template: ComponentStory<typeof TextInput> = (args) => (
 );
 
 export const Default = Template.bind({});
+Default.args = { placeholder: 'Email' };
