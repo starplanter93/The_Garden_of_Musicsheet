@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <UserAuth />
+      <UserAuth type="Login" />
     </div>
   );
 }

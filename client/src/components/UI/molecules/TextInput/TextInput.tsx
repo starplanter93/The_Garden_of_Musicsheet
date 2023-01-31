@@ -5,7 +5,7 @@ import { emailRegex, passwordRegex } from '../../../../utils/Regex';
 import './textInput.scss';
 
 interface TextInputProps {
-  placeholder: 'Email' | 'Password';
+  placeholder: 'Email' | 'Password' | 'Password Check' | 'NickName';
 }
 
 const TextInput = ({ placeholder }: TextInputProps) => {
@@ -25,10 +25,17 @@ const TextInput = ({ placeholder }: TextInputProps) => {
       <form className="textInput__form">
         <div className="textInput__input">
           <div className="textInput__icon">
-            {placeholder === 'Email' ? (
+            {placeholder === 'Email' && (
               <Icon icon="MdMailOutline" color="gray" />
-            ) : (
+            )}
+            {placeholder === 'Password' && (
               <Icon icon="MdOutlineLock" color="gray" />
+            )}
+            {placeholder === 'Password Check' && (
+              <Icon icon="MdOutlineLock" color="gray" />
+            )}
+            {placeholder === 'NickName' && (
+              <Icon icon="BiUserCircle" color="gray" />
             )}
           </div>
           <Input
