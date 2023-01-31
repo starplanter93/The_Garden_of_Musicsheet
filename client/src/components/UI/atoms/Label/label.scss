@@ -2,8 +2,8 @@
 
 .label {
   position: absolute;
-  left: 74px;
-  top: 10px;
+  left: 58px;
+  top: 16px;
   pointer-events: none;
   font-size: 1rem;
   transition: all 0.2s ease;
@@ -11,6 +11,6 @@
 }
 
 .label--focused {
-  top: 2.5px;
+  top: 8px;
   font-size: 0.75rem;
 }

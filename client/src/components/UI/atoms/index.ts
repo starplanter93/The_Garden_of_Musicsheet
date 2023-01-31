@@ -1,3 +1,4 @@
 import Icon from './Icon/Icon';
-
-export { Icon };
+import Input from './Input/Input';
+import Label from './Label/Label';
+export { Icon, Input, Label };

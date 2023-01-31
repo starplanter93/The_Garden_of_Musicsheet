@@ -5,14 +5,14 @@ interface TextProps {
   size?: 'xs' | 's' | 'm' | 'lg' | 'xlg' | '2xlg';
   weight?: 'regular' | 'medium' | 'semibold' | 'bold';
   color?: 'black' | 'green' | 'white' | 'blue' | 'red';
-  value: string;
+  children: string;
 }
 
 function Text({
   size = 'm',
   weight = 'regular',
   color = 'black',
-  value,
+  children,
 }: TextProps) {
   return (
     <span
@@ -23,7 +23,7 @@ function Text({
         `text--${color}`,
       ].join(' ')}
     >
-      {value}
+      {children}
     </span>
   );
 }
