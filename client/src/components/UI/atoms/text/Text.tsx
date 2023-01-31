@@ -1,12 +1,15 @@
 import React from 'react';
-import './text.scss';
+import styles from './text.module.scss';
+import classNames from 'classnames/bind';
 
 interface TextProps {
-  size?: 'xs' | 's' | 'm' | 'lg' | 'xlg' | '2xlg';
+  size?: 'xs' | 's' | 'm' | 'lg' | 'xlg' | 'txlg';
   weight?: 'regular' | 'medium' | 'semibold' | 'bold';
   color?: 'black' | 'green' | 'white' | 'blue' | 'red';
   children: string;
 }
+
+const cx = classNames.bind(styles);
 
 function Text({
   size = 'm',
@@ -15,14 +18,7 @@ function Text({
   children,
 }: TextProps) {
   return (
-    <span
-      className={[
-        'text',
-        `text--${size}`,
-        `text--${weight}`,
-        `text--${color}`,
-      ].join(' ')}
-    >
+    <span className={cx('text', `${size}`, `${weight}`, `${color}`)}>
       {children}
     </span>
   );
