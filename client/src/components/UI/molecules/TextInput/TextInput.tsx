@@ -75,4 +75,4 @@ const TextInput = ({ placeholder }: TextInputProps) => {
   );
 };
 
-export default TextInput;
+export default React.memo(TextInput);
