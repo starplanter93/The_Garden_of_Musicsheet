@@ -3,7 +3,7 @@ import styles from './text.module.scss';
 import classNames from 'classnames/bind';
 
 interface TextProps {
-  size?: 'xs' | 's' | 'm' | 'lg' | 'xlg' | '2xlg';
+  size?: 'xs' | 's' | 'm' | 'lg' | 'xlg' | 'txlg';
   weight?: 'regular' | 'medium' | 'semibold' | 'bold';
   color?: 'black' | 'green' | 'white' | 'blue' | 'red';
   children: string;
