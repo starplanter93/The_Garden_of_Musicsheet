@@ -1,0 +1,35 @@
+@import '/src/utils/utils';
+
+@mixin icon-size($class, $size) {
+    &.icon-container--#{$class} {
+        svg {
+            width: #{$size}px;
+            height: auto;
+        }
+    }
+};
+
+@mixin icon-color($class, $color) {
+    &.icon-container--#{$class} {
+        svg {
+            fill: $color;
+        }
+    }
+};
+
+.icon-container {
+    display: inline-block;
+    
+    @include icon-size('xl', 50);
+    @include icon-size('l', 40);
+    @include icon-size('m', 30);
+    @include icon-size('s', 25);
+    @include icon-size('xs', 20);
+
+    @include icon-color('black', $black);
+    @include icon-color('gray', $gray);
+    @include icon-color('green', $deep-green);
+    @include icon-color('lightgray', $light-gray);
+    @include icon-color('red', $red);
+    @include icon-color('white', $white);
+};
