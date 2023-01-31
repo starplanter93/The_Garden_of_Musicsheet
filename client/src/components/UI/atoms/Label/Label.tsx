@@ -7,7 +7,7 @@ interface LabelProps {
   userInput: string;
 }
 
-const Label: React.FC<LabelProps> = ({ placeholder, isFocused, userInput }) => {
+const Label = ({ placeholder, isFocused, userInput }: LabelProps) => {
   const focus = isFocused || userInput?.length !== 0 ? 'label--focused' : null;
   return <label className={[`label`, focus].join(' ')}>{placeholder}</label>;
 };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Label from '../../atoms/Label/Label';
-import Input from '../../atoms/Input/Input';
-import Text from '../../atoms/text/Text';
+import { Label } from '../../atoms';
+import { Input } from '../../atoms';
+import { Text } from '../../atoms';
 import { emailRegex, passwordRegex } from '../../../../utils/Regex';
 import './textInput.scss';
 

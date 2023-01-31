@@ -5,7 +5,7 @@ interface InputProps {
   setUserInput(state: string): void;
 }
 
-const Input: React.FC<InputProps> = ({ setIsFocused, setUserInput }) => {
+const Input = ({ setIsFocused, setUserInput }: InputProps) => {
   return (
     <input
       className="input"
