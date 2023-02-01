@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 interface TextProps {
   size?: 'xs' | 's' | 'm' | 'lg' | 'xlg' | 'txlg';
   weight?: 'regular' | 'medium' | 'semibold' | 'bold';
-  color?: 'black' | 'green' | 'white' | 'blue' | 'red';
+  color?: 'black' | 'green' | 'white' | 'blue' | 'red' | 'gray';
   children: string;
 }
 

@@ -1,5 +1,6 @@
 import Icon from './Icon/Icon';
-import Text from './text/Text';
+import Text from './Text/Text';
+import ImgLayout from './ImgLayout/ImgLayout';
 import Button from './Button/Button';
 
-export { Icon, Text, Button };
+export { Icon, Text, ImgLayout, Button };

@@ -1,5 +1,6 @@
 import * as icons from './icons';
-import './icon.scss';
+import styles from './icon.module.scss';
+import classNames from 'classnames/bind';
 
 interface IconProps {
   icon: keyof typeof icons;
@@ -13,15 +14,10 @@ const Icon = ({
   color = 'black',
 }: IconProps) => {
   const SVG = icons[icon];
+  const cx = classNames.bind(styles);
 
   return (
-    <span
-      className={[
-        'icon-container',
-        `icon-container--${size}`,
-        `icon-container--${color}`,
-      ].join(' ')}
-    >
+    <span className={cx('icon-container', `${size}`, `${color}`)}>
       <SVG />
     </span>
   );
