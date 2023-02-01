@@ -1,16 +1,17 @@
 @import '/src/utils/utils';
 
 @mixin icon-size($class, $size) {
-    &.icon-container--#{$class} {
+    &.#{$class} {
         svg {
-            width: #{$size}px;
+            display: block;
+            width: #{$size/$font-size}rem;
             height: auto;
         }
     }
 };
 
 @mixin icon-color($class, $color) {
-    &.icon-container--#{$class} {
+    &.#{$class} {
         svg {
             fill: $color;
         }
@@ -19,7 +20,7 @@
 
 .icon-container {
     display: inline-block;
-    
+
     @include icon-size('xl', 50);
     @include icon-size('l', 40);
     @include icon-size('m', 30);
