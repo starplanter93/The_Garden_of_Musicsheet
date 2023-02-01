@@ -21,7 +21,17 @@ const Button = ({
   const cx = classNames.bind(styles);
 
   return (
-    <button disabled={disabled} onClick={onClick}>
+    <button
+      className={cx(
+        'default-button',
+        `${theme}`,
+        `${size}`,
+        disabled && 'disabled',
+        clicked && 'clicked'
+      )}
+      disabled={disabled}
+      onClick={onClick}
+    >
       {children}
     </button>
   );
