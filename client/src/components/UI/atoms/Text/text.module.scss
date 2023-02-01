@@ -1,4 +1,10 @@
-@import '/src/utils/_utils';
+@import '../../../../utils/_utils';
+
+.text {
+  font-size: 1rem;
+  font-weight: 400;
+  color: $black;
+}
 
 @mixin font-size($class, $size) {
   &.#{$class} {
@@ -18,26 +24,20 @@
   }
 }
 
-.text {
-  font-size: 1rem;
-  font-weight: 400;
-  color: $black;
-  @include font-size('xs', 0.75);
-  @include font-size('s', 0.875);
-  @include font-size('m', 1);
-  @include font-size('lg', 1.25);
-  @include font-size('xlg', 1.5);
-  @include font-size('txlg', 1.75);
+@include font-size('xs', 0.75);
+@include font-size('s', 0.875);
+@include font-size('m', 1);
+@include font-size('lg', 1.25);
+@include font-size('xlg', 1.5);
+@include font-size('txlg', 1.75);
 
-  @include font-weight('regular', 400);
-  @include font-weight('medium', 500);
-  @include font-weight('semibold', 600);
-  @include font-weight('bold', 700);
+@include font-weight('regular', 400);
+@include font-weight('medium', 500);
+@include font-weight('semibold', 600);
+@include font-weight('bold', 700);
 
-  @include font-color('black', $black);
-  @include font-color('green', $deep-green);
-  @include font-color('white', $white);
-  @include font-color('blue', $blue);
-  @include font-color('red', $red);
-  @include font-color('gray', $gray);
-}
+@include font-color('black', $black);
+@include font-color('green', $deep-green);
+@include font-color('white', $white);
+@include font-color('blue', $blue);
+@include font-color('red', $red);

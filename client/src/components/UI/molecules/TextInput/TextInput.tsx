@@ -4,9 +4,13 @@ import { Label, Input, Text, Icon } from '../../atoms';
 import { emailRegex, passwordRegex } from '../../../../utils/Regex';
 import './textInput.scss';
 
+// import styles from './textInput.module.scss';
+// import classNames from 'classnames/bind';
 interface TextInputProps {
   placeholder: 'Email' | 'Password' | 'Password Check' | 'NickName';
 }
+
+// const cx = classNames.bind(styles);
 
 const TextInput = ({ placeholder }: TextInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
