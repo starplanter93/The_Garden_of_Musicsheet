@@ -1,0 +1,78 @@
+@import '/src/utils/utils';
+
+@mixin button-size($class, $width, $height){
+    &.#{$class} {
+        width: #{$width/$font-size}rem;
+        height: #{$height/$font-size}rem;
+    }
+}
+
+.default-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .1s ease-in;
+
+    &.primary {
+        background-color: $deep-green;
+
+        &:hover {
+            background-color: $light-green;
+        }
+    }
+
+    &.secondary {
+        background-color: rgba($light-gray, .2);
+        border: 1px solid rgba($gray, .5);
+
+        &:hover {
+            background-color: rgba($light-gray, .5);
+        }
+    }
+
+    &.tertiary {
+        background-color: rgba($gray, .2);
+
+        &:hover {
+            background-color: rgba($gray, .1);
+        }
+    }
+
+    &.toggle {
+        background-color: #fff;
+        border: 1px solid $light-gray;
+        box-shadow: 0 4px 3px 0 rgba($gray, .2);
+
+        &.clicked {
+            background-color: $light-green;
+        }
+    }
+    
+    // Todo : 반응형 사이즈 300*50(250*50) //150*35(100*25) 
+    @include button-size(xl, 332, 60);
+    @include button-size(l, 300, 50);
+    @include button-size(m, 150, 35);
+    @include button-size(s, 120, 45);
+    @include button-size(xs, 85, 35);
+    @include button-size(tiny, 35, 35);
+
+    &:disabled {
+        background-color: $gray-white;
+        border: none;
+        box-shadow: none;
+        pointer-events: none;
+
+        span{
+            color: $gray;
+
+            svg {
+                fill: $gray;
+            }
+        }
+    }
+}
+
