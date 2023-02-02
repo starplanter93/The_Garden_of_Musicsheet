@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import InstrumentCards from './InstrumentCard';
 
 export default {
-  title: 'Atoms/InstrumentCard',
+  title: 'Molecules/InstrumentCard',
   component: InstrumentCards,
 } as ComponentMeta<typeof InstrumentCards>;
 
