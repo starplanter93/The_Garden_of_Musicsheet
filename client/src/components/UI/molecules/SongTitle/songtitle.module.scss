@@ -1,0 +1,21 @@
+@import '/src/utils/utils';
+
+.songtitle-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 260px;
+  max-width: 400px;
+
+  .songtext-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  button {
+    height: 1.5rem;
+    width: 20%;
+  }
+}
