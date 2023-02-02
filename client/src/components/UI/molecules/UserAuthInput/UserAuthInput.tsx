@@ -2,47 +2,53 @@ import React, { useState } from 'react';
 import { Label, Input, Text, Icon } from '../../atoms';
 
 import { emailRegex, passwordRegex } from '../../../../utils/Regex';
-import './textInput.scss';
+import './userAuthInput.scss';
 
-// import styles from './textInput.module.scss';
+// import styles from './userAuthInput.module.scss';
 // import classNames from 'classnames/bind';
-interface TextInputProps {
-  placeholder: 'Email' | 'Password' | 'Password Check' | 'NickName';
+interface UserAuthInputProps {
+  placeholder: '이메일' | '비밀번호' | '비밀번호 확인' | '닉네임';
 }
 
 // const cx = classNames.bind(styles);
 
-const TextInput = ({ placeholder }: TextInputProps) => {
+const UserAuthInput = ({ placeholder }: UserAuthInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [userInput, setUserInput] = useState('');
 
   const handleInput = (userInput: string) => {
-    const valid =
-      placeholder === 'Email'
-        ? emailRegex.test(userInput)
-        : passwordRegex.test(userInput);
+    let valid;
+
+    if (placeholder === '이메일') {
+      valid = emailRegex.test(userInput);
+    } else if (placeholder === '비밀번호') {
+      valid = passwordRegex.test(userInput);
+    }
+
     return valid;
   };
 
   return (
     <>
-      <form className="textInput__form">
-        <div className="textInput__input">
-          <div className="textInput__icon">
-            {placeholder === 'Email' && (
+      <form className="userAuthInput__form">
+        <div className="userAuthInput__input">
+          <div className="userAuthInput__icon">
+            {placeholder === '이메일' && (
               <Icon icon="MdMailOutline" color="gray" />
             )}
-            {placeholder === 'Password' && (
+            {placeholder === '비밀번호' && (
               <Icon icon="MdOutlineLock" color="gray" />
             )}
-            {placeholder === 'Password Check' && (
+            {placeholder === '비밀번호 확인' && (
               <Icon icon="MdOutlineLock" color="gray" />
             )}
-            {placeholder === 'NickName' && (
+            {placeholder === '닉네임' && (
               <Icon icon="BiUserCircle" color="gray" />
             )}
           </div>
           <Input
+            theme="icon-input"
+            size="s"
             setIsFocused={setIsFocused}
             setUserInput={setUserInput}
           ></Input>
@@ -53,8 +59,8 @@ const TextInput = ({ placeholder }: TextInputProps) => {
           ></Label>
         </div>
       </form>
-      <div className="textInput__invalid">
-        {placeholder === 'Email' &&
+      <div className="userAuthInput__invalid">
+        {placeholder === '이메일' &&
           userInput.length > 5 &&
           !handleInput(userInput) && (
             <>
@@ -64,7 +70,7 @@ const TextInput = ({ placeholder }: TextInputProps) => {
               </Text>
             </>
           )}
-        {placeholder === 'Password' &&
+        {placeholder === '비밀번호' &&
           userInput.length > 5 &&
           !handleInput(userInput) && (
             <>
@@ -79,4 +85,4 @@ const TextInput = ({ placeholder }: TextInputProps) => {
   );
 };
 
-export default React.memo(TextInput);
+export default React.memo(UserAuthInput);

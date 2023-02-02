@@ -13,6 +13,7 @@ const Template: ComponentStory<typeof UserAuth> = (args) => (
 );
 
 export const Login = Template.bind({});
+Login.args = { type: 'Login' };
 
 export const SignUp = Template.bind({});
 SignUp.args = { type: 'SignUp' };

@@ -1,0 +1,47 @@
+@import '/src/utils/utils';
+
+//////////// organism, page에서 참고할 스타일입니다. ////////////
+// main{
+//     width: 100%;
+//     display: flex;
+//     justify-content: center;
+// }
+
+// section {
+//     width: 100%;
+//     max-width: 1220px;
+//     display: flex;
+//     justify-content: center;
+//     margin: 0 1rem;
+// }
+
+// .instruments-lists{
+//     width: 100%;
+//     display: flex;
+//     flex-wrap: wrap;
+// }
+
+// .instrument-list{
+//     flex-basis: 25%;
+//     padding: 0 18px 36px;
+// }
+/////////////////////////////////////////////////////////////////
+
+.instrument-card {
+    width: 100%;
+    max-width: #{269/$font-size}rem;
+    display: flex;
+    flex-direction: column;
+    padding: #{20/$font-size}rem;
+    background-color: $gray-white;
+    border-radius: 1rem;
+    text-align: left;
+
+    .instrument-type {
+        margin: #{20/$font-size}rem 0 5px;
+    }
+
+    .instrument-type, .instrument-sheet {
+        padding-left: 5px;
+    } 
+}

@@ -10,5 +10,5 @@ export default {
 
 const Template: ComponentStory<typeof Label> = (args) => <Label {...args} />;
 
-export const Default = Template.bind({});
-Default.args = { placeholder: 'placeholder' };
+export const Placeholder = Template.bind({});
+Placeholder.args = { placeholder: 'placeholder' };

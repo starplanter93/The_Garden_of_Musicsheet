@@ -10,5 +10,18 @@ export default {
 
 const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Basic = Template.bind({});
+Basic.args = {
+  theme: 'basic',
+  size: 'm',
+  setIsFocused: () => undefined,
+  setUserInput: () => undefined,
+};
+
+export const InputWithIcon = Template.bind({});
+InputWithIcon.args = {
+  theme: 'icon-input',
+  size: 's',
+  setIsFocused: () => undefined,
+  setUserInput: () => undefined,
+};

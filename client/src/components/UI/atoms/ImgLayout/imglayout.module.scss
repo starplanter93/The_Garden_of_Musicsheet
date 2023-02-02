@@ -28,7 +28,20 @@
       width: 3.125rem;
       height: 3.125rem;
     }
-  }
+  } @else if ($class = 'responsive') {
+    &.#{$class} {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-top: 100%;
+
+      img{
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+   }
 }
 
 .img-cover {
@@ -39,6 +52,7 @@
   @include img-size('lg');
   @include img-size('m');
   @include img-size('s');
+  @include img-size('responsive');
   img {
     object-fit: cover;
     width: 100%;
