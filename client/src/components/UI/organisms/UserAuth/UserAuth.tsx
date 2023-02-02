@@ -1,5 +1,5 @@
 import { Button, Text } from '../../atoms';
-import UserAuthInput from '../../molecules/UserAuthInput/UserAuthInput';
+import { UserAuthInput } from '../../molecules';
 import './userAuth.scss';
 
 interface UserAuthProps {
@@ -8,6 +8,9 @@ interface UserAuthProps {
 
 const UserAuth = ({ type }: UserAuthProps) => {
   if (type === 'Login') {
+    const handleLogin = () => {
+      console.log('loggedIn');
+    };
     return (
       <div className="userAuth">
         <div className="userAuth__logo">
@@ -21,7 +24,7 @@ const UserAuth = ({ type }: UserAuthProps) => {
         <UserAuthInput placeholder="이메일"></UserAuthInput>
         <UserAuthInput placeholder="비밀번호"></UserAuthInput>
         <div className="userAuth__btn">
-          <Button size="xl">
+          <Button size="xl" onClick={() => handleLogin()}>
             <Text weight="semibold" color="white" size="lg">
               로그인
             </Text>
@@ -37,6 +40,13 @@ const UserAuth = ({ type }: UserAuthProps) => {
         <UserAuthInput placeholder="비밀번호"></UserAuthInput>
         <UserAuthInput placeholder="비밀번호 확인"></UserAuthInput>
         <UserAuthInput placeholder="닉네임"></UserAuthInput>
+        <div className="userAuth__btn">
+          <Button size="xl">
+            <Text weight="semibold" color="white" size="lg">
+              회원가입
+            </Text>
+          </Button>
+        </div>
       </div>
     );
   } else return null;

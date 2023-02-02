@@ -47,6 +47,7 @@ const UserAuthInput = ({ placeholder }: UserAuthInputProps) => {
             )}
           </div>
           <Input
+            placeholder={placeholder}
             theme="icon-input"
             size="s"
             setIsFocused={setIsFocused}

@@ -8,7 +8,7 @@ interface InputProps {
   setUserInput(state: string): void;
   size: 's' | 'm' | 'l';
   theme: 'basic' | 'icon-input';
-  placeholder?: string;
+  placeholder?: '이메일' | '비밀번호' | '비밀번호 확인' | '닉네임';
 }
 
 const Input = ({
@@ -21,15 +21,15 @@ const Input = ({
   const cx = classNames.bind(styles);
 
   if (theme === 'basic') {
-    return (
-      <input
-        className={cx('default-input', `${size}`)}
-        placeholder={placeholder}
-      ></input>
-    );
+    return <input className={cx('default-input', `${size}`)}></input>;
   } else
     return (
       <input
+        type={
+          placeholder === '비밀번호' || placeholder === '비밀번호 확인'
+            ? 'password'
+            : 'text'
+        }
         className={cx('default-input', `${theme}`, `${size}`)}
         onFocus={() => {
           setIsFocused(true);
