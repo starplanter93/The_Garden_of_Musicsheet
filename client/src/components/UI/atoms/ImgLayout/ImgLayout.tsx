@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './imglayout.module.scss';
 import classNames from 'classnames/bind';
-import defaultImg from '/src/assets/default-image.jpg';
+import defaultImg from '../../../../assets/default-image.jpg';
 
 interface ImgLayoutProps {
   shape?: 'round' | 'square';
-  size?: 'lg' | 'm' | 's';
+  size?: 'lg' | 'm' | 's' | 'responsive';
   src?: string;
   alt: string;
 }
