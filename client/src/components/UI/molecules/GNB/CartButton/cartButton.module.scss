@@ -1,0 +1,19 @@
+@import '/src//utils/utils';
+
+.cartbutton-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    .bubble {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: $light-green;
+        position: absolute;
+        top: 14px;
+        left: 20px;
+        text-align: center;
+        overflow: hidden;
+    }
+}
