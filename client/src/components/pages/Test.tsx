@@ -8,7 +8,9 @@ function Test() {
       <SongTitle songtitle="사건의지평선" singer="윤하" />
       <MainScoreList
         scoreName="사건의지평선(ver.easy)"
-        songInfo="abc / 어쿠스틱 기타 / 보통"
+        scoreWriter="악보제작자123"
+        instrument="어쿠스틱 기타"
+        difficulty="난이도"
         price="3,000원"
       />
     </>

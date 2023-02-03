@@ -1,0 +1,14 @@
+@import '/src/utils/utils';
+
+.scorelist-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 565px;
+
+  .score-info {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+  }
+}
