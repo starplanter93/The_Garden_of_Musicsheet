@@ -1,0 +1,29 @@
+@import '/src/utils/utils';
+
+.scorelist-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: #{560 / $font-size}rem;
+
+  .profileimg-wrapper {
+    min-width: #{50 / $font-size}rem;
+  }
+
+  .score-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    margin: 0 0.5rem;
+  }
+}

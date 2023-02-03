@@ -1,0 +1,35 @@
+@import '/src/utils/utils';
+
+.songtitle-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 36rem;
+
+  .albumimg-wrapper {
+    min-width: 6.25rem;
+  }
+
+  .song-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      word-break: break-all;
+      margin: 0.25rem 0.5rem;
+    }
+  }
+
+  button {
+    height: 1.5rem;
+    width: 4rem;
+    min-width: 4rem;
+  }
+}
