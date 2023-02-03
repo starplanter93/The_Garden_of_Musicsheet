@@ -13,7 +13,9 @@ function SongTitle({ albumImg, songtitle, singer }: SongTitleProps) {
   const cx = classnames.bind(styles);
   return (
     <div className={cx('songtitle-wrapper')}>
-      <ImgLayout src={albumImg} shape="square" size="m" alt="album-cover" />
+      <div className={cx('albumimg-wrapper')}>
+        <ImgLayout src={albumImg} shape="square" size="m" alt="album-cover" />
+      </div>
       <div className={cx('song-info')}>
         <Text size="lg" weight="regular" color="black">
           {songtitle}
