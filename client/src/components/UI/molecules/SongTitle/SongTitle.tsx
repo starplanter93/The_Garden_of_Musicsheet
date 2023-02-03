@@ -4,15 +4,16 @@ import { ImgLayout, Text, Button } from '../../atoms';
 import classnames from 'classnames/bind';
 
 interface SongTitleProps {
+  albumImg?: string;
   songtitle: string;
   singer: string;
 }
 
-function SongTitle({ songtitle, singer }: SongTitleProps) {
+function SongTitle({ albumImg, songtitle, singer }: SongTitleProps) {
   const cx = classnames.bind(styles);
   return (
     <div className={cx('songtitle-wrapper')}>
-      <ImgLayout shape="square" size="m" alt="album-cover" />
+      <ImgLayout src={albumImg} shape="square" size="m" alt="album-cover" />
       <div className={cx('songtext-wrapper')}>
         <Text size="lg" weight="regular" color="black">
           {songtitle}
