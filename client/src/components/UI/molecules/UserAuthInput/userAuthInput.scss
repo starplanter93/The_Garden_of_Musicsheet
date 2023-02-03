@@ -24,11 +24,12 @@
 }
 
 .userAuthInput__invalid {
+  width: 100%;
   display: flex;
   position: relative;
   line-height: 1.25rem;
   pointer-events: none;
   margin-top: 0.75rem;
   margin-bottom: 1rem;
-  align-items: flex-start;
+  justify-content: center;
 }
