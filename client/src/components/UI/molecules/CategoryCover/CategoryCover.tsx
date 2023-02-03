@@ -6,7 +6,7 @@ interface CategoryCoverProps {
   category: string;
   thumbnail: string;
   title: string;
-  artist: string;
+  artist?: string;
 }
 
 const CategoryCover = ({
@@ -32,11 +32,13 @@ const CategoryCover = ({
               {title}
             </Text>
           </li>
-          <li className={cx('info-artist')}>
-            <Text size="lg" color="gray">
-              {artist}
-            </Text>
-          </li>
+          {artist && (
+            <li className={cx('info-artist')}>
+              <Text size="lg" color="gray">
+                {artist}
+              </Text>
+            </li>
+          )}
         </ul>
       </div>
     </div>
