@@ -23,7 +23,9 @@ function MainScoreList({
   const cx = classNames.bind(styles);
   return (
     <div className={cx('scorelist-wrapper')}>
-      <ImgLayout src={profileImg} size="s" alt="user-profile" />
+      <div className={cx('profileimg-wrapper')}>
+        <ImgLayout src={profileImg} size="s" alt="user-profile" />
+      </div>
       <div className={cx('score-info')}>
         <Text>{scoreName}</Text>
         <Text color="gray">{`${scoreWriter} / ${instrument} / ${difficulty}`}</Text>
