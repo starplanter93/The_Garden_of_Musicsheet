@@ -4,6 +4,8 @@ import MainScoreList from './MainScoreList/MainScoreList';
 import SongTitle from './SongTitle/SongTitle';
 import GlobalMenu from './GNB/Menu/GlobalMenu';
 import CartButton from './GNB/CartButton/CartButton';
+import MiniProfile from './UserDropdown/MiniProfile/MiniProfile';
+import UserMenu from './UserDropdown/UserMenu/UserMenu';
 
 export {
   InstrumentCard,
@@ -12,4 +14,6 @@ export {
   SongTitle,
   GlobalMenu,
   CartButton,
+  MiniProfile,
+  UserMenu,
 };
