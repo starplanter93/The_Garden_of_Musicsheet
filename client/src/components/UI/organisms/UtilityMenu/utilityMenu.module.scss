@@ -1,0 +1,22 @@
+@import '/src/utils/utils';
+
+.utility-lists {
+    display: flex;
+    align-items: center;
+
+    .utility-list {
+        position: relative;
+        margin-left: 2rem;
+
+        .utility-lnb {
+            position: absolute;
+            top: 3.2rem;
+            right: 0;
+            display: none;
+
+            &.hide {
+                display: block;
+            }
+        }
+    }
+}
