@@ -1,0 +1,6 @@
+@import '/src/utils/utils';
+
+.dropdown-wrapper {
+    width: #{280/$font-size}rem;
+    background-color: $white;
+}
