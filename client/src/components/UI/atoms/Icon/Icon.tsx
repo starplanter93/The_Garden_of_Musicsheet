@@ -8,11 +8,7 @@ interface IconProps {
   color?: 'black' | 'gray' | 'green' | 'lightgray' | 'red' | 'white';
 }
 
-const Icon = ({
-  icon = 'FaGuitar',
-  size = 'm',
-  color = 'black',
-}: IconProps) => {
+const Icon = ({ icon, size = 'm', color = 'black' }: IconProps) => {
   const SVG = icons[icon];
   const cx = classNames.bind(styles);
 

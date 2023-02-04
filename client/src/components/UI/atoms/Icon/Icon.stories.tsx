@@ -9,3 +9,6 @@ export default {
 const Template: ComponentStory<typeof Icons> = (args) => <Icons {...args} />;
 
 export const Icon = Template.bind({});
+Icon.args = {
+  icon: 'BsMusicNoteBeamed',
+};

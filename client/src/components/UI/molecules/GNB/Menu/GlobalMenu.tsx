@@ -1,9 +1,9 @@
-import styles from './menu.module.scss';
+import styles from './globalmenu.module.scss';
 import classNames from 'classnames/bind';
 import { Button, Icon, Text } from '../../../atoms';
 
 // Todo: active 클래스명 붙이는 조건 추가
-const Menu = () => {
+const GlobalMenu = () => {
   const cx = classNames.bind(styles);
 
   return (
@@ -32,4 +32,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default GlobalMenu;
