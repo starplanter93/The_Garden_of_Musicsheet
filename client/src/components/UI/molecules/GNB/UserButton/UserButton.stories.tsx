@@ -6,6 +6,8 @@ export default {
   component: UserButtons,
 } as ComponentMeta<typeof UserButtons>;
 
-const Template: ComponentStory<typeof UserButtons> = () => <UserButtons />;
+const Template: ComponentStory<typeof UserButtons> = (args) => (
+  <UserButtons {...args} />
+);
 
 export const UserButton = Template.bind({});
