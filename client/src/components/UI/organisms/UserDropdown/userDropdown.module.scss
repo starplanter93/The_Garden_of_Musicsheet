@@ -3,4 +3,7 @@
 .dropdown-wrapper {
     width: #{280/$font-size}rem;
     background-color: $white;
+    border: 1px solid $gray-white;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
 }
