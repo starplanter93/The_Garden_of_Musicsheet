@@ -4,6 +4,9 @@ import { UserAuthInput } from '../../molecules';
 import './userAuth.scss';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
+import React from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../../firebase/firebase';
 
 interface UserAuthProps {
   type: 'Login' | 'SignUp';
@@ -12,11 +15,22 @@ interface UserAuthProps {
 const UserAuth = ({ type }: UserAuthProps) => {
   const userLoginData = useSelector((state: RootState) => state.userInfo);
   const userRegData = useSelector((state: RootState) => state.regInfo);
-  const [typeState, setTypeState] = useState(type);
+  const [typeState, setTypeState] = useState(type); // page 단에서 진행해도 될 듯
+
+  const handleRegisterUser = (email: any, password: any) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
+
   if (typeState === 'Login') {
-    const handleLogin = () => {
-      console.log('loggedIn');
-    };
     return (
       <div className="userAuth">
         <div className="userAuth__logo">
@@ -30,7 +44,7 @@ const UserAuth = ({ type }: UserAuthProps) => {
         <UserAuthInput placeholder="이메일"></UserAuthInput>
         <UserAuthInput placeholder="비밀번호"></UserAuthInput>
         <div className="userAuth__login__btn">
-          <Button size="xl" onClick={() => handleLogin()}>
+          <Button size="xl">
             <Text weight="semibold" color="white" size="lg">
               로그인
             </Text>
@@ -40,7 +54,7 @@ const UserAuth = ({ type }: UserAuthProps) => {
         <hr></hr>
 
         <>
-          <Button theme="secondary" size="xl" onClick={() => handleLogin()}>
+          <Button theme="secondary" size="xl">
             <div className="userAuth__oauth__btn">
               <div className="userAuth__oauth__btn--icon">
                 <Icon icon="FcGoogle"></Icon>
@@ -61,6 +75,10 @@ const UserAuth = ({ type }: UserAuthProps) => {
       </div>
     );
   } else if (typeState === 'SignUp') {
+    const handleLogin = () => {
+      console.log(userRegData);
+      handleRegisterUser(userRegData.email, userRegData.password);
+    };
     return (
       <div className="userAuth">
         <div className="userAuth__logo">
@@ -77,7 +95,7 @@ const UserAuth = ({ type }: UserAuthProps) => {
         <UserAuthInput placeholder="비밀번호 확인"></UserAuthInput>
         <UserAuthInput placeholder="닉네임"></UserAuthInput>
         <div className="userAuth__btn">
-          <Button size="xl">
+          <Button size="xl" onClick={() => handleLogin()}>
             <Text weight="semibold" color="white" size="lg">
               회원가입
             </Text>
@@ -88,4 +106,4 @@ const UserAuth = ({ type }: UserAuthProps) => {
   } else return null;
 };
 
-export default UserAuth;
+export default React.memo(UserAuth);

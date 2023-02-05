@@ -28,7 +28,6 @@ const UserAuthInput = ({ placeholder }: UserAuthInputProps) => {
   }, []);
 
   const InputValidation = ({ input }: { input: string }) => {
-    console.log(input, handleInput(input));
     if (placeholder === '이메일' && input.length > 5 && !handleInput(input)) {
       return (
         <>

@@ -2,10 +2,8 @@
 
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth } from 'firebase/auth';
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyAZ4hRKbN3-Hq3w2v07pS-4KBikVP-4Wi0',
   authDomain: 'garden-of-musicsheet.firebaseapp.com',
@@ -24,3 +22,5 @@ export async function test() {
   const querySnapShot = await getDocs(collection(db, 'test'));
   return querySnapShot;
 }
+
+export const auth = getAuth();
