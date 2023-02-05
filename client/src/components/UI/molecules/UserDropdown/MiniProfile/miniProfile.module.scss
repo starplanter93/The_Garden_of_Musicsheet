@@ -1,0 +1,37 @@
+@import '/src/utils/utils';
+
+.profile-wrapper {
+    max-width: #{280/$font-size}rem;
+    min-width: #{280/$font-size}rem;
+
+    .profile-info {
+        display: flex;
+        padding: 1rem;
+
+        div:nth-child(2) {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 1rem;
+
+            span:first-child {
+                line-height: 1.5;
+            }
+        }
+    }
+
+    .profile-cash {
+        display: flex;
+        align-items: center;
+        border: {
+            top: 2px solid $light-gray;
+            bottom: 2px solid $light-gray;
+        }
+        padding: 10px 1rem;
+
+        span:nth-child(2) {
+            padding: 0 1rem 0 2px;
+        }
+    }
+}
