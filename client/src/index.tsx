@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <UserAuth type="Login" />
+      <UserAuth type="SignUp" />
     </Provider>
   </React.StrictMode>
 );

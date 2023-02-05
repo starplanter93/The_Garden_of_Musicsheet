@@ -10,7 +10,8 @@ interface UserAuthProps {
 
 const UserAuth = ({ type }: UserAuthProps) => {
   const userLoginData = useSelector((state: RootState) => state.userInfo);
-  console.log(userLoginData);
+  const userRegData = useSelector((state: RootState) => state.regInfo);
+
   if (type === 'Login') {
     const handleLogin = () => {
       console.log('loggedIn');
