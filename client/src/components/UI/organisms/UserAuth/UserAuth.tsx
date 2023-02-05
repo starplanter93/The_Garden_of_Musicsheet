@@ -5,7 +5,7 @@ import './userAuth.scss';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import React from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../../../../firebase/firebase';
 
 interface UserAuthProps {
@@ -17,16 +17,19 @@ const UserAuth = ({ type }: UserAuthProps) => {
   const userRegData = useSelector((state: RootState) => state.regInfo);
   const [typeState, setTypeState] = useState(type); // page 단에서 진행해도 될 듯
 
-  const handleRegisterUser = (email: any, password: any) => {
+  const handleRegisterUser = (email: any, password: any, nickname: any) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        updateProfile(user, { displayName: nickname });
+        console.log(user);
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        // if 400 => switch and show user that the ac already exists
       });
   };
 
@@ -77,7 +80,11 @@ const UserAuth = ({ type }: UserAuthProps) => {
   } else if (typeState === 'SignUp') {
     const handleLogin = () => {
       console.log(userRegData);
-      handleRegisterUser(userRegData.email, userRegData.password);
+      handleRegisterUser(
+        userRegData.email,
+        userRegData.password,
+        userRegData.nickname
+      );
     };
     return (
       <div className="userAuth">
