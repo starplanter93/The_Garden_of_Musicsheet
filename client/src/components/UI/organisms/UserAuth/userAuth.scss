@@ -43,10 +43,10 @@
 }
 
 .userAuth__register__btn {
-  width: 100%;
   display: flex;
   margin-top: 2rem;
-  justify-content: center;
+  justify-content: flex-end;
+  align-items: flex-end;
   padding-left: 13.5rem;
 }
 

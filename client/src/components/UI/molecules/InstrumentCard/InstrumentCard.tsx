@@ -1,3 +1,4 @@
+import React from 'react';
 import classNames from 'classnames/bind';
 import { ImgLayout, Text } from '../../atoms';
 import styles from './instrumentCard.module.scss';

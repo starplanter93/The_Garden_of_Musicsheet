@@ -1,4 +1,4 @@
-import { FaGuitar, FaTrash } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import {
   MdPiano,
@@ -19,6 +19,7 @@ import {
   MdOutlineRemoveCircle,
   MdOutlineFileDownload,
   MdOutlineArrowDropDown,
+  MdOutlineArrowDropUp,
 } from 'react-icons/md';
 import { BiUserCircle, BiCoin, BiPencil, BiSearch } from 'react-icons/bi';
 import {
@@ -32,7 +33,6 @@ import { CgUserList } from 'react-icons/cg';
 
 export {
   FcGoogle,
-  FaGuitar,
   FaTrash,
   MdPiano,
   MdOutlineQueueMusic,
@@ -52,6 +52,7 @@ export {
   MdOutlineRemoveCircle,
   MdOutlineFileDownload,
   MdOutlineArrowDropDown,
+  MdOutlineArrowDropUp,
   BiUserCircle,
   BiCoin,
   BiPencil,

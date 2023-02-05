@@ -1,32 +1,5 @@
 @import '/src/utils/utils';
 
-//////////// organism, page에서 참고할 스타일입니다. ////////////
-// main{
-//     width: 100%;
-//     display: flex;
-//     justify-content: center;
-// }
-
-// section {
-//     width: 100%;
-//     max-width: 1220px;
-//     display: flex;
-//     justify-content: center;
-//     margin: 0 1rem;
-// }
-
-// .instruments-lists{
-//     width: 100%;
-//     display: flex;
-//     flex-wrap: wrap;
-// }
-
-// .instrument-list{
-//     flex-basis: 25%;
-//     padding: 0 18px 36px;
-// }
-/////////////////////////////////////////////////////////////////
-
 .instrument-card {
     width: 100%;
     max-width: #{269/$font-size}rem;

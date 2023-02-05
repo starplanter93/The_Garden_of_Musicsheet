@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Button, Icon, Text } from '../../atoms';
 import { UserAuthInput } from '../../molecules';
 import './userAuth.scss';
@@ -11,8 +12,8 @@ interface UserAuthProps {
 const UserAuth = ({ type }: UserAuthProps) => {
   const userLoginData = useSelector((state: RootState) => state.userInfo);
   const userRegData = useSelector((state: RootState) => state.regInfo);
-
-  if (type === 'Login') {
+  const [typeState, setTypeState] = useState(type);
+  if (typeState === 'Login') {
     const handleLogin = () => {
       console.log('loggedIn');
     };
@@ -53,14 +54,24 @@ const UserAuth = ({ type }: UserAuthProps) => {
           </Button>
         </>
         <div className="userAuth__register__btn">
-          <Text>회원가입 하러가기</Text>
+          <Button theme="transparent" onClick={() => setTypeState('SignUp')}>
+            <Text>회원가입 하러가기</Text>
+          </Button>
         </div>
       </div>
     );
-  } else if (type === 'SignUp') {
+  } else if (typeState === 'SignUp') {
     return (
       <div className="userAuth">
-        <Button theme="transparent">Logo</Button>
+        <div className="userAuth__logo">
+          <img src={require('../../../../assets/Logo.png')} />
+        </div>
+        <Button theme="transparent">
+          <Text weight="semibold" size="xlg" color="green">
+            악보의 정원
+          </Text>
+        </Button>
+
         <UserAuthInput placeholder="이메일"></UserAuthInput>
         <UserAuthInput placeholder="비밀번호"></UserAuthInput>
         <UserAuthInput placeholder="비밀번호 확인"></UserAuthInput>
