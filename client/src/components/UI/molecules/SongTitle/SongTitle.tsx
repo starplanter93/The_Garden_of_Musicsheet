@@ -5,11 +5,11 @@ import classnames from 'classnames/bind';
 
 interface SongTitleProps {
   albumImg?: string;
-  songtitle: string;
+  songTitle: string;
   singer: string;
 }
 
-function SongTitle({ albumImg, songtitle, singer }: SongTitleProps) {
+function SongTitle({ albumImg, songTitle, singer }: SongTitleProps) {
   const cx = classnames.bind(styles);
   return (
     <div className={cx('songtitle-wrapper')}>
@@ -18,7 +18,7 @@ function SongTitle({ albumImg, songtitle, singer }: SongTitleProps) {
       </a>
       <a className={cx('song-info')}>
         <Text size="lg" weight="regular" color="black">
-          {songtitle}
+          {songTitle}
         </Text>
         <Text size="m" weight="regular" color="black">
           {singer}
