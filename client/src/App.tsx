@@ -1,9 +1,16 @@
-import UserAuth from './components/UI/organisms/UserAuth/UserAuth';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from './components/pages';
+
 function App() {
   return (
-    <div className="App">
-      <UserAuth type="Login"></UserAuth>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        {/* MainPage 등 */}
+      </Route>
+      {/* Login */}
+      {/* SignUp */}
+      {/* NotFound */}
+    </Routes>
   );
 }
 
