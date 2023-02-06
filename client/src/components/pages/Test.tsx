@@ -1,15 +1,15 @@
 import React from 'react';
-import MainScoreList from '../UI/molecules/MainScoreList/MainScoreList';
-import SongTitle from '../UI/molecules/SongTitle/SongTitle';
+import MainSongSection from '../UI/organisms/MainSongSection/MainSongSection';
 
 function Test() {
   return (
     <>
-      <SongTitle songtitle="사건의지평선" singer="윤하" />
-      <MainScoreList
-        scoreName="사건의지평선(ver.easy)"
-        scoreWriter="악보제작자123"
-        instrument="어쿠스틱 기타"
+      <MainSongSection
+        songTitle="노래 제목"
+        singer="가수"
+        scoreName="조금길지도모르는 악보제목"
+        scoreWriter="악보제작자"
+        instrument="사용된 악기"
         difficulty="난이도"
         price="3,000원"
       />

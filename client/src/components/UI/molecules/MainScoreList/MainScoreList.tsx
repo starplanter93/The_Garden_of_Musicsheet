@@ -23,13 +23,13 @@ function MainScoreList({
   const cx = classNames.bind(styles);
   return (
     <div className={cx('scorelist-wrapper')}>
-      <div className={cx('profileimg-wrapper')}>
+      <a className={cx('profileimg-wrapper')}>
         <ImgLayout src={profileImg} size="s" alt="user-profile" />
-      </div>
-      <div className={cx('score-info')}>
+      </a>
+      <a className={cx('score-info')}>
         <Text>{scoreName}</Text>
         <Text color="gray">{`${scoreWriter} / ${instrument} / ${difficulty}`}</Text>
-      </div>
+      </a>
       <Text color="blue">{price}</Text>
     </div>
   );

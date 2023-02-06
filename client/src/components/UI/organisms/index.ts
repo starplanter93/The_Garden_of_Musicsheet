@@ -3,4 +3,13 @@ import UserDropdown from './UserDropdown/UserDropdown';
 import UtilityMenu from './UtilityMenu/UtilityMenu';
 import Header from './Header/Header';
 import UserAuth from './UserAuth/UserAuth';
-export { InstrumentLists, UserDropdown, UtilityMenu, Header, UserAuth };
+import MainSongSection from './MainSongSection/MainSongSection';
+
+export {
+  InstrumentLists,
+  UserDropdown,
+  UtilityMenu,
+  Header,
+  MainSongSection,
+  UserAuth,
+};
