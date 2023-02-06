@@ -29,6 +29,7 @@ const UserAuth = ({ type }: UserAuthProps) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log('errorCode:', errorCode, 'errorMessage:', errorMessage);
         // if 400 => switch and show user that the ac already exists
       });
   };
@@ -79,7 +80,6 @@ const UserAuth = ({ type }: UserAuthProps) => {
     );
   } else if (typeState === 'SignUp') {
     const handleLogin = () => {
-      console.log(userRegData);
       handleRegisterUser(
         userRegData.email,
         userRegData.password,
