@@ -12,6 +12,7 @@ function App() {
           <Route index element={<Test />} />
           {/* MainPage 등 */}
         </Route>
+
         {/* Login */}
         {/* SignUp */}
         {/* NotFound */}
