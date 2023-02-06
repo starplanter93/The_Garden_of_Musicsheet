@@ -1,4 +1,4 @@
-import './label.module.scss';
+import './label.scss';
 
 interface LabelProps {
   placeholder: string;
