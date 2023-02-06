@@ -4,8 +4,8 @@ import { UserAuthInput } from '../../molecules';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import React from 'react';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../../../../firebase/firebase';
+import { handleRegisterUser, handleUserLogin } from '../../../../utils/utils';
+
 import classNames from 'classnames/bind';
 import styles from './userAuth.module.scss';
 
@@ -14,26 +14,10 @@ interface UserAuthProps {
 }
 
 const UserAuth = ({ type }: UserAuthProps) => {
-  // const userLoginData = useSelector((state: RootState) => state.userInfo);
+  const userLoginData = useSelector((state: RootState) => state.userLoginInput);
   const userRegData = useSelector((state: RootState) => state.regInfo);
   const [typeState, setTypeState] = useState(type); // page 단에서 진행해도 될 듯
   const cx = classNames.bind(styles);
-  const handleRegisterUser = (email: any, password: any, nickname: any) => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        updateProfile(user, { displayName: nickname });
-        console.log(user);
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log('errorCode:', errorCode, 'errorMessage:', errorMessage);
-        // if 400 => switch and show user that the ac already exists
-      });
-  };
 
   if (typeState === 'Login') {
     return (
@@ -46,10 +30,17 @@ const UserAuth = ({ type }: UserAuthProps) => {
             악보의 정원
           </Text>
         </Button>
-        <UserAuthInput placeholder="이메일"></UserAuthInput>
-        <UserAuthInput placeholder="비밀번호"></UserAuthInput>
+        <UserAuthInput type="Login" placeholder="이메일"></UserAuthInput>
+        <UserAuthInput type="Login" placeholder="비밀번호"></UserAuthInput>
 
-        <Button size="xl">
+        <Button
+          size="xl"
+          onClick={() =>
+            console.log(
+              handleUserLogin(userLoginData.email, userLoginData.password)
+            )
+          }
+        >
           <Text weight="semibold" color="white" size="lg">
             로그인
           </Text>
@@ -73,19 +64,12 @@ const UserAuth = ({ type }: UserAuthProps) => {
         </>
         <div className={cx('userAuth__register__btn')}>
           <Button theme="transparent" onClick={() => setTypeState('SignUp')}>
-            <Text>회원가입 하러가기</Text>
+            <Text>회원가입 하러가기 </Text>
           </Button>
         </div>
       </div>
     );
   } else if (typeState === 'SignUp') {
-    const handleLogin = () => {
-      handleRegisterUser(
-        userRegData.email,
-        userRegData.password,
-        userRegData.nickname
-      );
-    };
     return (
       <div className={cx('userAuth')}>
         <div className={cx('userAuth__logo')}>
@@ -97,12 +81,24 @@ const UserAuth = ({ type }: UserAuthProps) => {
           </Text>
         </Button>
 
-        <UserAuthInput placeholder="이메일"></UserAuthInput>
-        <UserAuthInput placeholder="비밀번호"></UserAuthInput>
-        <UserAuthInput placeholder="비밀번호 확인"></UserAuthInput>
-        <UserAuthInput placeholder="닉네임"></UserAuthInput>
+        <UserAuthInput type="SignUp" placeholder="이메일"></UserAuthInput>
+        <UserAuthInput type="SignUp" placeholder="비밀번호"></UserAuthInput>
+        <UserAuthInput
+          type="SignUp"
+          placeholder="비밀번호 확인"
+        ></UserAuthInput>
+        <UserAuthInput type="SignUp" placeholder="닉네임"></UserAuthInput>
         <div className={cx('userAuth__btn')}>
-          <Button size="xl" onClick={() => handleLogin()}>
+          <Button
+            size="xl"
+            onClick={() =>
+              handleRegisterUser(
+                userRegData.email,
+                userRegData.password,
+                userRegData.nickname
+              )
+            }
+          >
             <Text weight="semibold" color="white" size="lg">
               회원가입
             </Text>

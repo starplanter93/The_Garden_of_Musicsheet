@@ -4,9 +4,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import loginReducer from './LoginSlice';
 import regReducer from './RegSlice';
+import userReducer from './UserSlice';
 
 export const store = configureStore({
-  reducer: { userInfo: loginReducer, regInfo: regReducer },
+  reducer: {
+    userInfo: userReducer,
+    regInfo: regReducer,
+    userLoginInput: loginReducer,
+  },
 
   devTools: true, // 개발자도구 설정
 });

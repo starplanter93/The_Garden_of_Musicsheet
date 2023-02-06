@@ -8,9 +8,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 interface UserAuthInputProps {
   placeholder: '이메일' | '비밀번호' | '비밀번호 확인' | '닉네임';
+  type: 'Login' | 'SignUp';
 }
 
-const UserAuthInput = ({ placeholder }: UserAuthInputProps) => {
+const UserAuthInput = ({ type, placeholder }: UserAuthInputProps) => {
   const cx = classNames.bind(styles);
   const [isFocused, setIsFocused] = useState(false);
   const [userInput, setUserInput] = useState('');
@@ -40,12 +41,32 @@ const UserAuthInput = ({ placeholder }: UserAuthInputProps) => {
         </>
       );
     }
-    if (placeholder === '비밀번호' && input.length > 5 && !handleInput(input)) {
+    if (
+      type === 'Login' &&
+      placeholder === '비밀번호' &&
+      input.length > 5 &&
+      !handleInput(input)
+    ) {
       return (
         <>
           <Icon icon="MdInfoOutline" color="red" size="xs" />
           <Text color="red" size="xs">
             유효한 비밀번호가 아닙니다.
+          </Text>
+        </>
+      );
+    }
+    if (
+      type === 'SignUp' &&
+      placeholder === '비밀번호' &&
+      input.length > 5 &&
+      !handleInput(input)
+    ) {
+      return (
+        <>
+          <Icon icon="MdInfoOutline" color="red" size="xs" />
+          <Text color="red" size="xs">
+            숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요
           </Text>
         </>
       );

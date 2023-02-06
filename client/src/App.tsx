@@ -8,7 +8,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<UserAuth type="Login" />}>
           <Route index element={<Test />} />
           {/* MainPage 등 */}
         </Route>
