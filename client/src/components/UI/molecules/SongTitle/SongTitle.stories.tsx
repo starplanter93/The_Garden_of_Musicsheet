@@ -12,6 +12,6 @@ const Template: ComponentStory<typeof SongTitle> = (args) => (
 
 export const SongTitleOptions = Template.bind({});
 SongTitleOptions.args = {
-  songtitle: '노래제목',
+  songTitle: '노래제목',
   singer: '가수',
 };

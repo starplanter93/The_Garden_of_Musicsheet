@@ -6,6 +6,7 @@
   align-items: center;
   width: 100%;
   max-width: #{560 / $font-size}rem;
+  margin: 0.75rem;
 
   .profileimg-wrapper {
     min-width: #{50 / $font-size}rem;
