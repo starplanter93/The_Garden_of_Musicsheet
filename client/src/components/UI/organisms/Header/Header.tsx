@@ -3,10 +3,11 @@ import classNames from 'classnames/bind';
 import { GlobalMenu } from '../../molecules';
 import UtilityMenu from '../UtilityMenu/UtilityMenu';
 import { Button, Logo, Text } from '../../atoms';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const cx = classNames.bind(styles);
-
+  const navigate = useNavigate();
   return (
     <header>
       <nav>
@@ -16,7 +17,7 @@ const Header = () => {
         {true && (
           <div className={cx('login-button')}>
             {/* Todo: 로그인 버튼 Link */}
-            <Button size="xs">
+            <Button size="xs" onClick={() => navigate('/login')}>
               <Text color="white">로그인</Text>
             </Button>
           </div>
