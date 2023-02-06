@@ -1,10 +1,16 @@
-import Test from './components/pages/Test';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from './components/pages';
 
 function App() {
   return (
-    <div className="App">
-      <Test />
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        {/* MainPage 등 */}
+      </Route>
+      {/* Login */}
+      {/* SignUp */}
+      {/* NotFound */}
+    </Routes>
   );
 }
 
