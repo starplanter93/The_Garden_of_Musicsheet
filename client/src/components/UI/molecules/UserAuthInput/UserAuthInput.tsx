@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { Label, Input, Text, Icon } from '../../atoms';
-
+import styles from './userAuthInput.module.scss';
+import classNames from 'classnames/bind';
 import { emailRegex, passwordRegex } from '../../../../utils/Regex';
-import './userAuthInput.scss';
+
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 interface UserAuthInputProps {
@@ -10,6 +11,7 @@ interface UserAuthInputProps {
 }
 
 const UserAuthInput = ({ placeholder }: UserAuthInputProps) => {
+  const cx = classNames.bind(styles);
   const [isFocused, setIsFocused] = useState(false);
   const [userInput, setUserInput] = useState('');
   const userRegInput = useSelector(
@@ -66,9 +68,9 @@ const UserAuthInput = ({ placeholder }: UserAuthInputProps) => {
 
   return (
     <>
-      <form className="userAuthInput__form">
-        <div className="userAuthInput__input">
-          <div className="userAuthInput__icon">
+      <form className={cx('userAuthInput__form')}>
+        <div className={cx('userAuthInput__input')}>
+          <div className={cx('userAuthInput__icon')}>
             {placeholder === '이메일' && (
               <Icon icon="MdMailOutline" color="gray" />
             )}
@@ -96,7 +98,7 @@ const UserAuthInput = ({ placeholder }: UserAuthInputProps) => {
           ></Label>
         </div>
       </form>
-      <div className="userAuthInput__invalid">
+      <div className={cx('userAuthInput__invalid')}>
         <InputValidation input={userInput} />
       </div>
     </>
