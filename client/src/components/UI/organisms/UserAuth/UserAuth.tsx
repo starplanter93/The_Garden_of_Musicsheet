@@ -13,7 +13,7 @@ interface UserAuthProps {
 }
 
 const UserAuth = ({ type }: UserAuthProps) => {
-  const userLoginData = useSelector((state: RootState) => state.userInfo);
+  // const userLoginData = useSelector((state: RootState) => state.userInfo);
   const userRegData = useSelector((state: RootState) => state.regInfo);
   const [typeState, setTypeState] = useState(type); // page 단에서 진행해도 될 듯
 
