@@ -64,7 +64,7 @@ const UserAuth = ({ type }: UserAuthProps) => {
         </>
         <div className={cx('userAuth__register__btn')}>
           <Button
-            size="l"
+            size="s"
             theme="transparent"
             onClick={() => setTypeState('SignUp')}
           >
@@ -81,12 +81,13 @@ const UserAuth = ({ type }: UserAuthProps) => {
         <div className={cx('userAuth__logo')}>
           <img src={require('../../../../assets/Logo.png')} />
         </div>
-
-        <Button theme="transparent">
-          <Text weight="semibold" size="xlg" color="green">
-            악보의 정원
-          </Text>
-        </Button>
+        <div className={cx('logo__Text')}>
+          <Button theme="transparent">
+            <Text weight="semibold" size="xlg" color="green">
+              악보의 정원
+            </Text>
+          </Button>
+        </div>
 
         <UserAuthInput type="SignUp" placeholder="이메일"></UserAuthInput>
         <UserAuthInput type="SignUp" placeholder="비밀번호"></UserAuthInput>
@@ -95,7 +96,6 @@ const UserAuth = ({ type }: UserAuthProps) => {
           placeholder="비밀번호 확인"
         ></UserAuthInput>
         <UserAuthInput type="SignUp" placeholder="닉네임"></UserAuthInput>
-        <hr></hr>
         <div className={cx('userAuth__btn')}>
           <Button
             size="xl"
