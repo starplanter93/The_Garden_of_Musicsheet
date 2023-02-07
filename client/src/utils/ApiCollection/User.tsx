@@ -4,7 +4,7 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import { auth } from '../../firebase/firebase';
-
+import Avatar from '../Avatar';
 export const handleUserLogin = async (email: any, password: any) => {
   let response;
   await signInWithEmailAndPassword(auth, email, password)
@@ -26,20 +26,19 @@ export const handleUserLogin = async (email: any, password: any) => {
   return response;
 };
 
-export const handleRegisterUser = (
+export const handleRegisterUser = async (
   email: any,
   password: any,
   nickname: any
 ) => {
   let response;
-  createUserWithEmailAndPassword(auth, email, password)
+  await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
       updateProfile(user, {
         displayName: nickname,
-        photoURL:
-          'https://firebasestorage.googleapis.com/v0/b/garden-of-musicsheet.appspot.com/o/avatar%2Favatar1.png?alt=media&token=a10690ce-65fd-402c-8e3f-b520188a8ba1',
+        photoURL: Avatar(),
       });
       // ...
     })

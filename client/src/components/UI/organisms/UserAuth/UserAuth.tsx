@@ -8,18 +8,33 @@ import classNames from 'classnames/bind';
 import styles from './userAuth.module.scss';
 import { handleRegisterUser, handleUserLogin } from '../../../../utils/utils';
 import { auth } from '../../../../firebase/firebase';
+import { useNavigate } from 'react-router-dom';
 
 interface UserAuthProps {
   type: 'Login' | 'SignUp';
 }
 
 const UserAuth = ({ type }: UserAuthProps) => {
+  console.log(auth.currentUser);
+  const navigate = useNavigate();
   const userLoginData = useSelector((state: RootState) => state.userLoginInput);
   const userRegData = useSelector((state: RootState) => state.regInfo);
   const [typeState, setTypeState] = useState(type); // page 단에서 진행해도 될 듯
   const cx = classNames.bind(styles);
 
-  console.log(auth.currentUser);
+  const handleOnClick = async () => {
+    if (typeState === 'Login') {
+      await handleUserLogin(userLoginData.email, userLoginData.password);
+      navigate('/');
+    } else if (typeState === 'SignUp') {
+      await handleRegisterUser(
+        userRegData.email,
+        userRegData.password,
+        userRegData.nickname
+      );
+      navigate('/');
+    } else null;
+  };
 
   if (typeState === 'Login') {
     return (
@@ -37,12 +52,7 @@ const UserAuth = ({ type }: UserAuthProps) => {
         <UserAuthInput type="Login" placeholder="이메일"></UserAuthInput>
         <UserAuthInput type="Login" placeholder="비밀번호"></UserAuthInput>
 
-        <Button
-          size="xl"
-          onClick={async () =>
-            await handleUserLogin(userLoginData.email, userLoginData.password)
-          }
-        >
+        <Button size="xl" onClick={() => handleOnClick()}>
           <Text weight="semibold" color="white" size="lg">
             로그인
           </Text>
@@ -99,16 +109,7 @@ const UserAuth = ({ type }: UserAuthProps) => {
         ></UserAuthInput>
         <UserAuthInput type="SignUp" placeholder="닉네임"></UserAuthInput>
         <div className={cx('userAuth__btn')}>
-          <Button
-            size="xl"
-            onClick={() =>
-              handleRegisterUser(
-                userRegData.email,
-                userRegData.password,
-                userRegData.nickname
-              )
-            }
-          >
+          <Button size="xl" onClick={() => handleOnClick()}>
             <Text weight="semibold" color="white" size="lg">
               회원가입
             </Text>
