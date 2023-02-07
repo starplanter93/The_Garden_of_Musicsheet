@@ -11,6 +11,7 @@
     text-align: left;
     border: 1px solid $gray-white;
     box-shadow: 0 0 12px rgba(0,0,0, .05);
+    cursor: pointer;
 
     .instrument-type {
         margin: #{20/$font-size}rem 0 5px;
@@ -19,4 +20,10 @@
     .instrument-type, .instrument-sheet {
         padding-left: 5px;
     } 
+
+    &:hover {
+        margin-top: -10px;
+        box-shadow: 0 0 12px 10px rgba(0,0,0, .05);
+        transition: all .1s ease-in;
+    }
 }
