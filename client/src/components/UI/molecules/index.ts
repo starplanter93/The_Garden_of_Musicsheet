@@ -7,8 +7,10 @@ import CartButton from './GNB/CartButton/CartButton';
 import MiniProfile from './UserDropdown/MiniProfile/MiniProfile';
 import UserMenu from './UserDropdown/UserMenu/UserMenu';
 import UserButton from './GNB/UserButton/UserButton';
+import UserAuthInput from './UserAuthInput/UserAuthInput';
 
 export {
+  UserAuthInput,
   InstrumentCard,
   CategoryCover,
   MainScoreList,
