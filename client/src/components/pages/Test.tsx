@@ -1,9 +1,11 @@
 import React from 'react';
 import MainSongSection from '../UI/organisms/MainSongSection/MainSongSection';
+import Carousel from '../UI/organisms/Carousel/Carousel';
 
 function Test() {
   return (
     <>
+      <Carousel />
       <MainSongSection
         songTitle="노래 제목"
         singer="가수"
