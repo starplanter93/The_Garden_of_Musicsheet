@@ -6,14 +6,14 @@ interface StateType {
 }
 
 // initalState 생성
-const initialState: StateType = { username: '' };
+const initialState: any = '';
 
 // 슬라이스생성
 export const userSlice = createSlice({
   name: 'userSlice',
   initialState,
   reducers: {
-    userInfo: (state: StateType, action: PayloadAction<StateType>) => {
+    userInfo: (state: any, action: PayloadAction<any>) => {
       state = action.payload;
       return state;
     },

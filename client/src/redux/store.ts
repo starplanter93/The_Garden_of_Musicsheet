@@ -13,6 +13,8 @@ export const store = configureStore({
     userLoginInput: loginReducer,
   },
 
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+
   devTools: true, // 개발자도구 설정
 });
 

@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import React from 'react';
 import { handleRegisterUser, handleUserLogin } from '../../../../utils/utils';
-
 import classNames from 'classnames/bind';
 import styles from './userAuth.module.scss';
 
@@ -16,6 +15,7 @@ interface UserAuthProps {
 const UserAuth = ({ type }: UserAuthProps) => {
   const userLoginData = useSelector((state: RootState) => state.userLoginInput);
   const userRegData = useSelector((state: RootState) => state.regInfo);
+
   const [typeState, setTypeState] = useState(type); // page 단에서 진행해도 될 듯
   const cx = classNames.bind(styles);
 
@@ -35,10 +35,8 @@ const UserAuth = ({ type }: UserAuthProps) => {
 
         <Button
           size="xl"
-          onClick={() =>
-            console.log(
-              handleUserLogin(userLoginData.email, userLoginData.password)
-            )
+          onClick={async () =>
+            await handleUserLogin(userLoginData.email, userLoginData.password)
           }
         >
           <Text weight="semibold" color="white" size="lg">
