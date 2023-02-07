@@ -8,11 +8,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<UserAuth type="Login" />}>
+        <Route path="/" element={<Layout />}>
           <Route index element={<Test />} />
           {/* MainPage 등 */}
         </Route>
-
+        <Route path="/auth" element={<UserAuth type="Login" />}></Route>
         {/* Login */}
         {/* SignUp */}
         {/* NotFound */}
