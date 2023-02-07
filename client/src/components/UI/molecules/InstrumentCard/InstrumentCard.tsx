@@ -17,7 +17,7 @@ const InstrumentCard = ({ src, type, sheets }: InstrumentCardProps) => {
         <ImgLayout shape="square" size="responsive" src={src} alt="악기사진" />
       </li>
       <li className={cx('instrument-type')}>
-        <Text size="xlg">{type}</Text>
+        <Text size="lg">{type}</Text>
       </li>
       <li className={cx('instrument-sheet')}>
         <Text size="m" color="gray" weight="medium">
