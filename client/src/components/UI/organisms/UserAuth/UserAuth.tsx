@@ -4,9 +4,9 @@ import { UserAuthInput } from '../../molecules';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import React from 'react';
-import { handleRegisterUser, handleUserLogin } from '../../../../utils/utils';
 import classNames from 'classnames/bind';
 import styles from './userAuth.module.scss';
+import { handleRegisterUser, handleUserLogin } from '../../../../utils/utils';
 import { auth } from '../../../../firebase/firebase';
 
 interface UserAuthProps {
@@ -18,6 +18,8 @@ const UserAuth = ({ type }: UserAuthProps) => {
   const userRegData = useSelector((state: RootState) => state.regInfo);
   const [typeState, setTypeState] = useState(type); // page 단에서 진행해도 될 듯
   const cx = classNames.bind(styles);
+
+  console.log(auth.currentUser);
 
   if (typeState === 'Login') {
     return (
