@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Icon, Text } from '../../atoms';
+import { Button, Icon, ImgLayout, Text } from '../../atoms';
 import { UserAuthInput } from '../../molecules';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
@@ -7,6 +7,7 @@ import React from 'react';
 import { handleRegisterUser, handleUserLogin } from '../../../../utils/utils';
 import classNames from 'classnames/bind';
 import styles from './userAuth.module.scss';
+import { auth } from '../../../../firebase/firebase';
 
 interface UserAuthProps {
   type: 'Login' | 'SignUp';
@@ -15,7 +16,6 @@ interface UserAuthProps {
 const UserAuth = ({ type }: UserAuthProps) => {
   const userLoginData = useSelector((state: RootState) => state.userLoginInput);
   const userRegData = useSelector((state: RootState) => state.regInfo);
-
   const [typeState, setTypeState] = useState(type); // page 단에서 진행해도 될 듯
   const cx = classNames.bind(styles);
 
@@ -25,11 +25,13 @@ const UserAuth = ({ type }: UserAuthProps) => {
         <div className={cx('userAuth__logo')}>
           <img src={require('../../../../assets/Logo.png')} />
         </div>
-        <Button theme="transparent">
-          <Text weight="semibold" size="xlg" color="green">
-            악보의 정원
-          </Text>
-        </Button>
+        <div className={cx('logo__Text')}>
+          <Button theme="transparent">
+            <Text weight="semibold" size="xlg" color="green">
+              악보의 정원
+            </Text>
+          </Button>
+        </div>
         <UserAuthInput type="Login" placeholder="이메일"></UserAuthInput>
         <UserAuthInput type="Login" placeholder="비밀번호"></UserAuthInput>
 
@@ -61,8 +63,14 @@ const UserAuth = ({ type }: UserAuthProps) => {
           </Button>
         </>
         <div className={cx('userAuth__register__btn')}>
-          <Button theme="transparent" onClick={() => setTypeState('SignUp')}>
-            <Text>회원가입 하러가기 </Text>
+          <Button
+            size="l"
+            theme="transparent"
+            onClick={() => setTypeState('SignUp')}
+          >
+            <Text color="green" weight="semibold">
+              회원가입 하러가기
+            </Text>
           </Button>
         </div>
       </div>
@@ -73,6 +81,7 @@ const UserAuth = ({ type }: UserAuthProps) => {
         <div className={cx('userAuth__logo')}>
           <img src={require('../../../../assets/Logo.png')} />
         </div>
+
         <Button theme="transparent">
           <Text weight="semibold" size="xlg" color="green">
             악보의 정원
@@ -86,6 +95,7 @@ const UserAuth = ({ type }: UserAuthProps) => {
           placeholder="비밀번호 확인"
         ></UserAuthInput>
         <UserAuthInput type="SignUp" placeholder="닉네임"></UserAuthInput>
+        <hr></hr>
         <div className={cx('userAuth__btn')}>
           <Button
             size="xl"

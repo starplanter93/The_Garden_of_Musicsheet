@@ -18,9 +18,12 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Get a list of cities from your database
-export async function test() {
-  const querySnapShot = await getDocs(collection(db, 'test'));
-  return querySnapShot;
+
+export async function getDocument() {
+  const ref = collection(db, 'test');
+  const snapshot = await getDocs(ref);
+  const list = snapshot.docs.map((doc) => doc.data());
+  return list;
 }
 
 export const auth = getAuth();
