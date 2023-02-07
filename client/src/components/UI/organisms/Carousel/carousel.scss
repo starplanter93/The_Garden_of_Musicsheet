@@ -1,0 +1,51 @@
+@import '/src/utils/utils';
+
+.carousel-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 25rem;
+  &.first {
+    background-image: url('../../../../assets/carousel_bg1.png');
+  }
+  &.second {
+    background-image: url('../../../../assets/carousel_bg2.png');
+  }
+  &.third {
+    background-image: url('../../../../assets/carousel_bg3.png');
+  }
+  .carousel-detail-wrapper {
+    display: flex;
+    flex-direction: column;
+    > span:first-child {
+      margin: 0 0 1rem 0;
+    }
+    > span:nth-child(2) {
+      margin: 0 0 4rem 0;
+      font-size: 3rem;
+    }
+    button {
+      width: 7rem;
+      height: 2rem;
+    }
+  }
+  img {
+    height: 15rem;
+    object-fit: cover;
+  }
+}
+
+.swiper-button-prev {
+  color: $white;
+  margin-left: 1rem;
+}
+
+.swiper-button-next {
+  color: $white;
+  margin-right: 1rem;
+}
+
+.swiper-pagination-bullet {
+  background-color: $white;
+}
