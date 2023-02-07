@@ -6,7 +6,6 @@ import { Button, Logo, Text } from '../../atoms';
 
 const Header = () => {
   const cx = classNames.bind(styles);
-
   return (
     <header>
       <nav>
