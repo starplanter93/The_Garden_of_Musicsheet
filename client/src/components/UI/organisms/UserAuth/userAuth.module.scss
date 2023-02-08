@@ -22,6 +22,14 @@
   .logo__Text {
     margin-top: 2rem;
     margin-bottom: 2rem;
+    span {
+      color: $deep-green;
+      font: {
+        family: 'designhouseOTFLight00';
+        weight: bold;
+        size: 2.5rem;
+      }
+    }
   }
 
   .userAuth__btn {

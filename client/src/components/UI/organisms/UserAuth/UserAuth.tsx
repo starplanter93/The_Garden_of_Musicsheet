@@ -52,9 +52,7 @@ const UserAuth = ({ type }: UserAuthProps) => {
         </div>
         <div className={cx('logo__Text')}>
           <Link to="/">
-            <Text weight="semibold" size="xlg" color="green">
-              악보의 정원
-            </Text>
+            <span>악보의 정원</span>
           </Link>
         </div>
         <UserAuthInput type="Login" placeholder="이메일"></UserAuthInput>
@@ -103,9 +101,7 @@ const UserAuth = ({ type }: UserAuthProps) => {
         </div>
         <div className={cx('logo__Text')}>
           <Link to="/">
-            <Text weight="semibold" size="xlg" color="green">
-              악보의 정원
-            </Text>
+            <span>악보의 정원</span>
           </Link>
         </div>
 

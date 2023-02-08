@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction, Reducer } from '@reduxjs/toolkit';
+// 나중에 유저 정보를 저장할 때 사용할 용도 지금은 사용 X
 
 // initalState 타입 정의
 interface StateType {

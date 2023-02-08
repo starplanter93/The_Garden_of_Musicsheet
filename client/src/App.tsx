@@ -1,10 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './components/pages';
 import Test from './components/pages/Test';
-import Auth from './components/pages/Auth/Auth';
+import { Auth, PostMusic } from './components/pages';
 import { BrowserRouter } from 'react-router-dom';
 import { getDocument } from './firebase/firebase';
 import { useEffect } from 'react';
+
 function App() {
   useEffect(() => {
     getDocument().then((data) => console.log(data));
@@ -14,7 +15,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Test />} />
+          <Route index element={<PostMusic />} />
           {/* MainPage 등 */}
         </Route>
 
