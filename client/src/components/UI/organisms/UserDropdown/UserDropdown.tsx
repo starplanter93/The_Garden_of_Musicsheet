@@ -3,12 +3,15 @@ import classNames from 'classnames/bind';
 import { MiniProfile, UserMenu } from '../../molecules';
 import { Dispatch, SetStateAction, useEffect } from 'react';
 
-interface Props {
+interface UserDropdownProps {
   closeDropdownTarget: any;
   setDropdown: Dispatch<SetStateAction<boolean>>;
 }
 
-const UserDropdown = ({ closeDropdownTarget, setDropdown }: Props) => {
+const UserDropdown = ({
+  closeDropdownTarget,
+  setDropdown,
+}: UserDropdownProps) => {
   const cx = classNames.bind(styles);
 
   const handleDropdownClose = (event: any) => {
