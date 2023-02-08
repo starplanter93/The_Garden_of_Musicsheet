@@ -1,7 +1,7 @@
 @import '../../../../utils/utils';
 
 .userAuth {
-  background-color: $white;
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,22 +12,28 @@
   border: 2px solid $gray-white;
   border-radius: 1.5rem;
   align-items: center;
+  width: 40rem;
 
   .userAuth__logo {
-    margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
   }
+
+  .logo__Text {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
   .userAuth__btn {
     margin-bottom: 8rem;
   }
 
   .userAuth__register__btn {
-    // display: flex;
     margin-top: 2rem;
     padding-left: 13.5rem;
-    // justify-content: flex-end;
-    // align-items: flex-end;
+    :hover {
+      color: $light-green;
+    }
   }
 
   hr {
