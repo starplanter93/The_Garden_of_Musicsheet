@@ -24,7 +24,7 @@ function MainSongSection({
 }: MainSongSectionProps) {
   const cx = classNames.bind(styles);
   return (
-    <section>
+    <section className={cx('container')}>
       <SongTitle songTitle={songTitle} singer={singer} />
       <div className={cx('scorelist-wrapper')}>
         <MainScoreList
