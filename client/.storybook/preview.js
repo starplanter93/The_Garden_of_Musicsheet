@@ -19,4 +19,5 @@ export const decorators = [withRouter,
       <Story />
     </Provider>
   ),
+  withRouter
 ]

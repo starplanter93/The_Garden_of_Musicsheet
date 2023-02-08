@@ -1,18 +1,13 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import InstrumentListss from './InstrumentLists';
+import InstrumentLists from './InstrumentLists';
 
 export default {
   title: 'Organisms/InstrumentLists',
-  component: InstrumentListss,
-} as ComponentMeta<typeof InstrumentListss>;
+  component: InstrumentLists,
+} as ComponentMeta<typeof InstrumentLists>;
 
-const Template: ComponentStory<typeof InstrumentListss> = (args) => (
-  <InstrumentListss {...args} />
+const Template: ComponentStory<typeof InstrumentLists> = () => (
+  <InstrumentLists />
 );
 
-export const InstrumentLists = Template.bind({});
-
-// Todo: 추후 props 형식에 따라 변경 예정
-InstrumentLists.args = {
-  arraylength: 6,
-};
+export const Default = Template.bind({});
