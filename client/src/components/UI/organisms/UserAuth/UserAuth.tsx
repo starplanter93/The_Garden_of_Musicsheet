@@ -6,7 +6,11 @@ import { RootState } from '../../../../redux/store';
 import React from 'react';
 import classNames from 'classnames/bind';
 import styles from './userAuth.module.scss';
-import { handleRegisterUser, handleUserLogin } from '../../../../utils/utils';
+import {
+  handleRegisterUser,
+  handleUserLogin,
+  handleGoogleLogin,
+} from '../../../../utils/utils';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -35,6 +39,11 @@ const UserAuth = ({ type }: UserAuthProps) => {
     } else null;
   };
 
+  const handleOauth = async () => {
+    await handleGoogleLogin();
+    navigate('/');
+  };
+
   if (typeState === 'Login') {
     return (
       <div className={cx('userAuth')}>
@@ -60,7 +69,7 @@ const UserAuth = ({ type }: UserAuthProps) => {
         <hr></hr>
 
         <>
-          <Button theme="secondary" size="xl">
+          <Button theme="secondary" size="xl" onClick={() => handleOauth()}>
             <div className={cx('userAuth__oauth__btn')}>
               <div className={cx('userAuth__oauth__btn--icon')}>
                 <Icon icon="FcGoogle"></Icon>
