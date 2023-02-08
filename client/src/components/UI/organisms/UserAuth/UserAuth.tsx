@@ -7,15 +7,14 @@ import React from 'react';
 import classNames from 'classnames/bind';
 import styles from './userAuth.module.scss';
 import { handleRegisterUser, handleUserLogin } from '../../../../utils/utils';
-import { auth } from '../../../../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface UserAuthProps {
   type: 'Login' | 'SignUp';
 }
 
 const UserAuth = ({ type }: UserAuthProps) => {
-  console.log(auth.currentUser);
   const navigate = useNavigate();
   const userLoginData = useSelector((state: RootState) => state.userLoginInput);
   const userRegData = useSelector((state: RootState) => state.regInfo);
@@ -43,11 +42,11 @@ const UserAuth = ({ type }: UserAuthProps) => {
           <img src={require('../../../../assets/Logo.png')} />
         </div>
         <div className={cx('logo__Text')}>
-          <Button theme="transparent">
+          <Link to="/">
             <Text weight="semibold" size="xlg" color="green">
               악보의 정원
             </Text>
-          </Button>
+          </Link>
         </div>
         <UserAuthInput type="Login" placeholder="이메일"></UserAuthInput>
         <UserAuthInput type="Login" placeholder="비밀번호"></UserAuthInput>
@@ -94,11 +93,11 @@ const UserAuth = ({ type }: UserAuthProps) => {
           <img src={require('../../../../assets/Logo.png')} />
         </div>
         <div className={cx('logo__Text')}>
-          <Button theme="transparent">
+          <Link to="/">
             <Text weight="semibold" size="xlg" color="green">
               악보의 정원
             </Text>
-          </Button>
+          </Link>
         </div>
 
         <UserAuthInput type="SignUp" placeholder="이메일"></UserAuthInput>
