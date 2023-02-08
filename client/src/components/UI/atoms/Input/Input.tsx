@@ -18,7 +18,7 @@ interface InputProps {
   setUserInput(state: string): void;
   size: 's' | 'm' | 'l';
   theme: 'basic' | 'icon-input';
-  placeholder?: '이메일' | '비밀번호' | '비밀번호 확인' | '닉네임';
+  placeholder?: string | '이메일' | '비밀번호' | '비밀번호 확인' | '닉네임';
 }
 
 const Input = ({
@@ -32,23 +32,23 @@ const Input = ({
   const dispatch = useDispatch();
 
   const handleOnChange = (input: string) => {
-    if (placeholder === '이메일') {
-      setUserInput(input);
-      dispatch(userLoginEmail({ email: input }));
-      dispatch(userRegEmail({ email: input }));
-    }
-    if (placeholder === '비밀번호') {
-      setUserInput(input);
-      dispatch(userLoginPassword({ password: input }));
-      dispatch(userRegPassword({ password: input }));
-    }
-    if (placeholder === '비밀번호 확인') {
-      setUserInput(input);
-      dispatch(userRegPasswordCheck({ passwordCheck: input }));
-    }
-    if (placeholder === '닉네임') {
-      setUserInput(input);
-      dispatch(userRegNickname({ nickname: input }));
+    setUserInput(input);
+
+    switch (placeholder) {
+      case '이메일':
+        dispatch(userLoginEmail({ email: input }));
+        dispatch(userRegEmail({ email: input }));
+        break;
+      case '비밀번호':
+        dispatch(userLoginPassword({ password: input }));
+        dispatch(userRegPassword({ password: input }));
+        break;
+      case '비밀번호 확인':
+        dispatch(userRegPasswordCheck({ passwordCheck: input }));
+        break;
+      case '닉네임':
+        dispatch(userRegNickname({ nickname: input }));
+        break;
     }
   };
 
@@ -57,6 +57,7 @@ const Input = ({
       <input
         className={cx('default-input', `${size}`)}
         onChange={(e) => setUserInput(e.target.value)}
+        placeholder={placeholder}
       ></input>
     );
   } else
