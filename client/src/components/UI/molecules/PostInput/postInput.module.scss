@@ -1,5 +1,60 @@
+@import '../../../../utils/utils';
+
 .wrapper {
   .text {
     margin-bottom: 2rem;
+  }
+
+  .search {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 40rem;
+    height: 10rem;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 2px solid $gray-white;
+
+    .icon {
+      position: absolute;
+      z-index: 1;
+      top: 68px;
+      left: 36px;
+    }
+    .input {
+      height: 3.5rem;
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .selected-result {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 1rem;
+    width: 40rem;
+    height: 10rem;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 2px solid $gray-white;
+    border-top: none;
+    margin-bottom: 2rem;
+    .result-info-icon {
+      display: flex;
+      justify-content: space-between;
+      .result-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin-left: 1rem;
+      }
+    }
   }
 }
