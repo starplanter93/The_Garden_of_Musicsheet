@@ -5,12 +5,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import loginReducer from './LoginSlice';
 import regReducer from './RegSlice';
 import userReducer from './UserSlice';
+import HeaderReducer from './HeaderSlice';
 
 export const store = configureStore({
   reducer: {
     userInfo: userReducer,
     regInfo: regReducer,
     userLoginInput: loginReducer,
+    headerState: HeaderReducer,
   },
 
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
