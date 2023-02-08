@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { Layout } from './components/pages';
+import { Instrument, Layout } from './components/pages';
 import Test from './components/pages/Test';
 import Auth from './components/pages/Auth/Auth';
 import { BrowserRouter } from 'react-router-dom';
@@ -15,11 +15,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Test />} />
+          <Route path="instrument" element={<Instrument />} />
           {/* MainPage 등 */}
         </Route>
-
         <Route path="/auth" element={<Auth />}></Route>
-        {/* SignUp */}
         {/* NotFound */}
       </Routes>
     </BrowserRouter>
