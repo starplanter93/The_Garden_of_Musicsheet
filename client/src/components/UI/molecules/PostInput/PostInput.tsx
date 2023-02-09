@@ -4,7 +4,10 @@ import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './postInput.module.scss';
 import axios from 'axios';
-import { getSearchData } from '../../../../utils/ApiCollection/SearchData';
+import {
+  getSearchData,
+  refreshToken,
+} from '../../../../utils/ApiCollection/SearchData';
 
 interface PostInputProps {
   text: string;
@@ -26,7 +29,16 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
 
   useEffect(() => {
     if (userInput.length > 0) {
-      getSearchData(userInput).then((data) => setSearchData(data));
+      getSearchData(userInput).then((response) => {
+        switch (response.status) {
+          default:
+            setSearchData(response);
+            break;
+          case 401:
+            refreshToken();
+            break;
+        }
+      });
     }
   }, [userInput]);
 
