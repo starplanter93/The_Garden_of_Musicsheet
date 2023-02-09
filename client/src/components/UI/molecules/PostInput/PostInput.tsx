@@ -54,7 +54,7 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
       setUserInput('');
     };
 
-    if (!selectedData || userInput) {
+    if (userInput) {
       return (
         <div
           className={cx(selectedData ? 'dropdown-wrapper' : 'dropdown-default')}
