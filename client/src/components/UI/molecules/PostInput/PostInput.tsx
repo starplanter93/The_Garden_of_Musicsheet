@@ -4,7 +4,6 @@ import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './postInput.module.scss';
 import axios from 'axios';
-import { auth } from '../../../../firebase/firebase';
 
 interface PostInputProps {
   text: string;
