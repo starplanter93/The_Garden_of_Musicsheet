@@ -3,6 +3,8 @@ import { Input, Text, Icon, ImgLayout } from '../../atoms';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './postInput.module.scss';
+import axios from 'axios';
+import { auth } from '../../../../firebase/firebase';
 
 interface PostInputProps {
   text: string;
@@ -13,12 +15,28 @@ interface PostInputProps {
 const PostInput = ({ type, text, placeholder }: PostInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [userInput, setUserInput] = useState('');
-  const [selected, setSelected] = useState<string | undefined>(undefined);
+  const [searchData, setSearchData] = useState([]);
+
+  console.log(userInput);
+  const Token =
+    'BQBGpJREXmve8HyN6d7IsTtjS90oLyQfmbUCQb0DFuiXJShkelM2C27D8sANLOKBFm2sxlvb-oCXgjdxwJpDhkKCde5trJtS5NTyDcyaei6yces-g5fJuVpYdD7f3dafssUbKru0vQ6YwX-WXfSXCcJ3524oR1q5DCJ9v9QolyzbdkIprwCh_hPqu2bfTB60N9C1-Og9SiJZhv0d2E9yuKkS';
+
   useEffect(() => {
-    setSelected(userInput);
+    axios
+      .get('https://api.spotify.com/v1/search', {
+        headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+        params: {
+          q: userInput,
+          type: 'track',
+          limit: 10,
+        },
+      })
+      .then((data) => setSearchData(data.data.tracks.items));
   }, [userInput]);
-  console.log(selected);
   const cx = classNames.bind(styles);
+
   if (type === 'input') {
     return (
       <div className={cx('wrapper')}>
@@ -58,6 +76,27 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
               setUserInput={setUserInput}
               placeholder={placeholder}
             />
+          </div>
+        </div>
+        <div className={cx('dropdown-wrapper')}>
+          <div className={cx('dropdown')}>
+            {searchData.map((el: any, idx: number) => {
+              return (
+                <ul key={idx} className={cx('dropdown-result')}>
+                  <li className={cx('result-img')}>
+                    <img
+                      width="50px"
+                      src={el.album.images[0].url}
+                      alt="album-cover"
+                    />
+                  </li>
+                  <li className={cx('result-info')}>
+                    <span>{el.name}</span>
+                    <span>{el.artists[0].name}</span>
+                  </li>
+                </ul>
+              );
+            })}
           </div>
         </div>
         <div className={cx('selected-result')}>

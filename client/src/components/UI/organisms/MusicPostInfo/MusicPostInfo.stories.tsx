@@ -14,3 +14,8 @@ export const SongInfo = Template.bind({});
 SongInfo.args = {
   type: '곡 정보',
 };
+
+export const CommerceInfo = Template.bind({});
+CommerceInfo.args = {
+  type: '판매 상세 정보',
+};

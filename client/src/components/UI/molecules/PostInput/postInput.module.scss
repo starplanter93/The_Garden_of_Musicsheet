@@ -12,7 +12,7 @@
     align-items: center;
     background-color: white;
     width: 40rem;
-    height: 10rem;
+    height: 8rem;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border: 2px solid $gray-white;
@@ -20,7 +20,7 @@
     .icon {
       position: absolute;
       z-index: 1;
-      top: 68px;
+      top: 48px;
       left: 36px;
     }
     .input {
@@ -54,6 +54,43 @@
         justify-content: space-around;
         align-items: flex-start;
         margin-left: 1rem;
+      }
+    }
+  }
+
+  .dropdown-wrapper {
+    position: relative;
+    .dropdown {
+      overflow: auto;
+      z-index: 3;
+      width: 37rem;
+      height: 15rem;
+      background-color: white;
+      position: absolute;
+      top: -2rem;
+      left: 1.5rem;
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+      padding: 1rem;
+      border: 1px solid $gray-white;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      .dropdown-result {
+        display: flex;
+        padding-bottom: 0.5rem;
+        padding-top: 0.5rem;
+        border-bottom: 1px solid $gray-white;
+        align-items: center;
+        .result-info {
+          padding: 10px 8px;
+          position: relative;
+          width: 100%;
+          z-index: 4;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: flex-start;
+          margin-left: 1rem;
+        }
       }
     }
   }

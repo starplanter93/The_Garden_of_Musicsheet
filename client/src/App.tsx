@@ -17,6 +17,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Test />} />
           <Route path="instrument" element={<Instrument />} />
+          <Route path="/postmusic" element={<PostMusic />} />
           {/* MainPage 등 */}
         </Route>
         <Route path="/auth" element={<Auth />}></Route>

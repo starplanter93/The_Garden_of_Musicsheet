@@ -2,6 +2,7 @@ import '../src/index.scss';
 import { Provider } from "react-redux"
 import { store } from "../src/redux/store"
 import { withRouter } from 'storybook-addon-react-router-v6';
+import withStorybookAxios from 'storybook-axios';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -13,11 +14,12 @@ export const parameters = {
   },
 };
 
-export const decorators = [withRouter,
+export const decorators = [
   (Story) => (
     <Provider store={store}>
       <Story />
     </Provider>
   ),
-  withRouter
+  withRouter,
+  withStorybookAxios
 ]
