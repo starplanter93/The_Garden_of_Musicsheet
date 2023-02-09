@@ -1,8 +1,8 @@
 import React from 'react';
-import { MainGrid } from '../UI/organisms';
-import Carousel from '../UI/organisms/Carousel/Carousel';
+import { MainGrid } from '../../UI/organisms';
+import { Carousel } from '../../UI/organisms';
 
-function Test() {
+function Main() {
   return (
     <>
       <Carousel />
@@ -19,4 +19,4 @@ function Test() {
   );
 }
 
-export default Test;
+export default Main;
