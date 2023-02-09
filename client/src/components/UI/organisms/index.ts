@@ -5,6 +5,7 @@ import Header from './Header/Header';
 import MainSongSection from './MainSongSection/MainSongSection';
 import UserAuth from './UserAuth/UserAuth';
 import MainGrid from './MainGrid/MainGrid';
+import Carousel from './Carousel/Carousel';
 
 export {
   UserAuth,
@@ -14,4 +15,5 @@ export {
   Header,
   MainSongSection,
   MainGrid,
+  Carousel,
 };
