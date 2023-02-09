@@ -2,11 +2,26 @@ import styles from './userMenu.module.scss';
 import classNames from 'classnames/bind';
 import { Button, Icon, Text } from '../../../atoms';
 import { useDispatch } from 'react-redux';
-import { headerState } from '../../../../../redux/HeaderSlice';
+import { setHeader } from '../../../../../redux/HeaderSlice';
+import { auth } from '../../../../../firebase/firebase';
+import { useNavigate } from 'react-router-dom';
 // Todo: Link
 const UserMenu = () => {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleSignOut = () => {
+    auth.signOut();
+    localStorage.removeItem('authorization');
+    localStorage.removeItem('refresh');
+    location.reload();
+  };
+
+  const handleUpload = () => {
+    dispatch(setHeader(true));
+    navigate('/postmusic');
+  };
+
   return (
     <div className={cx('usermenu-wrapper')}>
       <ul>
@@ -14,7 +29,7 @@ const UserMenu = () => {
           <Button
             theme="transparent"
             size="auto"
-            onClick={() => dispatch(headerState())}
+            onClick={() => handleUpload()}
           >
             <>
               <Icon icon="MdOutlineUploadFile" size="s" />
@@ -31,7 +46,11 @@ const UserMenu = () => {
           </Button>
         </li>
         <li>
-          <Button theme="transparent" size="auto">
+          <Button
+            theme="transparent"
+            size="auto"
+            onClick={() => handleSignOut()}
+          >
             <>
               <Icon icon="MdLogout" size="s" />
               <Text>로그아웃</Text>

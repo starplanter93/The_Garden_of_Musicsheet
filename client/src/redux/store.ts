@@ -12,7 +12,8 @@ export const store = configureStore({
     userInfo: userReducer,
     regInfo: regReducer,
     userLoginInput: loginReducer,
-    headerState: HeaderReducer,
+    postHeader: HeaderReducer,
+    defaultHeader: HeaderReducer,
   },
 
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),

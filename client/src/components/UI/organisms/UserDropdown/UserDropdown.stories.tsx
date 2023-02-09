@@ -6,6 +6,8 @@ export default {
   component: UserDropdowns,
 } as ComponentMeta<typeof UserDropdowns>;
 
-const Template: ComponentStory<typeof UserDropdowns> = () => <UserDropdowns />;
+const Template: ComponentStory<typeof UserDropdowns> = (args) => (
+  <UserDropdowns {...args} />
+);
 
 export const UserDropdown = Template.bind({});

@@ -5,18 +5,28 @@ import UtilityMenu from '../UtilityMenu/UtilityMenu';
 import { Button, Icon, Logo, Text } from '../../atoms';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setHeader } from '../../../../redux/HeaderSlice';
 
 const Header = () => {
   const cx = classNames.bind(styles);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const headerState = useSelector(
-    (state: RootState) => state.headerState.isPost
+    (state: RootState) => state.postHeader.isPost
   );
+
+  const handleIsPost = () => {
+    dispatch(setHeader(false));
+    navigate(-1);
+  };
 
   if (headerState) {
     return (
       <header>
         <nav>
-          <Button size="s" theme="transparent">
+          <Button size="s" theme="transparent" onClick={() => handleIsPost()}>
             <div className={cx('upload')}>
               <Icon icon="BsArrowLeft" />
               <Text>뒤로 가기</Text>
@@ -37,18 +47,15 @@ const Header = () => {
         <nav>
           <Logo type="pc" />
           <GlobalMenu />
-          {/* Todo: store의 로그인 상태에 따라 분기 */}
-          {true && (
-            <div className={cx('login-button')}>
-              {/* Todo: 로그인 버튼 Link */}
-              <Button size="xs">
-                <Text color="white">로그인</Text>
-              </Button>
-            </div>
-          )}
-          {false && (
+          {localStorage.getItem('authorization') ? (
             <div className={cx('utility-menu')}>
               <UtilityMenu />
+            </div>
+          ) : (
+            <div className={cx('login-button')}>
+              <Button size="xs" onClick={() => navigate('/auth')}>
+                <Text color="white">로그인</Text>
+              </Button>
             </div>
           )}
         </nav>

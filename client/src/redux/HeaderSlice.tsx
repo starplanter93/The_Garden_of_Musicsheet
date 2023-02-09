@@ -1,4 +1,4 @@
-import { createSlice, Reducer } from '@reduxjs/toolkit';
+import { createSlice, Reducer, PayloadAction } from '@reduxjs/toolkit';
 
 // initalState 타입 정의
 interface StateType {
@@ -13,14 +13,14 @@ export const HeaderSlice = createSlice({
   name: 'headerSlice',
   initialState,
   reducers: {
-    headerState: (state: StateType) => {
-      return { ...state, isPost: true };
+    setHeader: (state: StateType, action: PayloadAction<boolean>) => {
+      return { ...state, isPost: action.payload };
     },
   },
 });
 
 // 액션을 export 해준다.
-export const { headerState } = HeaderSlice.actions;
+export const { setHeader } = HeaderSlice.actions;
 
 // 슬라이스를 export 해준다.
 const HeaderReducer: Reducer<typeof initialState> = HeaderSlice.reducer;
