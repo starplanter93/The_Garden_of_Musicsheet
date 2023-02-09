@@ -2,9 +2,10 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   updateProfile,
+  signInWithPopup,
 } from 'firebase/auth';
-import { auth } from '../../firebase/firebase';
-
+import { auth, provider } from '../../firebase/firebase';
+import Avatar from '../Avatar';
 export const handleUserLogin = async (email: any, password: any) => {
   let response;
   await signInWithEmailAndPassword(auth, email, password)
@@ -26,22 +27,32 @@ export const handleUserLogin = async (email: any, password: any) => {
   return response;
 };
 
-export const handleRegisterUser = (
+export const handleRegisterUser = async (
   email: any,
   password: any,
   nickname: any
 ) => {
   let response;
-  createUserWithEmailAndPassword(auth, email, password)
+  await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      updateProfile(user, { displayName: nickname });
+      updateProfile(user, {
+        displayName: nickname,
+        photoURL: Avatar(),
+      });
       // ...
     })
+
     .catch((error) => {
       response = error;
       console.log(response.code);
       // if 400 => switch and show user that the ac already exists
     });
+};
+
+export const handleGoogleLogin = async () => {
+  await signInWithPopup(auth, provider)
+    .then((data) => console.log(data.user))
+    .catch((err) => console.log(err));
 };

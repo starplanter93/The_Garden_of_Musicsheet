@@ -1,3 +1,7 @@
-import { handleUserLogin, handleRegisterUser } from './ApiCollection/User';
+import {
+  handleUserLogin,
+  handleRegisterUser,
+  handleGoogleLogin,
+} from './ApiCollection/User';
 
-export { handleUserLogin, handleRegisterUser };
+export { handleUserLogin, handleRegisterUser, handleGoogleLogin };
