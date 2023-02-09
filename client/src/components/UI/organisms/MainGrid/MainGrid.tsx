@@ -7,8 +7,10 @@ import classNames from 'classnames/bind';
 interface MainGridProps {
   songTitle: string;
   singer: string;
+  albumImg: string;
   scoreName: string;
   scoreWriter: string;
+  profileImg: string;
   instrument: string;
   difficulty: string;
   price: string;
@@ -17,8 +19,10 @@ interface MainGridProps {
 function MainGrid({
   songTitle,
   singer,
+  albumImg,
   scoreName,
   scoreWriter,
+  profileImg,
   instrument,
   difficulty,
   price,
@@ -35,8 +39,10 @@ function MainGrid({
         <MainSongSection
           songTitle={songTitle}
           singer={singer}
+          albumImg={albumImg}
           scoreName={scoreName}
           scoreWriter={scoreWriter}
+          profileImg={profileImg}
           instrument={instrument}
           difficulty={difficulty}
           price={price}
@@ -44,8 +50,10 @@ function MainGrid({
         <MainSongSection
           songTitle={songTitle}
           singer={singer}
+          albumImg={albumImg}
           scoreName={scoreName}
           scoreWriter={scoreWriter}
+          profileImg={profileImg}
           instrument={instrument}
           difficulty={difficulty}
           price={price}
@@ -53,8 +61,10 @@ function MainGrid({
         <MainSongSection
           songTitle={songTitle}
           singer={singer}
+          albumImg={albumImg}
           scoreName={scoreName}
           scoreWriter={scoreWriter}
+          profileImg={profileImg}
           instrument={instrument}
           difficulty={difficulty}
           price={price}
@@ -62,8 +72,10 @@ function MainGrid({
         <MainSongSection
           songTitle={songTitle}
           singer={singer}
+          albumImg={albumImg}
           scoreName={scoreName}
           scoreWriter={scoreWriter}
+          profileImg={profileImg}
           instrument={instrument}
           difficulty={difficulty}
           price={price}
@@ -71,8 +83,10 @@ function MainGrid({
         <MainSongSection
           songTitle={songTitle}
           singer={singer}
+          albumImg={albumImg}
           scoreName={scoreName}
           scoreWriter={scoreWriter}
+          profileImg={profileImg}
           instrument={instrument}
           difficulty={difficulty}
           price={price}
@@ -80,8 +94,10 @@ function MainGrid({
         <MainSongSection
           songTitle={songTitle}
           singer={singer}
+          albumImg={albumImg}
           scoreName={scoreName}
           scoreWriter={scoreWriter}
+          profileImg={profileImg}
           instrument={instrument}
           difficulty={difficulty}
           price={price}
@@ -89,8 +105,10 @@ function MainGrid({
         <MainSongSection
           songTitle={songTitle}
           singer={singer}
+          albumImg={albumImg}
           scoreName={scoreName}
           scoreWriter={scoreWriter}
+          profileImg={profileImg}
           instrument={instrument}
           difficulty={difficulty}
           price={price}
@@ -98,8 +116,10 @@ function MainGrid({
         <MainSongSection
           songTitle={songTitle}
           singer={singer}
+          albumImg={albumImg}
           scoreName={scoreName}
           scoreWriter={scoreWriter}
+          profileImg={profileImg}
           instrument={instrument}
           difficulty={difficulty}
           price={price}
@@ -107,8 +127,10 @@ function MainGrid({
         <MainSongSection
           songTitle={songTitle}
           singer={singer}
+          albumImg={albumImg}
           scoreName={scoreName}
           scoreWriter={scoreWriter}
+          profileImg={profileImg}
           instrument={instrument}
           difficulty={difficulty}
           price={price}
@@ -116,8 +138,10 @@ function MainGrid({
         <MainSongSection
           songTitle={songTitle}
           singer={singer}
+          albumImg={albumImg}
           scoreName={scoreName}
           scoreWriter={scoreWriter}
+          profileImg={profileImg}
           instrument={instrument}
           difficulty={difficulty}
           price={price}
@@ -125,8 +149,10 @@ function MainGrid({
         <MainSongSection
           songTitle={songTitle}
           singer={singer}
+          albumImg={albumImg}
           scoreName={scoreName}
           scoreWriter={scoreWriter}
+          profileImg={profileImg}
           instrument={instrument}
           difficulty={difficulty}
           price={price}

@@ -6,8 +6,10 @@ import classNames from 'classnames/bind';
 interface MainSongSectionProps {
   songTitle: string;
   singer: string;
+  albumImg: string;
   scoreName: string;
   scoreWriter: string;
+  profileImg: string;
   instrument: string;
   difficulty: string;
   price: string;
@@ -16,8 +18,10 @@ interface MainSongSectionProps {
 function MainSongSection({
   songTitle,
   singer,
+  albumImg,
   scoreName,
   scoreWriter,
+  profileImg,
   instrument,
   difficulty,
   price,
@@ -25,11 +29,12 @@ function MainSongSection({
   const cx = classNames.bind(styles);
   return (
     <section className={cx('container')}>
-      <SongTitle songTitle={songTitle} singer={singer} />
+      <SongTitle songTitle={songTitle} singer={singer} albumImg={albumImg} />
       <div className={cx('scorelist-wrapper')}>
         <MainScoreList
           scoreName={scoreName}
           scoreWriter={scoreWriter}
+          profileImg={profileImg}
           instrument={instrument}
           difficulty={difficulty}
           price={price}
@@ -37,6 +42,7 @@ function MainSongSection({
         <MainScoreList
           scoreName={scoreName}
           scoreWriter={scoreWriter}
+          profileImg={profileImg}
           instrument={instrument}
           difficulty={difficulty}
           price={price}
@@ -44,6 +50,7 @@ function MainSongSection({
         <MainScoreList
           scoreName={scoreName}
           scoreWriter={scoreWriter}
+          profileImg={profileImg}
           instrument={instrument}
           difficulty={difficulty}
           price={price}
