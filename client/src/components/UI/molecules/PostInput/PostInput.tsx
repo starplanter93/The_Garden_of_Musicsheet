@@ -4,6 +4,7 @@ import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './postInput.module.scss';
 import axios from 'axios';
+import { getSearchData } from '../../../../utils/ApiCollection/SearchData';
 
 interface PostInputProps {
   text: string;
@@ -23,25 +24,12 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
   const [searchData, setSearchData] = useState([]);
   const [selectedData, setSelectedData] = useState<SelectedDataProps>();
 
-  const Token =
-    'BQCZl98GeQDFHWBkHPQtRgoIdNghs14ejVcIA8UDOZ9Iom7ll9C5IBmxxp4P7dJ5vqernmaLP6orPHQmSj6UM038M_vum8zMmc5gSkM8523OJ91xCpgxS1alPgohUFfqiNUxls9pXwkmifYqXNfoyUIkWegihzIn_XBRPdWy65ALtNLqYKAi4n5lpjT_9cOQYDgvFYDqDSKlXfldwLgsWAUi';
-
   useEffect(() => {
     if (userInput.length > 0) {
-      axios
-        .get('https://api.spotify.com/v1/search', {
-          headers: {
-            Authorization: `Bearer ${Token}`,
-          },
-          params: {
-            q: userInput,
-            type: 'track',
-            limit: 10,
-          },
-        })
-        .then((data) => setSearchData(data.data.tracks.items));
+      getSearchData(userInput).then((data) => setSearchData(data));
     }
   }, [userInput]);
+
   const cx = classNames.bind(styles);
 
   const AutoComplete = () => {
