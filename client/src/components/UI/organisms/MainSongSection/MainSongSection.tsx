@@ -6,10 +6,10 @@ import classNames from 'classnames/bind';
 interface MainSongSectionProps {
   songTitle: string;
   singer: string;
-  albumImg: string;
+  albumImg?: string;
   scoreName: string;
   scoreWriter: string;
-  profileImg: string;
+  profileImg?: string;
   instrument: string;
   difficulty: string;
   price: string;
