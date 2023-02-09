@@ -1,12 +1,12 @@
 import React from 'react';
-import MainSongSection from '../UI/organisms/MainSongSection/MainSongSection';
+import { MainGrid } from '../UI/organisms';
 import Carousel from '../UI/organisms/Carousel/Carousel';
 
 function Test() {
   return (
     <>
       <Carousel />
-      <MainSongSection
+      <MainGrid
         songTitle="노래 제목"
         singer="가수"
         scoreName="조금길지도모르는 악보제목"

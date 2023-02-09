@@ -1,0 +1,19 @@
+@import '/src/utils/utils';
+
+.main-content-grid {
+  .main-content-header {
+    margin-top: 3.5rem;
+    grid-column: 1 / -1;
+  }
+  display: grid;
+  column-gap: 4rem;
+  row-gap: 2rem;
+  width: 100%;
+  justify-content: center;
+  grid-template-columns: repeat(2, minmax(400px, 500px));
+  grid-template-rows: 100px;
+  grid-auto-rows: auto;
+  @media screen and (max-width: 880px) {
+    grid-template-columns: repeat(1, minmax(400px, 500px));
+  }
+}
