@@ -25,7 +25,7 @@ const Header = () => {
   if (headerState) {
     return (
       <header>
-        <nav>
+        <nav className={cx('nav-post')}>
           <Button size="s" theme="transparent" onClick={() => handleIsPost()}>
             <div className={cx('upload')}>
               <Icon icon="BsArrowLeft" />

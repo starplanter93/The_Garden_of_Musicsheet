@@ -1,9 +1,8 @@
+import React from 'react';
 import MusicPostInfo from '../../UI/organisms/MusicPostInfo/MusicPostInfo';
-import { useEffect } from 'react';
-import axios from 'axios';
 import classNames from 'classnames/bind';
 import styles from './PostMusic.module.scss';
-import PostInput from '../../UI/molecules/PostInput/PostInput';
+import { PostInput } from '../../UI/molecules';
 const PostMusic = () => {
   const cx = classNames.bind(styles);
 
@@ -20,4 +19,4 @@ const PostMusic = () => {
   );
 };
 
-export default PostMusic;
+export default React.memo(PostMusic);

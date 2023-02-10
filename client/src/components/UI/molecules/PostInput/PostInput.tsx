@@ -3,7 +3,7 @@ import { Input, Text, Icon, ImgLayout, Button } from '../../atoms';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './postInput.module.scss';
-import axios from 'axios';
+
 import {
   getSearchData,
   refreshToken,
