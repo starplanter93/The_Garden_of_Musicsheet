@@ -1,10 +1,9 @@
 import React from 'react';
-import MusicPostInfo from '../../UI/organisms/MusicPostInfo/MusicPostInfo';
+
 import classNames from 'classnames/bind';
 import styles from './PostMusic.module.scss';
 import { PostInput } from '../../UI/molecules';
-
-import { PostButtons } from '../../UI/organisms';
+import { PostButtons, MusicPostInfo } from '../../UI/organisms';
 const PostMusic = () => {
   const cx = classNames.bind(styles);
 
