@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signInWithPopup,
+  GoogleAuthProvider,
 } from 'firebase/auth';
 import { auth, provider } from '../../firebase/firebase';
 import Avatar from '../Avatar';
@@ -16,6 +17,7 @@ export const handleUserLogin = async (email: any, password: any) => {
       localStorage.setItem('authorization', user.uid);
       localStorage.setItem('refresh', user.refreshToken);
       response = user;
+      console.log(user);
       // ...
     })
 
@@ -56,6 +58,12 @@ export const handleRegisterUser = async (
 
 export const handleGoogleLogin = async () => {
   await signInWithPopup(auth, provider)
-    .then((data) => console.log(data.user))
+    .then((data) => {
+      const credential = GoogleAuthProvider.credentialFromResult(data);
+      const token = credential?.accessToken;
+      const user = data.user;
+      if (token) localStorage.setItem('authorization', token);
+      if (user.refreshToken) localStorage.setItem('refresh', user.refreshToken);
+    })
     .catch((err) => console.log(err));
 };
