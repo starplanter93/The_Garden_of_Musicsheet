@@ -5,16 +5,16 @@ import { useDispatch } from 'react-redux';
 import { setHeader } from '../../../../../redux/HeaderSlice';
 import { auth } from '../../../../../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
-// Todo: Link
+import { persistor } from '../../../../../redux/store';
+
 const UserMenu = () => {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSignOut = () => {
-    auth.signOut();
-    localStorage.removeItem('authorization');
-    localStorage.removeItem('refresh');
+  const handleSignOut = async () => {
+    await auth.signOut();
+    await persistor.purge();
     location.reload();
   };
 

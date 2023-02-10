@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction, Reducer } from '@reduxjs/toolkit';
+import { PURGE } from 'redux-persist';
 
 interface StateType {
   displayName: string;
@@ -22,6 +23,14 @@ export const userSlice = createSlice({
       state = action.payload;
       return state;
     },
+  },
+  // initialState로 초기화
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, () => {
+      initialState;
+      localStorage.removeItem('authorization');
+      localStorage.removeItem('refresh');
+    });
   },
 });
 
