@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Icon, ImgLayout, Text } from '../../atoms';
+import { Button, Icon, Text } from '../../atoms';
 import { UserAuthInput } from '../../molecules';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
