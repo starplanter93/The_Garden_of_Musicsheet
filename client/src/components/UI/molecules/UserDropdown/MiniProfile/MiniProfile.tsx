@@ -1,22 +1,22 @@
 import styles from './miniProfile.module.scss';
 import classNames from 'classnames/bind';
 import { Icon, ImgLayout, Text } from '../../../atoms';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../../redux/store';
 
-// Todo: src, username, email, cash
 const MiniProfile = () => {
   const cx = classNames.bind(styles);
+  const { photoURL, displayName, email, phoneNumber } = useSelector(
+    (state: RootState) => state.user.userReducer
+  );
 
   return (
     <div className={cx('profile-wrapper')}>
       <div className={cx('profile-info')}>
-        <ImgLayout
-          size="s"
-          src="https://lh3.googleusercontent.com/ogw/AAEL6sgMlJvuCWZwwiG2zRIo7a1f7Ihd3a845sDU0u6mJg=s64-c-mo"
-          alt="프로필사진"
-        />
+        <ImgLayout size="s" src={photoURL} alt="프로필사진" />
         <div>
-          <Text weight="semibold">Username</Text>
-          <Text size="s">abcdef1234@gmail.com</Text>
+          <Text weight="semibold">{displayName}</Text>
+          <Text size="s">{email}</Text>
         </div>
       </div>
       <div className={cx('profile-cash')}>
@@ -24,7 +24,7 @@ const MiniProfile = () => {
         <Text size="s" color="gray">
           캐시
         </Text>
-        <Text weight="medium">1,000,000원</Text>
+        <Text weight="medium">{`${phoneNumber ?? 0}원`}</Text>
       </div>
     </div>
   );
