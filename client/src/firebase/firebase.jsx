@@ -26,6 +26,13 @@ export async function getDocument() {
   return list;
 }
 
+export async function getMusics() {
+  const ref = collection(db, 'music');
+  const snapshot = await getDocs(ref);
+  const list = snapshot.docs.map((doc) => doc.data());
+  return list;
+}
+
 export const auth = getAuth();
 
 export const provider = new GoogleAuthProvider();
