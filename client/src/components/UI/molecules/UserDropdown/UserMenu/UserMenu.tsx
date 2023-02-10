@@ -10,6 +10,7 @@ const UserMenu = () => {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleSignOut = () => {
     auth.signOut();
     localStorage.removeItem('authorization');
@@ -38,7 +39,11 @@ const UserMenu = () => {
           </Button>
         </li>
         <li>
-          <Button theme="transparent" size="auto">
+          <Button
+            theme="transparent"
+            size="auto"
+            onClick={() => navigate('/mypage')}
+          >
             <>
               <Icon icon="CgUserList" size="s" />
               <Text>마이페이지</Text>
