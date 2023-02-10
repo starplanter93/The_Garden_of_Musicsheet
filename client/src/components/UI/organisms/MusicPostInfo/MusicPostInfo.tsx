@@ -1,13 +1,21 @@
-import PostInput from '../../molecules/PostInput/PostInput';
-
+import { PostInput } from '../../molecules';
+import { Text } from '../../atoms';
+import styles from './musicPostInfo.module.scss';
+import classNames from 'classnames/bind';
 interface MusicPostInfoProps {
   type: '곡 정보' | '판매 상세 정보';
 }
 
 const MusicPostInfo = ({ type }: MusicPostInfoProps) => {
+  const cx = classNames.bind(styles);
   if (type === '곡 정보') {
     return (
       <>
+        <div className={cx('text')}>
+          <Text weight="semibold" size="xlg">
+            {type}
+          </Text>
+        </div>
         <PostInput
           type="input"
           text="곡 제목"
@@ -24,6 +32,11 @@ const MusicPostInfo = ({ type }: MusicPostInfoProps) => {
   } else if (type === '판매 상세 정보') {
     return (
       <>
+        <div className={cx('text')}>
+          <Text weight="semibold" size="xlg">
+            {type}
+          </Text>
+        </div>
         <PostInput type="input" text="가격" placeholder="원 단위" />
         <PostInput
           type="input"

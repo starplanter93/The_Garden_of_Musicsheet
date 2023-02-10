@@ -6,8 +6,10 @@ import MainSongSection from './MainSongSection/MainSongSection';
 import UserAuth from './UserAuth/UserAuth';
 import MainGrid from './MainGrid/MainGrid';
 import Carousel from './Carousel/Carousel';
+import PostButtons from './MusicPostInfo/Buttons/PostButtons';
 
 export {
+  PostButtons,
   UserAuth,
   InstrumentLists,
   UserDropdown,

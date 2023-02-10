@@ -129,6 +129,11 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
           <Text weight="regular" size="m">
             {text}
           </Text>
+          {text !== '유튜브 주소 (선택)' ? (
+            <Text size="xlg" color="red">
+              *
+            </Text>
+          ) : null}
         </div>
         <div className={cx('text')}>
           <Input
@@ -147,6 +152,9 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
         <div className={cx('text')}>
           <Text weight="regular" size="m">
             {text}
+          </Text>
+          <Text size="xlg" color="red">
+            *
           </Text>
         </div>
         <div className={cx(selectedData ? 'search' : 'default')}>
