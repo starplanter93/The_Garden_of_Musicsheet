@@ -8,6 +8,7 @@ import { RootState } from '../../../../redux/store';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setHeader } from '../../../../redux/HeaderSlice';
+import { useEffect } from 'react';
 
 const Header = () => {
   const cx = classNames.bind(styles);
@@ -16,7 +17,9 @@ const Header = () => {
   const headerState = useSelector(
     (state: RootState) => state.postHeader.isPost
   );
-
+  useEffect(() => {
+    dispatch(setHeader(false));
+  }, []);
   const handleIsPost = () => {
     dispatch(setHeader(false));
     navigate(-1);

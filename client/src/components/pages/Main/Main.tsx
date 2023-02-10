@@ -1,8 +1,15 @@
 import React from 'react';
 import { MainGrid } from '../../UI/organisms';
 import { Carousel } from '../../UI/organisms';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setHeader } from '../../../redux/HeaderSlice';
 
 function Main() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setHeader(false));
+  }, []);
   return (
     <>
       <Carousel />
