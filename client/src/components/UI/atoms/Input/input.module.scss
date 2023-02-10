@@ -25,6 +25,10 @@
     padding-top: 0.75rem;
     line-height: 1.5rem;
   }
+  &.icon-input-no-label {
+    position: absolute;
+    padding-left: 3.5rem;
+  }
 
   &:focus {
     border: 2px solid $deep-green;

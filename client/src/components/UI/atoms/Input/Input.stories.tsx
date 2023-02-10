@@ -18,6 +18,14 @@ Basic.args = {
   setUserInput: () => undefined,
 };
 
+export const InputWithoutIcon = Template.bind({});
+InputWithoutIcon.args = {
+  theme: 'icon-input-no-label',
+  size: 's',
+  setIsFocused: () => undefined,
+  setUserInput: () => undefined,
+};
+
 export const InputWithIcon = Template.bind({});
 InputWithIcon.args = {
   theme: 'icon-input',
