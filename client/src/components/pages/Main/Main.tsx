@@ -1,20 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MainGrid } from '../../UI/organisms';
 import { Carousel } from '../../UI/organisms';
+import { getMusics } from '../../../firebase/firebase';
+
+type MusicArrType = {
+  singer: string;
+  scores: ScoreInfo[];
+  albumImg: string;
+  songTitle: string;
+  songId: number | null;
+}[];
+
+interface ScoreInfo {
+  difficulty: string;
+  instrument: string;
+  price: string;
+  profileImg: string;
+  scoreName: string;
+  scoreWriter: string;
+  scoreId: number | null;
+}
 
 function Main() {
+  const [musicArr, setMusicArr] = useState<MusicArrType>([
+    { singer: '', scores: [], albumImg: '', songTitle: '', songId: null },
+  ]);
+  useEffect(() => {
+    getMusics().then((data) => {
+      console.log(data);
+      setMusicArr(data);
+    });
+  }, []);
+  console.log(musicArr);
   return (
     <>
       <Carousel />
-      <MainGrid
-        songTitle="노래 제목"
-        singer="가수"
-        scoreName="조금길지도모르는 악보제목"
-        scoreWriter="악보제작자"
-        instrument="사용된 악기"
-        difficulty="난이도"
-        price="3,000원"
-      />
+      {/* <MainGrid musicData={musicArr} /> */}
     </>
   );
 }
