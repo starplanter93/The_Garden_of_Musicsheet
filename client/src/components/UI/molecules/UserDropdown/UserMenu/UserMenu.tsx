@@ -13,9 +13,11 @@ const UserMenu = () => {
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
-    await auth.signOut();
-    await persistor.purge();
-    location.reload();
+    if (confirm('정말 로그아웃하시겠습니까?🥺')) {
+      await auth.signOut();
+      await persistor.purge();
+      navigate('/');
+    }
   };
 
   const handleUpload = () => {
