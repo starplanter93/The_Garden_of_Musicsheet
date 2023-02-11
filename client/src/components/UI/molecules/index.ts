@@ -11,8 +11,9 @@ import UserAuthInput from './UserAuthInput/UserAuthInput';
 import PostInput from './PostInput/PostInput';
 import DropDown from './DropDownSelect/DropDown';
 import TextEditor from './TextEditor/TextEditor';
-
+import PostSidebar from '../molecules/PostSidebar/PostSidebar';
 export {
+  PostSidebar,
   TextEditor,
   DropDown,
   PostInput,

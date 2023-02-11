@@ -1,16 +1,24 @@
 .wrapper {
-  margin-top: 4rem;
   margin-bottom: 4rem;
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 2rem;
+  padding-left: 2rem;
+
+  nav {
+    position: sticky;
+    width: 25%;
+    height: 100%;
+    border-left: 1px solid #d9d9d9;
+    background-color: #fafafa;
+    top: 4.4rem;
+  }
 
   .container {
-    width: 55%;
+    width: 75%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     .dropdown-wrapper {
       display: flex;
