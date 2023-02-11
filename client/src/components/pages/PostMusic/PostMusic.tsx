@@ -2,7 +2,12 @@ import React from 'react';
 
 import classNames from 'classnames/bind';
 import styles from './PostMusic.module.scss';
-import { DropDown, PostInput, TextEditor } from '../../UI/molecules';
+import {
+  DropDown,
+  PostInput,
+  TextEditor,
+  PostSidebar,
+} from '../../UI/molecules';
 import { PostButtons, MusicPostInfo } from '../../UI/organisms';
 const PostMusic = () => {
   const cx = classNames.bind(styles);
@@ -28,6 +33,9 @@ const PostMusic = () => {
         <MusicPostInfo type="판매 상세 정보" />
         <TextEditor text="상세 내용 설명" />
       </div>
+      <nav>
+        <PostSidebar />
+      </nav>
     </div>
   );
 };

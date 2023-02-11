@@ -10,7 +10,7 @@ const MusicPostInfo = ({ type }: MusicPostInfoProps) => {
   const cx = classNames.bind(styles);
   if (type === '곡 정보') {
     return (
-      <>
+      <div>
         <div className={cx('text')}>
           <Text weight="semibold" size="xlg">
             {type}
@@ -27,11 +27,11 @@ const MusicPostInfo = ({ type }: MusicPostInfoProps) => {
           text="악보제작자"
           placeholder="내용을 입력해 주세요"
         />
-      </>
+      </div>
     );
   } else if (type === '판매 상세 정보') {
     return (
-      <>
+      <div>
         <div className={cx('text')}>
           <Text weight="semibold" size="xlg">
             {type}
@@ -43,7 +43,7 @@ const MusicPostInfo = ({ type }: MusicPostInfoProps) => {
           text="유튜브 주소 (선택)"
           placeholder="유튜브 영상 URL을 넣어주세요"
         />
-      </>
+      </div>
     );
   } else return null;
 };
