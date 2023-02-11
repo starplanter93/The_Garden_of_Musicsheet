@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './postSidebar.module.scss';
 import classNames from 'classnames/bind';
 import { Button, Icon, Text } from '../../atoms';
@@ -24,12 +24,17 @@ const PostSidebar = () => {
       fileInputRef.current.click();
     }
   };
+  useEffect(() => {
+    if (!fileName && fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  }, [fileName]);
 
   return (
     <div className={cx('wrapper')}>
       <div className={cx('upload')}>
         <div className={cx('upload-element')}>
-          <div className={cx('icon')}>
+          <div>
             <Icon icon="MdOutlineUploadFile" color="gray" size="xl" />
           </div>
           <div className={cx('text')}>
@@ -40,7 +45,7 @@ const PostSidebar = () => {
               .pdf 지원
             </Text>
           </div>
-          <div className={cx('btn')}>
+          <div>
             <Button theme="tertiary" size="s" onClick={handleButtonClick}>
               <>
                 <Icon icon="MdUpload" />
@@ -66,12 +71,25 @@ const PostSidebar = () => {
             *
           </Text>
         </div>
-        <div className={cx('box')}>
-          {fileName && <span className={cx('file-name')}>{fileName}</span>}
-        </div>
+        {fileName && (
+          <div className={cx('box')}>
+            <div className={cx('file-name')}>
+              <span>{fileName}</span>
+              <Button
+                size="tiny"
+                theme="transparent"
+                onClick={() => {
+                  setFileName('');
+                }}
+              >
+                <Icon icon="FaTrash" />
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default PostSidebar;
+export default React.memo(PostSidebar);
