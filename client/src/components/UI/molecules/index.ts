@@ -10,8 +10,10 @@ import UserButton from './GNB/UserButton/UserButton';
 import UserAuthInput from './UserAuthInput/UserAuthInput';
 import PostInput from './PostInput/PostInput';
 import DropDown from './DropDownSelect/DropDown';
+import TextEditor from './TextEditor/TextEditor';
 
 export {
+  TextEditor,
   DropDown,
   PostInput,
   UserAuthInput,

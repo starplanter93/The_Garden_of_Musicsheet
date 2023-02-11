@@ -42,11 +42,9 @@ const DropDown = ({ option, text }: DropDownProps) => {
         <Text weight="regular" size="m">
           {text}
         </Text>
-        {text !== '유튜브 주소 (선택)' ? (
-          <Text size="xlg" color="red">
-            *
-          </Text>
-        ) : null}
+        <Text size="xlg" color="red">
+          *
+        </Text>
       </div>
       <Button theme="dropdown" onClick={() => setIsOpen(!isOpen)}>
         <div className={cx('default')}>
