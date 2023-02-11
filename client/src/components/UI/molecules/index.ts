@@ -9,8 +9,10 @@ import UserMenu from './UserDropdown/UserMenu/UserMenu';
 import UserButton from './GNB/UserButton/UserButton';
 import UserAuthInput from './UserAuthInput/UserAuthInput';
 import PostInput from './PostInput/PostInput';
+import DropDown from './DropDownSelect/DropDown';
 
 export {
+  DropDown,
   PostInput,
   UserAuthInput,
   InstrumentCard,

@@ -2,7 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames/bind';
 import styles from './PostMusic.module.scss';
-import { PostInput } from '../../UI/molecules';
+import { DropDown, PostInput } from '../../UI/molecules';
 import { PostButtons, MusicPostInfo } from '../../UI/organisms';
 const PostMusic = () => {
   const cx = classNames.bind(styles);
@@ -11,6 +11,14 @@ const PostMusic = () => {
     <div className={cx('wrapper')}>
       <div className={cx('container')}>
         <PostButtons />
+        <div className={cx('dropdown-wrapper')}>
+          <div className={cx('dropdown-left')}>
+            <DropDown text="난이도" option={['쉬움', '중간', '어려움']} />
+          </div>
+          <div className={cx('dropdown-right')}>
+            <DropDown text="악보 종류" option={['쉬움', '중간', '어려움']} />
+          </div>
+        </div>
         <MusicPostInfo type="곡 정보" />
         <PostInput
           text="저작권 정보"

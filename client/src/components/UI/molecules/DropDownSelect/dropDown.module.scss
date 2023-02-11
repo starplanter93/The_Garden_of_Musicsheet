@@ -1,0 +1,44 @@
+@import '../../../../utils/utils';
+
+.text {
+  margin-bottom: 2rem;
+}
+.default {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 1rem;
+
+  .opened {
+    transition: all 0.4s ease;
+    transform: rotate(360deg);
+  }
+  .closed {
+    transition: all 0.4s ease;
+    transform: rotate(180deg);
+  }
+}
+.options {
+  margin-top: 4px;
+  background-color: $gray-white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 18.75rem;
+
+  border-radius: 10px;
+  padding: 0.25rem;
+  :hover {
+    background-color: rgba($light-green, 0.6);
+    border-radius: 8px;
+  }
+
+  .option {
+    text-align: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    width: 100%;
+  }
+}

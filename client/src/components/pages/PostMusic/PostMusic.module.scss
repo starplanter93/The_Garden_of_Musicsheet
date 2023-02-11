@@ -12,5 +12,15 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    .dropdown-wrapper {
+      display: flex;
+      margin-bottom: 2rem;
+      .dropdown-right {
+        display: flex;
+        margin-left: 2rem;
+        flex-direction: column;
+        margin-left: none;
+      }
+    }
   }
 }
