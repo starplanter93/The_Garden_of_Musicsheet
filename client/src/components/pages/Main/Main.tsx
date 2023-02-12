@@ -3,7 +3,7 @@ import { MainGrid } from '../../UI/organisms';
 import { Carousel } from '../../UI/organisms';
 import { getMusics } from '../../../firebase/firebase';
 
-type MusicArrType = {
+export type MusicData = {
   singer: string;
   scores: ScoreInfo[];
   albumImg: string;
@@ -11,7 +11,7 @@ type MusicArrType = {
   songId: number | null;
 }[];
 
-interface ScoreInfo {
+export interface ScoreInfo {
   difficulty: string;
   instrument: string;
   price: string;
@@ -22,20 +22,18 @@ interface ScoreInfo {
 }
 
 function Main() {
-  const [musicArr, setMusicArr] = useState<MusicArrType>([
+  const [musicArr, setMusicArr] = useState<MusicData>([
     { singer: '', scores: [], albumImg: '', songTitle: '', songId: null },
   ]);
   useEffect(() => {
     getMusics().then((data) => {
-      console.log(data);
       setMusicArr(data);
     });
   }, []);
-  console.log(musicArr);
   return (
     <>
       <Carousel />
-      {/* <MainGrid musicData={musicArr} /> */}
+      <MainGrid musicData={musicArr} />
     </>
   );
 }

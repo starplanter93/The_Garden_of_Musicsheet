@@ -3,30 +3,9 @@ import MainSongSection from '../MainSongSection/MainSongSection';
 import { Text } from '../../atoms';
 import styles from './maingrid.module.scss';
 import classNames from 'classnames/bind';
+import { MusicData } from '../../../pages/Main/Main';
 
-interface MainGridProps {
-  songTitle: string;
-  singer: string;
-  albumImg?: string;
-  scoreName: string;
-  scoreWriter: string;
-  profileImg?: string;
-  instrument: string;
-  difficulty: string;
-  price: string;
-}
-
-function MainGrid({
-  songTitle,
-  singer,
-  albumImg,
-  scoreName,
-  scoreWriter,
-  profileImg,
-  instrument,
-  difficulty,
-  price,
-}: MainGridProps) {
+function MainGrid({ musicData }: { musicData: MusicData }) {
   const cx = classNames.bind(styles);
   return (
     <div className={cx('main-content-wrapper')}>
@@ -36,7 +15,18 @@ function MainGrid({
             곡
           </Text>
         </h1>
-        <MainSongSection
+        {musicData.map((el) => {
+          return (
+            <MainSongSection
+              key={el.songId}
+              songTitle={el.songTitle}
+              singer={el.singer}
+              albumImg={el.albumImg}
+              scores={el.scores}
+            />
+          );
+        })}
+        {/* <MainSongSection
           songTitle={songTitle}
           singer={singer}
           albumImg={albumImg}
@@ -156,7 +146,7 @@ function MainGrid({
           instrument={instrument}
           difficulty={difficulty}
           price={price}
-        />
+        /> */}
       </div>
     </div>
   );
