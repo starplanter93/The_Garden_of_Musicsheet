@@ -6,12 +6,12 @@
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     a {
         width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
 
         .detail {
             flex: 1;
@@ -49,13 +49,12 @@
             }
         }
 
-        .price {
-            width: 4rem;
-            text-align: center;
-        }
-
     }
 
+    .price {
+        min-width: #{85/$font-size}rem;
+        text-align: center;
+    }
 
     &:hover {
         background-color: $gray-white;
