@@ -22,6 +22,7 @@ const PostSidebar = () => {
   const handleButtonClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
+      console.log(fileInputRef.current, fileName);
     }
   };
   useEffect(() => {

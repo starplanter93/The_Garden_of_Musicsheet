@@ -138,7 +138,7 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
         <div className={cx('text')}>
           <Input
             theme="basic"
-            size="m"
+            size="l"
             setIsFocused={setIsFocused}
             setUserInput={setUserInput}
             placeholder={placeholder}

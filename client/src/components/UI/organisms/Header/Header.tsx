@@ -17,9 +17,7 @@ const Header = () => {
   const headerState = useSelector(
     (state: RootState) => state.postHeader.isPost
   );
-  useEffect(() => {
-    dispatch(setHeader(false));
-  }, []);
+
   const handleIsPost = () => {
     dispatch(setHeader(false));
     navigate(-1);

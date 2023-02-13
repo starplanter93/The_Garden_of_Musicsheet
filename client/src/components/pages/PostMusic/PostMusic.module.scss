@@ -1,3 +1,5 @@
+@import '/src/utils/utils';
+
 .wrapper {
   margin-bottom: 4rem;
   width: 100%;
@@ -9,7 +11,7 @@
     position: sticky;
     width: 25%;
     height: 100%;
-    border-left: 1px solid #d9d9d9;
+    border-left: 1px solid $gray-white;
     background-color: #fafafa;
     top: 4.4rem;
   }
@@ -20,15 +22,42 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    .dropdown-wrapper {
-      display: flex;
-      margin-bottom: 2rem;
-      .dropdown-right {
+    background-color: $white;
+
+    .sheet-info {
+      background-color: white;
+      margin-top: 2rem;
+      border: 2px solid $gray-white;
+      border-radius: 10px;
+      padding: 2rem;
+
+      .dropdown-wrapper {
         display: flex;
-        margin-left: 2rem;
-        flex-direction: column;
-        margin-left: none;
+        margin-bottom: 2rem;
+        .dropdown-right {
+          display: flex;
+          margin-left: 2rem;
+          flex-direction: column;
+          margin-left: none;
+        }
       }
+    }
+
+    .song-info {
+      background-color: white;
+      margin-top: 2rem;
+      border: 2px solid $gray-white;
+      border-radius: 10px;
+      padding: 2rem;
+    }
+
+    .sale-info {
+      background-color: white;
+      margin-top: 2rem;
+      border: 2px solid $gray-white;
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 4rem;
     }
   }
 }
