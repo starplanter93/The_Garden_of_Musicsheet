@@ -7,6 +7,7 @@ import { MusicData } from '../../../pages/Main/Main';
 
 function MainGrid({ musicData }: { musicData: MusicData }) {
   const cx = classNames.bind(styles);
+  console.log(musicData);
   return (
     <div className={cx('main-content-wrapper')}>
       <div className={cx('main-content-grid')}>
@@ -15,17 +16,18 @@ function MainGrid({ musicData }: { musicData: MusicData }) {
             곡
           </Text>
         </h1>
-        {musicData.map((el) => {
-          return (
-            <MainSongSection
-              key={el.songId}
-              songTitle={el.songTitle}
-              singer={el.singer}
-              albumImg={el.albumImg}
-              scores={el.scores}
-            />
-          );
-        })}
+        {musicData &&
+          musicData.map((el) => {
+            return (
+              <MainSongSection
+                key={el.songId}
+                songTitle={el.songTitle}
+                singer={el.singer}
+                albumImg={el.albumImg}
+                scores={el.scores}
+              />
+            );
+          })}
         {/* <MainSongSection
           songTitle={songTitle}
           singer={singer}

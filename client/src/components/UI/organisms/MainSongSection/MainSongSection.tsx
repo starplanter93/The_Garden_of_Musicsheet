@@ -34,21 +34,22 @@ MainSongSectionProps) {
     <section className={cx('container')}>
       <SongTitle songTitle={songTitle} singer={singer} albumImg={albumImg} />
       <div className={cx('scorelist-wrapper')}>
-        {scores.map((el, idx) => {
-          if (idx < 3) {
-            return (
-              <MainScoreList
-                key={el.scoreId}
-                profileImg={el.profileImg}
-                difficulty={el.difficulty}
-                instrument={el.instrument}
-                price={el.price}
-                scoreName={el.scoreName}
-                scoreWriter={el.scoreWriter}
-              />
-            );
-          }
-        })}
+        {scores &&
+          scores.map((el, idx) => {
+            if (idx < 3) {
+              return (
+                <MainScoreList
+                  key={el.scoreId}
+                  profileImg={el.profileImg}
+                  difficulty={el.difficulty}
+                  instrument={el.instrument}
+                  price={el.price}
+                  scoreName={el.scoreName}
+                  scoreWriter={el.scoreWriter}
+                />
+              );
+            }
+          })}
         {/* <MainScoreList
           scoreName={scoreName}
           scoreWriter={scoreWriter}
