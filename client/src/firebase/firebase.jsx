@@ -3,6 +3,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAZ4hRKbN3-Hq3w2v07pS-4KBikVP-4Wi0',
@@ -29,3 +30,8 @@ export async function getDocument() {
 export const auth = getAuth();
 
 export const provider = new GoogleAuthProvider();
+
+// const storage = getStorage(app);
+// export const sheetRef = ref(storage);
+
+// export const upload = uploadBytes();

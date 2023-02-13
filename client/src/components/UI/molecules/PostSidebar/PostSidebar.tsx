@@ -6,18 +6,39 @@ import { Button, Icon, Text } from '../../atoms';
 const PostSidebar = () => {
   const cx = classNames.bind(styles);
   const [fileName, setFileName] = useState('');
+  const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileUpload = (e: any) => {
     if (e.target.files.length > 0) {
       const [file] = e.target.files;
       if (file.type === 'application/pdf') {
+        const fileBlob = new Blob([file], { type: file.type });
         setFileName(file.name);
       } else {
         alert('Only .pdf files are supported.');
       }
     }
   };
+
+  // const uploadFirebase = async (fileBlob: Blob, fileName: string) => {
+  //   const uploadTask = uploadBytesResumable(sheetRef, fileBlob);
+
+  //   uploadTask.on(
+  //     'state_changed',
+  //     (snapshot: any) => {
+  //       setUploadProgress(
+  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+  //       );
+  //     },
+  //     (error: any) => {
+  //       console.error(error);
+  //     },
+  //     () => {
+  //       console.log('File successfully uploaded to Firebase!');
+  //     }
+  //   );
+  // };
 
   const handleButtonClick = () => {
     if (fileInputRef.current) {
@@ -26,6 +47,7 @@ const PostSidebar = () => {
     }
   };
   useEffect(() => {
+    console.log(fileInputRef.current, fileName);
     if (!fileName && fileInputRef.current) {
       fileInputRef.current.value = '';
     }

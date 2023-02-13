@@ -1,16 +1,22 @@
 import ReactQuill from 'react-quill';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import { Text } from '../../atoms';
 import styles from './textEditor.module.scss';
 import classNames from 'classnames/bind';
+import { useDispatch } from 'react-redux';
+import { setDetail } from '../../../../redux/PostSlice';
 interface TextEditorProps {
   text: string;
 }
 
 const TextEditor = ({ text }: TextEditorProps) => {
   const cx = classNames.bind(styles);
+  const dispatch = useDispatch();
   const [value, setValue] = useState('');
+  useEffect(() => {
+    dispatch(setDetail(value));
+  }, [value]);
   return (
     <div className={cx('wrapper')}>
       <div className={cx('text')}>
@@ -25,7 +31,7 @@ const TextEditor = ({ text }: TextEditorProps) => {
         <ReactQuill
           theme="snow"
           value={value}
-          onChange={setValue}
+          onChange={(value) => setValue(value)}
           placeholder="내용을 입력해주세요"
         />
       </div>
@@ -33,4 +39,4 @@ const TextEditor = ({ text }: TextEditorProps) => {
   );
 };
 
-export default TextEditor;
+export default React.memo(TextEditor);

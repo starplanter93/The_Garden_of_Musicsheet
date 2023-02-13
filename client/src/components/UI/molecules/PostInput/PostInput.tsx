@@ -9,6 +9,14 @@ import {
   refreshToken,
 } from '../../../../utils/ApiCollection/SearchData';
 
+import { useDispatch } from 'react-redux';
+import {
+  setSongName,
+  setArtist,
+  setPrice,
+  setURL,
+} from '../../../../redux/PostSlice';
+
 interface PostInputProps {
   text: string;
   placeholder: string;
@@ -22,13 +30,18 @@ interface SelectedDataProps {
 }
 
 const PostInput = ({ type, text, placeholder }: PostInputProps) => {
+  const dispatch = useDispatch();
+
   const [isFocused, setIsFocused] = useState(false);
   const [userInput, setUserInput] = useState(''); // 곡 제목에서 받아온 걸 넣어주면 될 듯
   const [searchData, setSearchData] = useState([]);
   const [selectedData, setSelectedData] = useState<SelectedDataProps>();
-
   useEffect(() => {
     if (userInput.length > 0) {
+      // if (text === '곡 제목') dispatch(setSongName(userInput));
+      // if (text === '원곡자') dispatch(setArtist(userInput));
+      if (text === '가격') dispatch(setPrice(userInput));
+      if (text === '유튜브 주소 (선택)') dispatch(setURL(userInput));
       getSearchData(userInput).then((response) => {
         switch (response.status) {
           default:
@@ -53,6 +66,11 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
       });
       setUserInput('');
     };
+
+    if (selectedData) {
+      dispatch(setArtist(selectedData?.artist));
+      dispatch(setSongName(selectedData?.songName));
+    }
 
     if (userInput) {
       return (

@@ -2,9 +2,13 @@ import { Button, Text } from '../../../atoms';
 import classNames from 'classnames/bind';
 import styles from './postButtons.module.scss';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setInstType } from '../../../../../redux/PostSlice';
+import { instType } from '../../../../../redux/PostSlice';
 
 const PostButtons = () => {
   const cx = classNames.bind(styles);
+  const dispatch = useDispatch();
   const [clickedButton, setClickedButton] = useState<number | null>(null);
 
   const handleButtonClick = (index: number) => {
@@ -12,6 +16,7 @@ const PostButtons = () => {
       setClickedButton(null);
     } else {
       setClickedButton(index);
+      dispatch(setInstType(buttons[index].label as instType));
     }
   };
 

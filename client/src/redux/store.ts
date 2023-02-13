@@ -6,6 +6,7 @@ import loginReducer from './LoginSlice';
 import regReducer from './RegSlice';
 import userReducer from './UserSlice';
 import HeaderReducer from './HeaderSlice';
+import PostReducer from './PostSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     userLoginInput: loginReducer,
     postHeader: HeaderReducer,
     defaultHeader: HeaderReducer,
+    PostInfo: PostReducer,
   },
 
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
