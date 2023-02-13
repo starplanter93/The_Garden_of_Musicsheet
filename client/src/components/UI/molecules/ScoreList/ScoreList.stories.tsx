@@ -12,5 +12,5 @@ const Template: ComponentStory<typeof ScoreList> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  btnType: 'text',
+  buttonEvent: 'edit',
 };

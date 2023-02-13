@@ -1,15 +1,17 @@
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Text } from '../../atoms';
 import EditOrDownButton from '../EditOrDownButton/EditOrDownButton';
 import styles from './scoreList.module.scss';
 
 interface ScoreListProps {
-  btnType?: 'text' | 'edit' | 'download';
+  buttonEvent?: 'edit' | 'download';
 }
 
-const ScoreList = ({ btnType = 'text' }: ScoreListProps) => {
+// Todo: 데이터 연결
+const ScoreList = ({ buttonEvent = 'edit' }: ScoreListProps) => {
   const cx = classNames.bind(styles);
+  const { pathname } = useLocation();
 
   return (
     <div className={cx('wrapper')}>
@@ -37,13 +39,13 @@ const ScoreList = ({ btnType = 'text' }: ScoreListProps) => {
           </ul>
         </div>
       </Link>
-      {btnType === 'text' ? (
+      {!pathname.includes('/maypage') ? (
         <div className={cx('price')}>
           <Text color="blue">5000원</Text>
         </div>
       ) : (
         <div>
-          <EditOrDownButton event={btnType} />
+          <EditOrDownButton event={buttonEvent} />
         </div>
       )}
     </div>
