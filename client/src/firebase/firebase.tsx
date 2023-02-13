@@ -4,6 +4,7 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import { DocumentData } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAZ4hRKbN3-Hq3w2v07pS-4KBikVP-4Wi0',
@@ -23,7 +24,14 @@ const db = getFirestore(app);
 export async function getDocument() {
   const ref = collection(db, 'test');
   const snapshot = await getDocs(ref);
-  const list = snapshot.docs.map((doc) => doc.data());
+  const list = snapshot.docs.map((doc: DocumentData) => doc.data());
+  return list;
+}
+
+export async function getMusics() {
+  const ref = collection(db, 'music');
+  const snapshot = await getDocs(ref);
+  const list = snapshot.docs.map((doc: DocumentData) => doc.data());
   return list;
 }
 
