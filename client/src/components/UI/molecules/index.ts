@@ -11,6 +11,7 @@ import UserAuthInput from './UserAuthInput/UserAuthInput';
 import PostInput from './PostInput/PostInput';
 import ScoreList from './ScoreList/ScoreList';
 import EditOrDownButton from './EditOrDownButton/EditOrDownButton';
+import Pagination from './Pagination/Pagination';
 
 export {
   PostInput,
@@ -26,4 +27,5 @@ export {
   UserButton,
   ScoreList,
   EditOrDownButton,
+  Pagination,
 };
