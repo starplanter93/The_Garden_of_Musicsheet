@@ -10,6 +10,7 @@ import UserButton from './GNB/UserButton/UserButton';
 import UserAuthInput from './UserAuthInput/UserAuthInput';
 import PostInput from './PostInput/PostInput';
 import ScoreList from './ScoreList/ScoreList';
+import EditOrDownButton from './EditOrDownButton/EditOrDownButton';
 
 export {
   PostInput,
@@ -24,4 +25,5 @@ export {
   UserMenu,
   UserButton,
   ScoreList,
+  EditOrDownButton,
 };
