@@ -2,6 +2,8 @@ import styles from './userButton.module.scss';
 import classNames from 'classnames/bind';
 import { Button, Icon, ImgLayout } from '../../../atoms';
 import { Dispatch, SetStateAction } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../../redux/store';
 
 interface UserButtonProps {
   dropdown: boolean;
@@ -10,6 +12,9 @@ interface UserButtonProps {
 
 const UserButton = ({ dropdown, setDropdown }: UserButtonProps) => {
   const cx = classNames.bind(styles);
+  const { photoURL } = useSelector(
+    (state: RootState) => state.user.userReducer
+  );
 
   const handleClick = () => {
     setDropdown(!dropdown);
@@ -18,12 +23,7 @@ const UserButton = ({ dropdown, setDropdown }: UserButtonProps) => {
   return (
     <div className={cx('userbutton-wrapper')}>
       <Button theme="transparent" size="auto" onClick={handleClick}>
-        {/* Todo: src */}
-        <ImgLayout
-          size="s"
-          src="https://lh3.googleusercontent.com/ogw/AAEL6sgMlJvuCWZwwiG2zRIo7a1f7Ihd3a845sDU0u6mJg=s64-c-mo"
-          alt="아바타"
-        />
+        <ImgLayout size="s" src={photoURL} alt="아바타" />
       </Button>
       {dropdown ? (
         <Icon icon="MdOutlineArrowDropUp" size="s" />

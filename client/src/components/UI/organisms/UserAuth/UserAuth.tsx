@@ -13,6 +13,8 @@ import {
 } from '../../../../utils/utils';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userInfo } from '../../../../redux/UserSlice';
 
 interface UserAuthProps {
   type: 'Login' | 'SignUp';
@@ -24,11 +26,20 @@ const UserAuth = ({ type }: UserAuthProps) => {
   const userRegData = useSelector((state: RootState) => state.regInfo);
   const [typeState, setTypeState] = useState(type); // page 단에서 진행해도 될 듯
   const cx = classNames.bind(styles);
+  const dispatch = useDispatch();
 
   const handleOnClick = async () => {
     if (typeState === 'Login') {
-      await handleUserLogin(userLoginData.email, userLoginData.password);
-      navigate('/');
+      await handleUserLogin(userLoginData.email, userLoginData.password).then(
+        (response) => {
+          if (typeof response !== 'undefined') {
+            console.log(response);
+            const { displayName, email, phoneNumber, photoURL } = response;
+            dispatch(userInfo({ displayName, email, phoneNumber, photoURL }));
+          }
+        }
+      );
+      navigate(-1);
     } else if (typeState === 'SignUp') {
       await handleRegisterUser(
         userRegData.email,

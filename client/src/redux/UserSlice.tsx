@@ -1,30 +1,43 @@
 import { createSlice, PayloadAction, Reducer } from '@reduxjs/toolkit';
-// 나중에 유저 정보를 저장할 때 사용할 용도 지금은 사용 X
+import { toast } from 'react-toastify';
+import { PURGE } from 'redux-persist';
 
-// initalState 타입 정의
 interface StateType {
-  username: string;
+  displayName: string;
+  email: string;
+  phoneNumber: string;
+  photoURL: string;
 }
 
-// initalState 생성
-const initialState: any = '';
+const initialState: StateType = {
+  displayName: '',
+  email: '',
+  phoneNumber: '',
+  photoURL: '',
+};
 
-// 슬라이스생성
 export const userSlice = createSlice({
   name: 'userSlice',
   initialState,
   reducers: {
-    userInfo: (state: any, action: PayloadAction<any>) => {
+    userInfo: (state: StateType, action: PayloadAction<StateType>) => {
       state = action.payload;
       return state;
     },
   },
+  // initialState로 초기화
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, () => {
+      initialState;
+      localStorage.removeItem('authorization');
+      localStorage.removeItem('refresh');
+      toast.success('다음에 또 만나요👋');
+    });
+  },
 });
 
-// 액션을 export 해준다.
 export const { userInfo } = userSlice.actions;
 
-// 슬라이스를 export 해준다.
 const userReducer: Reducer<typeof initialState> = userSlice.reducer;
 
 export default userReducer;
