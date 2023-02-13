@@ -1,10 +1,10 @@
 import React from 'react';
-import Carousel from '../UI/organisms/Carousel/Carousel';
+import { SongInfoHeader } from '../UI/molecules';
 
 function Test() {
   return (
     <>
-      <Carousel />
+      <SongInfoHeader />
     </>
   );
 }

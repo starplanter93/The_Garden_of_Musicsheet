@@ -25,6 +25,7 @@ function Main() {
   const [musicArr, setMusicArr] = useState<MusicData>([
     { singer: '', scores: [], albumImg: '', songTitle: '', songId: null },
   ]);
+  console.log(musicArr);
   useEffect(() => {
     getMusics().then((data) => {
       setMusicArr(data);

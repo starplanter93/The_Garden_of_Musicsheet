@@ -9,6 +9,7 @@ import UserMenu from './UserDropdown/UserMenu/UserMenu';
 import UserButton from './GNB/UserButton/UserButton';
 import UserAuthInput from './UserAuthInput/UserAuthInput';
 import PostInput from './PostInput/PostInput';
+import SongInfoHeader from './SongInfoHeader/SongInfoHeader';
 
 export {
   PostInput,
@@ -22,4 +23,5 @@ export {
   MiniProfile,
   UserMenu,
   UserButton,
+  SongInfoHeader,
 };
