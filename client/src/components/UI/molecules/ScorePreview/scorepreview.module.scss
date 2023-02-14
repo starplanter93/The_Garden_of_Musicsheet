@@ -8,5 +8,7 @@
     width: #{340 / $font-size}rem;
     height: #{500 / $font-size}rem;
     object-fit: cover;
+    border: 2px solid $light-gray;
+    border-radius: 1rem;
   }
 }
