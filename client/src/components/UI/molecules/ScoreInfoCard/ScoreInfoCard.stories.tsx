@@ -1,13 +1,13 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import ScoreInfo from './ScoreInfo';
+import ScoreInfoCard from './ScoreInfoCard';
 
 export default {
-  title: 'Molecules/ScoreInfo',
-  component: ScoreInfo,
-} as ComponentMeta<typeof ScoreInfo>;
+  title: 'Molecules/ScoreInfoCard',
+  component: ScoreInfoCard,
+} as ComponentMeta<typeof ScoreInfoCard>;
 
-const Template: ComponentStory<typeof ScoreInfo> = (args) => (
-  <ScoreInfo {...args} />
+const Template: ComponentStory<typeof ScoreInfoCard> = (args) => (
+  <ScoreInfoCard {...args} />
 );
 
 export const ScoreInfoOptions = Template.bind({});

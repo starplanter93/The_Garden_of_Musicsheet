@@ -11,7 +11,7 @@ import UserAuthInput from './UserAuthInput/UserAuthInput';
 import PostInput from './PostInput/PostInput';
 import SongInfoHeader from './SongInfoHeader/SongInfoHeader';
 import ScorePreview from './ScorePreview/ScorePreview';
-import ScoreInfo from './ScoreInfo/ScoreInfo';
+import ScoreInfoCard from './ScoreInfoCard/ScoreInfoCard';
 
 export {
   PostInput,
@@ -27,5 +27,5 @@ export {
   UserButton,
   SongInfoHeader,
   ScorePreview,
-  ScoreInfo,
+  ScoreInfoCard,
 };

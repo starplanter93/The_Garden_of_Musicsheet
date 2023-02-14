@@ -1,21 +1,21 @@
 import React from 'react';
 import { Text, Icon } from '../../atoms';
 import classNames from 'classnames/bind';
-import styles from './scoreinfo.module.scss';
+import styles from './scoreinfocard.module.scss';
 
-interface ScoreInfoProps {
+interface ScoreInfoCardProps {
   instrument: string;
   difficulty: string;
   page: string;
   scoreType: string;
 }
 
-function ScoreInfo({
+function ScoreInfoCard({
   instrument,
   difficulty,
   page,
   scoreType,
-}: ScoreInfoProps) {
+}: ScoreInfoCardProps) {
   const cx = classNames.bind(styles);
   return (
     <div className={cx('scoreinfo-wrapper')}>
@@ -51,4 +51,4 @@ function ScoreInfo({
   );
 }
 
-export default ScoreInfo;
+export default ScoreInfoCard;
