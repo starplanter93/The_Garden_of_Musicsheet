@@ -11,10 +11,11 @@ import {
 
 import { useDispatch } from 'react-redux';
 import {
-  setSongName,
-  setArtist,
   setPrice,
   setURL,
+  setArtist,
+  setSongName,
+  setAlbumImg,
 } from '../../../../redux/PostSlice';
 
 interface PostInputProps {
@@ -36,6 +37,7 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
   const [userInput, setUserInput] = useState(''); // 곡 제목에서 받아온 걸 넣어주면 될 듯
   const [searchData, setSearchData] = useState([]);
   const [selectedData, setSelectedData] = useState<SelectedDataProps>();
+
   useEffect(() => {
     if (userInput.length > 0) {
       // if (text === '곡 제목') dispatch(setSongName(userInput));
@@ -68,8 +70,9 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
     };
 
     if (selectedData) {
-      dispatch(setArtist(selectedData?.artist));
-      dispatch(setSongName(selectedData?.songName));
+      dispatch(setArtist(selectedData.artist));
+      dispatch(setSongName(selectedData.songName));
+      dispatch(setAlbumImg(selectedData.albumCover));
     }
 
     if (userInput) {
@@ -89,7 +92,7 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
                   <div className={cx('result-img')}>
                     <img
                       width="50px"
-                      src={el.album.images[0].url}
+                      src={el.album.images[0]?.url}
                       alt="album-cover"
                     />
                   </div>

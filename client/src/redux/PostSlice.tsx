@@ -1,5 +1,4 @@
 import { createSlice, Reducer, PayloadAction } from '@reduxjs/toolkit';
-import { auth } from '../firebase/firebase';
 
 // initalState 타입 정의
 
@@ -13,32 +12,47 @@ export type instType =
 
 export type difficulty = '쉬움' | '중간' | '어려움' | '';
 export type sheetType = '단선 악보' | '타브 악보' | '';
+export type userinfo = string | null | undefined;
 
-interface StateType {
-  author: string | null | undefined;
-  authorId: string | null | undefined;
+export interface Score {
+  createdAt: string;
+  author: userinfo;
+  authorId: userinfo;
   instType: instType;
   difficulty: difficulty;
   sheetType: sheetType;
-  songName: string;
-  artist: string;
   price: string;
   youtubeURL?: string;
   detail: string;
+  scoreId: string;
+}
+
+export interface StateType {
+  songId: string;
+  albumImg: string;
+  songName: string;
+  artist: string;
+  scores: Score;
 }
 
 // initalState 생성
 const initialState: StateType = {
-  author: auth.currentUser?.displayName,
-  authorId: auth.currentUser?.uid,
-  instType: '',
-  difficulty: '',
-  sheetType: '',
+  songId: '',
+  albumImg: '',
   songName: '',
   artist: '',
-  price: '',
-  youtubeURL: '',
-  detail: '',
+  scores: {
+    createdAt: new Date().toISOString(),
+    author: '',
+    authorId: '',
+    instType: '',
+    difficulty: '',
+    sheetType: '',
+    price: '',
+    youtubeURL: '',
+    detail: '',
+    scoreId: '',
+  },
 };
 
 // 슬라이스생성
@@ -47,16 +61,13 @@ export const PostSlice = createSlice({
   initialState,
   reducers: {
     setInstType: (state: StateType, action: PayloadAction<instType>) => {
-      state = { ...state, instType: action.payload };
-      return state;
+      state.scores.instType = action.payload;
     },
     setDifficulty: (state: StateType, action: PayloadAction<difficulty>) => {
-      state = { ...state, difficulty: action.payload };
-      return state;
+      state.scores.difficulty = action.payload;
     },
     setSheetType: (state: StateType, action: PayloadAction<sheetType>) => {
-      state = { ...state, sheetType: action.payload };
-      return state;
+      state.scores.sheetType = action.payload;
     },
     setSongName: (state: StateType, action: PayloadAction<string>) => {
       state = { ...state, songName: action.payload };
@@ -66,28 +77,36 @@ export const PostSlice = createSlice({
       state = { ...state, artist: action.payload };
       return state;
     },
-    setPrice: (state: StateType, action: PayloadAction<string>) => {
-      state = { ...state, price: action.payload };
+    setAlbumImg: (state: StateType, action: PayloadAction<string>) => {
+      state = { ...state, albumImg: action.payload };
       return state;
+    },
+    setPrice: (state: StateType, action: PayloadAction<string>) => {
+      state.scores.price = action.payload;
     },
     setURL: (state: StateType, action: PayloadAction<string>) => {
-      state = { ...state, youtubeURL: action.payload };
-      return state;
+      state.scores.youtubeURL = action.payload;
     },
     setDetail: (state: StateType, action: PayloadAction<string>) => {
-      state = { ...state, detail: action.payload };
-      return state;
+      state.scores.detail = action.payload;
+    },
+
+    setUserInfo: (state: StateType, action: PayloadAction<userinfo[]>) => {
+      (state.scores.author = action.payload[0]),
+        (state.scores.authorId = action.payload[1]);
     },
   },
 });
 
 // 액션을 export 해준다.
 export const {
+  setAlbumImg,
+  setSongName,
+  setArtist,
+  setUserInfo,
   setInstType,
   setDifficulty,
   setSheetType,
-  setSongName,
-  setArtist,
   setPrice,
   setURL,
   setDetail,

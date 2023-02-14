@@ -8,6 +8,10 @@ import { RootState } from '../../../../redux/store';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setHeader } from '../../../../redux/HeaderSlice';
+import { auth } from '../../../../firebase/firebase';
+import { useEffect } from '@storybook/addons';
+import { setUserInfo } from '../../../../redux/PostSlice';
+import { getMusicData } from '../../../../firebase/firebase';
 
 const Header = () => {
   const cx = classNames.bind(styles);
@@ -16,10 +20,27 @@ const Header = () => {
   const headerState = useSelector(
     (state: RootState) => state.postHeader.isPost
   );
+  const data = useSelector((state: RootState) => state.PostInfo);
 
   const handleIsPost = () => {
     dispatch(setHeader(false));
     navigate(-1);
+  };
+
+  const handleUpload = async () => {
+    const user = [auth.currentUser?.displayName, auth.currentUser?.uid];
+    dispatch(setUserInfo(user));
+
+    console.log(data);
+    await getMusicData(data.songName, data);
+
+    const initialData = {
+      songId: '',
+      albumImg: '',
+      songName: '',
+      artist: '',
+      scores: [],
+    };
   };
 
   if (headerState) {
@@ -32,7 +53,7 @@ const Header = () => {
               <Text>뒤로 가기</Text>
             </div>
           </Button>
-          <Button size="s">
+          <Button size="s" onClick={() => handleUpload()}>
             <div className={cx('save')}>
               <Icon icon="MdOutlineCheck" color="white" />
               <Text color="white">저장하기</Text>

@@ -15,8 +15,7 @@ import { RootState } from '../../../redux/store';
 
 const PostMusic = () => {
   const cx = classNames.bind(styles);
-  const userInput = useSelector((state: RootState) => state.PostInfo);
-  console.log(userInput);
+
   return (
     <div className={cx('wrapper')}>
       <div className={cx('container')}>
