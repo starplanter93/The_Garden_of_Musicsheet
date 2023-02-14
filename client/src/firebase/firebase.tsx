@@ -18,6 +18,7 @@ import {
   query,
 } from 'firebase/firestore/lite';
 import { StateType } from '../redux/PostSlice';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyAZ4hRKbN3-Hq3w2v07pS-4KBikVP-4Wi0',
   authDomain: 'garden-of-musicsheet.firebaseapp.com',
@@ -67,21 +68,32 @@ export async function getMusicData(songName: string, data: StateType) {
   const lastIdx =
     colSnap.docs.map((doc: DocumentData) => doc.data()).length - 1;
 
-  console.log(savedData);
+  if (savedData === undefined) {
+    data = { ...data };
+    data.scores = [{ ...data.scores[0], scoreId: '0' }];
+  } else {
+    const lastScore = savedData.scores[savedData.scores.length - 1];
+    const nextScoreId = parseInt(lastScore.scoreId) + 1;
+    data = { ...data };
+    data.scores = [{ ...data.scores[0], scoreId: nextScoreId.toString() }];
+  }
 
-  // if (savedData && savedData.artist === data.artist) {
-  //   // update
-  //   console.log('검증 완료');
-  //   updateData(name, data);
-  // } else if (savedData && savedData.artist !== data.artist) {
-  //   // post new song with new ID
-  //   console.log('너 이름이 같구나?');
-  // } else if (!infoSnapshot.exists()) {
-  //   console.log('너 처음이구나?');
-  //   data = { ...data };
-  //   data.songId = (Number(list[lastIdx].songId) + 1).toString();
-  //   postData(name, data);
-  // }
+  if (savedData && savedData.artist === data.artist) {
+    // update
+    console.log('검증 완료');
+    data.scores = { ...data.scores };
+    updateData(name, data);
+  } else if (savedData && savedData.artist !== data.artist) {
+    // post new song with new ID
+    console.log('너 이름만 같구나?');
+  } else if (!infoSnapshot.exists()) {
+    console.log('너 처음이구나?');
+    data = { ...data };
+    data.songId = (Number(list[lastIdx].songId) + 1).toString();
+    console.log(data);
+    postData(name, data);
+  }
+
   // const saved = infoSnapshot.data();
   // console.log(saved);
 
@@ -106,11 +118,6 @@ export async function getMusicData(songName: string, data: StateType) {
 async function postData(songName: string, data: StateType) {
   const infoRef = doc(db, 'test', songName);
   await setDoc(infoRef, data);
-  // const infoRef = collection(db, 'test');
-  // data = { ...data };
-  // data.songId = infoRef.id;
-  // console.log(infoRef);
-  // await addDoc(infoRef, data);
 }
 
 /** 해당 곡으로 만들어진 문서가 존재한다면 아래 함수가 작동하여 scores 배열을 업데이트 합니다 */

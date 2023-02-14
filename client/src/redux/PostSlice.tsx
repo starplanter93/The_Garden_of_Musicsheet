@@ -32,7 +32,7 @@ export interface StateType {
   albumImg: string;
   songName: string;
   artist: string;
-  scores: Score;
+  scores: Score[];
 }
 
 // initalState 생성
@@ -41,18 +41,20 @@ const initialState: StateType = {
   albumImg: '',
   songName: '',
   artist: '',
-  scores: {
-    createdAt: new Date().toISOString(),
-    author: '',
-    authorId: '',
-    instType: '',
-    difficulty: '',
-    sheetType: '',
-    price: '',
-    youtubeURL: '',
-    detail: '',
-    scoreId: '',
-  },
+  scores: [
+    {
+      createdAt: new Date().toISOString(),
+      author: '',
+      authorId: '',
+      instType: '',
+      difficulty: '',
+      sheetType: '',
+      price: '',
+      youtubeURL: '',
+      detail: '',
+      scoreId: '',
+    },
+  ],
 };
 
 // 슬라이스생성
@@ -61,39 +63,39 @@ export const PostSlice = createSlice({
   initialState,
   reducers: {
     setInstType: (state: StateType, action: PayloadAction<instType>) => {
-      state.scores.instType = action.payload;
+      state.scores[0].instType = action.payload;
     },
     setDifficulty: (state: StateType, action: PayloadAction<difficulty>) => {
-      state.scores.difficulty = action.payload;
+      state.scores[0].difficulty = action.payload;
     },
     setSheetType: (state: StateType, action: PayloadAction<sheetType>) => {
-      state.scores.sheetType = action.payload;
+      state.scores[0].sheetType = action.payload;
     },
     setSongName: (state: StateType, action: PayloadAction<string>) => {
-      state = { ...state, songName: action.payload };
-      return state;
+      return { ...state, songName: action.payload };
     },
     setArtist: (state: StateType, action: PayloadAction<string>) => {
-      state = { ...state, artist: action.payload };
-      return state;
+      return { ...state, artist: action.payload };
     },
     setAlbumImg: (state: StateType, action: PayloadAction<string>) => {
-      state = { ...state, albumImg: action.payload };
-      return state;
+      return { ...state, albumImg: action.payload };
     },
     setPrice: (state: StateType, action: PayloadAction<string>) => {
-      state.scores.price = action.payload;
+      state.scores[0].price = action.payload;
     },
     setURL: (state: StateType, action: PayloadAction<string>) => {
-      state.scores.youtubeURL = action.payload;
+      state.scores[0].youtubeURL = action.payload;
     },
     setDetail: (state: StateType, action: PayloadAction<string>) => {
-      state.scores.detail = action.payload;
+      state.scores[0].detail = action.payload;
     },
 
     setUserInfo: (state: StateType, action: PayloadAction<userinfo[]>) => {
-      (state.scores.author = action.payload[0]),
-        (state.scores.authorId = action.payload[1]);
+      (state.scores[0].author = action.payload[0]),
+        (state.scores[0].authorId = action.payload[1]);
+    },
+    setScoreId: (state: StateType, action: PayloadAction<string>) => {
+      state.scores[0].scoreId = action.payload;
     },
   },
 });
@@ -110,6 +112,7 @@ export const {
   setPrice,
   setURL,
   setDetail,
+  setScoreId,
 } = PostSlice.actions;
 
 // 슬라이스를 export 해준다.

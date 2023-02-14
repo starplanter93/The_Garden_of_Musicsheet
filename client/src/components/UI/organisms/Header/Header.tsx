@@ -32,7 +32,7 @@ const Header = () => {
     dispatch(setUserInfo(user));
 
     console.log(data);
-    await getMusicData(data.songName, data);
+    await getMusicData(data.songName, data).then((el) => console.log(el));
 
     const initialData = {
       songId: '',
