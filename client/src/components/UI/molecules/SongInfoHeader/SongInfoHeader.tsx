@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, Button } from '../../atoms';
-import styles from './songinfo.module.scss';
+import styles from './songinfoheader.module.scss';
 import classNames from 'classnames/bind';
 
 interface SongInfoHeaderProps {

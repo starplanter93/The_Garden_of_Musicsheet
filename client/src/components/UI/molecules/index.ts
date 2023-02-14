@@ -10,6 +10,7 @@ import UserButton from './GNB/UserButton/UserButton';
 import UserAuthInput from './UserAuthInput/UserAuthInput';
 import PostInput from './PostInput/PostInput';
 import SongInfoHeader from './SongInfoHeader/SongInfoHeader';
+import ScorePreview from './ScorePreview/ScorePreview';
 
 export {
   PostInput,
@@ -24,4 +25,5 @@ export {
   UserMenu,
   UserButton,
   SongInfoHeader,
+  ScorePreview,
 };
