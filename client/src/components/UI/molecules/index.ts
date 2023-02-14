@@ -12,6 +12,7 @@ import PostInput from './PostInput/PostInput';
 import SongInfoHeader from './SongInfoHeader/SongInfoHeader';
 import ScorePreview from './ScorePreview/ScorePreview';
 import ScoreInfoCard from './ScoreInfoCard/ScoreInfoCard';
+import ScoreInfoExplain from './ScoerInfoExplain/ScoreInfoExplain';
 
 export {
   PostInput,
@@ -28,4 +29,5 @@ export {
   SongInfoHeader,
   ScorePreview,
   ScoreInfoCard,
+  ScoreInfoExplain,
 };

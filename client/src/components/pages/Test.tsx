@@ -1,5 +1,10 @@
 import React from 'react';
-import { SongInfoHeader, ScorePreview, ScoreInfoCard } from '../UI/molecules';
+import {
+  SongInfoHeader,
+  ScorePreview,
+  ScoreInfoCard,
+  ScoreInfoExplain,
+} from '../UI/molecules';
 
 function Test() {
   return (
@@ -15,6 +20,7 @@ function Test() {
         page="7"
         scoreType="타브 악보"
       />
+      <ScoreInfoExplain scoreExplain="게시글 등록자가 작성한 악보에 대한 상세한 설명과 정보" />
     </>
   );
 }
