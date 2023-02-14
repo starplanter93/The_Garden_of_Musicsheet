@@ -3,16 +3,22 @@ import { Text, Button } from '../../atoms';
 import styles from './songinfo.module.scss';
 import classNames from 'classnames/bind';
 
-function SongInfoHeader() {
+interface SongInfoHeaderProps {
+  scoreName: string;
+  singer: string;
+  date: string;
+}
+
+function SongInfoHeader({ scoreName, singer, date }: SongInfoHeaderProps) {
   const cx = classNames.bind(styles);
   return (
     <div className={cx('songinfo-header-wrapper')}>
       <div className={cx('text-wrapper')}>
         <Text size="txlg" weight="semibold">
-          게시글제목
+          {scoreName}
         </Text>
-        <Text size="m">가수</Text>
-        <Text size="m">작성일</Text>
+        <Text size="m">{singer}</Text>
+        <Text size="m">{date}</Text>
       </div>
       <div className={cx('button-wrapper')}>
         <Button theme="transparent" size="auto">

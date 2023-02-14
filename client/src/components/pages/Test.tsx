@@ -4,7 +4,7 @@ import { SongInfoHeader } from '../UI/molecules';
 function Test() {
   return (
     <>
-      <SongInfoHeader />
+      <SongInfoHeader scoreName="악보 제목" singer="가수" date="작성일" />
     </>
   );
 }
