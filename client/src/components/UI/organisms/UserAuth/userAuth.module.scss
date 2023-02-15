@@ -17,6 +17,9 @@
   .userAuth__logo {
     display: flex;
     flex-direction: column;
+    margin-bottom: 2rem;
+    align-items: center;
+    justify-content: center;
   }
 
   .logo__Text {
@@ -33,7 +36,7 @@
   }
 
   .userAuth__btn {
-    margin-bottom: 8rem;
+    margin-bottom: 4rem;
   }
 
   .userAuth__register__btn {

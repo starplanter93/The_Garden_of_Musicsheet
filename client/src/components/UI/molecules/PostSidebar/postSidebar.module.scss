@@ -1,0 +1,61 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem;
+  height: 100vh;
+
+  .uploaded {
+    margin-top: 2rem;
+    width: 100%;
+    .box {
+      margin-top: 1rem;
+      width: 100%;
+      height: 4rem;
+      border-radius: 10px;
+      border: 1px solid #d9d9d9;
+      padding: 1rem;
+      .file-name {
+        display: flex;
+        justify-content: space-between;
+        line-clamp: 1;
+        align-items: center;
+        width: 100%;
+        span {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          width: 90%;
+        }
+        icon {
+          width: 10%;
+        }
+      }
+    }
+  }
+
+  .upload {
+    width: 100%;
+    height: 20rem;
+    border: 2px dashed #d9d9d9;
+    border-radius: 20px;
+    .upload-element {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 2rem;
+      padding-top: 3rem;
+
+      .text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}

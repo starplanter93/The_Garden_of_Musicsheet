@@ -12,8 +12,13 @@ import PostInput from './PostInput/PostInput';
 import ScoreList from './ScoreList/ScoreList';
 import EditOrDownButton from './EditOrDownButton/EditOrDownButton';
 import Pagination from './Pagination/Pagination';
-
+import DropDown from './DropDownSelect/DropDown';
+import TextEditor from './TextEditor/TextEditor';
+import PostSidebar from '../molecules/PostSidebar/PostSidebar';
 export {
+  PostSidebar,
+  TextEditor,
+  DropDown,
   PostInput,
   UserAuthInput,
   InstrumentCard,

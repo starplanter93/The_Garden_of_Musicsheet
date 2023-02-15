@@ -1,29 +1,47 @@
 import React from 'react';
-import MusicPostInfo from '../../UI/organisms/MusicPostInfo/MusicPostInfo';
+
 import classNames from 'classnames/bind';
 import styles from './PostMusic.module.scss';
-import { PostInput } from '../../UI/molecules';
-import { Button } from '../../UI/atoms';
+import {
+  DropDown,
+  PostInput,
+  TextEditor,
+  PostSidebar,
+} from '../../UI/molecules';
+import { PostButtons, MusicPostInfo } from '../../UI/organisms';
+
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+
 const PostMusic = () => {
   const cx = classNames.bind(styles);
 
   return (
     <div className={cx('wrapper')}>
-      <div>
-        <span></span>
-        <div>
-          <Button size="s" theme="toggle">
-            피아노
-          </Button>
+      <div className={cx('container')}>
+        <div className={cx('sheet-info')}>
+          <PostButtons />
+          <div className={cx('dropdown-wrapper')}>
+            <div className={cx('dropdown-left')}>
+              <DropDown text="난이도" option={['쉬움', '중간', '어려움']} />
+            </div>
+            <div className={cx('dropdown-right')}>
+              <DropDown text="악보 종류" option={['단선 악보', '타브 악보']} />
+            </div>
+          </div>
+        </div>
+        <div className={cx('song-info')}>
+          <MusicPostInfo type="곡 정보" />
+        </div>
+
+        <div className={cx('sale-info')}>
+          <MusicPostInfo type="판매 상세 정보" />
+          <TextEditor text="상세 내용 설명" />
         </div>
       </div>
-      <MusicPostInfo type="곡 정보" />
-      <PostInput
-        text="저작권 정보"
-        type="dropdown"
-        placeholder="곡 제목을 입력해주세요"
-      />
-      <MusicPostInfo type="판매 상세 정보" />
+      <nav>
+        <PostSidebar />
+      </nav>
     </div>
   );
 };
