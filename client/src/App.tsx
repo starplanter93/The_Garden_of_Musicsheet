@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { Instrument, Layout } from './components/pages';
+import { Instrument, InstrumentDetail, Layout } from './components/pages';
 import { Main } from './components/pages';
 import { Auth, PostMusic } from './components/pages';
 import { BrowserRouter } from 'react-router-dom';
@@ -14,6 +14,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Main />} />
             <Route path="instrument" element={<Instrument />} />
+            <Route path="instrument/:instType" element={<InstrumentDetail />} />
             <Route path="/postmusic" element={<PostMusic />} />
             {/* MainPage 등 */}
           </Route>
