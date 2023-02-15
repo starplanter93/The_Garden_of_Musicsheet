@@ -40,6 +40,7 @@ export interface StateType {
   albumImg: string;
   songName: string;
   artist: string;
+  isDeleted: boolean;
   scores: Score[];
 }
 
@@ -49,6 +50,7 @@ const initialState: StateType = {
   albumImg: '',
   songName: '',
   artist: '',
+  isDeleted: false,
   scores: [
     {
       createdAt: new Date().toISOString(),

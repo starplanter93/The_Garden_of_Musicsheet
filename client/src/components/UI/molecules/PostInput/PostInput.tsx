@@ -3,12 +3,10 @@ import { Input, Text, Icon, ImgLayout, Button } from '../../atoms';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './postInput.module.scss';
-
 import {
   getSearchData,
   refreshToken,
 } from '../../../../utils/ApiCollection/SearchData';
-
 import { useDispatch } from 'react-redux';
 import {
   setPrice,

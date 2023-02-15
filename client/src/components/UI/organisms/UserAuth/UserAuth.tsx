@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Icon, Logo, Text } from '../../atoms';
 import { UserAuthInput } from '../../molecules';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
-import React from 'react';
 import classNames from 'classnames/bind';
 import styles from './userAuth.module.scss';
 import {
@@ -12,8 +11,6 @@ import {
   handleGoogleLogin,
 } from '../../../../utils/utils';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { userInfo } from '../../../../redux/UserSlice';
 
 interface UserAuthProps {
@@ -60,13 +57,6 @@ const UserAuth = ({ type }: UserAuthProps) => {
       <div className={cx('userAuth')}>
         <div className={cx('userAuth__logo')}>
           <Logo type="mobile" />
-
-          {/* <img src={require('../../../../assets/Logo.png')} />
-        </div>
-        <div className={cx('logo__Text')}>
-          <Link to="/">
-            <span>악보의 정원</span>
-          </Link> */}
         </div>
         <UserAuthInput type="Login" placeholder="이메일"></UserAuthInput>
         <UserAuthInput type="Login" placeholder="비밀번호"></UserAuthInput>
@@ -111,12 +101,6 @@ const UserAuth = ({ type }: UserAuthProps) => {
       <div className={cx('userAuth')}>
         <div className={cx('userAuth__logo')}>
           <Logo type="mobile" />
-          {/* <img src={require('../../../../assets/Logo.png')} />
-        </div>
-        <div className={cx('logo__Text')}>
-          <Link to="/">
-            <span>악보의 정원</span>
-          </Link> */}
         </div>
 
         <UserAuthInput type="SignUp" placeholder="이메일"></UserAuthInput>

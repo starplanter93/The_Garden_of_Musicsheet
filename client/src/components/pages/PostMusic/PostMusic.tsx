@@ -2,16 +2,8 @@ import React from 'react';
 
 import classNames from 'classnames/bind';
 import styles from './PostMusic.module.scss';
-import {
-  DropDown,
-  PostInput,
-  TextEditor,
-  PostSidebar,
-} from '../../UI/molecules';
+import { DropDown, TextEditor, PostSidebar } from '../../UI/molecules';
 import { PostButtons, MusicPostInfo } from '../../UI/organisms';
-
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
 
 const PostMusic = () => {
   const cx = classNames.bind(styles);
