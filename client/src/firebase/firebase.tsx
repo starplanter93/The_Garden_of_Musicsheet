@@ -1,7 +1,13 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+} from 'firebase/firestore/lite';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { DocumentData } from 'firebase/firestore/lite';
 
@@ -32,6 +38,16 @@ export async function getMusics() {
   const snapshot = await getDocs(ref);
   const list = snapshot.docs.map((doc: DocumentData) => doc.data());
   return list;
+}
+
+export async function getScoresByInstrument(docName: string) {
+  const ref = doc(db, 'instrument', docName);
+  const snapshot = await getDoc(ref);
+
+  if (snapshot.exists()) {
+    return snapshot.data();
+  }
+  return {};
 }
 
 export const auth = getAuth();
