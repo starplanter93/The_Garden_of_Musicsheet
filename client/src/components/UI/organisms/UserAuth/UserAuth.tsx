@@ -12,7 +12,7 @@ import {
 } from '../../../../utils/utils';
 import { useNavigate } from 'react-router-dom';
 import { userInfo } from '../../../../redux/UserSlice';
-
+import { toast } from 'react-toastify';
 interface UserAuthProps {
   type: 'Login' | 'SignUp';
 }
@@ -36,7 +36,7 @@ const UserAuth = ({ type }: UserAuthProps) => {
           }
         }
       );
-      navigate(-1);
+      navigate('/');
     } else if (typeState === 'SignUp') {
       await handleRegisterUser(
         userRegData.email,

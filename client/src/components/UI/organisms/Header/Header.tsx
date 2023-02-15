@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { setHeader } from '../../../../redux/HeaderSlice';
 import { auth, getMusicData } from '../../../../firebase/firebase';
 import { setUserInfo } from '../../../../redux/PostSlice';
+import { toast } from 'react-toastify';
 
 const Header = () => {
   const cx = classNames.bind(styles);
@@ -28,9 +29,32 @@ const Header = () => {
     const user = [auth.currentUser.displayName, auth.currentUser.uid];
     dispatch(setUserInfo(user));
   }
+  const validateInputs = () => {
+    const { songName, artist, albumImg, scores } = data;
+    if (
+      !songName ||
+      !artist ||
+      !albumImg ||
+      !scores[0].instType ||
+      !scores[0].difficulty ||
+      !scores[0].sheetType ||
+      !scores[0].detail ||
+      !scores[0].price
+    ) {
+      return false;
+    }
+    return true;
+  };
+
   const handleUpload = async () => {
+    if (!validateInputs()) {
+      toast.error('모든 필드를 입력해주세요.');
+      return;
+    }
+
     await getMusicData(data.songName, data).then(() => navigate('/'));
     dispatch(setHeader(false));
+    toast.success('악보 등록 성공!');
   };
 
   if (headerState) {
