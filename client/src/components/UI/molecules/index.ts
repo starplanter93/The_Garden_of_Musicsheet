@@ -13,8 +13,14 @@ import SongInfoHeader from './SongInfoHeader/SongInfoHeader';
 import ScorePreview from './ScorePreview/ScorePreview';
 import ScoreInfoCard from './ScoreInfoCard/ScoreInfoCard';
 import ScoreInfoExplain from './ScoerInfoExplain/ScoreInfoExplain';
+import DropDown from './DropDownSelect/DropDown';
+import TextEditor from './TextEditor/TextEditor';
+import PostSidebar from '../molecules/PostSidebar/PostSidebar';
 
 export {
+  PostSidebar,
+  TextEditor,
+  DropDown,
   PostInput,
   UserAuthInput,
   InstrumentCard,

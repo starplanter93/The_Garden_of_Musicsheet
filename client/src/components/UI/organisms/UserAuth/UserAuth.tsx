@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Icon, Text } from '../../atoms';
+import { Button, Icon, Logo, Text } from '../../atoms';
 import { UserAuthInput } from '../../molecules';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
@@ -59,12 +59,14 @@ const UserAuth = ({ type }: UserAuthProps) => {
     return (
       <div className={cx('userAuth')}>
         <div className={cx('userAuth__logo')}>
-          <img src={require('../../../../assets/Logo.png')} />
+          <Logo type="mobile" />
+
+          {/* <img src={require('../../../../assets/Logo.png')} />
         </div>
         <div className={cx('logo__Text')}>
           <Link to="/">
             <span>악보의 정원</span>
-          </Link>
+          </Link> */}
         </div>
         <UserAuthInput type="Login" placeholder="이메일"></UserAuthInput>
         <UserAuthInput type="Login" placeholder="비밀번호"></UserAuthInput>
@@ -108,12 +110,13 @@ const UserAuth = ({ type }: UserAuthProps) => {
     return (
       <div className={cx('userAuth')}>
         <div className={cx('userAuth__logo')}>
-          <img src={require('../../../../assets/Logo.png')} />
+          <Logo type="mobile" />
+          {/* <img src={require('../../../../assets/Logo.png')} />
         </div>
         <div className={cx('logo__Text')}>
           <Link to="/">
             <span>악보의 정원</span>
-          </Link>
+          </Link> */}
         </div>
 
         <UserAuthInput type="SignUp" placeholder="이메일"></UserAuthInput>

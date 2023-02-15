@@ -3,7 +3,13 @@ import classNames from 'classnames/bind';
 
 interface ButtonProps {
   children: JSX.Element | string;
-  theme?: 'primary' | 'secondary' | 'tertiary' | 'transparent' | 'toggle';
+  theme?:
+    | 'primary'
+    | 'secondary'
+    | 'tertiary'
+    | 'transparent'
+    | 'toggle'
+    | 'dropdown';
   size?: 'auto' | 'xl' | 'l' | 'm' | 's' | 'xs' | 'tiny';
   clicked?: boolean;
   disabled?: boolean;
