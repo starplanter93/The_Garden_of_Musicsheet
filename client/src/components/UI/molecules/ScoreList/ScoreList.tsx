@@ -1,47 +1,49 @@
 import classNames from 'classnames/bind';
+import { DocumentData } from 'firebase/firestore/lite';
 import { Link, useLocation } from 'react-router-dom';
 import { Text } from '../../atoms';
 import EditOrDownButton from '../EditOrDownButton/EditOrDownButton';
 import styles from './scoreList.module.scss';
 
 interface ScoreListProps {
+  score: DocumentData;
   buttonEvent?: 'edit' | 'download';
 }
 
-// Todo: 데이터 연결
-const ScoreList = ({ buttonEvent = 'edit' }: ScoreListProps) => {
+const ScoreList = ({ score, buttonEvent = 'edit' }: ScoreListProps) => {
   const cx = classNames.bind(styles);
   const { pathname } = useLocation();
+  const { artist, difficulty, instType, price, songName, author, scoreId } =
+    score;
 
   return (
     <div className={cx('wrapper')}>
-      {/* Todo: 경로 수정 */}
-      <Link to="/scoredetail">
+      <Link to={`/scoredetail/${scoreId}`}>
         <div className={cx('detail')}>
           <ul className={cx('score-song')}>
             <li>
-              <Text>KICK BACK (Chainsaw Man OP)</Text>
+              <Text>{songName}</Text>
             </li>
             <li>
-              <Text color="gray">Kenshi Yonezu</Text>
+              <Text color="gray">{artist}</Text>
             </li>
           </ul>
           <ul className={cx('score-info')}>
             <li>
-              <Text color="gray">Animenz</Text>
+              <Text color="gray">{author}</Text>
             </li>
             <li>
-              <Text color="gray">어쿠스틱 기타</Text>
+              <Text color="gray">{instType}</Text>
             </li>
             <li>
-              <Text color="gray">어려움</Text>
+              <Text color="gray">{difficulty}</Text>
             </li>
           </ul>
         </div>
       </Link>
       {!pathname.includes('/maypage') ? (
         <div className={cx('price')}>
-          <Text color="blue">5000원</Text>
+          <Text color="blue">{`${Number(price).toLocaleString()}원`}</Text>
         </div>
       ) : (
         <div>

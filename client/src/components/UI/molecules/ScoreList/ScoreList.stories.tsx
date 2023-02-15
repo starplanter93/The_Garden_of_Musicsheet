@@ -12,5 +12,12 @@ const Template: ComponentStory<typeof ScoreList> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  buttonEvent: 'edit',
+  score: {
+    difficulty: '중간',
+    instType: '피아노',
+    songName: '오르트구름',
+    artist: '윤하',
+    author: 'lee',
+    price: '5000',
+  },
 };
