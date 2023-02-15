@@ -1,29 +1,45 @@
 import styles from './CategoryDetail.module.scss';
 import classNames from 'classnames/bind';
-import { CategoryCover, ScoreList } from '../../molecules';
+import { CategoryCover, Pagination, ScoreList } from '../../molecules';
 import { Text } from '../../atoms';
+import { useEffect, useState } from 'react';
+import { DocumentData } from 'firebase/firestore/lite';
 
-// Todo: 데이터 연결
-const CategoryDetail = () => {
+interface CategoryDetailProps {
+  scoresByInst: DocumentData;
+  totalLists: number;
+}
+
+const CategoryDetail = ({ scoresByInst, totalLists }: CategoryDetailProps) => {
   const cx = classNames.bind(styles);
+  const { thumbnail, name, scores } = scoresByInst;
+  const [scoresData, setScoresData] = useState<DocumentData>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    const currentData = scores?.slice(currentPage - 1, currentPage + 0);
+    setScoresData(currentData);
+  }, [currentPage, scoresByInst]);
 
   return (
     <>
       <div className={cx('cover-wrapper')}>
-        <CategoryCover category="악기" thumbnail="piano" title="피아노" />
+        <CategoryCover category="악기" thumbnail={thumbnail} title={name} />
       </div>
       <section className={cx('container')}>
         <h2>
           <Text size="xlg">악보</Text>
         </h2>
         <div className={cx('score-lists')}>
-          {Array(10)
-            .fill(0)
-            .map((el, idx) => (
-              <ScoreList key={idx} />
-            ))}
+          {scoresData?.map((score: DocumentData, idx: number) => (
+            <ScoreList score={score} key={idx} />
+          ))}
         </div>
-        {/* 페이지네이션 */}
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalLists={totalLists}
+        />
       </section>
     </>
   );
