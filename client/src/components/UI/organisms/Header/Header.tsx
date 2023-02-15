@@ -3,15 +3,13 @@ import classNames from 'classnames/bind';
 import { GlobalMenu } from '../../molecules';
 import UtilityMenu from '../UtilityMenu/UtilityMenu';
 import { Button, Icon, Logo, Text } from '../../atoms';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { setHeader } from '../../../../redux/HeaderSlice';
-import { auth } from '../../../../firebase/firebase';
-import { useEffect } from '@storybook/addons';
+import { auth, getMusicData } from '../../../../firebase/firebase';
 import { setUserInfo } from '../../../../redux/PostSlice';
-import { getMusicData } from '../../../../firebase/firebase';
+import { toast } from 'react-toastify';
 
 const Header = () => {
   const cx = classNames.bind(styles);
@@ -27,11 +25,15 @@ const Header = () => {
     navigate(-1);
   };
 
-  console.log(data);
-  const handleUpload = async () => {
-    const user = [auth.currentUser?.displayName, auth.currentUser?.uid];
+  if (auth.currentUser) {
+    const user = [auth.currentUser.displayName, auth.currentUser.uid];
     dispatch(setUserInfo(user));
+  }
+
+  const handleUpload = async () => {
     await getMusicData(data.songName, data).then(() => navigate('/'));
+    dispatch(setHeader(false));
+    toast.success('악보 등록 성공!');
   };
 
   if (headerState) {

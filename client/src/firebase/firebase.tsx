@@ -1,7 +1,12 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  updatePhoneNumber,
+  updateProfile,
+} from 'firebase/auth';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 import {
   getFirestore,
@@ -32,8 +37,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Get a list of cities from your database
-
 export async function getDocument() {
   const ref = collection(db, 'test');
   const snapshot = await getDocs(ref);
@@ -57,11 +60,11 @@ export async function getMusics() {
 
 export async function getMusicData(songName: string, data: StateType) {
   const name = `${songName}-${data.artist}`;
-  const info = doc(db, 'test', name);
+  const info = doc(db, 'music', name);
   const infoSnapshot = await getDoc(info);
   const savedData = infoSnapshot.data();
 
-  const colRef = collection(db, 'test');
+  const colRef = collection(db, 'music');
   const colSnap = await getDocs(colRef);
 
   const list = colSnap.docs.map((doc: DocumentData) => doc.data());
@@ -116,7 +119,7 @@ export async function getMusicData(songName: string, data: StateType) {
 
 /** 해당 곡으로 만들어진 문서가 없으면 아래 함수가 작동하여 initialize 됩니다*/
 async function postData(songName: string, data: StateType) {
-  const infoRef = doc(db, 'test', songName);
+  const infoRef = doc(db, 'music', songName);
   await setDoc(infoRef, data);
 
   /** instrument collection 에 추가 */
@@ -144,7 +147,7 @@ async function postData(songName: string, data: StateType) {
 
 /** 해당 곡으로 만들어진 문서가 존재한다면 아래 함수가 작동하여 scores 배열을 업데이트 합니다 */
 async function updateData(songName: string, data: StateType) {
-  const infoRef = doc(db, 'test', songName);
+  const infoRef = doc(db, 'music', songName);
   await updateDoc(infoRef, { scores: arrayUnion(data.scores[0]) });
 
   /** instrument collection 에 추가 */

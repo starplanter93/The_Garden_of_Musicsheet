@@ -1,15 +1,15 @@
 import React from 'react';
 import { Text, Button } from '../../atoms';
-import styles from './songinfoheader.module.scss';
+import styles from './scoreinfoheader.module.scss';
 import classNames from 'classnames/bind';
 
-interface SongInfoHeaderProps {
+interface ScoreInfoHeaderProps {
   scoreName: string;
   singer: string;
   date: string;
 }
 
-function SongInfoHeader({ scoreName, singer, date }: SongInfoHeaderProps) {
+function ScoreInfoHeader({ scoreName, singer, date }: ScoreInfoHeaderProps) {
   const cx = classNames.bind(styles);
   return (
     <div className={cx('songinfo-header-wrapper')}>
@@ -32,4 +32,4 @@ function SongInfoHeader({ scoreName, singer, date }: SongInfoHeaderProps) {
   );
 }
 
-export default SongInfoHeader;
+export default ScoreInfoHeader;

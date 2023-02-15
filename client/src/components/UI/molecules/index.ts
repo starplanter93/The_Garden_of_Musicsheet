@@ -9,10 +9,11 @@ import UserMenu from './UserDropdown/UserMenu/UserMenu';
 import UserButton from './GNB/UserButton/UserButton';
 import UserAuthInput from './UserAuthInput/UserAuthInput';
 import PostInput from './PostInput/PostInput';
-import SongInfoHeader from './SongInfoHeader/SongInfoHeader';
+import ScoreInfoHeader from './ScoreInfoHeader/ScoreInfoHeader';
 import ScorePreview from './ScorePreview/ScorePreview';
 import ScoreInfoCard from './ScoreInfoCard/ScoreInfoCard';
 import ScoreInfoExplain from './ScoerInfoExplain/ScoreInfoExplain';
+import ScorePriceCard from './ScorePriceCard/ScorePriceCard';
 import DropDown from './DropDownSelect/DropDown';
 import TextEditor from './TextEditor/TextEditor';
 import PostSidebar from '../molecules/PostSidebar/PostSidebar';
@@ -32,8 +33,9 @@ export {
   MiniProfile,
   UserMenu,
   UserButton,
-  SongInfoHeader,
+  ScoreInfoHeader,
   ScorePreview,
   ScoreInfoCard,
   ScoreInfoExplain,
+  ScorePriceCard,
 };

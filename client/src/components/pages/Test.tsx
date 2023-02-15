@@ -1,15 +1,16 @@
 import React from 'react';
 import {
-  SongInfoHeader,
+  ScoreInfoHeader,
   ScorePreview,
   ScoreInfoCard,
   ScoreInfoExplain,
+  ScorePriceCard,
 } from '../UI/molecules';
 
 function Test() {
   return (
     <>
-      <SongInfoHeader scoreName="악보 제목" singer="가수" date="작성일" />
+      <ScoreInfoHeader scoreName="악보 제목" singer="가수" date="작성일" />
       <ScorePreview
         scoreImg1="https://firebasestorage.googleapis.com/v0/b/garden-of-musicsheet.appspot.com/o/if%20i%20could%20be%20a%20constellation%231.png?alt=media&token=5f6f761a-104d-4317-ad8d-03feb5c018fb"
         scoreImg2="https://firebasestorage.googleapis.com/v0/b/garden-of-musicsheet.appspot.com/o/if%20i%20could%20be%20a%20constellation%232.png?alt=media&token=7338efea-878a-4762-a0a7-1d121e405a24"
@@ -21,6 +22,7 @@ function Test() {
         scoreType="타브 악보"
       />
       <ScoreInfoExplain scoreExplain="게시글 등록자가 작성한 악보에 대한 상세한 설명과 정보" />
+      <ScorePriceCard price="3000" />
     </>
   );
 }
