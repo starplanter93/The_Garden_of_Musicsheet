@@ -123,11 +123,15 @@ export const PostSlice = createSlice({
     setScoreId: (state: StateType, action: PayloadAction<string>) => {
       state.scores[0].scoreId = action.payload;
     },
+    initializeState: (state: StateType) => {
+      return (state = initialState);
+    },
   },
 });
 
 // 액션을 export 해준다.
 export const {
+  initializeState,
   setAlbumImg,
   setSongName,
   setArtist,

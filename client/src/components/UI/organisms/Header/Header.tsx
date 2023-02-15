@@ -8,7 +8,7 @@ import { RootState } from '../../../../redux/store';
 import { useNavigate } from 'react-router-dom';
 import { setHeader } from '../../../../redux/HeaderSlice';
 import { auth, getMusicData } from '../../../../firebase/firebase';
-import { setUserInfo } from '../../../../redux/PostSlice';
+import { setUserInfo, initializeState } from '../../../../redux/PostSlice';
 import { toast } from 'react-toastify';
 
 const Header = () => {
@@ -22,6 +22,7 @@ const Header = () => {
 
   const handleIsPost = () => {
     dispatch(setHeader(false));
+    dispatch(initializeState());
     navigate(-1);
   };
 
