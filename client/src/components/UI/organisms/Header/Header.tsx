@@ -27,20 +27,11 @@ const Header = () => {
     navigate(-1);
   };
 
+  console.log(data);
   const handleUpload = async () => {
     const user = [auth.currentUser?.displayName, auth.currentUser?.uid];
     dispatch(setUserInfo(user));
-
-    console.log(data);
-    await getMusicData(data.songName, data).then((el) => console.log(el));
-
-    const initialData = {
-      songId: '',
-      albumImg: '',
-      songName: '',
-      artist: '',
-      scores: [],
-    };
+    await getMusicData(data.songName, data).then(() => navigate('/'));
   };
 
   if (headerState) {

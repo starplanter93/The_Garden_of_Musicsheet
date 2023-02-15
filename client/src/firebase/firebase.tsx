@@ -65,8 +65,8 @@ export async function getMusicData(songName: string, data: StateType) {
   const colSnap = await getDocs(colRef);
 
   const list = colSnap.docs.map((doc: DocumentData) => doc.data());
-  const lastIdx =
-    colSnap.docs.map((doc: DocumentData) => doc.data()).length - 1;
+  // const lastIdx =
+  //   colSnap.docs.map((doc: DocumentData) => doc.data()).length - 1;
 
   if (savedData === undefined) {
     data = { ...data };
@@ -89,8 +89,8 @@ export async function getMusicData(songName: string, data: StateType) {
   } else if (!infoSnapshot.exists()) {
     console.log('너 처음이구나?');
     data = { ...data };
-    data.songId = (Number(list[lastIdx].songId) + 1).toString();
-    console.log(data);
+    // data.songId = (Number(list[lastIdx].songId) + 1).toString();
+    data.songId = list.length.toString();
     postData(name, data);
   }
 
@@ -118,12 +118,56 @@ export async function getMusicData(songName: string, data: StateType) {
 async function postData(songName: string, data: StateType) {
   const infoRef = doc(db, 'test', songName);
   await setDoc(infoRef, data);
+
+  /** instrument collection 에 추가 */
+  let inst = data.scores[0].instType;
+
+  if (inst === '피아노') {
+    inst = 'piano';
+  }
+  if (inst === '어쿠스틱 기타') {
+    inst = 'acoustic';
+  }
+  if (inst === '베이스') {
+    inst = 'bass';
+  }
+  if (inst === '드럼') {
+    inst = 'drum';
+  }
+  if (inst === '일렉 기타') {
+    inst = 'electric';
+  }
+
+  const instRef = doc(db, 'instrument', inst);
+  await updateDoc(instRef, { scores: arrayUnion(data.scores[0]) });
 }
 
 /** 해당 곡으로 만들어진 문서가 존재한다면 아래 함수가 작동하여 scores 배열을 업데이트 합니다 */
 async function updateData(songName: string, data: StateType) {
   const infoRef = doc(db, 'test', songName);
-  await updateDoc(infoRef, { scores: arrayUnion(data.scores) });
+  await updateDoc(infoRef, { scores: arrayUnion(data.scores[0]) });
+
+  /** instrument collection 에 추가 */
+  let inst = data.scores[0].instType;
+
+  if (inst === '피아노') {
+    inst = 'piano';
+  }
+  if (inst === '어쿠스틱 기타') {
+    inst = 'acoustic';
+  }
+  if (inst === '베이스') {
+    inst = 'bass';
+  }
+  if (inst === '드럼') {
+    inst = 'drum';
+  }
+  if (inst === '일렉 기타') {
+    inst = 'electric';
+  }
+
+  const instRef = doc(db, 'instrument', inst);
+  await updateDoc(instRef, { scores: arrayUnion(data.scores[0]) });
 }
 
 export const auth = getAuth();

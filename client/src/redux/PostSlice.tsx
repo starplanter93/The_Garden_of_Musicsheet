@@ -8,7 +8,12 @@ export type instType =
   | '어쿠스틱 기타'
   | '베이스'
   | '드럼'
-  | '';
+  | ''
+  | 'piano'
+  | 'acoustic'
+  | 'drum'
+  | 'bass'
+  | 'electric';
 
 export type difficulty = '쉬움' | '중간' | '어려움' | '';
 export type sheetType = '단선 악보' | '타브 악보' | '';
@@ -25,6 +30,9 @@ export interface Score {
   youtubeURL?: string;
   detail: string;
   scoreId: string;
+  songName: string;
+  artist: string;
+  albumImg: string;
 }
 
 export interface StateType {
@@ -53,6 +61,9 @@ const initialState: StateType = {
       youtubeURL: '',
       detail: '',
       scoreId: '',
+      songName: '',
+      artist: '',
+      albumImg: '',
     },
   ],
 };
@@ -72,13 +83,26 @@ export const PostSlice = createSlice({
       state.scores[0].sheetType = action.payload;
     },
     setSongName: (state: StateType, action: PayloadAction<string>) => {
-      return { ...state, songName: action.payload };
+      return {
+        ...state,
+        scores: [{ ...state.scores[0], songName: action.payload }],
+        songName: action.payload,
+      };
     },
     setArtist: (state: StateType, action: PayloadAction<string>) => {
-      return { ...state, artist: action.payload };
+      return {
+        ...state,
+        scores: [{ ...state.scores[0], artist: action.payload }],
+        artist: action.payload,
+      };
     },
+
     setAlbumImg: (state: StateType, action: PayloadAction<string>) => {
-      return { ...state, albumImg: action.payload };
+      return {
+        ...state,
+        scores: [{ ...state.scores[0], albumImg: action.payload }],
+        albumImg: action.payload,
+      };
     },
     setPrice: (state: StateType, action: PayloadAction<string>) => {
       state.scores[0].price = action.payload;
