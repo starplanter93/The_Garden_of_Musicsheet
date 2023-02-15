@@ -10,52 +10,55 @@ import {
 import { Icon } from '../../atoms';
 
 interface PaginationProps {
-  totalLists?: number;
-  currentPage?: number;
-  setCurrentPage?: Dispatch<SetStateAction<number>>;
+  totalLists: number;
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
 }
 
 const Pagination = ({
-  totalLists = 60,
-  currentPage = 7,
+  totalLists,
+  currentPage,
   setCurrentPage,
 }: PaginationProps) => {
   const cx = classNames.bind(styles);
-  const listPerpage = 5;
+  const listPerpage = 1;
   const totalPages = Math.ceil(totalLists / listPerpage);
-  const totalPageArr = Array(totalPages)
-    .fill(1)
-    .map((el, idx) => el + idx);
+  let totalPageArr = [1];
+  if (totalPages > 1) {
+    totalPageArr = Array(totalPages)
+      .fill(1)
+      .map((el, idx) => el + idx);
+  }
   const [pageGroup, setPageGroup] = useState<number[]>([]);
   const prevActive = pageGroup[0] !== 1;
   const nextActive = pageGroup[pageGroup.length - 1] < totalPages;
 
   useEffect(() => {
     const pageGroupArr = totalPageArr.slice(
-      currentPage - 1 - ((currentPage - 1) % 5),
-      currentPage - 1 - ((currentPage - 1) % 5) + 5
+      currentPage - 1 - ((currentPage - 1) % 1),
+      currentPage - 1 - ((currentPage - 1) % 1) + 1
     );
     setPageGroup([...pageGroupArr]);
-  }, [totalPages]);
+  }, [currentPage]);
 
   const handlePrev = () => {
     if (!prevActive) return;
 
     // setIsPending(true);
-    // setCurrentPage(pageGroup[0] - 5);
+    setCurrentPage(pageGroup[0] - 1);
   };
 
   const handlePage = (e: MouseEvent<HTMLButtonElement>) => {
     if (Number((e.target as HTMLButtonElement).value) === currentPage) return;
     // setIsPending(true);
-    // setCurrentPage(Number((e.target as HTMLButtonElement).value));
+    setCurrentPage(Number((e.target as HTMLButtonElement).value));
   };
 
   const handleNext = () => {
     if (!nextActive) return;
 
     // setIsPending(true);
-    // setCurrentPage(pageGroup[0] + 5);
+    setCurrentPage(pageGroup[0] + 1);
   };
 
   return (

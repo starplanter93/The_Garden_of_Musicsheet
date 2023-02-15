@@ -6,7 +6,7 @@ import MainSongSection from './MainSongSection/MainSongSection';
 import UserAuth from './UserAuth/UserAuth';
 import MainGrid from './MainGrid/MainGrid';
 import Carousel from './Carousel/Carousel';
-
+import CategoryDetail from './CategoryDetail/CategoryDetail';
 export {
   UserAuth,
   InstrumentLists,
@@ -16,4 +16,5 @@ export {
   MainSongSection,
   MainGrid,
   Carousel,
+  CategoryDetail,
 };
