@@ -9,6 +9,7 @@ import loginReducer from './LoginSlice';
 import regReducer from './RegSlice';
 import userReducer from './UserSlice';
 import HeaderReducer from './HeaderSlice';
+import PostReducer from './PostSlice';
 
 const persistConfig = {
   // storage에 저장할 명칭
@@ -30,6 +31,7 @@ export const store = configureStore({
     userLoginInput: loginReducer,
     postHeader: HeaderReducer,
     defaultHeader: HeaderReducer,
+    PostInfo: PostReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

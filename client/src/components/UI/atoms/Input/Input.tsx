@@ -3,6 +3,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import styles from './input.module.scss';
 import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
+
 import {
   userLoginEmail,
   userLoginPassword,
@@ -13,12 +14,14 @@ import {
   userRegPasswordCheck,
   userRegNickname,
 } from '../../../../redux/RegSlice';
+
 interface InputProps {
   setIsFocused: Dispatch<SetStateAction<boolean>>;
   setUserInput(state: string): void;
   size: 's' | 'm' | 'l';
   theme: 'basic' | 'icon-input' | 'icon-input-no-label';
   placeholder?: string | '이메일' | '비밀번호' | '비밀번호 확인' | '닉네임';
+  value?: string;
 }
 
 const Input = ({
@@ -30,7 +33,6 @@ const Input = ({
 }: InputProps) => {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
-
   const handleOnChange = (input: string) => {
     setUserInput(input);
 
@@ -53,13 +55,11 @@ const Input = ({
   };
 
   if (theme === 'basic') {
-    return (
-      <input
-        className={cx('default-input', `${size}`)}
-        onChange={(e) => setUserInput(e.target.value)}
-        placeholder={placeholder}
-      ></input>
-    );
+    <input
+      className={cx('default-input', `${size}`)}
+      onChange={(e) => setUserInput(e.target.value)}
+      placeholder={placeholder}
+    ></input>;
   }
   if (theme === 'icon-input-no-label') {
     return (

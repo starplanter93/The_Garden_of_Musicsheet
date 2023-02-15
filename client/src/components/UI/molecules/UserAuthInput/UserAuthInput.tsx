@@ -89,7 +89,12 @@ const UserAuthInput = ({ type, placeholder }: UserAuthInputProps) => {
 
   return (
     <>
-      <form className={cx('userAuthInput__form')}>
+      <form
+        className={cx('userAuthInput__form')}
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
         <div className={cx('userAuthInput__input')}>
           <div className={cx('userAuthInput__icon')}>
             {placeholder === '이메일' && (
