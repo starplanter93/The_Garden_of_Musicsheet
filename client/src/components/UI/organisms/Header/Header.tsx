@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setHeader } from '../../../../redux/HeaderSlice';
 import { auth } from '../../../../firebase/firebase';
-import { useEffect } from '@storybook/addons';
 import { setUserInfo } from '../../../../redux/PostSlice';
 import { getMusicData } from '../../../../firebase/firebase';
 
