@@ -15,6 +15,8 @@ import Pagination from './Pagination/Pagination';
 import DropDown from './DropDownSelect/DropDown';
 import TextEditor from './TextEditor/TextEditor';
 import PostSidebar from '../molecules/PostSidebar/PostSidebar';
+import TabMenu from './TabMenu/TabMenu';
+
 export {
   PostSidebar,
   TextEditor,
@@ -33,4 +35,5 @@ export {
   ScoreList,
   EditOrDownButton,
   Pagination,
+  TabMenu,
 };
