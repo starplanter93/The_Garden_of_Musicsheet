@@ -6,32 +6,47 @@ import { useEffect, useState } from 'react';
 import { DocumentData } from 'firebase/firestore/lite';
 
 interface CategoryDetailProps {
-  scoresByInst: DocumentData;
+  category: string;
+  coverData: DocumentData;
+  scoresByCategory: DocumentData;
   totalLists: number;
 }
 
-const CategoryDetail = ({ scoresByInst, totalLists }: CategoryDetailProps) => {
+const CategoryDetail = ({
+  category,
+  coverData,
+  scoresByCategory,
+  totalLists,
+}: CategoryDetailProps) => {
   const cx = classNames.bind(styles);
-  const { thumbnail, name, scores } = scoresByInst;
-  const [scoresData, setScoresData] = useState<DocumentData>([]);
+  const { thumbnail, name, artist } = coverData;
+  const [scores, setScores] = useState<DocumentData>([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    const currentData = scores?.slice(currentPage - 1, currentPage + 0);
-    setScoresData(currentData);
-  }, [currentPage, scoresByInst]);
+    const currentData = scoresByCategory?.slice(
+      currentPage - 1,
+      currentPage + 0
+    );
+    setScores(currentData);
+  }, [currentPage, scoresByCategory]);
 
   return (
     <>
       <div className={cx('cover-wrapper')}>
-        <CategoryCover category="악기" thumbnail={thumbnail} title={name} />
+        <CategoryCover
+          category={category}
+          thumbnail={thumbnail}
+          title={name}
+          artist={artist}
+        />
       </div>
       <section className={cx('container')}>
         <h2>
           <Text size="xlg">악보</Text>
         </h2>
         <div className={cx('score-lists')}>
-          {scoresData?.map((score: DocumentData, idx: number) => (
+          {scores?.map((score: DocumentData, idx: number) => (
             <ScoreList score={score} key={idx} />
           ))}
         </div>
