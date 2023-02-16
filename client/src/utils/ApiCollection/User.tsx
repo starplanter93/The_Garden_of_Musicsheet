@@ -53,13 +53,17 @@ export const handleRegisterUser = async (
 };
 
 export const handleGoogleLogin = async () => {
+  let response;
   await signInWithPopup(auth, provider)
     .then((data) => {
       const credential = GoogleAuthProvider.credentialFromResult(data);
       const token = credential?.accessToken;
       const user = data.user;
+      response = user;
       if (token) localStorage.setItem('authorization', token);
       if (user.refreshToken) localStorage.setItem('refresh', user.refreshToken);
     })
     .catch((err) => console.log(err));
+
+  return response;
 };
