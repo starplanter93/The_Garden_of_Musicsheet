@@ -48,8 +48,9 @@ export async function getMusics() {
   return list;
 }
 
-export async function getScoresByInstrument(docName: string) {
-  const ref = doc(db, 'instrument', docName);
+// 곡 상세페이지, 악기 상세페이지 데이터 api
+export async function getScoresByCategory(colName: string, docName: string) {
+  const ref = doc(db, colName, docName);
   const snapshot = await getDoc(ref);
 
   if (snapshot.exists()) {
