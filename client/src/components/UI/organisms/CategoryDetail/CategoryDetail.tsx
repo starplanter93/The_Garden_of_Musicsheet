@@ -1,6 +1,6 @@
 import styles from './CategoryDetail.module.scss';
 import classNames from 'classnames/bind';
-import { CategoryCover, Pagination, ScoreList } from '../../molecules';
+import { CategoryCover, Pagination, ScoreList, TabMenu } from '../../molecules';
 import { Text } from '../../atoms';
 import { useEffect, useState } from 'react';
 import { DocumentData } from 'firebase/firestore/lite';
@@ -22,14 +22,19 @@ const CategoryDetail = ({
   const { thumbnail, name, artist } = coverData;
   const [scores, setScores] = useState<DocumentData>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [clickedTab, setClickedTab] = useState('전체');
 
   useEffect(() => {
-    const currentData = scoresByCategory?.slice(
-      currentPage - 1,
-      currentPage + 0
-    );
+    let currentData: DocumentData;
+    if (clickedTab === '전체') {
+      currentData = scoresByCategory?.slice(currentPage - 1, currentPage + 0);
+    } else {
+      currentData = scoresByCategory
+        ?.filter((el: DocumentData) => el.instType === clickedTab)
+        .slice(currentPage - 1, currentPage + 0);
+    }
     setScores(currentData);
-  }, [currentPage, scoresByCategory]);
+  }, [currentPage, scoresByCategory, clickedTab]);
 
   return (
     <>
@@ -41,6 +46,7 @@ const CategoryDetail = ({
           artist={artist}
         />
       </div>
+      {category === '곡' && <TabMenu setClickedTab={setClickedTab} />}
       <section className={cx('container')}>
         <h2>
           <Text size="xlg">악보</Text>

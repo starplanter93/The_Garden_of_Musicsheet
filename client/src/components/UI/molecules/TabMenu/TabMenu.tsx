@@ -1,10 +1,11 @@
 import { Button, Text } from '../../atoms';
 import styles from './tabMenu.module.scss';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 interface TabMenuProps {
   tabGroupArr?: string[];
+  setClickedTab: Dispatch<SetStateAction<string>>;
 }
 
 const TabMenu = ({
@@ -16,12 +17,14 @@ const TabMenu = ({
     '베이스',
     '드럼',
   ],
+  setClickedTab,
 }: TabMenuProps) => {
   const cx = classNames.bind(styles);
   const [currentTab, setCurrentTab] = useState(0);
 
-  const handleClick = (idx: number) => {
+  const handleClick = (tab: string, idx: number) => {
     setCurrentTab(idx);
+    setClickedTab(tab);
   };
 
   return (
@@ -39,7 +42,7 @@ const TabMenu = ({
             <Button
               theme="transparent"
               size="auto"
-              onClick={() => handleClick(idx)}
+              onClick={() => handleClick(tab, idx)}
             >
               <Text
                 size="lg"
