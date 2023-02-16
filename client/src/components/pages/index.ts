@@ -4,5 +4,14 @@ import Auth from './Auth/Auth';
 import PostMusic from './PostMusic/PostMusic';
 import Main from './Main/Main';
 import InstrumentDetail from './InstrumentDetail/InstrumentDetail';
+import MusicDetail from './MusicDetail/MusicDetail';
 
-export { Layout, Instrument, Auth, PostMusic, Main, InstrumentDetail };
+export {
+  Layout,
+  Instrument,
+  Auth,
+  PostMusic,
+  Main,
+  InstrumentDetail,
+  MusicDetail,
+};
