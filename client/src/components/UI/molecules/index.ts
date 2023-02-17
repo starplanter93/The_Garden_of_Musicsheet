@@ -9,6 +9,7 @@ import UserMenu from './UserDropdown/UserMenu/UserMenu';
 import UserButton from './GNB/UserButton/UserButton';
 import UserAuthInput from './UserAuthInput/UserAuthInput';
 import PostInput from './PostInput/PostInput';
+import ScoreList from './ScoreList/ScoreList';
 import DropDown from './DropDownSelect/DropDown';
 import TextEditor from './TextEditor/TextEditor';
 import PostSidebar from '../molecules/PostSidebar/PostSidebar';
@@ -27,4 +28,5 @@ export {
   MiniProfile,
   UserMenu,
   UserButton,
+  ScoreList,
 };
