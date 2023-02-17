@@ -10,6 +10,7 @@ import PostButtons from './MusicPostInfo/Buttons/PostButtons';
 import MusicPostInfo from './MusicPostInfo/MusicPostInfo';
 import CategoryDetail from './CategoryDetail/CategoryDetail';
 import ScoreInfoAside from './ScoreInfoAside/ScoreInfoAside';
+import ScoreInfoMain from './ScoreInfoMain/ScoreInfoMain';
 
 export {
   MusicPostInfo,
@@ -24,4 +25,5 @@ export {
   Carousel,
   CategoryDetail,
   ScoreInfoAside,
+  ScoreInfoMain,
 };
