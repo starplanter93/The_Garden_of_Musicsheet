@@ -20,7 +20,7 @@ const Header = () => {
   );
   const data = useSelector((state: RootState) => state.postInfo);
   const pdf = useSelector((state: RootState) => state.pdfFile);
-  console.log(data);
+
   const handleIsPost = () => {
     dispatch(setHeader(false));
     dispatch(initializeState());
