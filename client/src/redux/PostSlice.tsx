@@ -33,6 +33,7 @@ export interface Score {
   songName: string;
   artist: string;
   albumImg: string;
+  downloadURL: string;
 }
 
 export interface StateType {
@@ -66,6 +67,7 @@ const initialState: StateType = {
       songName: '',
       artist: '',
       albumImg: '',
+      downloadURL: '',
     },
   ],
 };
@@ -123,6 +125,9 @@ export const PostSlice = createSlice({
     setScoreId: (state: StateType, action: PayloadAction<string>) => {
       state.scores[0].scoreId = action.payload;
     },
+    setDownloadURL: (state: StateType, action: PayloadAction<string>) => {
+      state.scores[0].downloadURL = action.payload;
+    },
     initializeState: (state: StateType) => {
       return (state = initialState);
     },
@@ -131,6 +136,7 @@ export const PostSlice = createSlice({
 
 // 액션을 export 해준다.
 export const {
+  setDownloadURL,
   initializeState,
   setAlbumImg,
   setSongName,

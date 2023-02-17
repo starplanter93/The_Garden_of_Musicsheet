@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 import styles from './PostMusic.module.scss';
 import { DropDown, TextEditor, PostSidebar } from '../../UI/molecules';
 import { PostButtons, MusicPostInfo } from '../../UI/organisms';
-import { toast } from 'react-toastify';
 import { auth } from '../../../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
 

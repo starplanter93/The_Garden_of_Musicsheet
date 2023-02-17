@@ -18,8 +18,9 @@ const Header = () => {
   const headerState = useSelector(
     (state: RootState) => state.postHeader.isPost
   );
-  const data = useSelector((state: RootState) => state.PostInfo);
-
+  const data = useSelector((state: RootState) => state.postInfo);
+  const pdf = useSelector((state: RootState) => state.pdfFile);
+  console.log(data);
   const handleIsPost = () => {
     dispatch(setHeader(false));
     dispatch(initializeState());
@@ -40,7 +41,8 @@ const Header = () => {
       !scores[0].difficulty ||
       !scores[0].sheetType ||
       !scores[0].detail ||
-      !scores[0].price
+      !scores[0].price ||
+      !pdf
     ) {
       return false;
     }
@@ -50,9 +52,7 @@ const Header = () => {
   const handleUpload = async () => {
     if (!validateInputs()) {
       toast.error('모든 필드를 입력해주세요.');
-      return;
     }
-
     await getMusicData(data.songName, data).then(() => navigate('/'));
     dispatch(setHeader(false));
     toast.success('악보 등록 성공!');

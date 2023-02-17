@@ -1,26 +1,23 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import {
-  getAuth,
-  GoogleAuthProvider,
-  updatePhoneNumber,
-  updateProfile,
-} from 'firebase/auth';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from 'firebase/storage';
 import {
   getFirestore,
   collection,
   getDocs,
-  addDoc,
   doc,
   setDoc,
   DocumentData,
   updateDoc,
   getDoc,
   arrayUnion,
-  where,
-  query,
 } from 'firebase/firestore/lite';
 import { StateType } from '../redux/PostSlice';
 
@@ -97,23 +94,6 @@ export async function getMusicData(songName: string, data: StateType) {
     postData(name, data);
   }
 
-  // const saved = infoSnapshot.data();
-  // console.log(saved);
-
-  // const q = query(collection(db, 'test'), where(songName, '==', true));
-  // const querySnapshot = await getDocs(q);
-  // const saved = querySnapshot.docs;
-  // console.log(saved);
-
-  // if (!infoSnapshot.exists()) {
-  //   data = { ...data };
-  //   data.songId = list.length.toString();
-  //   postData(songName, data);
-  // } else {
-  //   updateData(songName, data);
-  //   console.log('hi');
-  // }
-
   return infoSnapshot.data();
 }
 
@@ -176,15 +156,41 @@ async function updateData(songName: string, data: StateType) {
 export const auth = getAuth();
 export const provider = new GoogleAuthProvider();
 
-// export async function postArticle(songName: string, data: StateType) {
-//   const ref = doc(db, songName, 'Ditto');
-//   await updateDoc(ref, { scores: data });
-// console.log(songName);
-// const ref = doc(db, 'test');
-// await addDoc(ref, data);
-// }
+export async function postPDF(file: any) {
+  return new Promise<string>((resolve, reject) => {
+    const storage = getStorage();
+    const storageRef = ref(storage, `pdf/${file.name}`);
 
-// const storage = getStorage(app);
-// export const sheetRef = ref(storage);
+    const uploadTask = uploadBytesResumable(storageRef, file);
 
-// export const upload = uploadBytes();
+    let sheetURL = '';
+
+    uploadTask.on(
+      'state_changed',
+      (snapshot: any) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+        }
+      },
+      (error: any) => {
+        console.log(error);
+        reject(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log('File available at', downloadURL);
+          sheetURL = downloadURL;
+          resolve(sheetURL);
+        });
+      }
+    );
+  });
+}
