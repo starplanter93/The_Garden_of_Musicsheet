@@ -68,11 +68,6 @@ export async function getScoresByCategory(colName: string, docName: string) {
 //   return snapshot.data();
 // }
 
-  if (snapshot.exists()) {
-    return snapshot.data();
-  }
-  return {};
-}
 export async function getMusicData(songName: string, data: StateType) {
   const name = `${songName}-${data.artist}`;
   const info = doc(db, 'music', name);
