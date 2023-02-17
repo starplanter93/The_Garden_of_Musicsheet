@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, ImgLayout } from '../../atoms';
-import styles from './usercard.module.scss';
+import styles from './userCard.module.scss';
 import classNames from 'classnames/bind';
 
 interface UserCardProps {

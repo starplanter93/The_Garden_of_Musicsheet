@@ -4,11 +4,17 @@ import {
   ScorePreview,
   ScoreInfoCard,
   ScoreInfoExplain,
-  ScorePriceCard,
-  UserCard,
 } from '../UI/molecules';
+import { ScoreInfoAside } from '../UI/organisms';
 
 function Test() {
+  const data = {
+    scoreExplain: '게시글 등록자가 작성한 악보에 대한 상세한 설명과 정보',
+    price: '3000',
+    author: '97세기타마스터박춘식',
+    profileImg:
+      'https://firebasestorage.googleapis.com/v0/b/garden-of-musicsheet.appspot.com/o/avatar%2Favatar1.png?alt=media&token=a10690ce-65fd-402c-8e3f-b520188a8ba1',
+  };
   return (
     <>
       <ScoreInfoHeader scoreName="악보 제목" singer="가수" date="작성일" />
@@ -23,10 +29,10 @@ function Test() {
         scoreType="타브 악보"
       />
       <ScoreInfoExplain scoreExplain="게시글 등록자가 작성한 악보에 대한 상세한 설명과 정보" />
-      <ScorePriceCard price="3000" />
-      <UserCard
-        author="97세기타마스터백종원"
-        profileImg="https://firebasestorage.googleapis.com/v0/b/garden-of-musicsheet.appspot.com/o/avatar%2Favatar1.png?alt=media&token=a10690ce-65fd-402c-8e3f-b520188a8ba1"
+      <ScoreInfoAside
+        price={data.price}
+        author={data.author}
+        profileImg={data.profileImg}
       />
     </>
   );

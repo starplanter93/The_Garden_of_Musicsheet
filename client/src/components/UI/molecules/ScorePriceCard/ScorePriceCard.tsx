@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, Button, Icon } from '../../atoms';
-import styles from './scorepricecard.module.scss';
+import styles from './scorePriceCard.module.scss';
 import classNames from 'classnames/bind';
 
 interface SongPriceCardProps {

@@ -4,7 +4,8 @@
   width: 20rem;
   height: 10rem;
   border-radius: 1rem;
-  box-shadow: 0 0 1rem $gray;
+  box-shadow: 0 0 1rem $light-gray;
+  border: 1px solid $light-gray;
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
