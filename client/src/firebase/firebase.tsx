@@ -33,6 +33,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+export const auth = getAuth();
+export const provider = new GoogleAuthProvider();
 
 export async function getDocument() {
   const ref = collection(db, 'test');
@@ -57,14 +59,6 @@ export async function getScoresByInstrument(docName: string) {
   }
   return {};
 }
-
-// export async function getMusic(songName: string) {
-//   const ref = doc(db, 'test', songName);
-//   const snapshot = await getDoc(ref);
-//   console.log(snapshot.data());
-//   return snapshot.data();
-// }
-
 export async function getMusicData(songName: string, data: StateType) {
   const name = `${songName}-${data.artist}`;
   const info = doc(db, 'music', name);
@@ -133,6 +127,15 @@ async function postData(songName: string, data: StateType) {
 
   const instRef = doc(db, 'instrument', inst);
   await updateDoc(instRef, { scores: arrayUnion(data.scores[0]) });
+
+  const user = auth.currentUser;
+
+  // if (user) {
+  //   const uid = user.uid;
+  //   const purchasedScore = data.scores[0];
+  //   const userRef = doc(db, 'user', uid);
+  //   await setDoc(userRef, purchasedScore);
+  // }
 }
 
 /** 해당 곡으로 만들어진 문서가 존재한다면 아래 함수가 작동하여 scores 배열을 업데이트 합니다 */
@@ -161,11 +164,18 @@ async function updateData(songName: string, data: StateType) {
 
   const instRef = doc(db, 'instrument', inst);
   await updateDoc(instRef, { scores: arrayUnion(data.scores[0]) });
+
+  const user = auth.currentUser;
+
+  // if (user) {
+  //   const uid = user.uid;
+  //   const purchasedScore = data.scores[0];
+  //   const userRef = doc(db, 'user', uid);
+  //   await updateDoc(userRef, { purchasedList: arrayUnion(purchasedScore) });
+  // }
 }
 
-export const auth = getAuth();
-export const provider = new GoogleAuthProvider();
-
+/** 악보파일 업로드 api 호출 */
 export async function postPDF(file: any) {
   return new Promise<string>((resolve, reject) => {
     const storage = getStorage();
