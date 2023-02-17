@@ -7,7 +7,6 @@ import { MusicData } from '../../../pages/Main/Main';
 
 function MainGrid({ musicData }: { musicData: MusicData }) {
   const cx = classNames.bind(styles);
-  console.log(musicData);
   return (
     <div className={cx('main-content-wrapper')}>
       <div className={cx('main-content-grid')}>
@@ -28,127 +27,6 @@ function MainGrid({ musicData }: { musicData: MusicData }) {
               />
             );
           })}
-        {/* <MainSongSection
-          songTitle={songTitle}
-          singer={singer}
-          albumImg={albumImg}
-          scoreName={scoreName}
-          scoreWriter={scoreWriter}
-          profileImg={profileImg}
-          instrument={instrument}
-          difficulty={difficulty}
-          price={price}
-        />
-        <MainSongSection
-          songTitle={songTitle}
-          singer={singer}
-          albumImg={albumImg}
-          scoreName={scoreName}
-          scoreWriter={scoreWriter}
-          profileImg={profileImg}
-          instrument={instrument}
-          difficulty={difficulty}
-          price={price}
-        />
-        <MainSongSection
-          songTitle={songTitle}
-          singer={singer}
-          albumImg={albumImg}
-          scoreName={scoreName}
-          scoreWriter={scoreWriter}
-          profileImg={profileImg}
-          instrument={instrument}
-          difficulty={difficulty}
-          price={price}
-        />
-        <MainSongSection
-          songTitle={songTitle}
-          singer={singer}
-          albumImg={albumImg}
-          scoreName={scoreName}
-          scoreWriter={scoreWriter}
-          profileImg={profileImg}
-          instrument={instrument}
-          difficulty={difficulty}
-          price={price}
-        />
-        <MainSongSection
-          songTitle={songTitle}
-          singer={singer}
-          albumImg={albumImg}
-          scoreName={scoreName}
-          scoreWriter={scoreWriter}
-          profileImg={profileImg}
-          instrument={instrument}
-          difficulty={difficulty}
-          price={price}
-        />
-        <MainSongSection
-          songTitle={songTitle}
-          singer={singer}
-          albumImg={albumImg}
-          scoreName={scoreName}
-          scoreWriter={scoreWriter}
-          profileImg={profileImg}
-          instrument={instrument}
-          difficulty={difficulty}
-          price={price}
-        />
-        <MainSongSection
-          songTitle={songTitle}
-          singer={singer}
-          albumImg={albumImg}
-          scoreName={scoreName}
-          scoreWriter={scoreWriter}
-          profileImg={profileImg}
-          instrument={instrument}
-          difficulty={difficulty}
-          price={price}
-        />
-        <MainSongSection
-          songTitle={songTitle}
-          singer={singer}
-          albumImg={albumImg}
-          scoreName={scoreName}
-          scoreWriter={scoreWriter}
-          profileImg={profileImg}
-          instrument={instrument}
-          difficulty={difficulty}
-          price={price}
-        />
-        <MainSongSection
-          songTitle={songTitle}
-          singer={singer}
-          albumImg={albumImg}
-          scoreName={scoreName}
-          scoreWriter={scoreWriter}
-          profileImg={profileImg}
-          instrument={instrument}
-          difficulty={difficulty}
-          price={price}
-        />
-        <MainSongSection
-          songTitle={songTitle}
-          singer={singer}
-          albumImg={albumImg}
-          scoreName={scoreName}
-          scoreWriter={scoreWriter}
-          profileImg={profileImg}
-          instrument={instrument}
-          difficulty={difficulty}
-          price={price}
-        />
-        <MainSongSection
-          songTitle={songTitle}
-          singer={singer}
-          albumImg={albumImg}
-          scoreName={scoreName}
-          scoreWriter={scoreWriter}
-          profileImg={profileImg}
-          instrument={instrument}
-          difficulty={difficulty}
-          price={price}
-        /> */}
       </div>
     </div>
   );
