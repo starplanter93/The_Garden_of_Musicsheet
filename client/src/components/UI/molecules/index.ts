@@ -48,8 +48,5 @@ export {
   ScoreInfoCard,
   ScoreInfoExplain,
   ScorePriceCard,
-  ScoreList,
-  EditOrDownButton,
-  Pagination,
   UserCard,
 };
