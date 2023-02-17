@@ -8,7 +8,6 @@ import { RootState } from '../../../../redux/store';
 import { useNavigate } from 'react-router-dom';
 import { setHeader } from '../../../../redux/HeaderSlice';
 import { auth, getMusicData } from '../../../../firebase/firebase';
-import { auth } from '../../../../firebase/firebase';
 import { setUserInfo } from '../../../../redux/PostSlice';
 import { toast } from 'react-toastify';
 
