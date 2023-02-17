@@ -23,6 +23,7 @@ export interface Score {
   createdAt: string;
   author: userinfo;
   authorId: userinfo;
+  author_profile: userinfo;
   instType: instType;
   difficulty: difficulty;
   sheetType: sheetType;
@@ -57,6 +58,7 @@ const initialState: StateType = {
       createdAt: new Date().toISOString(),
       author: '',
       authorId: '',
+      author_profile: '',
       instType: '',
       difficulty: '',
       sheetType: '',
@@ -120,7 +122,8 @@ export const PostSlice = createSlice({
 
     setUserInfo: (state: StateType, action: PayloadAction<userinfo[]>) => {
       (state.scores[0].author = action.payload[0]),
-        (state.scores[0].authorId = action.payload[1]);
+        (state.scores[0].authorId = action.payload[1]),
+        (state.scores[0].author_profile = action.payload[2]);
     },
     setScoreId: (state: StateType, action: PayloadAction<string>) => {
       state.scores[0].scoreId = action.payload;
