@@ -1,1 +1,21 @@
 @import '/src/utils/utils';
+
+.price-card-wrapper {
+  width: 20rem;
+  height: 10rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem $gray;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  > span {
+    padding-left: 0.5rem;
+  }
+
+  button {
+    width: 17.5rem;
+    height: 3rem;
+  }
+}

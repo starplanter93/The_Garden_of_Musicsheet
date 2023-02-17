@@ -12,7 +12,7 @@ function SongPriceCard({ price }: SongPriceCardProps) {
   return (
     <div className={cx('price-card-wrapper')}>
       <Text size="xlg" weight="bold">{`${price}원`}</Text>
-      <Button size="l">
+      <Button size="auto">
         <>
           <Icon icon="MdOutlineShoppingBag" color="white" />
           <Text color="white">장바구니 담기</Text>
