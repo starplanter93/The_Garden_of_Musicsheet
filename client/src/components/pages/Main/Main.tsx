@@ -13,11 +13,11 @@ export type MusicData = {
 
 export interface ScoreInfo {
   difficulty: string;
-  instrument: string;
+  instType: string;
   price: string;
   profileImg: string;
   scoreName: string;
-  scoreWriter: string;
+  author: string;
   scoreId: number | null;
 }
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { MainScoreList, SongTitle } from '../../molecules';
 import styles from './mainsongsection.module.scss';
 import classNames from 'classnames/bind';
@@ -30,6 +29,7 @@ function MainSongSection({
 // price,
 MainSongSectionProps) {
   const cx = classNames.bind(styles);
+
   return (
     <section className={cx('container')}>
       <SongTitle songTitle={songTitle} singer={singer} albumImg={albumImg} />
@@ -42,10 +42,10 @@ MainSongSectionProps) {
                   key={el.scoreId}
                   profileImg={el.profileImg}
                   difficulty={el.difficulty}
-                  instrument={el.instrument}
+                  instrument={el.instType}
                   price={el.price}
+                  scoreWriter={el.author}
                   scoreName={el.scoreName}
-                  scoreWriter={el.scoreWriter}
                 />
               );
             }
