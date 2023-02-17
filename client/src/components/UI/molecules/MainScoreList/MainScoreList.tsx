@@ -1,4 +1,3 @@
-import React from 'react';
 import { ImgLayout, Text } from '../../atoms';
 import styles from './mainscorelist.module.scss';
 import classNames from 'classnames/bind';
@@ -30,7 +29,7 @@ function MainScoreList({
         <Text>{scoreName}</Text>
         <Text color="gray">{`${scoreWriter} / ${instrument} / ${difficulty}`}</Text>
       </a>
-      <Text color="blue">{price}</Text>
+      <Text color="blue">{`${Number(price).toLocaleString()}원`}</Text>
     </div>
   );
 }
