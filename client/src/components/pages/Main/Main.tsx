@@ -18,7 +18,7 @@ export interface ScoreInfo {
   profileImg: string;
   scoreName: string;
   author: string;
-  scoreId: number | null;
+  scoreId: number;
 }
 
 function Main() {

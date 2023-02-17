@@ -46,6 +46,9 @@ MainSongSectionProps) {
                   price={el.price}
                   scoreWriter={el.author}
                   scoreName={el.scoreName}
+                  scoreId={el.scoreId}
+                  songTitle={songTitle}
+                  singer={singer}
                 />
               );
             }
