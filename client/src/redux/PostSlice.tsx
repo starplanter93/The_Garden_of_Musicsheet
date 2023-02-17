@@ -30,6 +30,7 @@ export interface Score {
   price: string;
   youtubeURL?: string;
   detail: string;
+  scoreName: string;
   scoreId: string;
   songName: string;
   artist: string;
@@ -65,6 +66,7 @@ const initialState: StateType = {
       price: '',
       youtubeURL: '',
       detail: '',
+      scoreName: '',
       scoreId: '',
       songName: '',
       artist: '',
@@ -94,6 +96,9 @@ export const PostSlice = createSlice({
         scores: [{ ...state.scores[0], songName: action.payload }],
         songName: action.payload,
       };
+    },
+    setScoreName: (state: StateType, action: PayloadAction<string>) => {
+      state.scores[0].scoreName = action.payload;
     },
     setArtist: (state: StateType, action: PayloadAction<string>) => {
       return {
@@ -139,6 +144,7 @@ export const PostSlice = createSlice({
 
 // 액션을 export 해준다.
 export const {
+  setScoreName,
   setDownloadURL,
   initializeState,
   setAlbumImg,
