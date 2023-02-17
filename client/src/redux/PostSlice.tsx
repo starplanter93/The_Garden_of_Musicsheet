@@ -23,16 +23,19 @@ export interface Score {
   createdAt: string;
   author: userinfo;
   authorId: userinfo;
+  author_profile: userinfo;
   instType: instType;
   difficulty: difficulty;
   sheetType: sheetType;
   price: string;
   youtubeURL?: string;
   detail: string;
+  scoreName: string;
   scoreId: string;
   songName: string;
   artist: string;
   albumImg: string;
+  downloadURL: string;
 }
 
 export interface StateType {
@@ -40,6 +43,7 @@ export interface StateType {
   albumImg: string;
   songName: string;
   artist: string;
+  isDeleted: boolean;
   scores: Score[];
 }
 
@@ -49,21 +53,25 @@ const initialState: StateType = {
   albumImg: '',
   songName: '',
   artist: '',
+  isDeleted: false,
   scores: [
     {
       createdAt: new Date().toISOString(),
       author: '',
       authorId: '',
+      author_profile: '',
       instType: '',
       difficulty: '',
       sheetType: '',
       price: '',
       youtubeURL: '',
       detail: '',
+      scoreName: '',
       scoreId: '',
       songName: '',
       artist: '',
       albumImg: '',
+      downloadURL: '',
     },
   ],
 };
@@ -88,6 +96,9 @@ export const PostSlice = createSlice({
         scores: [{ ...state.scores[0], songName: action.payload }],
         songName: action.payload,
       };
+    },
+    setScoreName: (state: StateType, action: PayloadAction<string>) => {
+      state.scores[0].scoreName = action.payload;
     },
     setArtist: (state: StateType, action: PayloadAction<string>) => {
       return {
@@ -116,16 +127,26 @@ export const PostSlice = createSlice({
 
     setUserInfo: (state: StateType, action: PayloadAction<userinfo[]>) => {
       (state.scores[0].author = action.payload[0]),
-        (state.scores[0].authorId = action.payload[1]);
+        (state.scores[0].authorId = action.payload[1]),
+        (state.scores[0].author_profile = action.payload[2]);
     },
     setScoreId: (state: StateType, action: PayloadAction<string>) => {
       state.scores[0].scoreId = action.payload;
+    },
+    setDownloadURL: (state: StateType, action: PayloadAction<string>) => {
+      state.scores[0].downloadURL = action.payload;
+    },
+    initializeState: (state: StateType) => {
+      return (state = initialState);
     },
   },
 });
 
 // 액션을 export 해준다.
 export const {
+  setScoreName,
+  setDownloadURL,
+  initializeState,
   setAlbumImg,
   setSongName,
   setArtist,

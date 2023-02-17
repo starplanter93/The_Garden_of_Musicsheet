@@ -53,30 +53,6 @@ MainSongSectionProps) {
               );
             }
           })}
-        {/* <MainScoreList
-          scoreName={scoreName}
-          scoreWriter={scoreWriter}
-          profileImg={profileImg}
-          instrument={instrument}
-          difficulty={difficulty}
-          price={price}
-        />
-        <MainScoreList
-          scoreName={scoreName}
-          scoreWriter={scoreWriter}
-          profileImg={profileImg}
-          instrument={instrument}
-          difficulty={difficulty}
-          price={price}
-        />
-        <MainScoreList
-          scoreName={scoreName}
-          scoreWriter={scoreWriter}
-          profileImg={profileImg}
-          instrument={instrument}
-          difficulty={difficulty}
-          price={price}
-        /> */}
       </div>
     </section>
   );

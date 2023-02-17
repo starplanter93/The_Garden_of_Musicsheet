@@ -3,12 +3,10 @@ import { Input, Text, Icon, ImgLayout, Button } from '../../atoms';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './postInput.module.scss';
-
 import {
   getSearchData,
   refreshToken,
 } from '../../../../utils/ApiCollection/SearchData';
-
 import { useDispatch } from 'react-redux';
 import {
   setPrice,
@@ -16,11 +14,12 @@ import {
   setArtist,
   setSongName,
   setAlbumImg,
+  setScoreName,
 } from '../../../../redux/PostSlice';
 
 interface PostInputProps {
   text: string;
-  placeholder: string;
+  placeholder?: string;
   type: 'input' | 'dropdown';
 }
 
@@ -38,6 +37,9 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
   const [searchData, setSearchData] = useState([]);
   const [selectedData, setSelectedData] = useState<SelectedDataProps>();
 
+  if (text === '악보 제목') {
+    dispatch(setScoreName(userInput));
+  }
   useEffect(() => {
     if (userInput.length > 0) {
       // if (text === '곡 제목') dispatch(setSongName(userInput));
