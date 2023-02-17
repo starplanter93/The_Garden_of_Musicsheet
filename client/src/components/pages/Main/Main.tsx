@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MainGrid } from '../../UI/organisms';
 import { Carousel } from '../../UI/organisms';
 import { getMusics } from '../../../firebase/firebase';
 
 export type MusicData = {
-  singer: string;
+  artist: string;
   scores: ScoreInfo[];
   albumImg: string;
-  songTitle: string;
+  songName: string;
   songId: number | null;
 }[];
 
@@ -23,7 +23,7 @@ export interface ScoreInfo {
 
 function Main() {
   const [musicArr, setMusicArr] = useState<MusicData>([
-    { singer: '', scores: [], albumImg: '', songTitle: '', songId: null },
+    { artist: '', scores: [], albumImg: '', songName: '', songId: null },
   ]);
   useEffect(() => {
     getMusics().then((data) => {
