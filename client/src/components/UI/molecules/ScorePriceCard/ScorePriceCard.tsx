@@ -3,11 +3,11 @@ import { Text, Button, Icon } from '../../atoms';
 import styles from './scorePriceCard.module.scss';
 import classNames from 'classnames/bind';
 
-interface SongPriceCardProps {
+interface ScorePriceCardProps {
   price: string;
 }
 
-function SongPriceCard({ price }: SongPriceCardProps) {
+function ScorePriceCard({ price }: ScorePriceCardProps) {
   const cx = classNames.bind(styles);
   return (
     <div className={cx('price-card')}>
@@ -22,4 +22,4 @@ function SongPriceCard({ price }: SongPriceCardProps) {
   );
 }
 
-export default SongPriceCard;
+export default ScorePriceCard;
