@@ -10,6 +10,7 @@ import { setHeader } from '../../../../redux/HeaderSlice';
 import { auth, getMusicData } from '../../../../firebase/firebase';
 import { setUserInfo, initializeState } from '../../../../redux/PostSlice';
 import { toast } from 'react-toastify';
+import React from 'react';
 
 const Header = () => {
   const cx = classNames.bind(styles);
@@ -105,4 +106,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default React.memo(Header);
