@@ -19,7 +19,6 @@ const ScoreList = ({ score, buttonEvent = 'edit' }: ScoreListProps) => {
   return (
     <div className={cx('wrapper')}>
       <Link to={`/${songName}-${artist}/${scoreId}`}>
-
         <div className={cx('detail')}>
           <ul className={cx('score-song')}>
             <li>
