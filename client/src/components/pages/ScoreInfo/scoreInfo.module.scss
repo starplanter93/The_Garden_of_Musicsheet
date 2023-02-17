@@ -1,0 +1,29 @@
+@import '/src/utils/utils';
+
+.scoreinfo {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: auto;
+  position: relative;
+
+  > div:first-child {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    justify-self: center;
+    margin-top: 2rem;
+  }
+
+  > aside:nth-child(2) {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    position: sticky;
+    top: 10%;
+    height: #{330 / $font-size}rem;
+    margin: 0 1rem;
+  }
+  > aside:nth-child(3) {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    margin: 0 0.5rem;
+  }
+}

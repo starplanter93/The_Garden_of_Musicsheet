@@ -10,7 +10,7 @@ interface SongPriceCardProps {
 function SongPriceCard({ price }: SongPriceCardProps) {
   const cx = classNames.bind(styles);
   return (
-    <div className={cx('price-card-wrapper')}>
+    <div className={cx('price-card')}>
       <Text size="xlg" weight="bold">{`${price}원`}</Text>
       <Button size="auto">
         <>

@@ -12,7 +12,7 @@ interface ScoreInfoHeaderProps {
 function ScoreInfoHeader({ scoreName, singer, date }: ScoreInfoHeaderProps) {
   const cx = classNames.bind(styles);
   return (
-    <div className={cx('songinfo-header-wrapper')}>
+    <div className={cx('songinfo-header')}>
       <div className={cx('text-wrapper')}>
         <Text size="txlg" weight="semibold">
           {scoreName}

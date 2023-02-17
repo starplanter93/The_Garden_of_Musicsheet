@@ -10,7 +10,7 @@ interface ScoreInfoExplainProps {
 function ScoreInfoExplain({ scoreExplain }: ScoreInfoExplainProps) {
   const cx = classNames.bind(styles);
   return (
-    <div className={cx('score-explain-wrapper')}>
+    <div className={cx('score-explain')}>
       <Text>{scoreExplain}</Text>
     </div>
   );

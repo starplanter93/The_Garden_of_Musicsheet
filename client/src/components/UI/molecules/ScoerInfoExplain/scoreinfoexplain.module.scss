@@ -1,3 +1,6 @@
-.score-explain-wrapper {
+@import '/src/utils/utils';
+
+.score-explain {
   padding: 1rem;
+  max-width: #{700 / $font-size}rem;
 }

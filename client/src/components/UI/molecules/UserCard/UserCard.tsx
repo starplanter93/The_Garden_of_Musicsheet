@@ -11,7 +11,7 @@ interface UserCardProps {
 function UserCard({ author, profileImg }: UserCardProps) {
   const cx = classNames.bind(styles);
   return (
-    <div className={cx('user-card-wrapper')}>
+    <div className={cx('user-card')}>
       <ImgLayout alt="profile-img" shape="round" size="m" src={profileImg} />
       <Text size="lg" weight="bold">
         {author}
