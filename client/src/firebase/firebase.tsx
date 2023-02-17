@@ -87,9 +87,6 @@ export async function getMusicData(songName: string, data: StateType) {
     console.log('검증 완료');
     data.scores = { ...data.scores };
     updateData(name, data);
-  } else if (savedData && savedData.artist !== data.artist) {
-    // post new song with new ID
-    console.log('너 이름만 같구나?');
   } else if (!infoSnapshot.exists()) {
     console.log('너 처음이구나?');
     data = { ...data };
@@ -97,6 +94,8 @@ export async function getMusicData(songName: string, data: StateType) {
     data.songId = list.length.toString();
     postData(name, data);
   }
+
+  await savingUserPost(data);
 
   return infoSnapshot.data();
 }
@@ -127,15 +126,6 @@ async function postData(songName: string, data: StateType) {
 
   const instRef = doc(db, 'instrument', inst);
   await updateDoc(instRef, { scores: arrayUnion(data.scores[0]) });
-
-  const user = auth.currentUser;
-
-  // if (user) {
-  //   const uid = user.uid;
-  //   const purchasedScore = data.scores[0];
-  //   const userRef = doc(db, 'user', uid);
-  //   await setDoc(userRef, purchasedScore);
-  // }
 }
 
 /** 해당 곡으로 만들어진 문서가 존재한다면 아래 함수가 작동하여 scores 배열을 업데이트 합니다 */
@@ -213,4 +203,19 @@ export async function postPDF(file: any) {
       }
     );
   });
+}
+
+async function savingUserPost(data: StateType) {
+  const user = auth.currentUser;
+
+  if (user) {
+    const uid = user.uid;
+    const userRef = doc(db, 'user', uid);
+    const snapshot = await getDoc(userRef);
+    if (snapshot.exists()) {
+      await updateDoc(userRef, { posts: arrayUnion(data.scores[0]) });
+    } else {
+      await setDoc(userRef, { posts: data.scores });
+    }
+  }
 }

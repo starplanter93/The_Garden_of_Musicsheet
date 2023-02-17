@@ -10,6 +10,7 @@ import { setHeader } from '../../../../redux/HeaderSlice';
 import { auth, getMusicData } from '../../../../firebase/firebase';
 import { setUserInfo, initializeState } from '../../../../redux/PostSlice';
 import { toast } from 'react-toastify';
+import React from 'react';
 
 const Header = () => {
   const cx = classNames.bind(styles);
@@ -20,7 +21,7 @@ const Header = () => {
   );
   const data = useSelector((state: RootState) => state.postInfo);
   const pdf = useSelector((state: RootState) => state.pdfFile);
-  console.log(data);
+
   const handleIsPost = () => {
     dispatch(setHeader(false));
     dispatch(initializeState());
@@ -28,7 +29,11 @@ const Header = () => {
   };
 
   if (auth.currentUser) {
-    const user = [auth.currentUser.displayName, auth.currentUser.uid];
+    const user = [
+      auth.currentUser.displayName,
+      auth.currentUser.uid,
+      auth.currentUser.photoURL,
+    ];
     dispatch(setUserInfo(user));
   }
   const validateInputs = () => {
@@ -52,10 +57,12 @@ const Header = () => {
   const handleUpload = async () => {
     if (!validateInputs()) {
       toast.error('모든 필드를 입력해주세요.');
+    } else {
+      await getMusicData(data.songName, data).then(() => navigate('/'));
+      dispatch(setHeader(false));
+      dispatch(initializeState());
+      toast.success('악보 등록 성공!');
     }
-    await getMusicData(data.songName, data).then(() => navigate('/'));
-    dispatch(setHeader(false));
-    toast.success('악보 등록 성공!');
   };
 
   if (headerState) {
@@ -99,4 +106,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default React.memo(Header);
