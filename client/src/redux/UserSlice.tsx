@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction, Reducer } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 import { PURGE } from 'redux-persist';
 
 interface StateType {
@@ -31,7 +30,6 @@ export const userSlice = createSlice({
       initialState;
       localStorage.removeItem('authorization');
       localStorage.removeItem('refresh');
-      toast.success('다음에 또 만나요👋');
     });
   },
 });

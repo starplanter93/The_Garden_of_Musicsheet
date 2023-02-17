@@ -1,0 +1,63 @@
+@import '/src/utils/utils';
+
+.wrapper {
+    width: 100%;
+    max-width: #{1220/$font-size}rem;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+        width: 100%;
+
+        .detail {
+            flex: 1;
+            display: flex;
+            align-items: center;
+
+            .score-song {
+                flex-basis: 40%;
+                padding-left: 8px;
+            }
+
+            .score-info {
+                flex-basis: 60%;
+                display: flex;
+                justify-content: space-between;
+
+                li {
+                    flex-basis: 30%;
+
+                    &:first-child {
+                        flex-basis: 40%;
+                    }
+                }
+            }
+
+            li {
+                line-height: 1.5;
+                padding-right: 1rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                word-break: break-all;
+            }
+        }
+
+    }
+
+    .price {
+        min-width: #{85/$font-size}rem;
+        text-align: center;
+    }
+
+    &:hover {
+        background-color: $gray-white;
+        transition: all .1s ease-in;
+    }
+}
