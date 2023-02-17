@@ -1,7 +1,7 @@
-import React from 'react';
 import styles from './songtitle.module.scss';
-import { ImgLayout, Text, Button } from '../../atoms';
+import { ImgLayout, Text, Button, Icon } from '../../atoms';
 import classnames from 'classnames/bind';
+import { useNavigate } from 'react-router-dom';
 
 interface SongTitleProps {
   albumImg?: string;
@@ -11,6 +11,8 @@ interface SongTitleProps {
 
 function SongTitle({ albumImg, songTitle, singer }: SongTitleProps) {
   const cx = classnames.bind(styles);
+  const navigate = useNavigate();
+
   return (
     <div className={cx('songtitle-wrapper')}>
       <a className={cx('albumimg-wrapper')}>
@@ -24,10 +26,17 @@ function SongTitle({ albumImg, songTitle, singer }: SongTitleProps) {
           {singer}
         </Text>
       </a>
-      <Button theme="tertiary" size="auto">
-        <Text size="s" weight="regular" color="gray">
-          더보기 &gt;
-        </Text>
+      <Button
+        theme="tertiary"
+        size="auto"
+        onClick={() => navigate(`/music/${songTitle}-${singer}`)}
+      >
+        <>
+          <Text size="s" weight="regular" color="gray">
+            더보기
+          </Text>
+          <Icon icon="MdKeyboardArrowRight" size="xs" color="gray" />
+        </>
       </Button>
     </div>
   );
