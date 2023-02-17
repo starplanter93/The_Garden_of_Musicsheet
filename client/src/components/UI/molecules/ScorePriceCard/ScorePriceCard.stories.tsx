@@ -10,7 +10,7 @@ const Template: ComponentStory<typeof ScorePriceCard> = (args) => (
   <ScorePriceCard {...args} />
 );
 
-export const ScorePreviewOptions = Template.bind({});
-ScorePreviewOptions.args = {
+export const ScorePriceCardOptions = Template.bind({});
+ScorePriceCardOptions.args = {
   price: '3000',
 };
