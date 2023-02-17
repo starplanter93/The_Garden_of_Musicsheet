@@ -33,7 +33,6 @@ const UserAuth = ({ type }: UserAuthProps) => {
       await handleUserLogin(userLoginData.email, userLoginData.password).then(
         (response) => {
           if (typeof response !== 'undefined') {
-            console.log(response);
             const { displayName, email, phoneNumber, photoURL } = response;
             dispatch(userInfo({ displayName, email, phoneNumber, photoURL }));
           }
@@ -45,13 +44,23 @@ const UserAuth = ({ type }: UserAuthProps) => {
         userRegData.email,
         userRegData.password,
         userRegData.nickname
-      );
+      ).then((response) => {
+        if (typeof response !== 'undefined') {
+          const { displayName, email, phoneNumber, photoURL } = response;
+          dispatch(userInfo({ displayName, email, phoneNumber, photoURL }));
+        }
+      });
       navigate('/');
     } else null;
   };
 
   const handleOauth = async () => {
-    await handleGoogleLogin();
+    await handleGoogleLogin().then((response) => {
+      if (typeof response !== 'undefined') {
+        const { displayName, email, phoneNumber, photoURL } = response;
+        dispatch(userInfo({ displayName, email, phoneNumber, photoURL }));
+      }
+    });
     navigate('/');
   };
 

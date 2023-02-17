@@ -8,7 +8,7 @@ import MainGrid from './MainGrid/MainGrid';
 import Carousel from './Carousel/Carousel';
 import PostButtons from './MusicPostInfo/Buttons/PostButtons';
 import MusicPostInfo from './MusicPostInfo/MusicPostInfo';
-
+import CategoryDetail from './CategoryDetail/CategoryDetail';
 export {
   MusicPostInfo,
   PostButtons,
@@ -20,4 +20,5 @@ export {
   MainSongSection,
   MainGrid,
   Carousel,
+  CategoryDetail,
 };

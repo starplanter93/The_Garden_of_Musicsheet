@@ -17,7 +17,6 @@ export const handleUserLogin = async (email: any, password: any) => {
       localStorage.setItem('authorization', user.uid);
       localStorage.setItem('refresh', user.refreshToken);
       response = user;
-      console.log(user);
       // ...
     })
 
@@ -35,35 +34,36 @@ export const handleRegisterUser = async (
   password: any,
   nickname: any
 ) => {
-  let response;
   await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      localStorage.setItem('authorization', user.uid);
-      localStorage.setItem('refresh', user.refreshToken);
+
       updateProfile(user, {
         displayName: nickname,
         photoURL: Avatar(),
       });
-      // ...
     })
-
     .catch((error) => {
-      response = error;
-      console.log(response.code);
+      console.log(error.code);
       // if 400 => switch and show user that the ac already exists
     });
+
+  return handleUserLogin(email, password);
 };
 
 export const handleGoogleLogin = async () => {
+  let response;
   await signInWithPopup(auth, provider)
     .then((data) => {
       const credential = GoogleAuthProvider.credentialFromResult(data);
       const token = credential?.accessToken;
       const user = data.user;
+      response = user;
       if (token) localStorage.setItem('authorization', token);
       if (user.refreshToken) localStorage.setItem('refresh', user.refreshToken);
     })
     .catch((err) => console.log(err));
+
+  return response;
 };
