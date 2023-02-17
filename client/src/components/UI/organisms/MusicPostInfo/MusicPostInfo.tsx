@@ -21,12 +21,7 @@ const MusicPostInfo = ({ type }: MusicPostInfoProps) => {
           type="dropdown"
           placeholder="곡 제목을 입력해주세요"
         />
-        <PostInput
-          type="input"
-          text="곡 제목"
-          placeholder="예시) 사건의 지평선"
-        />
-        <PostInput type="input" text="원곡자" placeholder="예시) 윤하" />
+        <PostInput type="input" text="악보 제목" />
       </div>
     );
   } else if (type === '판매 상세 정보') {

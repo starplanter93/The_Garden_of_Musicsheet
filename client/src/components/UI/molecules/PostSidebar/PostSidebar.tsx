@@ -27,7 +27,6 @@ const PostSidebar = () => {
       } else {
         alert('Only .pdf files are supported.');
       }
-
       dispatch(setFile(file));
     }
   };

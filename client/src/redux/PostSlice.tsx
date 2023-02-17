@@ -23,12 +23,14 @@ export interface Score {
   createdAt: string;
   author: userinfo;
   authorId: userinfo;
+  author_profile: userinfo;
   instType: instType;
   difficulty: difficulty;
   sheetType: sheetType;
   price: string;
   youtubeURL?: string;
   detail: string;
+  scoreName: string;
   scoreId: string;
   songName: string;
   artist: string;
@@ -57,12 +59,14 @@ const initialState: StateType = {
       createdAt: new Date().toISOString(),
       author: '',
       authorId: '',
+      author_profile: '',
       instType: '',
       difficulty: '',
       sheetType: '',
       price: '',
       youtubeURL: '',
       detail: '',
+      scoreName: '',
       scoreId: '',
       songName: '',
       artist: '',
@@ -93,6 +97,9 @@ export const PostSlice = createSlice({
         songName: action.payload,
       };
     },
+    setScoreName: (state: StateType, action: PayloadAction<string>) => {
+      state.scores[0].scoreName = action.payload;
+    },
     setArtist: (state: StateType, action: PayloadAction<string>) => {
       return {
         ...state,
@@ -120,7 +127,8 @@ export const PostSlice = createSlice({
 
     setUserInfo: (state: StateType, action: PayloadAction<userinfo[]>) => {
       (state.scores[0].author = action.payload[0]),
-        (state.scores[0].authorId = action.payload[1]);
+        (state.scores[0].authorId = action.payload[1]),
+        (state.scores[0].author_profile = action.payload[2]);
     },
     setScoreId: (state: StateType, action: PayloadAction<string>) => {
       state.scores[0].scoreId = action.payload;
@@ -136,6 +144,7 @@ export const PostSlice = createSlice({
 
 // 액션을 export 해준다.
 export const {
+  setScoreName,
   setDownloadURL,
   initializeState,
   setAlbumImg,
