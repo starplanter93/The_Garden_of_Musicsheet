@@ -8,15 +8,9 @@ const InstrumentLists = () => {
 
   return (
     <ul className={cx('instrument-lists')}>
-      {/* Todo: 악보 개수 데이터 연결 */}
       {instrumentDummy.map((el, idx) => (
         <li className={cx('instrument-list')} key={idx}>
-          <InstrumentCard
-            type={el.type}
-            name={el.name}
-            src={el.thumbnail}
-            sheets="12"
-          />
+          <InstrumentCard type={el.type} name={el.name} src={el.thumbnail} />
         </li>
       ))}
     </ul>
