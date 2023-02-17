@@ -20,6 +20,7 @@ import Pagination from './Pagination/Pagination';
 import DropDown from './DropDownSelect/DropDown';
 import TextEditor from './TextEditor/TextEditor';
 import PostSidebar from '../molecules/PostSidebar/PostSidebar';
+import UserCard from './UserCard/UserCard';
 
 export {
   PostSidebar,
@@ -44,4 +45,5 @@ export {
   ScoreList,
   EditOrDownButton,
   Pagination,
+  UserCard,
 };

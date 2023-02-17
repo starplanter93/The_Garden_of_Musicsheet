@@ -1,0 +1,14 @@
+@import '/src/utils/utils';
+
+.user-card-wrapper {
+  width: 20rem;
+  height: 8rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem $gray;
+  padding: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  > div {
+    margin-right: 1rem;
+  }
+}
