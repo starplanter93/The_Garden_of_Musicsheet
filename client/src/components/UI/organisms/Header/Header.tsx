@@ -8,7 +8,7 @@ import { RootState } from '../../../../redux/store';
 import { useNavigate } from 'react-router-dom';
 import { setHeader } from '../../../../redux/HeaderSlice';
 import { auth, getMusicData } from '../../../../firebase/firebase';
-import { setUserInfo } from '../../../../redux/PostSlice';
+import { setUserInfo, initializeState } from '../../../../redux/PostSlice';
 import { toast } from 'react-toastify';
 
 const Header = () => {
@@ -18,10 +18,12 @@ const Header = () => {
   const headerState = useSelector(
     (state: RootState) => state.postHeader.isPost
   );
-  const data = useSelector((state: RootState) => state.PostInfo);
-
+  const data = useSelector((state: RootState) => state.postInfo);
+  const pdf = useSelector((state: RootState) => state.pdfFile);
+  console.log(data);
   const handleIsPost = () => {
     dispatch(setHeader(false));
+    dispatch(initializeState());
     navigate(-1);
   };
 
@@ -29,8 +31,28 @@ const Header = () => {
     const user = [auth.currentUser.displayName, auth.currentUser.uid];
     dispatch(setUserInfo(user));
   }
+  const validateInputs = () => {
+    const { songName, artist, albumImg, scores } = data;
+    if (
+      !songName ||
+      !artist ||
+      !albumImg ||
+      !scores[0].instType ||
+      !scores[0].difficulty ||
+      !scores[0].sheetType ||
+      !scores[0].detail ||
+      !scores[0].price ||
+      !pdf
+    ) {
+      return false;
+    }
+    return true;
+  };
 
   const handleUpload = async () => {
+    if (!validateInputs()) {
+      toast.error('모든 필드를 입력해주세요.');
+    }
     await getMusicData(data.songName, data).then(() => navigate('/'));
     dispatch(setHeader(false));
     toast.success('악보 등록 성공!');

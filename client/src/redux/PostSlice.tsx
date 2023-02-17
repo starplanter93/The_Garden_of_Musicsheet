@@ -33,6 +33,7 @@ export interface Score {
   songName: string;
   artist: string;
   albumImg: string;
+  downloadURL: string;
 }
 
 export interface StateType {
@@ -40,6 +41,7 @@ export interface StateType {
   albumImg: string;
   songName: string;
   artist: string;
+  isDeleted: boolean;
   scores: Score[];
 }
 
@@ -49,6 +51,7 @@ const initialState: StateType = {
   albumImg: '',
   songName: '',
   artist: '',
+  isDeleted: false,
   scores: [
     {
       createdAt: new Date().toISOString(),
@@ -64,6 +67,7 @@ const initialState: StateType = {
       songName: '',
       artist: '',
       albumImg: '',
+      downloadURL: '',
     },
   ],
 };
@@ -121,11 +125,19 @@ export const PostSlice = createSlice({
     setScoreId: (state: StateType, action: PayloadAction<string>) => {
       state.scores[0].scoreId = action.payload;
     },
+    setDownloadURL: (state: StateType, action: PayloadAction<string>) => {
+      state.scores[0].downloadURL = action.payload;
+    },
+    initializeState: (state: StateType) => {
+      return (state = initialState);
+    },
   },
 });
 
 // 액션을 export 해준다.
 export const {
+  setDownloadURL,
+  initializeState,
   setAlbumImg,
   setSongName,
   setArtist,

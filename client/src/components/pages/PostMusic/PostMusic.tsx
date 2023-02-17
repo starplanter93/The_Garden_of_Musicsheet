@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 import styles from './PostMusic.module.scss';
-import {
-  DropDown,
-  PostInput,
-  TextEditor,
-  PostSidebar,
-} from '../../UI/molecules';
+import { DropDown, TextEditor, PostSidebar } from '../../UI/molecules';
 import { PostButtons, MusicPostInfo } from '../../UI/organisms';
-
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
+import { auth } from '../../../firebase/firebase';
+import { useNavigate } from 'react-router-dom';
 
 const PostMusic = () => {
   const cx = classNames.bind(styles);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth.currentUser) {
+      navigate('/auth');
+    }
+  }, []);
 
   return (
     <div className={cx('wrapper')}>
