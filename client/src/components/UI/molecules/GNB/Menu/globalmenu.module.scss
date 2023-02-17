@@ -15,13 +15,9 @@
             }
         }
 
-        &.active {
-            span {
-                color: $black;
-                svg {
-                    fill: $black;
-                }
-            }
+        &:hover {
+            transform: scale(1.03);
+            transition: all .1s ease-in;
         }
     }
 }

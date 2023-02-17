@@ -1,26 +1,17 @@
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ImgLayout, Text } from '../../atoms';
 import styles from './instrumentCard.module.scss';
 
 interface InstrumentCardProps {
-  src: string;
   type: string;
+  name: string;
+  src: string;
   sheets: string;
 }
 
-const InstrumentCard = ({ src, type, sheets }: InstrumentCardProps) => {
+const InstrumentCard = ({ type, name, src, sheets }: InstrumentCardProps) => {
   const cx = classNames.bind(styles);
-  const [instrumentName, setInstrumentName] = useState('');
-
-  useEffect(() => {
-    if (type === 'piano') setInstrumentName('피아노');
-    else if (type === 'electric') setInstrumentName('일렉 기타');
-    else if (type === 'acoustic') setInstrumentName('어쿠스틱 기타');
-    else if (type === 'bass') setInstrumentName('베이스');
-    else if (type === 'drum') setInstrumentName('드럼');
-  }, [instrumentName]);
 
   return (
     <Link to={`/instrument/${type}`}>
@@ -34,7 +25,7 @@ const InstrumentCard = ({ src, type, sheets }: InstrumentCardProps) => {
           />
         </li>
         <li className={cx('instrument-type')}>
-          <Text size="lg">{instrumentName}</Text>
+          <Text size="lg">{name}</Text>
         </li>
         <li className={cx('instrument-sheet')}>
           <Text size="m" color="gray" weight="medium">

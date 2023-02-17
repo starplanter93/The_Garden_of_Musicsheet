@@ -14,6 +14,9 @@ import ScorePreview from './ScorePreview/ScorePreview';
 import ScoreInfoCard from './ScoreInfoCard/ScoreInfoCard';
 import ScoreInfoExplain from './ScoerInfoExplain/ScoreInfoExplain';
 import ScorePriceCard from './ScorePriceCard/ScorePriceCard';
+import ScoreList from './ScoreList/ScoreList';
+import EditOrDownButton from './EditOrDownButton/EditOrDownButton';
+import Pagination from './Pagination/Pagination';
 import DropDown from './DropDownSelect/DropDown';
 import TextEditor from './TextEditor/TextEditor';
 import PostSidebar from '../molecules/PostSidebar/PostSidebar';
@@ -38,4 +41,7 @@ export {
   ScoreInfoCard,
   ScoreInfoExplain,
   ScorePriceCard,
+  ScoreList,
+  EditOrDownButton,
+  Pagination,
 };
