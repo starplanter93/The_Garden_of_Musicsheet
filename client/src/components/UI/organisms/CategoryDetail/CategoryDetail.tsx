@@ -4,6 +4,7 @@ import { CategoryCover, Pagination, ScoreList, TabMenu } from '../../molecules';
 import { Text } from '../../atoms';
 import { useEffect, useState } from 'react';
 import { DocumentData } from 'firebase/firestore/lite';
+import { v4 as uuid } from 'uuid';
 
 interface CategoryDetailProps {
   category: string;
@@ -52,8 +53,8 @@ const CategoryDetail = ({
           <Text size="xlg">악보</Text>
         </h2>
         <div className={cx('score-lists')}>
-          {scores?.map((score: DocumentData, idx: number) => (
-            <ScoreList score={score} key={idx} />
+          {scores?.map((score: DocumentData) => (
+            <ScoreList score={score} key={uuid()} />
           ))}
         </div>
         <Pagination
