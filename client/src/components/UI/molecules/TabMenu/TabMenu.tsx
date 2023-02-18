@@ -6,15 +6,21 @@ import { Dispatch, SetStateAction, useState } from 'react';
 interface TabMenuProps {
   tabGroupArr: string[];
   setClickedTab: Dispatch<SetStateAction<string>>;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
 }
 
-const TabMenu = ({ tabGroupArr, setClickedTab }: TabMenuProps) => {
+const TabMenu = ({
+  tabGroupArr,
+  setClickedTab,
+  setCurrentPage,
+}: TabMenuProps) => {
   const cx = classNames.bind(styles);
   const [currentTab, setCurrentTab] = useState(0);
 
   const handleClick = (tab: string, idx: number) => {
     setCurrentTab(idx);
     setClickedTab(tab);
+    setCurrentPage(1);
   };
 
   return (

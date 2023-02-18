@@ -56,7 +56,11 @@ const CategoryDetail = ({
         />
       </div>
       {category === '곡' && (
-        <TabMenu setClickedTab={setClickedTab} tabGroupArr={tabGroupArr} />
+        <TabMenu
+          setClickedTab={setClickedTab}
+          tabGroupArr={tabGroupArr}
+          setCurrentPage={setCurrentPage}
+        />
       )}
       <section className={cx('container')}>
         <h2>
