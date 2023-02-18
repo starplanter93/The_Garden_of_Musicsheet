@@ -21,7 +21,7 @@ const Pagination = ({
   setCurrentPage,
 }: PaginationProps) => {
   const cx = classNames.bind(styles);
-  const listPerpage = 1;
+  const listPerpage = 5;
   const totalPages = Math.ceil(totalLists / listPerpage);
   let totalPageArr = [1];
   if (totalPages > 1) {

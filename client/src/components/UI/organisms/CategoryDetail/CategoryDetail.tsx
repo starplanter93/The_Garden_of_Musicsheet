@@ -29,13 +29,19 @@ const CategoryDetail = ({
     let currentData: DocumentData;
     if (clickedTab === '전체') {
       setTotalLists(scoresByCategory?.length);
-      currentData = scoresByCategory?.slice(currentPage - 1, currentPage + 0);
+      currentData = scoresByCategory?.slice(
+        (currentPage - 1) * 5,
+        5 + (currentPage - 1) * 5
+      );
     } else {
       const filteredData: DocumentData = scoresByCategory?.filter(
         (el: DocumentData) => el.instType === clickedTab
       );
       setTotalLists(filteredData.length);
-      currentData = filteredData.slice(currentPage - 1, currentPage + 0);
+      currentData = filteredData.slice(
+        (currentPage - 1) * 5,
+        5 + (currentPage - 1) * 5
+      );
     }
     setScores(currentData);
   }, [currentPage, scoresByCategory, clickedTab]);
