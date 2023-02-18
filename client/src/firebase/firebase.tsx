@@ -20,7 +20,7 @@ import {
   arrayUnion,
 } from 'firebase/firestore/lite';
 import { StateType } from '../redux/PostSlice';
-import { ScoreInfo } from '../components/pages/Main/Main';
+import { ScoreInfoType } from '../components/pages/Main/Main';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAZ4hRKbN3-Hq3w2v07pS-4KBikVP-4Wi0',
@@ -54,13 +54,11 @@ export async function getMusics() {
 export async function getScoreByMusic(docName: string, scoreId: string) {
   const ref = doc(db, 'music', docName);
   const snapshot = await getDoc(ref);
-
   if (snapshot.exists()) {
-    console.log(
-      snapshot.data().scores.filter((score: ScoreInfo) => {
-        return score.scoreId === scoreId;
-      })
-    );
+    const scoreData = snapshot.data().scores.filter((score: ScoreInfoType) => {
+      return score.scoreId === scoreId;
+    });
+    return scoreData;
   }
 }
 
