@@ -1,7 +1,7 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { albumImgs } from '../../../../assets/carouselImg';
-import { Text, Button } from '../../atoms';
+import { Text, Button, Icon } from '../../atoms';
 
 // Import Swiper styles
 import 'swiper/scss';
@@ -11,8 +11,11 @@ import './carousel.scss';
 
 // import required modules
 import { Pagination, Navigation } from 'swiper';
+import { useNavigate } from 'react-router-dom';
 
 export default function Carousel() {
+  const navigate = useNavigate();
+
   return (
     <>
       <Swiper
@@ -35,8 +38,15 @@ export default function Carousel() {
               <Text size="txlg" weight="bold" color="white">
                 Ditto
               </Text>
-              <Button theme="tertiary" size="auto">
-                <Text color="white">{'악보보기>>'}</Text>
+              <Button
+                theme="tertiary"
+                size="auto"
+                onClick={() => navigate('/music/Ditto-NewJeans')}
+              >
+                <>
+                  <Text color="white">악보 보기</Text>
+                  <Icon icon="HiChevronDoubleRight" size="xs" color="white" />
+                </>
               </Button>
             </div>
             <img src={albumImgs[0]} />
@@ -51,8 +61,15 @@ export default function Carousel() {
               <Text size="txlg" weight="bold" color="white">
                 사건의 지평선
               </Text>
-              <Button theme="tertiary" size="auto">
-                <Text color="white">{'악보보기>>'}</Text>
+              <Button
+                theme="tertiary"
+                size="auto"
+                onClick={() => navigate('/music/사건의 지평선-윤하')}
+              >
+                <>
+                  <Text color="white">악보 보기</Text>
+                  <Icon icon="HiChevronDoubleRight" size="xs" color="white" />
+                </>
               </Button>
             </div>
             <img src={albumImgs[1]} />
@@ -67,8 +84,15 @@ export default function Carousel() {
               <Text size="txlg" weight="bold" color="white">
                 Kick Back
               </Text>
-              <Button theme="tertiary" size="auto">
-                <Text color="white">{'악보보기>>'}</Text>
+              <Button
+                theme="tertiary"
+                size="auto"
+                onClick={() => navigate('/music/Kick Back-Yonezu Kenshi')}
+              >
+                <>
+                  <Text color="white">악보 보기</Text>
+                  <Icon icon="HiChevronDoubleRight" size="xs" color="white" />
+                </>
               </Button>
             </div>
             <img src={albumImgs[2]} />

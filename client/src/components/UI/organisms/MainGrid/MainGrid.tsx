@@ -1,4 +1,3 @@
-import React from 'react';
 import MainSongSection from '../MainSongSection/MainSongSection';
 import { Text } from '../../atoms';
 import styles from './maingrid.module.scss';
@@ -7,6 +6,7 @@ import { MusicData } from '../../../pages/Main/Main';
 
 function MainGrid({ musicData }: { musicData: MusicData }) {
   const cx = classNames.bind(styles);
+
   return (
     <div className={cx('main-content-wrapper')}>
       <div className={cx('main-content-grid')}>
@@ -20,8 +20,8 @@ function MainGrid({ musicData }: { musicData: MusicData }) {
             return (
               <MainSongSection
                 key={el.songId}
-                songTitle={el.songTitle}
-                singer={el.singer}
+                songTitle={el.songName}
+                singer={el.artist}
                 albumImg={el.albumImg}
                 scores={el.scores}
               />

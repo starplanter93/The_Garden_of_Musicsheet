@@ -4,21 +4,21 @@ import { useParams } from 'react-router-dom';
 import { getScoresByCategory } from '../../../firebase/firebase';
 import { CategoryDetail } from '../../UI/organisms';
 
-const InstrumentDetail = () => {
-  const [scoresByInst, setScoresByInst] = useState<DocumentData>([]);
+const MusicDetail = () => {
+  const [scoresByMusic, setScoresByMusic] = useState<DocumentData>([]);
   const [coverData, setCoverData] = useState<DocumentData>({});
   const [totalLists, setTotalLists] = useState(0);
-  const { instType } = useParams();
+  const { songTitle } = useParams();
 
   useEffect(() => {
-    getScoresByCategory('instrument', `${instType}`)
+    getScoresByCategory('music', `${songTitle}`)
       .then((data) => {
         setCoverData({
           name: data.name || data.songName,
           thumbnail: data.thumbnail || data.albumImg,
           artist: data.artist,
         });
-        setScoresByInst(data.scores);
+        setScoresByMusic(data.scores);
         setTotalLists(data.scores.length);
       })
       .catch((error) => console.log(error));
@@ -26,12 +26,12 @@ const InstrumentDetail = () => {
 
   return (
     <CategoryDetail
-      category="악기"
+      category="곡"
       coverData={coverData}
-      scoresByCategory={scoresByInst}
+      scoresByCategory={scoresByMusic}
       totalLists={totalLists}
     />
   );
 };
 
-export default InstrumentDetail;
+export default MusicDetail;
