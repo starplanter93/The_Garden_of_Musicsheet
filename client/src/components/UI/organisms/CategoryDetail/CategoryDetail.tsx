@@ -10,18 +10,17 @@ interface CategoryDetailProps {
   category: string;
   coverData: DocumentData;
   scoresByCategory: DocumentData;
-  totalLists: number;
 }
 
 const CategoryDetail = ({
   category,
   coverData,
   scoresByCategory,
-  totalLists,
 }: CategoryDetailProps) => {
   const cx = classNames.bind(styles);
   const { thumbnail, name, artist } = coverData;
   const [scores, setScores] = useState<DocumentData>([]);
+  const [totalLists, setTotalLists] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [clickedTab, setClickedTab] = useState('전체');
   const [tabGroupArr, setTabGroupArr] = useState<string[]>([]);
@@ -29,11 +28,14 @@ const CategoryDetail = ({
   useEffect(() => {
     let currentData: DocumentData;
     if (clickedTab === '전체') {
+      setTotalLists(scoresByCategory?.length);
       currentData = scoresByCategory?.slice(currentPage - 1, currentPage + 0);
     } else {
-      currentData = scoresByCategory
-        ?.filter((el: DocumentData) => el.instType === clickedTab)
-        .slice(currentPage - 1, currentPage + 0);
+      const filteredData: DocumentData = scoresByCategory?.filter(
+        (el: DocumentData) => el.instType === clickedTab
+      );
+      setTotalLists(filteredData.length);
+      currentData = filteredData.slice(currentPage - 1, currentPage + 0);
     }
     setScores(currentData);
   }, [currentPage, scoresByCategory, clickedTab]);
