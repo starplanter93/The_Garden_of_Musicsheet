@@ -1,12 +1,14 @@
 @import '/src/utils/utils';
 
 .main-content-grid {
+  padding: 0 2.4rem;
+
   .main-content-header {
     margin-top: 3.5rem;
     grid-column: 1 / -1;
   }
   display: grid;
-  column-gap: 4rem;
+  column-gap: 8rem;
   row-gap: 4rem;
   width: 100%;
   justify-content: center;

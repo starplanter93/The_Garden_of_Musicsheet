@@ -1,6 +1,5 @@
 import { FaTrash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-
 import {
   MdPiano,
   MdOutlineQueueMusic,
@@ -31,6 +30,7 @@ import {
 } from 'react-icons/bs';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import { CgUserList } from 'react-icons/cg';
+import { HiChevronDoubleRight } from 'react-icons/hi';
 
 export {
   FcGoogle,
@@ -65,4 +65,5 @@ export {
   SlArrowLeft,
   SlArrowRight,
   CgUserList,
+  HiChevronDoubleRight,
 };

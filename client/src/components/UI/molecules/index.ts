@@ -9,6 +9,7 @@ import UserMenu from './UserDropdown/UserMenu/UserMenu';
 import UserButton from './GNB/UserButton/UserButton';
 import UserAuthInput from './UserAuthInput/UserAuthInput';
 import PostInput from './PostInput/PostInput';
+
 import ScoreInfoHeader from './ScoreInfoHeader/ScoreInfoHeader';
 import ScorePreview from './ScorePreview/ScorePreview';
 import ScoreInfoCard from './ScoreInfoCard/ScoreInfoCard';
@@ -20,6 +21,7 @@ import Pagination from './Pagination/Pagination';
 import DropDown from './DropDownSelect/DropDown';
 import TextEditor from './TextEditor/TextEditor';
 import PostSidebar from '../molecules/PostSidebar/PostSidebar';
+import TabMenu from './TabMenu/TabMenu';
 import UserCard from './UserCard/UserCard';
 
 export {
@@ -37,13 +39,14 @@ export {
   MiniProfile,
   UserMenu,
   UserButton,
+  ScoreList,
+  EditOrDownButton,
+  Pagination,
+  TabMenu,
   ScoreInfoHeader,
   ScorePreview,
   ScoreInfoCard,
   ScoreInfoExplain,
   ScorePriceCard,
-  ScoreList,
-  EditOrDownButton,
-  Pagination,
   UserCard,
 };

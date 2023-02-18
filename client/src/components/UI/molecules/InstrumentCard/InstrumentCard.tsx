@@ -7,10 +7,9 @@ interface InstrumentCardProps {
   type: string;
   name: string;
   src: string;
-  sheets: string;
 }
 
-const InstrumentCard = ({ type, name, src, sheets }: InstrumentCardProps) => {
+const InstrumentCard = ({ type, name, src }: InstrumentCardProps) => {
   const cx = classNames.bind(styles);
 
   return (
@@ -26,11 +25,6 @@ const InstrumentCard = ({ type, name, src, sheets }: InstrumentCardProps) => {
         </li>
         <li className={cx('instrument-type')}>
           <Text size="lg">{name}</Text>
-        </li>
-        <li className={cx('instrument-sheet')}>
-          <Text size="m" color="gray" weight="medium">
-            {`악보 (${sheets})`}
-          </Text>
         </li>
       </ul>
     </Link>

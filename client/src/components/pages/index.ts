@@ -4,6 +4,7 @@ import Auth from './Auth/Auth';
 import PostMusic from './PostMusic/PostMusic';
 import Main from './Main/Main';
 import InstrumentDetail from './InstrumentDetail/InstrumentDetail';
+import MusicDetail from './MusicDetail/MusicDetail';
 import ScoreInfo from './ScoreInfo/ScoreInfo';
 
 export {
@@ -13,5 +14,6 @@ export {
   PostMusic,
   Main,
   InstrumentDetail,
+  MusicDetail,
   ScoreInfo,
 };

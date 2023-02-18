@@ -50,8 +50,9 @@ export async function getMusics() {
   return list;
 }
 
-export async function getScoresByInstrument(docName: string) {
-  const ref = doc(db, 'instrument', docName);
+// 곡 상세페이지, 악기 상세페이지 데이터 api
+export async function getScoresByCategory(colName: string, docName: string) {
+  const ref = doc(db, colName, docName);
   const snapshot = await getDoc(ref);
 
   if (snapshot.exists()) {
@@ -59,6 +60,14 @@ export async function getScoresByInstrument(docName: string) {
   }
   return {};
 }
+
+// export async function getMusic(songName: string) {
+//   const ref = doc(db, 'test', songName);
+//   const snapshot = await getDoc(ref);
+//   console.log(snapshot.data());
+//   return snapshot.data();
+// }
+
 export async function getMusicData(songName: string, data: StateType) {
   const name = `${songName}-${data.artist}`;
   const info = doc(db, 'music', name);

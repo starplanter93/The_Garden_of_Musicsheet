@@ -3,6 +3,7 @@ import {
   Instrument,
   InstrumentDetail,
   Layout,
+  MusicDetail,
   ScoreInfo,
 } from './components/pages';
 import { Main } from './components/pages';
@@ -20,6 +21,7 @@ function App() {
             <Route index element={<Main />} />
             <Route path="instrument" element={<Instrument />} />
             <Route path="instrument/:instType" element={<InstrumentDetail />} />
+            <Route path="music/:songTitle" element={<MusicDetail />} />
             <Route path="/postmusic" element={<PostMusic />} />
             <Route path="/scoreinfo" element={<ScoreInfo />}></Route>
             {/* MainPage 등 */}

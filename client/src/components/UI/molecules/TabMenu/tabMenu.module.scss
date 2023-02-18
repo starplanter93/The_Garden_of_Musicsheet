@@ -1,0 +1,64 @@
+@import '/src/utils/utils';
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #d9eddf;
+
+    .tabs {
+        width: 100%;
+        max-width: #{1220/$font-size}rem;
+        display: flex;
+        align-items: start;
+        padding: .8rem 0 1rem;
+        position: relative;
+
+        .tab {
+            margin: 0 1rem;
+            padding: 0 .5rem;
+        }
+
+        .triangle {
+            position: absolute;
+            bottom: 0;
+            border-left: 1.5rem solid transparent;
+            border-top: 1.5rem solid transparent;
+            border-bottom: .9rem solid $white;
+            border-right: 1.5rem solid transparent;
+            opacity: 0;
+            transition: all 0.5s;
+        }
+
+        .tab1.active~.triangle {
+            left: 1.1rem;
+            opacity: 1;
+        }
+
+        .tab2.active~.triangle {
+            left: 6.6rem;
+            opacity: 1;
+        }
+
+        .tab3.active~.triangle {
+            left: 13.5rem;
+            opacity: 1;
+        }
+
+        .tab4.active~.triangle {
+            left: 22rem;
+            opacity: 1;
+        }
+
+        .tab5.active~.triangle {
+            left: 30.4rem;
+            opacity: 1;
+        }
+
+        .tab6.active~.triangle {
+            left: 36.2rem;
+            opacity: 1;
+        }
+
+    }
+}
