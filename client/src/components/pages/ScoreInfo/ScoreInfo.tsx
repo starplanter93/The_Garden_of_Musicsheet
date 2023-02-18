@@ -3,8 +3,10 @@ import { ScoreInfoHeader } from '../../UI/molecules';
 import { ScoreInfoAside, ScoreInfoMain } from '../../UI/organisms';
 import styles from './scoreInfo.module.scss';
 import classNames from 'classnames/bind';
+import { getScoresByMusic } from '../../../firebase/firebase';
 
 function ScoreInfo() {
+  getScoresByMusic('운이 좋았지-권진아', '0');
   const data = {
     scoreName: '악보 제목',
     singer: '가수',

@@ -50,6 +50,19 @@ export async function getMusics() {
   return list;
 }
 
+export async function getScoresByMusic(docName: string, scoreId: string) {
+  const ref = doc(db, 'music', docName);
+  const snapshot = await getDoc(ref);
+
+  if (snapshot.exists()) {
+    console.log(
+      snapshot.data().scores.filter((el: any) => {
+        return el.scoreId === scoreId;
+      })
+    );
+  }
+}
+
 export async function getScoresByInstrument(docName: string) {
   const ref = doc(db, 'instrument', docName);
   const snapshot = await getDoc(ref);
