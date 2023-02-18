@@ -6,12 +6,13 @@ import classNames from 'classnames/bind';
 interface ScoreInfoHeaderProps {
   scoreName: string;
   singer: string;
-  date: string;
+  date: string | number;
 }
 
 function ScoreInfoHeader({ scoreName, singer, date }: ScoreInfoHeaderProps) {
   const cx = classNames.bind(styles);
   const formattedDate = new Intl.DateTimeFormat('ko-kr').format(new Date(date));
+
   return (
     <div className={cx('songinfo-header')}>
       <div className={cx('text-wrapper')}>
