@@ -12,13 +12,22 @@ export type MusicData = {
 }[];
 
 export interface ScoreInfo {
+  albumImg?: string;
+  artist?: string;
+  author: string;
+  authorId?: string;
+  profileImg: string;
+  createdAt?: string;
+  detail?: string;
   difficulty: string;
+  downloadURL?: string;
   instType: string;
   price: string;
-  profileImg: string;
+  scoreId: string;
   scoreName: string;
-  author: string;
-  scoreId: number;
+  sheetType?: string;
+  songName?: string;
+  youtubeURL?: string;
 }
 
 function Main() {

@@ -24,7 +24,7 @@ MainGridOptions.args = {
             'https://firebasestorage.googleapis.com/v0/b/garden-of-musicsheet.appspot.com/o/avatar%2Favatar1.png?alt=media&token=a10690ce-65fd-402c-8e3f-b520188a8ba1',
           scoreName: '악보제목123',
           author: '악보제작자123',
-          scoreId: 15151,
+          scoreId: '15151',
         },
       ],
       albumImg:

@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScoreInfoHeader } from '../../UI/molecules';
 import { ScoreInfoAside, ScoreInfoMain } from '../../UI/organisms';
 import styles from './scoreInfo.module.scss';
 import classNames from 'classnames/bind';
 import { getScoreByMusic } from '../../../firebase/firebase';
+import { useParams } from 'react-router';
 
 function ScoreInfo() {
-  getScoreByMusic('운이 좋았지-권진아', '0');
+  const [scoreData, setScoreData] = useState();
+  const { scoreName, scoreId } = useParams();
+  useEffect(() => {
+    if (scoreName && scoreId) {
+      getScoreByMusic(scoreName, scoreId);
+    }
+  }, []);
   const data = {
     scoreName: '악보 제목',
     singer: '가수',
