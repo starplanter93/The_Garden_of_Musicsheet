@@ -29,7 +29,7 @@ function ScoreInfo() {
   useEffect(() => {
     fetchScoreData();
   }, []);
-  console.log(scoreData);
+
   if (scoreData === undefined) {
     return <div>로딩중...</div>;
   }
