@@ -4,21 +4,11 @@ import classNames from 'classnames/bind';
 import { Dispatch, SetStateAction, useState } from 'react';
 
 interface TabMenuProps {
-  tabGroupArr?: string[];
+  tabGroupArr: string[];
   setClickedTab: Dispatch<SetStateAction<string>>;
 }
 
-const TabMenu = ({
-  tabGroupArr = [
-    '전체',
-    '피아노',
-    '일렉 기타',
-    '어쿠스틱 기타',
-    '베이스',
-    '드럼',
-  ],
-  setClickedTab,
-}: TabMenuProps) => {
+const TabMenu = ({ tabGroupArr, setClickedTab }: TabMenuProps) => {
   const cx = classNames.bind(styles);
   const [currentTab, setCurrentTab] = useState(0);
 

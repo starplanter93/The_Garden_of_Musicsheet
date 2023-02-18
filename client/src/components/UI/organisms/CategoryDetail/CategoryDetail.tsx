@@ -24,6 +24,7 @@ const CategoryDetail = ({
   const [scores, setScores] = useState<DocumentData>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [clickedTab, setClickedTab] = useState('전체');
+  const [tabGroupArr, setTabGroupArr] = useState<string[]>([]);
 
   useEffect(() => {
     let currentData: DocumentData;
@@ -37,6 +38,13 @@ const CategoryDetail = ({
     setScores(currentData);
   }, [currentPage, scoresByCategory, clickedTab]);
 
+  useEffect(() => {
+    const tabGroup: string[] = Array.from(
+      new Set(scoresByCategory?.map((el: DocumentData) => el.instType))
+    );
+    setTabGroupArr(['전체', ...tabGroup]);
+  }, [scoresByCategory]);
+
   return (
     <>
       <div className={cx('cover-wrapper')}>
@@ -47,7 +55,9 @@ const CategoryDetail = ({
           artist={artist}
         />
       </div>
-      {category === '곡' && <TabMenu setClickedTab={setClickedTab} />}
+      {category === '곡' && (
+        <TabMenu setClickedTab={setClickedTab} tabGroupArr={tabGroupArr} />
+      )}
       <section className={cx('container')}>
         <h2>
           <Text size="xlg">악보</Text>
