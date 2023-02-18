@@ -50,7 +50,7 @@ export async function getMusics() {
   return list;
 }
 
-export async function getScoresByMusic(docName: string, scoreId: string) {
+export async function getScoreByMusic(docName: string, scoreId: string) {
   const ref = doc(db, 'music', docName);
   const snapshot = await getDoc(ref);
 
