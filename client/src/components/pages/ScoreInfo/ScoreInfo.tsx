@@ -50,6 +50,7 @@ function ScoreInfo() {
           page={dummyData.page}
           scoreType={scoreData.sheetType}
           scoreExplain={scoreData.detail}
+          youtubeURL={scoreData.youtubeURL}
         />
       </div>
       <ScoreInfoAside
