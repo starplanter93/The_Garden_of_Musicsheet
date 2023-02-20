@@ -43,6 +43,11 @@ const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
   useEffect(() => {
     if (value) {
       setUserInput(value.scoreName);
+      setSelectedData({
+        songName: value.songName,
+        artist: value.artist,
+        albumCover: value.albumImg,
+      });
     }
   }, []);
 
@@ -51,8 +56,8 @@ const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
       // if (text === '곡 제목') dispatch(setSongName(userInput));
       // if (text === '원곡자') dispatch(setArtist(userInput));
       if (text === '악보 제목') dispatch(setScoreName(userInput));
-      if (text === '가격') dispatch(setPrice(userInput));
-      if (text === '유튜브 주소 (선택)') dispatch(setURL(userInput));
+      else if (text === '가격') dispatch(setPrice(userInput));
+      else if (text === '유튜브 주소 (선택)') dispatch(setURL(userInput));
       getSearchData(userInput).then((response) => {
         switch (response.status) {
           default:
@@ -84,7 +89,7 @@ const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
       dispatch(setAlbumImg(selectedData.albumCover));
     }
 
-    if (userInput) {
+    if (userInput && isFocused) {
       return (
         <div
           className={cx(selectedData ? 'dropdown-wrapper' : 'dropdown-default')}

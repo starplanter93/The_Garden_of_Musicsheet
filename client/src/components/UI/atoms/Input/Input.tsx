@@ -70,6 +70,7 @@ const Input = ({
       <input
         className={cx('default-input', `${theme}`, `${size}`)}
         onChange={(e) => setUserInput(e.target.value)}
+        onClick={() => setIsFocused(true)}
         placeholder={placeholder}
       ></input>
     );

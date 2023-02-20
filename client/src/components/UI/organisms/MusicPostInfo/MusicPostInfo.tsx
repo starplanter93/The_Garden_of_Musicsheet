@@ -23,6 +23,7 @@ const MusicPostInfo = ({ type, value }: MusicPostInfoProps) => {
           text="저작권 정보"
           type="dropdown"
           placeholder="곡 제목을 입력해주세요"
+          value={value}
         />
         <PostInput type="input" text="악보 제목" value={value} />
       </div>
