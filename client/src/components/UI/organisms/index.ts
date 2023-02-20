@@ -11,8 +11,10 @@ import MusicPostInfo from './MusicPostInfo/MusicPostInfo';
 import CategoryDetail from './CategoryDetail/CategoryDetail';
 import ScoreInfoAside from './ScoreInfoAside/ScoreInfoAside';
 import ScoreInfoMain from './ScoreInfoMain/ScoreInfoMain';
+import MyPageTop from './MyPageTop/MyPageTop';
 
 export {
+  MyPageTop,
   MusicPostInfo,
   PostButtons,
   UserAuth,
