@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { updateProfile } from 'firebase/auth';
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import { auth } from '../../../../firebase/firebase';
 import { Button, Icon, ImgLayout, Text } from '../../atoms';
 import styles from './categoryCover.module.scss';
@@ -11,6 +11,7 @@ interface CategoryCoverProps {
   title: string;
   artist?: string;
   mypage?: boolean;
+  setModal?: Dispatch<SetStateAction<boolean>>;
 }
 
 const CategoryCover = ({
@@ -19,20 +20,23 @@ const CategoryCover = ({
   thumbnail,
   title,
   artist,
+  setModal,
 }: CategoryCoverProps) => {
   const cx = classNames.bind(styles);
   const [editmode, setEditMode] = useState(false);
   const [username, setUsername] = useState(category);
 
-  const handleNameChange = () => {
-    setEditMode(true);
-  };
-
-  const handleNameSubmit = (e: any) => {
+  const handleNameSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (auth.currentUser && e.key === 'Enter') {
       updateProfile(auth.currentUser, { displayName: username });
       setEditMode(false);
       console.log(auth.currentUser);
+    }
+  };
+
+  const handleOptOut = () => {
+    if (setModal) {
+      setModal(true);
     }
   };
 
@@ -65,13 +69,6 @@ const CategoryCover = ({
                   <Text size="txlg" weight="bold">
                     {username}
                   </Text>
-                  <Button
-                    size="tiny"
-                    theme="transparent"
-                    onClick={handleNameChange}
-                  >
-                    <Icon icon="BiPencil" size="s" />
-                  </Button>
                 </div>
               )}
               <Text size="lg" color="gray">
@@ -90,11 +87,12 @@ const CategoryCover = ({
                   </Text>
                 </div>
                 <div>
-                  <Button size="m" theme="tertiary">
-                    <>
-                      <Icon icon="MdOutlineSettings" color="gray" size="xs" />
-                      <Text color="gray">프로필 사진 변경</Text>
-                    </>
+                  <Button
+                    size="s"
+                    theme="transparent"
+                    onClick={() => handleOptOut()}
+                  >
+                    <Text color="gray">회원탈퇴</Text>
                   </Button>
                 </div>
               </li>

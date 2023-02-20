@@ -1,24 +1,30 @@
 import styles from './myPageTop.module.scss';
 import classNames from 'classnames/bind';
 import { CategoryCover } from '../../molecules';
-import { useState } from 'react';
-import { TabMenu } from '../../molecules';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 interface MyPageTopProps {
   username: string; // userName
   photoURL: string; // photoURL
   email: string; // email
   cash: string;
+  setModal?: Dispatch<SetStateAction<boolean>>;
 }
 
-const MyPageTop = ({ username, photoURL, email, cash }: MyPageTopProps) => {
+const MyPageTop = ({
+  username,
+  photoURL,
+  email,
+  cash,
+  setModal,
+}: MyPageTopProps) => {
   const cx = classNames.bind(styles);
-  const [clickedTab, setClickedTab] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+
   return (
     <div>
       <div className={cx('cover-wrapper')}>
         <CategoryCover
+          setModal={setModal}
           mypage={true}
           category={username}
           thumbnail={photoURL}
@@ -26,11 +32,6 @@ const MyPageTop = ({ username, photoURL, email, cash }: MyPageTopProps) => {
           artist={cash}
         />
       </div>
-      <TabMenu
-        setClickedTab={setClickedTab}
-        tabGroupArr={['등록한 악보', '구매한 악보']}
-        setCurrentPage={setCurrentPage}
-      />
     </div>
   );
 };
