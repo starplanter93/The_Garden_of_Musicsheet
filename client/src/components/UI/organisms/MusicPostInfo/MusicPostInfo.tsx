@@ -36,11 +36,17 @@ const MusicPostInfo = ({ type, value }: MusicPostInfoProps) => {
             {type}
           </Text>
         </div>
-        <PostInput type="input" text="가격" placeholder="원 단위" />
+        <PostInput
+          type="input"
+          text="가격"
+          placeholder="원 단위"
+          value={value}
+        />
         <PostInput
           type="input"
           text="유튜브 주소 (선택)"
           placeholder="유튜브 영상 URL을 넣어주세요"
+          value={value}
         />
       </div>
     );

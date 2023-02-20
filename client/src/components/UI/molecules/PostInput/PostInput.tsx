@@ -42,7 +42,10 @@ const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
   // 수정 페이지에서만 동작하는 이펙트
   useEffect(() => {
     if (value) {
-      setUserInput(value.scoreName);
+      if (text === '악보 제목') setUserInput(value.scoreName);
+      else if (text === '가격') setUserInput(value.price);
+      else if (text === '유튜브 주소 (선택)') setUserInput(value.youtubeURL);
+
       setSelectedData({
         songName: value.songName,
         artist: value.artist,
