@@ -5,20 +5,29 @@ import { getMusics } from '../../../firebase/firebase';
 
 export type MusicData = {
   artist: string;
-  scores: ScoreInfo[];
+  scores: ScoreInfoType[];
   albumImg: string;
   songName: string;
   songId: number | null;
 }[];
 
-export interface ScoreInfo {
+export interface ScoreInfoType {
+  albumImg: string;
+  artist: string;
+  author: string;
+  authorId: string;
+  author_profile: string;
+  createdAt: string;
+  detail: string;
   difficulty: string;
+  downloadURL: string;
   instType: string;
   price: string;
-  profileImg: string;
+  scoreId: string;
   scoreName: string;
-  author: string;
-  scoreId: number;
+  sheetType: string;
+  songName: string;
+  youtubeURL: string;
 }
 
 function Main() {

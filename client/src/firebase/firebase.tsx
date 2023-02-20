@@ -20,6 +20,7 @@ import {
   arrayUnion,
 } from 'firebase/firestore/lite';
 import { StateType } from '../redux/PostSlice';
+import { ScoreInfoType } from '../components/pages/Main/Main';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAZ4hRKbN3-Hq3w2v07pS-4KBikVP-4Wi0',
@@ -48,6 +49,17 @@ export async function getMusics() {
   const snapshot = await getDocs(ref);
   const list = snapshot.docs.map((doc: DocumentData) => doc.data());
   return list;
+}
+
+export async function getScoreByMusic(docName: string, scoreId: string) {
+  const ref = doc(db, 'music', docName);
+  const snapshot = await getDoc(ref);
+  if (snapshot.exists()) {
+    const scoreData = snapshot.data().scores.filter((score: ScoreInfoType) => {
+      return score.scoreId === scoreId;
+    });
+    return scoreData;
+  }
 }
 
 // 곡 상세페이지, 악기 상세페이지 데이터 api

@@ -10,7 +10,7 @@ interface MainScoreListProps {
   instrument: string;
   difficulty: string;
   price: string;
-  scoreId: number;
+  scoreId: string;
   songTitle: string;
   singer: string;
 }
