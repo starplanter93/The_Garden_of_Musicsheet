@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import {
+  EditScore,
   Instrument,
   InstrumentDetail,
   Layout,
@@ -24,6 +25,10 @@ function App() {
             <Route path="music/:songTitle" element={<MusicDetail />} />
             <Route path="/postmusic" element={<PostMusic />} />
             <Route path="/:scoreName/:scoreId" element={<ScoreInfo />}></Route>
+            <Route
+              path="edit/:scoreName/:scoreId"
+              element={<EditScore />}
+            ></Route>
             {/* MainPage 등 */}
           </Route>
           <Route path="/auth" element={<Auth />}></Route>

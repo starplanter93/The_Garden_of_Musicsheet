@@ -6,6 +6,7 @@ import Main from './Main/Main';
 import InstrumentDetail from './InstrumentDetail/InstrumentDetail';
 import MusicDetail from './MusicDetail/MusicDetail';
 import ScoreInfo from './ScoreInfo/ScoreInfo';
+import EditScore from './EditScore/EditScore';
 
 export {
   Layout,
@@ -16,4 +17,5 @@ export {
   InstrumentDetail,
   MusicDetail,
   ScoreInfo,
+  EditScore,
 };
