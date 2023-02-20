@@ -4,20 +4,15 @@ import classNames from 'classnames/bind';
 import { Dispatch, SetStateAction, useState } from 'react';
 
 interface TabMenuProps {
-  tabGroupArr?: string[];
+  tabGroupArr: string[];
   setClickedTab: Dispatch<SetStateAction<string>>;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
 }
 
 const TabMenu = ({
-  tabGroupArr = [
-    '전체',
-    '피아노',
-    '일렉 기타',
-    '어쿠스틱 기타',
-    '베이스',
-    '드럼',
-  ],
+  tabGroupArr,
   setClickedTab,
+  setCurrentPage,
 }: TabMenuProps) => {
   const cx = classNames.bind(styles);
   const [currentTab, setCurrentTab] = useState(0);
@@ -25,36 +20,25 @@ const TabMenu = ({
   const handleClick = (tab: string, idx: number) => {
     setCurrentTab(idx);
     setClickedTab(tab);
+    setCurrentPage(1);
   };
 
   return (
     <div className={cx('wrapper')}>
       <ul className={cx('tabs')}>
         {tabGroupArr.map((tab, idx) => (
-          <li
-            key={idx}
-            className={cx(
-              'tab',
-              `tab${idx + 1}`,
-              currentTab === idx && 'active'
-            )}
-          >
+          <li key={idx} className={cx('tab', currentTab === idx && 'active')}>
             <Button
               theme="transparent"
               size="auto"
               onClick={() => handleClick(tab, idx)}
             >
-              <Text
-                size="lg"
-                color={currentTab === idx ? 'black' : 'gray'}
-                weight={currentTab === idx ? 'medium' : 'regular'}
-              >
+              <Text size="lg" color="gray">
                 {tab}
               </Text>
             </Button>
           </li>
         ))}
-        <li className={cx('triangle')}></li>
       </ul>
     </div>
   );

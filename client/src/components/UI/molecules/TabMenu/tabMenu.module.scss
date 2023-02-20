@@ -11,54 +11,47 @@
         max-width: #{1220/$font-size}rem;
         display: flex;
         align-items: start;
-        padding: .8rem 0 1rem;
+        padding: .8rem 0 .7rem;
         position: relative;
 
         .tab {
+            position: relative;
             margin: 0 1rem;
-            padding: 0 .5rem;
-        }
+            padding: 0 1rem;
 
-        .triangle {
-            position: absolute;
-            bottom: 0;
-            border-left: 1.5rem solid transparent;
-            border-top: 1.5rem solid transparent;
-            border-bottom: .9rem solid $white;
-            border-right: 1.5rem solid transparent;
-            opacity: 0;
-            transition: all 0.5s;
-        }
+            span:last-child {
+                &:hover {
+                    color: $light-green;
+                    transition: all .1s ease-in;
+                }
+            }
 
-        .tab1.active~.triangle {
-            left: 1.1rem;
-            opacity: 1;
-        }
+            &.active {
+                &::after {
+                    position: absolute;
+                    top: 1.9rem;
+                    left: 0;
+                    content: '';
+                    width: 100%;
+                    height: 4px;
+                    background-color: $light-green;
+                    animation: underline .5s;
+                }
 
-        .tab2.active~.triangle {
-            left: 6.6rem;
-            opacity: 1;
-        }
+                @keyframes underline {
+                    0% {
+                        width: 0;
+                    }
 
-        .tab3.active~.triangle {
-            left: 13.5rem;
-            opacity: 1;
-        }
+                    100% {
+                        width: 100%;
+                    }
+                }
 
-        .tab4.active~.triangle {
-            left: 22rem;
-            opacity: 1;
+                span:last-child {
+                    color: $black;
+                }
+            }
         }
-
-        .tab5.active~.triangle {
-            left: 30.4rem;
-            opacity: 1;
-        }
-
-        .tab6.active~.triangle {
-            left: 36.2rem;
-            opacity: 1;
-        }
-
     }
 }

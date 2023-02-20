@@ -7,7 +7,6 @@ import { CategoryDetail } from '../../UI/organisms';
 const MusicDetail = () => {
   const [scoresByMusic, setScoresByMusic] = useState<DocumentData>([]);
   const [coverData, setCoverData] = useState<DocumentData>({});
-  const [totalLists, setTotalLists] = useState(0);
   const { songTitle } = useParams();
 
   useEffect(() => {
@@ -19,7 +18,6 @@ const MusicDetail = () => {
           artist: data.artist,
         });
         setScoresByMusic(data.scores);
-        setTotalLists(data.scores.length);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -29,7 +27,6 @@ const MusicDetail = () => {
       category="곡"
       coverData={coverData}
       scoresByCategory={scoresByMusic}
-      totalLists={totalLists}
     />
   );
 };

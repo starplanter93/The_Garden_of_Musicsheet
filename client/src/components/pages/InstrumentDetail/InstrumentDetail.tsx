@@ -7,7 +7,6 @@ import { CategoryDetail } from '../../UI/organisms';
 const InstrumentDetail = () => {
   const [scoresByInst, setScoresByInst] = useState<DocumentData>([]);
   const [coverData, setCoverData] = useState<DocumentData>({});
-  const [totalLists, setTotalLists] = useState(0);
   const { instType } = useParams();
 
   useEffect(() => {
@@ -19,7 +18,6 @@ const InstrumentDetail = () => {
           artist: data.artist,
         });
         setScoresByInst(data.scores);
-        setTotalLists(data.scores.length);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -29,7 +27,6 @@ const InstrumentDetail = () => {
       category="악기"
       coverData={coverData}
       scoresByCategory={scoresByInst}
-      totalLists={totalLists}
     />
   );
 };
