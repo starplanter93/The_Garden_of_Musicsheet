@@ -26,7 +26,7 @@ function App() {
             <Route path="/postmusic" element={<PostMusic />} />
             <Route path="/scoreinfo" element={<ScoreInfo />} />
             <Route path="/mypage" element={<MyPage />} />
-
+            <Route path="/:scoreName/:scoreId" element={<ScoreInfo />} />
             {/* MainPage 등 */}
           </Route>
           <Route path="/auth" element={<Auth />}></Route>

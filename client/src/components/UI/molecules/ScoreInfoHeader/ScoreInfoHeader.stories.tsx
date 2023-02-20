@@ -14,5 +14,5 @@ export const ScoreInfoHeaderOptions = Template.bind({});
 ScoreInfoHeaderOptions.args = {
   scoreName: '악보 제목',
   singer: '가수',
-  date: '작성일',
+  date: 123,
 };

@@ -9,9 +9,12 @@ interface ScorePriceCardProps {
 
 function ScorePriceCard({ price }: ScorePriceCardProps) {
   const cx = classNames.bind(styles);
+  const formattedPrice = new Intl.NumberFormat('ko-kr').format(Number(price));
   return (
     <div className={cx('price-card')}>
-      <Text size="xlg" weight="bold">{`${price}원`}</Text>
+      <Text size="xlg" weight="bold">
+        {`${formattedPrice}원`}
+      </Text>
       <Button size="auto">
         <>
           <Icon icon="MdOutlineShoppingBag" color="white" />

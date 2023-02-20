@@ -21,4 +21,5 @@ ScoreInfoMainOptions.args = {
   page: '7',
   scoreType: '타브 악보',
   scoreExplain: '게시글 등록자가 작성한 악보에 대한 상세한 설명과 정보',
+  youtubeURL: 'https://www.youtube.com/watch?v=k3rUzmGK1Hs',
 };

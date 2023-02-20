@@ -1,8 +1,8 @@
 import classNames from 'classnames/bind';
 import { updateProfile } from 'firebase/auth';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { auth } from '../../../../firebase/firebase';
-import { Button, Icon, ImgLayout, Input, Text } from '../../atoms';
+import { Button, Icon, ImgLayout, Text } from '../../atoms';
 import styles from './categoryCover.module.scss';
 
 interface CategoryCoverProps {
@@ -26,8 +26,16 @@ const CategoryCover = ({
 
   const handleNameChange = () => {
     setEditMode(true);
-    console.log('hi');
   };
+
+  const handleNameSubmit = (e: any) => {
+    if (auth.currentUser && e.key === 'Enter') {
+      updateProfile(auth.currentUser, { displayName: username });
+      setEditMode(false);
+      console.log(auth.currentUser);
+    }
+  };
+
   if (mypage) {
     return (
       <div className={cx('category-cover')}>
@@ -48,9 +56,7 @@ const CategoryCover = ({
                     className={cx('name-input')}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    onKeyDown={(e) =>
-                      e.key === 'Enter' ? setEditMode(false) : null
-                    }
+                    onKeyDown={(e) => handleNameSubmit(e)}
                     autoFocus
                   />
                 </div>
@@ -78,6 +84,9 @@ const CategoryCover = ({
                   <Icon icon="BiCoin" color="gray" size="s" />
                   <Text size="lg" color="gray">
                     {artist}
+                  </Text>
+                  <Text size="lg" color="gray">
+                    원
                   </Text>
                 </div>
                 <div>

@@ -13,8 +13,16 @@ interface ScoreListProps {
 const ScoreList = ({ score, buttonEvent = 'edit' }: ScoreListProps) => {
   const cx = classNames.bind(styles);
   const { pathname } = useLocation();
-  const { artist, difficulty, instType, price, songName, author, scoreId } =
-    score;
+  const {
+    artist,
+    difficulty,
+    instType,
+    price,
+    songName,
+    author,
+    scoreId,
+    scoreName,
+  } = score;
 
   return (
     <div className={cx('wrapper')}>
@@ -22,7 +30,7 @@ const ScoreList = ({ score, buttonEvent = 'edit' }: ScoreListProps) => {
         <div className={cx('detail')}>
           <ul className={cx('score-song')}>
             <li>
-              <Text>{songName}</Text>
+              <Text>{scoreName}</Text>
             </li>
             <li>
               <Text color="gray">{artist}</Text>

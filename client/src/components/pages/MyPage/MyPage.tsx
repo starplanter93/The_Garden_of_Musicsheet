@@ -1,13 +1,12 @@
 import { MyPageTop } from '../../UI/organisms';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TabMenu } from '../../UI/molecules';
 import { auth } from '../../../firebase/firebase';
 import { User } from 'firebase/auth';
 
 const MyPage = () => {
   const navigate = useNavigate();
-  const [clickedTab, setClickedTab] = useState('');
+
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
 
@@ -38,7 +37,6 @@ const MyPage = () => {
               photoURL={photoURL}
               cash="100,000"
             />
-            <TabMenu setClickedTab={setClickedTab} />
           </>
         )}
       </>

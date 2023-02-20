@@ -21,7 +21,7 @@ const Pagination = ({
   setCurrentPage,
 }: PaginationProps) => {
   const cx = classNames.bind(styles);
-  const listPerpage = 1;
+  const listPerpage = 5;
   const totalPages = Math.ceil(totalLists / listPerpage);
   let totalPageArr = [1];
   if (totalPages > 1) {
@@ -35,17 +35,17 @@ const Pagination = ({
 
   useEffect(() => {
     const pageGroupArr = totalPageArr.slice(
-      currentPage - 1 - ((currentPage - 1) % 1),
-      currentPage - 1 - ((currentPage - 1) % 1) + 1
+      currentPage - 1 - ((currentPage - 1) % 5),
+      currentPage - 1 - ((currentPage - 1) % 5) + 5
     );
     setPageGroup([...pageGroupArr]);
-  }, [currentPage]);
+  }, [currentPage, totalLists]);
 
   const handlePrev = () => {
     if (!prevActive) return;
 
     // setIsPending(true);
-    setCurrentPage(pageGroup[0] - 1);
+    setCurrentPage(pageGroup[0] - 5);
   };
 
   const handlePage = (e: MouseEvent<HTMLButtonElement>) => {
@@ -58,7 +58,7 @@ const Pagination = ({
     if (!nextActive) return;
 
     // setIsPending(true);
-    setCurrentPage(pageGroup[0] + 1);
+    setCurrentPage(pageGroup[0] + 5);
   };
 
   return (
