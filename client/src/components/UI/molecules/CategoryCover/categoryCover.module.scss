@@ -23,6 +23,14 @@
         .username {
           display: flex;
           align-items: center;
+          .name-input {
+            border: none;
+            border-bottom: 2px solid green;
+            background-color: transparent;
+            font-size: 1.75rem;
+            font-weight: 700;
+            outline: none;
+          }
         }
       }
       .bottom {

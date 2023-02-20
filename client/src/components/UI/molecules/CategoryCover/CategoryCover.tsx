@@ -1,8 +1,8 @@
 import classNames from 'classnames/bind';
 import { updateProfile } from 'firebase/auth';
-import React from 'react';
+import React, { useState } from 'react';
 import { auth } from '../../../../firebase/firebase';
-import { Button, Icon, ImgLayout, Text } from '../../atoms';
+import { Button, Icon, ImgLayout, Input, Text } from '../../atoms';
 import styles from './categoryCover.module.scss';
 
 interface CategoryCoverProps {
@@ -21,9 +21,12 @@ const CategoryCover = ({
   artist,
 }: CategoryCoverProps) => {
   const cx = classNames.bind(styles);
+  const [editmode, setEditMode] = useState(false);
+  const [username, setUsername] = useState(category);
 
   const handleNameChange = () => {
-    return;
+    setEditMode(true);
+    console.log('hi');
   };
   if (mypage) {
     return (
@@ -39,18 +42,32 @@ const CategoryCover = ({
         <div className={cx('user-info')}>
           <ul>
             <li className={cx('top')}>
-              <div className={cx('username')}>
-                <Text size="txlg" weight="bold">
-                  {category}
-                </Text>
-                <Button
-                  size="tiny"
-                  theme="transparent"
-                  onClick={() => handleNameChange}
-                >
-                  <Icon icon="BiPencil" size="s" />
-                </Button>
-              </div>
+              {editmode ? (
+                <div className={cx('username')}>
+                  <input
+                    className={cx('name-input')}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    onKeyDown={(e) =>
+                      e.key === 'Enter' ? setEditMode(false) : null
+                    }
+                    autoFocus
+                  />
+                </div>
+              ) : (
+                <div className={cx('username')}>
+                  <Text size="txlg" weight="bold">
+                    {username}
+                  </Text>
+                  <Button
+                    size="tiny"
+                    theme="transparent"
+                    onClick={handleNameChange}
+                  >
+                    <Icon icon="BiPencil" size="s" />
+                  </Button>
+                </div>
+              )}
               <Text size="lg" color="gray">
                 {title}
               </Text>
