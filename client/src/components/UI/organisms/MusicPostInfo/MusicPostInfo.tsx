@@ -2,9 +2,10 @@ import { PostInput } from '../../molecules';
 import { Text } from '../../atoms';
 import styles from './musicPostInfo.module.scss';
 import classNames from 'classnames/bind';
+import { ScoreInfoType } from '../../../pages/Main/Main';
 interface MusicPostInfoProps {
   type: '곡 정보' | '판매 상세 정보';
-  value?: string;
+  value?: ScoreInfoType;
 }
 
 const MusicPostInfo = ({ type, value }: MusicPostInfoProps) => {

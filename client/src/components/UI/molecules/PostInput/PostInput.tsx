@@ -16,12 +16,13 @@ import {
   setAlbumImg,
   setScoreName,
 } from '../../../../redux/PostSlice';
+import { ScoreInfoType } from '../../../pages/Main/Main';
 
 interface PostInputProps {
   text: string;
   placeholder?: string;
   type: 'input' | 'dropdown';
-  value?: string;
+  value?: ScoreInfoType;
 }
 
 interface SelectedDataProps {
@@ -41,7 +42,7 @@ const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
   // 수정 페이지에서만 동작하는 이펙트
   useEffect(() => {
     if (value) {
-      setUserInput(value);
+      setUserInput(value.scoreName);
     }
   }, []);
 
