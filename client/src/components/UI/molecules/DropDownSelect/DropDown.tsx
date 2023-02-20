@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Icon, Text } from '../../atoms';
 import styles from './dropDown.module.scss';
 import { useDispatch } from 'react-redux';
@@ -13,14 +13,21 @@ import {
 interface DropDownProps {
   option: string[];
   text: string;
+  value?: string;
 }
 
-const DropDown = ({ option, text }: DropDownProps) => {
+const DropDown = ({ option, text, value }: DropDownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const cx = classNames.bind(styles);
   const [selectedValue, setSelectedValue] = useState('선택');
-
   const dispatch = useDispatch();
+
+  // 수정 페이지에서만 동작하는 이펙트
+  useEffect(() => {
+    if (value) {
+      setSelectedValue(value);
+    }
+  }, []);
 
   const handleOnClick = (el: string) => {
     setSelectedValue(el);
