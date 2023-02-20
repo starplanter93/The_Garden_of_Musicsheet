@@ -21,6 +21,7 @@ interface PostInputProps {
   text: string;
   placeholder?: string;
   type: 'input' | 'dropdown';
+  value?: string;
 }
 
 interface SelectedDataProps {
@@ -29,7 +30,7 @@ interface SelectedDataProps {
   albumCover: string;
 }
 
-const PostInput = ({ type, text, placeholder }: PostInputProps) => {
+const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
   const dispatch = useDispatch();
 
   const [isFocused, setIsFocused] = useState(false);
@@ -37,13 +38,18 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
   const [searchData, setSearchData] = useState([]);
   const [selectedData, setSelectedData] = useState<SelectedDataProps>();
 
-  if (text === '악보 제목') {
-    dispatch(setScoreName(userInput));
-  }
+  // 수정 페이지에서만 동작하는 이펙트
+  useEffect(() => {
+    if (value) {
+      setUserInput(value);
+    }
+  }, []);
+
   useEffect(() => {
     if (userInput.length > 0) {
       // if (text === '곡 제목') dispatch(setSongName(userInput));
       // if (text === '원곡자') dispatch(setArtist(userInput));
+      if (text === '악보 제목') dispatch(setScoreName(userInput));
       if (text === '가격') dispatch(setPrice(userInput));
       if (text === '유튜브 주소 (선택)') dispatch(setURL(userInput));
       getSearchData(userInput).then((response) => {
@@ -164,6 +170,7 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
             size="l"
             setIsFocused={setIsFocused}
             setUserInput={setUserInput}
+            userInput={userInput}
             placeholder={placeholder}
           />
         </div>

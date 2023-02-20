@@ -4,10 +4,12 @@ import styles from './musicPostInfo.module.scss';
 import classNames from 'classnames/bind';
 interface MusicPostInfoProps {
   type: '곡 정보' | '판매 상세 정보';
+  value?: string;
 }
 
-const MusicPostInfo = ({ type }: MusicPostInfoProps) => {
+const MusicPostInfo = ({ type, value }: MusicPostInfoProps) => {
   const cx = classNames.bind(styles);
+
   if (type === '곡 정보') {
     return (
       <div>
@@ -21,7 +23,7 @@ const MusicPostInfo = ({ type }: MusicPostInfoProps) => {
           type="dropdown"
           placeholder="곡 제목을 입력해주세요"
         />
-        <PostInput type="input" text="악보 제목" />
+        <PostInput type="input" text="악보 제목" value={value} />
       </div>
     );
   } else if (type === '판매 상세 정보') {
