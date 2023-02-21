@@ -2,7 +2,7 @@
 
 .scoreinfo {
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-columns: 1fr auto 1fr;
   grid-template-rows: auto;
   position: relative;
 
@@ -19,7 +19,8 @@
     position: sticky;
     top: 10%;
     height: #{330 / $font-size}rem;
-    margin: 0 1rem;
+    margin-left: 2.5rem;
+    margin-right: 1rem;
   }
   > aside:nth-child(3) {
     grid-column: 1 / 2;
