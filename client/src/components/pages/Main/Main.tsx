@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { MainGrid } from '../../UI/organisms';
 import { Carousel } from '../../UI/organisms';
-import { getMusics } from '../../../firebase/firebase';
 import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
@@ -13,6 +12,9 @@ import {
   startAfter,
   DocumentData,
 } from 'firebase/firestore/lite';
+
+import classNames from 'classnames/bind';
+import styles from './main.module.scss';
 
 export type MusicData = {
   artist: string;
@@ -42,6 +44,8 @@ export interface ScoreInfoType {
 }
 
 function Main() {
+  const cx = classNames.bind(styles);
+
   const [musicArr, setMusicArr] = useState<MusicData>([
     { artist: '', scores: [], albumImg: '', songName: '', songId: null },
   ]);
@@ -74,28 +78,31 @@ function Main() {
       setMusicArr(docsArray);
       // 커서로 사용할 마지막 문서 스냅샷 저장
       setKey(snap.docs[snap.docs.length - 1]);
-      console.log(key);
     } catch (err) {
       console.log(err);
     }
   }, []);
-
   // 추가 요청 함수
   const loadMore = useCallback(async () => {
-    const queryRef = query(
-      collection(db, 'music'),
-      orderBy('songId'),
-      startAfter(key), // 마지막 커서 기준으로 추가 요청을 보내도록 쿼리 전송
-      limit(6)
-    );
+    let queryRef;
+    if (key !== undefined) {
+      queryRef = query(
+        collection(db, 'music'),
+        orderBy('songId'),
+        startAfter(key), // 마지막 커서 기준으로 추가 요청을 보내도록 쿼리 전송
+        limit(6)
+      );
+    }
     try {
-      const snap = await getDocs(queryRef);
-      console.log(snap.empty);
-      snap.empty
-        ? setNoMore(true) // 만약 스냅샷이 존재 하지 않는다면 더이상 불러올수 없다는 flag 설정
-        : setKey(snap.docs[snap.docs.length - 1]); // 존재한다면 처음과 마찬가지고 마지막 커서 저장
-      const docsArray = snap.docs.map((doc: DocumentData) => doc.data());
-      setMusicArr([...musicArr, ...docsArray]); // 기존 데이터와 합쳐서 상태 저장
+      let snap;
+      if (queryRef !== undefined) {
+        snap = await getDocs(queryRef);
+        snap.empty
+          ? setNoMore(true) // 만약 스냅샷이 존재 하지 않는다면 더이상 불러올수 없다는 flag 설정
+          : setKey(snap.docs[snap.docs.length - 1]); // 존재한다면 처음과 마찬가지고 마지막 커서 저장
+        const docsArray = snap.docs.map((doc: DocumentData) => doc.data());
+        setMusicArr([...musicArr, ...docsArray]); // 기존 데이터와 합쳐서 상태 저장
+      }
     } catch (err) {
       console.log(err);
     }
@@ -137,7 +144,7 @@ function Main() {
     <>
       <Carousel />
       <MainGrid musicData={musicArr} />
-      <div ref={target}></div>
+      <div className={cx('target')} ref={target}></div>
     </>
   );
 }

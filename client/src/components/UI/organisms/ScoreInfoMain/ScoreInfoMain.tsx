@@ -64,12 +64,15 @@ function ScoreInfoMain({
         page={page}
         scoreType={scoreType}
       />
-      <YouTube
-        videoId={formattedURL}
-        opts={opts}
-        onReady={onPlayerReady}
-        onEnd={onPlayerEnd}
-      />
+      {youtubeURL && (
+        <YouTube
+          videoId={formattedURL}
+          opts={opts}
+          onReady={onPlayerReady}
+          onEnd={onPlayerEnd}
+        />
+      )}
+
       <ScoreInfoExplain scoreExplain={scoreExplain} />
     </div>
   );
