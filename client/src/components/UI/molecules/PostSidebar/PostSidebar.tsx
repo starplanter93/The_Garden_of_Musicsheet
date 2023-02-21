@@ -73,7 +73,7 @@ const PostSidebar = ({ url }: PostSidebarProps) => {
           <div>
             <Button theme="tertiary" size="s" onClick={handleButtonClick}>
               <>
-                <Icon icon="MdUpload" />
+                <Icon icon="MdUpload" size="s" />
                 <Text>파일 선택</Text>
               </>
             </Button>
@@ -102,16 +102,22 @@ const PostSidebar = ({ url }: PostSidebarProps) => {
               <span>{fileName}</span>
               <Button
                 size="tiny"
-                theme="transparent"
+                theme="secondary"
                 onClick={() => {
                   setFileName('');
                 }}
               >
-                <Icon icon="FaTrash" />
+                <Icon icon="FaTrash" size="xs" color="gray" />
               </Button>
             </div>
           </div>
         )}
+        <div className={cx('upload-info')}>
+          <Icon icon="MdInfoOutline" size="xs" color="gray" />
+          <Text size="s" weight="medium" color="gray">
+            한개의 악보 파일(.pdf)만 업로드할 수 있습니다.
+          </Text>
+        </div>
       </div>
     </div>
   );

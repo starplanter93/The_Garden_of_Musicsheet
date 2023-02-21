@@ -8,6 +8,7 @@
   .uploaded {
     margin-top: 2rem;
     width: 100%;
+
     .box {
       margin-top: 1rem;
       width: 100%;
@@ -15,21 +16,35 @@
       border-radius: 10px;
       border: 1px solid #d9d9d9;
       padding: 1rem;
+
       .file-name {
         display: flex;
         justify-content: space-between;
         line-clamp: 1;
         align-items: center;
         width: 100%;
-        span {
+
+        >span:first-child {
+          flex: 1;
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
-          width: 90%;
+          padding-right: 10px;
         }
-        icon {
-          width: 10%;
-        }
+      }
+
+    }
+
+    .upload-info {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+
+      >span:last-child {
+        padding-left: 3px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }
@@ -39,21 +54,23 @@
     height: 20rem;
     border: 2px dashed #d9d9d9;
     border-radius: 20px;
+    display: flex;
+
     .upload-element {
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      padding: 2rem;
-      padding-top: 3rem;
+      // padding: 2rem;
+      // padding-top: 3rem;
 
       .text {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-top: 2rem;
+        margin-top: 1rem;
         margin-bottom: 2rem;
       }
     }
