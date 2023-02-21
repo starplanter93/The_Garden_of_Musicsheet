@@ -7,11 +7,24 @@ import { setFile } from '../../../../redux/FileSlice';
 import { postPDF } from '../../../../firebase/firebase';
 import { setDownloadURL } from '../../../../redux/PostSlice';
 
-const PostSidebar = () => {
+interface PostSidebarProps {
+  url?: string;
+}
+
+const PostSidebar = ({ url }: PostSidebarProps) => {
   const dispatch = useDispatch();
   const cx = classNames.bind(styles);
   const [fileName, setFileName] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // 수정 페이지에서만 동작하는 이펙트
+  useEffect(() => {
+    if (url) {
+      const decodedURI = decodeURI(url);
+      const uploadedFile = decodedURI.match(/(%2F)(.+)\?/) as RegExpMatchArray;
+      setFileName(uploadedFile[2]);
+    }
+  }, []);
 
   const handleFileUpload = async (e: any) => {
     if (e.target.files.length > 0) {

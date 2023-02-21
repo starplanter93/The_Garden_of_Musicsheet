@@ -52,7 +52,7 @@ const EditScore = () => {
         </div>
       </div>
       <nav>
-        <PostSidebar />
+        <PostSidebar url={scoreData.downloadURL} />
       </nav>
     </div>
   );
