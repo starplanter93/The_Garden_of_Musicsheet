@@ -7,8 +7,10 @@ import InstrumentDetail from './InstrumentDetail/InstrumentDetail';
 import MusicDetail from './MusicDetail/MusicDetail';
 import ScoreInfo from './ScoreInfo/ScoreInfo';
 import MyPage from './MyPage/MyPage';
+import PostLayout from './PostLayout/PostLayout';
 
 export {
+  PostLayout,
   MyPage,
   Layout,
   Instrument,

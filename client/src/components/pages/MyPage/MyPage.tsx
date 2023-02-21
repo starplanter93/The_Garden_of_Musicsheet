@@ -66,11 +66,6 @@ const MyPage = () => {
     return <Spinner />;
   }
 
-  if (modal) {
-    console.log('modal on');
-    console.log(modal);
-  }
-
   if (user) {
     const username = user.displayName;
     const email = user.email;

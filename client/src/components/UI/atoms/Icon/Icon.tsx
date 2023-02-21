@@ -1,6 +1,7 @@
 import * as icons from './icons';
 import styles from './icon.module.scss';
 import classNames from 'classnames/bind';
+import React from 'react';
 
 interface IconProps {
   icon: keyof typeof icons;
@@ -19,4 +20,4 @@ const Icon = ({ icon, size = 'm', color = 'black' }: IconProps) => {
   );
 };
 
-export default Icon;
+export default React.memo(Icon);
