@@ -40,9 +40,9 @@ const PostMusic = () => {
           <TextEditor text="상세 내용 설명" />
         </div>
       </div>
-      <nav>
+      <aside>
         <PostSidebar />
-      </nav>
+      </aside>
     </div>
   );
 };

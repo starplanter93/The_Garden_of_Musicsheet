@@ -51,9 +51,9 @@ const EditScore = () => {
           <TextEditor text="상세 내용 설명" description={scoreData.detail} />
         </div>
       </div>
-      <nav>
+      <aside>
         <PostSidebar url={scoreData.downloadURL} />
-      </nav>
+      </aside>
     </div>
   );
 };
