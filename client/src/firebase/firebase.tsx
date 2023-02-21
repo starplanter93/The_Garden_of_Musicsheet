@@ -19,7 +19,7 @@ import {
   getDoc,
   arrayUnion,
 } from 'firebase/firestore/lite';
-import { StateType } from '../redux/PostSlice';
+import { Score, StateType } from '../redux/PostSlice';
 import { ScoreInfoType } from '../components/pages/Main/Main';
 
 const firebaseConfig = {
@@ -34,7 +34,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
 export const auth = getAuth();
+
 export const provider = new GoogleAuthProvider();
 
 export async function getDocument() {
@@ -239,4 +241,11 @@ async function savingUserPost(data: StateType) {
       await setDoc(userRef, { posts: data.scores });
     }
   }
+}
+
+export async function getUserArticle(uid: string) {
+  const ref = doc(db, 'user', uid);
+  const snapshot = await getDoc(ref);
+
+  return snapshot.data();
 }

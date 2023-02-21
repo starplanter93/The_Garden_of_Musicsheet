@@ -10,7 +10,7 @@ interface ScoreListProps {
   buttonEvent?: 'edit' | 'download';
 }
 
-const ScoreList = ({ score, buttonEvent = 'edit' }: ScoreListProps) => {
+const ScoreList = ({ score, buttonEvent }: ScoreListProps) => {
   const cx = classNames.bind(styles);
   const { pathname } = useLocation();
   const {

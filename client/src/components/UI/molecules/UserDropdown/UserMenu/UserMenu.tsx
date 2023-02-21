@@ -6,8 +6,13 @@ import { setHeader } from '../../../../../redux/HeaderSlice';
 import { auth } from '../../../../../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
 import { persistor } from '../../../../../redux/store';
+import { Dispatch, SetStateAction } from 'react';
 
-const UserMenu = () => {
+interface UserMenuProps {
+  setDropdown?: Dispatch<SetStateAction<boolean>>;
+}
+
+const UserMenu = ({ setDropdown }: UserMenuProps) => {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,6 +28,11 @@ const UserMenu = () => {
   const handleUpload = () => {
     dispatch(setHeader(true));
     navigate('/postmusic');
+  };
+
+  const handleMyPage = () => {
+    if (setDropdown) setDropdown(false);
+    navigate('/mypage');
   };
 
   return (
@@ -44,7 +54,7 @@ const UserMenu = () => {
           <Button
             theme="transparent"
             size="auto"
-            onClick={() => navigate('/mypage')}
+            onClick={() => handleMyPage()}
           >
             <>
               <Icon icon="CgUserList" size="s" />

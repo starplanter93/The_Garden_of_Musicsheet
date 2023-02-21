@@ -12,9 +12,11 @@ const PostMusic = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!auth.currentUser) {
-      navigate('/auth');
-    }
+    setTimeout(() => {
+      if (!auth.currentUser) {
+        navigate('/auth');
+      }
+    }, 2000);
   }, []);
 
   return (

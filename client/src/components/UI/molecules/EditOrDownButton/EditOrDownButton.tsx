@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Icon, Text } from '../../atoms';
 
 interface EditOrDownButtonProps {
-  event: 'edit' | 'download';
+  event?: 'edit' | 'download';
 }
 
 const EditOrDownButton = ({ event }: EditOrDownButtonProps) => {

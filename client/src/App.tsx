@@ -4,6 +4,7 @@ import {
   InstrumentDetail,
   Layout,
   MusicDetail,
+  MyPage,
   ScoreInfo,
 } from './components/pages';
 import { Main } from './components/pages';
@@ -23,7 +24,9 @@ function App() {
             <Route path="instrument/:instType" element={<InstrumentDetail />} />
             <Route path="music/:songTitle" element={<MusicDetail />} />
             <Route path="/postmusic" element={<PostMusic />} />
-            <Route path="/:scoreName/:scoreId" element={<ScoreInfo />}></Route>
+            <Route path="/scoreinfo" element={<ScoreInfo />} />
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/:scoreName/:scoreId" element={<ScoreInfo />} />
             {/* MainPage 등 */}
           </Route>
           <Route path="/auth" element={<Auth />}></Route>
