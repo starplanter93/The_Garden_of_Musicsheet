@@ -6,6 +6,7 @@
   top: 0%;
   right: 0%;
   width: 40%;
+  min-width: #{300 / $font-size}rem;
   height: 100%;
   display: flex;
   flex-direction: column;
