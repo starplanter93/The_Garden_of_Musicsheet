@@ -1,1 +1,13 @@
 @import '/src/utils/utils';
+
+.cart-header {
+  box-shadow: 0 0 1rem $light-gray;
+  border: 1px solid $light-gray;
+  height: #{70 / $font-size}rem;
+  background-color: $white;
+  display: flex;
+  align-items: center;
+  button {
+    margin-left: 1rem;
+  }
+}
