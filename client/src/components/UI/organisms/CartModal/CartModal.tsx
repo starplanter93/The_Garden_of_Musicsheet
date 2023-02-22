@@ -6,13 +6,15 @@ import styles from './cartModal.module.scss';
 function CartModal() {
   const cx = classNames.bind(styles);
   return (
-    <section className={cx('cart-modal')}>
-      <CartHeader />
-      <div className={cx('cart-body-wrapper')}>
-        <CartBody />
-      </div>
-      <CartFooter />
-    </section>
+    <div className={cx('backdrop')}>
+      <section className={cx('cart-modal')}>
+        <CartHeader />
+        <div className={cx('cart-body-wrapper')}>
+          <CartBody />
+        </div>
+        <CartFooter />
+      </section>
+    </div>
   );
 }
 
