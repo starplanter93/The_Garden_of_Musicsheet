@@ -7,6 +7,7 @@ import {
 } from 'firebase/auth';
 import { auth, provider } from '../../firebase/firebase';
 import Avatar from '../Avatar';
+import { userInitData } from '../../firebase/firebase';
 
 export const handleUserLogin = async (email: any, password: any) => {
   let response;
@@ -38,7 +39,7 @@ export const handleRegisterUser = async (
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-
+      userInitData(user.uid);
       updateProfile(user, {
         displayName: nickname,
         photoURL: Avatar(),
