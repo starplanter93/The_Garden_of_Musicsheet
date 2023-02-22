@@ -1,0 +1,47 @@
+@import '/src/utils/utils';
+
+.cart-list {
+  list-style: none;
+  background-color: $white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3.5rem;
+
+  .title-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.25rem;
+    flex: 1;
+    > span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      word-break: break-all;
+      width: auto;
+      margin-left: 0.5rem;
+    }
+  }
+
+  button {
+    margin-right: 1.75rem;
+  }
+
+  > span:nth-child(2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    width: auto;
+    margin-left: 0.5rem;
+    flex: 0.75;
+  }
+
+  > span:nth-child(3) {
+    margin: 0 0.5rem;
+  }
+}

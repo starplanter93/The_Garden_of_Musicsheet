@@ -23,8 +23,10 @@ import TextEditor from './TextEditor/TextEditor';
 import PostSidebar from '../molecules/PostSidebar/PostSidebar';
 import TabMenu from './TabMenu/TabMenu';
 import UserCard from './UserCard/UserCard';
+
 import CartHeader from './CartHeader/CartHeader';
 import CartFooter from './CartFooter/CartFooter';
+import CartList from './CartList/CartList';
 
 export {
   PostSidebar,
@@ -53,4 +55,5 @@ export {
   UserCard,
   CartHeader,
   CartFooter,
+  CartList,
 };
