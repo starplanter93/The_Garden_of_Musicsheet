@@ -37,15 +37,19 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
   const [searchData, setSearchData] = useState([]);
   const [selectedData, setSelectedData] = useState<SelectedDataProps>();
 
-  if (text === '악보 제목') {
-    dispatch(setScoreName(userInput));
-  }
   useEffect(() => {
     if (userInput.length > 0) {
       // if (text === '곡 제목') dispatch(setSongName(userInput));
       // if (text === '원곡자') dispatch(setArtist(userInput));
-      if (text === '가격') dispatch(setPrice(userInput));
-      if (text === '유튜브 주소 (선택)') dispatch(setURL(userInput));
+      if (text === '악보 제목') {
+        dispatch(setScoreName(userInput));
+      }
+      if (text === '가격') {
+        dispatch(setPrice(userInput));
+      }
+      if (text === '유튜브 주소 (선택)') {
+        dispatch(setURL(userInput));
+      }
       getSearchData(userInput).then((response) => {
         switch (response.status) {
           default:
@@ -61,22 +65,24 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
 
   const cx = classNames.bind(styles);
 
-  const AutoComplete = () => {
-    const handleOnClick = (el: any) => {
-      setSelectedData({
-        albumCover: el.album.images[0].url,
-        artist: el.artists[0].name,
-        songName: el.name,
-      });
-      setUserInput('');
-    };
+  const handleOnClick = (el: any) => {
+    setSelectedData({
+      albumCover: el.album.images[0].url,
+      artist: el.artists[0].name,
+      songName: el.name,
+    });
+    setUserInput('');
+  };
 
+  useEffect(() => {
     if (selectedData) {
       dispatch(setArtist(selectedData.artist));
       dispatch(setSongName(selectedData.songName));
       dispatch(setAlbumImg(selectedData.albumCover));
     }
+  }, [selectedData]);
 
+  const AutoComplete = () => {
     if (userInput) {
       return (
         <div

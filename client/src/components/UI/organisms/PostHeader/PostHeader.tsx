@@ -4,11 +4,10 @@ import { Button, Icon, Text } from '../../atoms';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import { useNavigate } from 'react-router-dom';
-import { setHeader } from '../../../../redux/HeaderSlice';
 import { auth, getMusicData } from '../../../../firebase/firebase';
 import { setUserInfo, initializeState } from '../../../../redux/PostSlice';
 import { toast } from 'react-toastify';
-import React from 'react';
+import { useEffect } from 'react';
 
 const PostHeader = () => {
   const cx = classNames.bind(styles);
@@ -19,19 +18,21 @@ const PostHeader = () => {
   const pdf = useSelector((state: RootState) => state.pdfFile);
 
   const handleIsPost = () => {
-    dispatch(setHeader(false));
     dispatch(initializeState());
     navigate(-1);
   };
 
-  if (auth.currentUser) {
-    const user = [
-      auth.currentUser.displayName,
-      auth.currentUser.uid,
-      auth.currentUser.photoURL,
-    ];
-    dispatch(setUserInfo(user));
-  }
+  useEffect(() => {
+    if (auth.currentUser) {
+      const user = [
+        auth.currentUser.displayName,
+        auth.currentUser.uid,
+        auth.currentUser.photoURL,
+      ];
+      dispatch(setUserInfo(user));
+    }
+  }, [data]);
+
   const validateInputs = () => {
     const { songName, artist, albumImg, scores } = data;
     if (
@@ -55,7 +56,6 @@ const PostHeader = () => {
       toast.error('모든 필드를 입력해주세요.');
     } else {
       await getMusicData(data.songName, data).then(() => navigate('/'));
-      dispatch(setHeader(false));
       dispatch(initializeState());
       toast.success('악보 등록 성공!');
     }
