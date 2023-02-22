@@ -6,9 +6,13 @@ import Main from './Main/Main';
 import InstrumentDetail from './InstrumentDetail/InstrumentDetail';
 import MusicDetail from './MusicDetail/MusicDetail';
 import ScoreInfo from './ScoreInfo/ScoreInfo';
+import MyPage from './MyPage/MyPage';
+import PostLayout from './PostLayout/PostLayout';
 import EditScore from './EditScore/EditScore';
 
 export {
+  PostLayout,
+  MyPage,
   Layout,
   Instrument,
   Auth,

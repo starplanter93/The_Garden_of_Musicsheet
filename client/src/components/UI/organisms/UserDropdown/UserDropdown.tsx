@@ -28,7 +28,7 @@ const UserDropdown = ({
   return (
     <div className={cx('dropdown-wrapper')}>
       <MiniProfile />
-      <UserMenu />
+      <UserMenu setDropdown={setDropdown} />
     </div>
   );
 };

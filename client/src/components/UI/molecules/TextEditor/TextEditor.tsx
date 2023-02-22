@@ -48,4 +48,4 @@ const TextEditor = ({ text, description }: TextEditorProps) => {
   );
 };
 
-export default React.memo(TextEditor);
+export default TextEditor;

@@ -55,6 +55,13 @@
     border: 2px solid $light-green;
   }
 
+  &.cancel {
+    background-color: $red;
+    &:hover {
+      background-color: rgba($red, 0.8);
+    }
+  }
+
   // Todo : 반응형 사이즈 300*50(250*50) //150*35(100*25)
   @include button-size(xl, 332, 60);
   @include button-size(l, 300, 50);

@@ -1,6 +1,6 @@
 import styles from './button.module.scss';
 import classNames from 'classnames/bind';
-
+import React from 'react';
 interface ButtonProps {
   children: JSX.Element | string;
   theme?:
@@ -9,7 +9,8 @@ interface ButtonProps {
     | 'tertiary'
     | 'transparent'
     | 'toggle'
-    | 'dropdown';
+    | 'dropdown'
+    | 'cancel';
   size?: 'auto' | 'xl' | 'l' | 'm' | 's' | 'xs' | 'tiny';
   clicked?: boolean;
   disabled?: boolean;
@@ -43,4 +44,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default React.memo(Button);

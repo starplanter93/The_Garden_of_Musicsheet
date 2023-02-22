@@ -76,22 +76,24 @@ const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
 
   const cx = classNames.bind(styles);
 
-  const AutoComplete = () => {
-    const handleOnClick = (el: any) => {
-      setSelectedData({
-        albumCover: el.album.images[0].url,
-        artist: el.artists[0].name,
-        songName: el.name,
-      });
-      setUserInput('');
-    };
+  const handleOnClick = (el: any) => {
+    setSelectedData({
+      albumCover: el.album.images[0].url,
+      artist: el.artists[0].name,
+      songName: el.name,
+    });
+    setUserInput('');
+  };
 
+  useEffect(() => {
     if (selectedData) {
       dispatch(setArtist(selectedData.artist));
       dispatch(setSongName(selectedData.songName));
       dispatch(setAlbumImg(selectedData.albumCover));
     }
+  }, [selectedData]);
 
+  const AutoComplete = () => {
     if (userInput && isFocused) {
       return (
         <div

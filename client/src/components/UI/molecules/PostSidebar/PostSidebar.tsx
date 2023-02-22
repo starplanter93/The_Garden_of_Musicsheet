@@ -123,4 +123,4 @@ const PostSidebar = ({ url }: PostSidebarProps) => {
   );
 };
 
-export default React.memo(PostSidebar);
+export default PostSidebar;
