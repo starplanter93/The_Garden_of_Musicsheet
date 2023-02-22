@@ -1,7 +1,13 @@
 import React from 'react';
+import { CartHeader, CartFooter } from '../UI/molecules';
 
 function Test() {
-  return <></>;
+  return (
+    <>
+      <CartHeader />
+      <CartFooter />
+    </>
+  );
 }
 
 export default Test;
