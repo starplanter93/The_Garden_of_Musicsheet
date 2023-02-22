@@ -2,7 +2,6 @@ import styles from './userMenu.module.scss';
 import classNames from 'classnames/bind';
 import { Button, Icon, Text } from '../../../atoms';
 import { useDispatch } from 'react-redux';
-import { setHeader } from '../../../../../redux/HeaderSlice';
 import { auth } from '../../../../../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
 import { persistor } from '../../../../../redux/store';
@@ -26,7 +25,6 @@ const UserMenu = ({ setDropdown }: UserMenuProps) => {
   };
 
   const handleUpload = () => {
-    dispatch(setHeader(true));
     navigate('/postmusic');
   };
 

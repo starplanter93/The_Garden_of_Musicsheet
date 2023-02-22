@@ -25,14 +25,19 @@ const MyPage = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user as User);
-      setLoading(false);
       if (user) {
         getUserArticle(user.uid).then((el) => el && setData(el.posts));
       }
+      setLoading(false);
     });
-
     return unsubscribe;
   }, []);
+
+  useEffect(() => {
+    if (!localStorage.getItem('authorization')) {
+      navigate('/auth');
+    }
+  }, [user]);
 
   const UserData = () => {
     if (data && clickedTab === '등록한 악보') {
@@ -64,11 +69,6 @@ const MyPage = () => {
 
   if (loading) {
     return <Spinner />;
-  }
-
-  if (modal) {
-    console.log('modal on');
-    console.log(modal);
   }
 
   if (user) {

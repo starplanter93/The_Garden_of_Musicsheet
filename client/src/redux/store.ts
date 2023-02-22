@@ -8,7 +8,6 @@ import storage from 'redux-persist/lib/storage';
 import loginReducer from './LoginSlice';
 import regReducer from './RegSlice';
 import userReducer from './UserSlice';
-import HeaderReducer from './HeaderSlice';
 import PostReducer from './PostSlice';
 import FileReducer from './FileSlice';
 const persistConfig = {
@@ -29,8 +28,6 @@ export const store = configureStore({
     user: persistedReducer,
     regInfo: regReducer,
     userLoginInput: loginReducer,
-    postHeader: HeaderReducer,
-    defaultHeader: HeaderReducer,
     postInfo: PostReducer,
     pdfFile: FileReducer,
   },

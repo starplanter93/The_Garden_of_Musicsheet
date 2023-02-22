@@ -13,6 +13,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Test from './components/pages/Test';
+import { PostLayout } from './components/pages';
 
 function App() {
   return (
@@ -24,11 +25,14 @@ function App() {
             <Route path="instrument" element={<Instrument />} />
             <Route path="instrument/:instType" element={<InstrumentDetail />} />
             <Route path="music/:songTitle" element={<MusicDetail />} />
-            <Route path="/postmusic" element={<PostMusic />} />
             <Route path="/scoreinfo" element={<ScoreInfo />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/:scoreName/:scoreId" element={<ScoreInfo />} />
             {/* MainPage 등 */}
+          </Route>
+          <Route path="/postmusic" element={<PostLayout />}>
+            <Route path="/postmusic" element={<PostMusic />} />
+            {/* <Route path='/edit/:scoreName/:scoreId'/> */}
           </Route>
           <Route path="/auth" element={<Auth />}></Route>
           <Route path="/test" element={<Test />}></Route>

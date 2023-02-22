@@ -49,4 +49,4 @@ const PostMusic = () => {
   );
 };
 
-export default React.memo(PostMusic);
+export default PostMusic;
