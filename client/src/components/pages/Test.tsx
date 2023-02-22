@@ -1,11 +1,11 @@
 import React from 'react';
-import { CartHeader, CartFooter, CartList } from '../UI/molecules';
+import { CartHeader, CartFooter, CartBody } from '../UI/molecules';
 
 function Test() {
   return (
     <>
       <CartHeader />
-      <CartList />
+      <CartBody />
       <CartFooter />
     </>
   );

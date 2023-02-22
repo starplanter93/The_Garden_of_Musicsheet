@@ -27,6 +27,7 @@ import UserCard from './UserCard/UserCard';
 import CartHeader from './CartHeader/CartHeader';
 import CartFooter from './CartFooter/CartFooter';
 import CartList from './CartList/CartList';
+import CartBody from './CartBody/CartBody';
 
 export {
   PostSidebar,
@@ -56,4 +57,5 @@ export {
   CartHeader,
   CartFooter,
   CartList,
+  CartBody,
 };
