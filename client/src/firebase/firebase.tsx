@@ -249,3 +249,11 @@ export async function getUserArticle(uid: string) {
 
   return snapshot.data();
 }
+
+export async function userInitData(uid: string) {
+  const ref = doc(db, 'user', uid);
+  const snapshot = await getDoc(ref);
+  await setDoc(ref, { cash: '0' });
+
+  return snapshot.data();
+}

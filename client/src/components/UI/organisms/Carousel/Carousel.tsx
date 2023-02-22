@@ -10,7 +10,7 @@ import 'swiper/scss/navigation';
 import './carousel.scss';
 
 // import required modules
-import { Pagination, Navigation } from 'swiper';
+import { Pagination, Navigation, Autoplay } from 'swiper';
 import { useNavigate } from 'react-router-dom';
 
 export default function Carousel() {
@@ -25,8 +25,12 @@ export default function Carousel() {
         pagination={{
           clickable: true,
         }}
+        autoplay={{
+          delay: 4000,
+          disableOnInteraction: false,
+        }}
         navigation={true}
-        modules={[Pagination, Navigation]}
+        modules={[Pagination, Navigation, Autoplay]}
         className="mySwiper"
       >
         <SwiperSlide>
