@@ -13,20 +13,18 @@ const MiniProfile = () => {
     (state: RootState) => state.user.userReducer
   );
   const [cash, setCash] = useState('');
-  const [picture, setPicture] = useState(photoURL);
 
   useEffect(() => {
     const user = auth.currentUser;
     if (user && user.photoURL) {
       getUserCash(user.uid).then((el) => el && setCash(el.cash));
-      setPicture(user.photoURL);
     }
   }, [auth]);
 
   return (
     <div className={cx('profile-wrapper')}>
       <div className={cx('profile-info')}>
-        <ImgLayout size="s" src={picture} alt="프로필사진" />
+        <ImgLayout size="s" src={photoURL} alt="프로필사진" />
         <div>
           <Text weight="semibold">{displayName}</Text>
           <Text size="s">{email}</Text>
