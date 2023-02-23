@@ -3,8 +3,8 @@ import classNames from 'classnames/bind';
 import { Button, Icon, Text } from '../../atoms';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
-import { useNavigate } from 'react-router-dom';
-import { auth, getMusicData } from '../../../../firebase/firebase';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { auth, getMusicData, updateScore } from '../../../../firebase/firebase';
 import { setUserInfo, initializeState } from '../../../../redux/PostSlice';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
@@ -13,9 +13,10 @@ const PostHeader = () => {
   const cx = classNames.bind(styles);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const { scoreId } = useParams();
 
   const data = useSelector((state: RootState) => state.postInfo);
-  const pdf = useSelector((state: RootState) => state.pdfFile);
 
   const handleIsPost = () => {
     dispatch(initializeState());
@@ -44,7 +45,7 @@ const PostHeader = () => {
       !scores[0].sheetType ||
       !scores[0].detail ||
       !scores[0].price ||
-      !pdf
+      !scores[0].downloadURL
     ) {
       return false;
     }
@@ -55,7 +56,11 @@ const PostHeader = () => {
     if (!validateInputs()) {
       toast.error('모든 필드를 입력해주세요.');
     } else {
-      await getMusicData(data.songName, data).then(() => navigate('/'));
+      if (pathname.includes('/edit') && scoreId) {
+        await updateScore(data, scoreId);
+      } else await getMusicData(data.songName, data);
+
+      navigate('/');
       dispatch(initializeState());
       toast.success('악보 등록 성공!');
     }
@@ -73,7 +78,9 @@ const PostHeader = () => {
         <Button size="s" onClick={() => handleUpload()}>
           <div className={cx('save')}>
             <Icon icon="MdOutlineCheck" color="white" />
-            <Text color="white">저장하기</Text>
+            <Text color="white">
+              {pathname.includes('/edit') ? '수정하기' : '저장하기'}
+            </Text>
           </div>
         </Button>
       </nav>
