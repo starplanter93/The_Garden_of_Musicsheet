@@ -1,10 +1,10 @@
 import { createSlice, Reducer } from '@reduxjs/toolkit';
 
 interface StateType {
-  isCartModalOpen: boolean;
+  isCartModalOpened: boolean;
 }
 
-const initialState: StateType = { isCartModalOpen: false };
+const initialState: StateType = { isCartModalOpened: false };
 
 export const modalSlice = createSlice({
   name: 'modalSlice',
@@ -12,17 +12,17 @@ export const modalSlice = createSlice({
   reducers: {
     openCartModal: (state: StateType) => {
       const newState = { ...state };
-      newState.isCartModalOpen = true;
+      newState.isCartModalOpened = true;
       return newState;
     },
     closeCartModal: (state: StateType) => {
       const newState = { ...state };
-      newState.isCartModalOpen = false;
+      newState.isCartModalOpened = false;
       return newState;
     },
     cartModalHandler: (state: StateType) => {
       const newState = { ...state };
-      newState.isCartModalOpen = !newState.isCartModalOpen;
+      newState.isCartModalOpened = !newState.isCartModalOpened;
       return newState;
     },
   },
