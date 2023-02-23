@@ -17,6 +17,7 @@ import {
   setScoreName,
 } from '../../../../redux/PostSlice';
 import { ScoreInfoType } from '../../../pages/Main/Main';
+import { useLocation } from 'react-router-dom';
 
 interface PostInputProps {
   text: string;
@@ -33,6 +34,7 @@ interface SelectedDataProps {
 
 const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
   const [isFocused, setIsFocused] = useState(false);
   const [userInput, setUserInput] = useState(''); // 곡 제목에서 받아온 걸 넣어주면 될 듯
@@ -146,7 +148,7 @@ const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
               <Text size="s">{selectedData?.artist}</Text>
             </div>
           </div>
-          <div>
+          <div className={cx('delete-btn')}>
             <Button
               size="tiny"
               theme="transparent"
@@ -189,7 +191,7 @@ const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
     );
   } else if (type === 'dropdown') {
     return (
-      <div className={cx('wrapper')}>
+      <div className={cx('wrapper', pathname.includes('/edit') && 'editmode')}>
         <div className={cx('text')}>
           <Text weight="regular" size="m">
             {text}
@@ -198,21 +200,25 @@ const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
             *
           </Text>
         </div>
-        <div className={cx(selectedData ? 'search' : 'default')}>
-          <div className={cx('icon')}>
-            <Icon icon="BiSearch" color="gray" />
-          </div>
-          <div className={cx('input')}>
-            <Input
-              theme="icon-input-no-label"
-              size="m"
-              setIsFocused={setIsFocused}
-              setUserInput={setUserInput}
-              placeholder={placeholder}
-            />
-          </div>
-        </div>
-        <AutoComplete />
+        {pathname.includes('/edit') || (
+          <>
+            <div className={cx(selectedData ? 'search' : 'default')}>
+              <div className={cx('icon')}>
+                <Icon icon="BiSearch" color="gray" />
+              </div>
+              <div className={cx('input')}>
+                <Input
+                  theme="icon-input-no-label"
+                  size="m"
+                  setIsFocused={setIsFocused}
+                  setUserInput={setUserInput}
+                  placeholder={placeholder}
+                />
+              </div>
+            </div>
+            <AutoComplete />
+          </>
+        )}
         <Selection />
       </div>
     );

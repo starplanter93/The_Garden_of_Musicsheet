@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setInstType } from '../../../../../redux/PostSlice';
 import { instType } from '../../../../../redux/PostSlice';
+import { useLocation } from 'react-router-dom';
 
 interface PostButtonsProps {
   value?: string;
@@ -13,6 +14,7 @@ interface PostButtonsProps {
 const PostButtons = ({ value }: PostButtonsProps) => {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const [clickedButton, setClickedButton] = useState<number | null>(null);
   const buttons = [
     { label: '피아노', index: 0 },
@@ -48,7 +50,7 @@ const PostButtons = ({ value }: PostButtonsProps) => {
         </Text>
       </div>
       <div>
-        <div className={cx('h2')}>
+        <div className={cx('h2', pathname.includes('/edit') && 'editmode')}>
           <Text weight="regular" size="m">
             악기 종류
           </Text>
@@ -64,6 +66,7 @@ const PostButtons = ({ value }: PostButtonsProps) => {
               theme="toggle"
               onClick={() => handleButtonClick(button.index)}
               clicked={clickedButton === button.index}
+              disabled={pathname.includes('/edit') ? true : false}
             >
               {button.label}
             </Button>
