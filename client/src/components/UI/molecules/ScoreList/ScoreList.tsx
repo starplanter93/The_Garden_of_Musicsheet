@@ -49,13 +49,16 @@ const ScoreList = ({ score, buttonEvent }: ScoreListProps) => {
           </ul>
         </div>
       </Link>
-      {!pathname.includes('/maypage') ? (
+      {pathname !== '/mypage' ? (
         <div className={cx('price')}>
           <Text color="blue">{`${Number(price).toLocaleString()}원`}</Text>
         </div>
       ) : (
         <div>
-          <EditOrDownButton event={buttonEvent} />
+          <EditOrDownButton
+            event={buttonEvent}
+            link={`/scores/edit/${songName}-${artist}/${scoreId}`}
+          />
         </div>
       )}
     </div>
