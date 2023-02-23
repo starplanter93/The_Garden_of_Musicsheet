@@ -27,6 +27,7 @@ const PostButtons = ({ value }: PostButtonsProps) => {
     if (value) {
       const index = buttons.filter((el) => el.label === value)[0].index;
       setClickedButton(index);
+      dispatch(setInstType(value as instType));
     }
   }, []);
 

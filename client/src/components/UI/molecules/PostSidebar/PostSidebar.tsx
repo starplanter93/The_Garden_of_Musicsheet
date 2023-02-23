@@ -23,6 +23,7 @@ const PostSidebar = ({ url }: PostSidebarProps) => {
       const decodedURI = decodeURI(url);
       const uploadedFile = decodedURI.match(/(%2F)(.+)\?/) as RegExpMatchArray;
       setFileName(uploadedFile[2]);
+      dispatch(setDownloadURL(url));
     }
   }, []);
 

@@ -26,6 +26,8 @@ const DropDown = ({ option, text, value }: DropDownProps) => {
   useEffect(() => {
     if (value) {
       setSelectedValue(value);
+      if (text === '난이도') dispatch(setDifficulty(value as difficulty));
+      if (text === '악보 종류') dispatch(setSheetType(value as sheetType));
     }
   }, []);
 
