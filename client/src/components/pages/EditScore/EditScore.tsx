@@ -6,6 +6,7 @@ import { PostButtons, MusicPostInfo } from '../../UI/organisms';
 import { getScoreByMusic } from '../../../firebase/firebase';
 import { useParams } from 'react-router-dom';
 import { ScoreInfoType } from '../Main/Main';
+import { LoadingSpinner } from '../../UI/atoms';
 
 const EditScore = () => {
   const cx = classNames.bind(styles);
@@ -18,7 +19,7 @@ const EditScore = () => {
     }
   }, []);
 
-  if (scoreData === undefined) return <div>로딩중..</div>;
+  if (scoreData === undefined) return <LoadingSpinner />;
 
   return (
     <div className={cx('wrapper')}>
