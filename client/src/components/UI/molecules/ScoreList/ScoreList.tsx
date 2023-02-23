@@ -22,6 +22,7 @@ const ScoreList = ({ score, buttonEvent }: ScoreListProps) => {
     author,
     scoreId,
     scoreName,
+    downloadURL,
   } = score;
 
   return (
@@ -58,6 +59,7 @@ const ScoreList = ({ score, buttonEvent }: ScoreListProps) => {
           <EditOrDownButton
             event={buttonEvent}
             link={`/scores/edit/${songName}-${artist}/${scoreId}`}
+            downloadURL={downloadURL}
           />
         </div>
       )}
