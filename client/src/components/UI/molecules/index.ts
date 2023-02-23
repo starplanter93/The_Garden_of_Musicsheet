@@ -23,8 +23,10 @@ import TextEditor from './TextEditor/TextEditor';
 import PostSidebar from '../molecules/PostSidebar/PostSidebar';
 import TabMenu from './TabMenu/TabMenu';
 import UserCard from './UserCard/UserCard';
+import MyPageModal from './MyPageModal/MyPageModal';
 
 export {
+  MyPageModal,
   PostSidebar,
   TextEditor,
   DropDown,
