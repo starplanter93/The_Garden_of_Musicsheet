@@ -2,7 +2,7 @@ import styles from './optOutModal.module.scss';
 import classNames from 'classnames/bind';
 import { Button, Text } from '../../atoms';
 import { Dispatch, SetStateAction } from 'react';
-import { auth } from '../../../../firebase/firebase';
+import { auth, userOptout } from '../../../../firebase/firebase';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { deleteUser } from 'firebase/auth';
@@ -19,6 +19,7 @@ const OptOutModal = ({
     if (user)
       try {
         // deleteUser(user);
+        await userOptout(user.uid);
         await auth.signOut();
         await persistor.purge();
         toast.success('그동안 이용해주셔서 고마워요!🙇‍♂️');

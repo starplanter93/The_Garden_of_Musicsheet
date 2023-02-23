@@ -27,11 +27,12 @@ const CategoryCover = ({
   const [editmode, setEditMode] = useState(false);
   const [username, setUsername] = useState(category);
 
-  const handleNameSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleNameSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (auth.currentUser && e.key === 'Enter') {
-      updateProfile(auth.currentUser, { displayName: username });
-      updateUserName(auth.currentUser.uid, username);
+      await updateProfile(auth.currentUser, { displayName: username });
+      await updateUserName(auth.currentUser.uid, username);
       setEditMode(false);
+      window.location.reload();
     }
   };
   const handleNameChange = () => {
