@@ -4,20 +4,22 @@
   margin-bottom: 4rem;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   padding-left: 2rem;
 
-  aside {
+  > aside {
     position: sticky;
-    width: 25%;
-    height: 100%;
+    top: 4.375rem;
+    width: 28rem;
+    min-width: 28rem;
+    height: calc(100vh - 4.375rem);
+    margin-left: 1rem;
     border-left: 1px solid $gray-white;
     background-color: #fafafa;
-    top: 4.4rem;
   }
 
   .container {
-    width: 75%;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,16 +31,19 @@
       margin-top: 2rem;
       border: 2px solid $gray-white;
       border-radius: 10px;
-      padding: 2rem;
+      padding: 1rem 3rem;
 
       .dropdown-wrapper {
         display: flex;
         margin-bottom: 2rem;
+        
+        .dropdown-left, .dropdown-right {
+          position: relative;
+        }
         .dropdown-right {
           display: flex;
           margin-left: 2rem;
           flex-direction: column;
-          margin-left: none;
         }
       }
     }
@@ -48,7 +53,7 @@
       margin-top: 2rem;
       border: 2px solid $gray-white;
       border-radius: 10px;
-      padding: 2rem;
+      padding: 1rem 3rem;
     }
 
     .sale-info {
@@ -56,7 +61,7 @@
       margin-top: 2rem;
       border: 2px solid $gray-white;
       border-radius: 10px;
-      padding: 2rem;
+      padding: 1rem 3rem;;
       margin-bottom: 4rem;
     }
   }

@@ -3,6 +3,7 @@
 .text {
   margin-bottom: 2rem;
 }
+
 .default {
   display: flex;
   align-items: center;
@@ -20,6 +21,8 @@
   }
 }
 .options {
+  position: absolute;
+  top: 6.8rem;
   margin-top: 4px;
   background-color: $gray-white;
   display: flex;
@@ -27,7 +30,6 @@
   justify-content: center;
   align-items: center;
   width: 18.75rem;
-
   border-radius: 10px;
   padding: 0.25rem;
   :hover {
@@ -37,8 +39,8 @@
 
   .option {
     text-align: center;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding: 10px 0;
     width: 100%;
+    cursor: pointer;
   }
 }
