@@ -5,26 +5,30 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from 'firebase/auth';
-import { auth, provider } from '../../firebase/firebase';
+import { auth, provider, db, userInitData } from '../../firebase/firebase';
 import Avatar from '../Avatar';
-import { userInitData } from '../../firebase/firebase';
 
-export const handleUserLogin = async (email: any, password: any) => {
+import { doc, getDoc } from 'firebase/firestore/lite';
+import { toast } from 'react-toastify';
+
+export const handleUserLogin = async (email: string, password: string) => {
   let response;
   await signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
+    .then(async (userCredential) => {
       const user = userCredential.user;
-      localStorage.setItem('authorization', user.uid);
-      localStorage.setItem('refresh', user.refreshToken);
-      response = user;
-      // ...
+      const ref = doc(db, 'user', user.uid);
+      const snapshot = await getDoc(ref);
+      if (snapshot.exists()) {
+        snapshot.data().isActive === false
+          ? toast.error('탈퇴한 회원이에요!')
+          : localStorage.setItem('authorization', user.uid);
+        localStorage.setItem('refresh', user.refreshToken);
+        response = snapshot.data().isOptout;
+      }
     })
-
     .catch((error) => {
       response = error;
       console.log(response.code);
-      // if 400 => switch and show user that the ac already exists
     });
 
   return response;
@@ -36,21 +40,27 @@ export const handleRegisterUser = async (
   nickname: any
 ) => {
   await createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
+    .then(async (userCredential) => {
       const user = userCredential.user;
-      userInitData(user.uid);
-      updateProfile(user, {
-        displayName: nickname,
-        photoURL: Avatar(),
-      });
+      const ref = doc(db, 'user', user.uid);
+      const snapshot = await getDoc(ref);
+      if (snapshot.exists()) {
+        toast.error('이미 가입한 회원이세요!');
+      } else {
+        userInitData(user.uid);
+        updateProfile(user, {
+          displayName: nickname,
+          photoURL: Avatar(),
+        });
+        handleUserLogin(email, password);
+      }
     })
     .catch((error) => {
+      toast.error('이미 가입한 회원이세요!');
       console.log(error.code);
-      // if 400 => switch and show user that the ac already exists
     });
 
-  return handleUserLogin(email, password);
+  return;
 };
 
 export const handleGoogleLogin = async () => {

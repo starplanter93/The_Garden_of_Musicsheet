@@ -33,7 +33,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 export const auth = getAuth();
 
@@ -477,7 +477,7 @@ export async function userOptout(uid: string) {
     const { posts } = userSnap.data();
     const scoresWithId = posts.filter((obj: Score) => obj.authorId === uid);
     scoresWithId.forEach((obj: Score) => (obj.isOptout = true));
-    await updateDoc(userRef, { posts: posts });
+    await updateDoc(userRef, { posts: posts, isActive: false });
   }
   /** music 컬렉션 수정*/
   const musicRef = collection(db, 'music');

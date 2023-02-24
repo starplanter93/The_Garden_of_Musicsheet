@@ -17,33 +17,50 @@ interface UserAuthProps {
   type: 'Login' | 'SignUp';
 }
 
+interface RegDataProps {
+  email?: string;
+  password?: string;
+  nickname?: string;
+  passwordCheck?: string;
+}
+
 const UserAuth = ({ type }: UserAuthProps) => {
   const navigate = useNavigate();
   const userLoginData = useSelector((state: RootState) => state.userLoginInput);
-  const userRegData = useSelector((state: RootState) => state.regInfo);
+  const userRegData: RegDataProps = useSelector(
+    (state: RootState) => state.regInfo
+  );
   const [typeState, setTypeState] = useState(type); // page 단에서 진행해도 될 듯
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
 
   const handleOnClick = async () => {
-    if (typeState === 'Login') {
+    if (
+      typeState === 'Login' &&
+      userLoginData.email &&
+      userLoginData.password
+    ) {
       await handleUserLogin(userLoginData.email, userLoginData.password).then(
         (response) => {
+          console.log(response);
           if (typeof response !== 'undefined') {
-            console.log(response);
             const { displayName, email, phoneNumber, photoURL } = response;
             dispatch(userInfo({ displayName, email, phoneNumber, photoURL }));
           }
         }
       );
-      navigate('/');
+      localStorage.getItem('authorization') ? navigate('/') : null;
     } else if (typeState === 'SignUp') {
-      await handleRegisterUser(
-        userRegData.email,
-        userRegData.password,
-        userRegData.nickname
-      );
-      navigate('/');
+      try {
+        await handleRegisterUser(
+          userRegData.email,
+          userRegData.password,
+          userRegData.nickname
+        );
+        localStorage.getItem('authorization') ? navigate('/') : null;
+      } catch (err) {
+        console.log(err);
+      }
     } else null;
   };
 

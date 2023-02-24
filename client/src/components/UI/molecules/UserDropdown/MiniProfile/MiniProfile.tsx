@@ -12,7 +12,7 @@ const MiniProfile = () => {
   const { photoURL, displayName, email } = useSelector(
     (state: RootState) => state.user.userReducer
   );
-  const [cash, setCash] = useState('');
+  const [cash, setCash] = useState('1000000');
 
   useEffect(() => {
     const user = auth.currentUser;
