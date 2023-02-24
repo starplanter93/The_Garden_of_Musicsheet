@@ -28,7 +28,13 @@ export const handleUserLogin = async (email: string, password: string) => {
     })
     .catch((error) => {
       response = error;
-      console.log(response.code);
+      if (response.code === 'auth/user-not-found') {
+        toast.error('유저가 존재하지 않아요!');
+      }
+
+      if (response.code === 'auth/wrong-password') {
+        toast.error('이메일 또는 비밀번호가 이상해요!');
+      }
     });
 
   return response;
