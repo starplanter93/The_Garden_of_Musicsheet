@@ -2,7 +2,7 @@ import styles from './userDropdown.module.scss';
 import classNames from 'classnames/bind';
 import { MiniProfile, UserMenu } from '../../molecules';
 import { Dispatch, SetStateAction, useEffect } from 'react';
-
+import React from 'react';
 interface UserDropdownProps {
   closeDropdownTarget: any;
   setDropdown: Dispatch<SetStateAction<boolean>>;
@@ -33,4 +33,4 @@ const UserDropdown = ({
   );
 };
 
-export default UserDropdown;
+export default React.memo(UserDropdown);

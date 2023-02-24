@@ -3,12 +3,23 @@ import classNames from 'classnames/bind';
 import { Icon, ImgLayout, Text } from '../../../atoms';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../redux/store';
+import { memo, useEffect, useState } from 'react';
+import { auth } from '../../../../../firebase/firebase';
+import { getUserCash } from '../../../../../firebase/firebase';
 
 const MiniProfile = () => {
   const cx = classNames.bind(styles);
-  const { photoURL, displayName, email, phoneNumber } = useSelector(
+  const { photoURL, displayName, email } = useSelector(
     (state: RootState) => state.user.userReducer
   );
+  const [cash, setCash] = useState('1000000');
+
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (user && user.photoURL) {
+      getUserCash(user.uid).then((el) => el && setCash(el.cash));
+    }
+  }, [auth]);
 
   return (
     <div className={cx('profile-wrapper')}>
@@ -24,10 +35,10 @@ const MiniProfile = () => {
         <Text size="s" color="gray">
           캐시
         </Text>
-        <Text weight="medium">{`${phoneNumber ?? 0}원`}</Text>
+        <Text weight="medium">{`${Number(cash).toLocaleString()}원`}</Text>
       </div>
     </div>
   );
 };
 
-export default MiniProfile;
+export default memo(MiniProfile);
