@@ -34,13 +34,31 @@ const Footer = () => {
               Members GitHub
               <ul className={cx(isHidden && 'hide')}>
                 <li>
-                  <a href="https://github.com/seungmin2ee">Seungmin2ee</a>
+                  <a
+                    href="https://github.com/seungmin2ee"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Seungmin2ee
+                  </a>
                 </li>
                 <li>
-                  <a href="https://github.com/EthanJcoding">Ethan Jeong</a>
+                  <a
+                    href="https://github.com/EthanJcoding"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Ethan Jeong
+                  </a>
                 </li>
                 <li>
-                  <a href="https://github.com/starplanter93">starplanter93</a>
+                  <a
+                    href="https://github.com/starplanter93"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    starplanter93
+                  </a>
                 </li>
               </ul>
             </div>

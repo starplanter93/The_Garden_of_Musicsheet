@@ -70,7 +70,7 @@ footer {
                         box-shadow: 0 0 5px rgba(0,0,0,.1);
 
                         > li {
-                            padding: 12px 1.5rem;
+                            
                             text-align: center;
 
                             &:hover {
@@ -78,6 +78,8 @@ footer {
                             }
 
                             > a {
+                                display: block;
+                                padding: 12px 1.5rem;
                                 font-weight: 500;
                             }
                         }
