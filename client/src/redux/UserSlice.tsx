@@ -23,6 +23,13 @@ export const userSlice = createSlice({
       state = action.payload;
       return state;
     },
+    setUserProfilePicture: (
+      state: StateType,
+      action: PayloadAction<string>
+    ) => {
+      state.photoURL = action.payload;
+      return state;
+    },
   },
   // initialState로 초기화
   extraReducers: (builder) => {
@@ -34,7 +41,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { userInfo } = userSlice.actions;
+export const { userInfo, setUserProfilePicture } = userSlice.actions;
 
 const userReducer: Reducer<typeof initialState> = userSlice.reducer;
 

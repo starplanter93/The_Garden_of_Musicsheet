@@ -9,6 +9,7 @@ interface MyPageTopProps {
   email: string; // email
   cash: string;
   setModal?: Dispatch<SetStateAction<boolean>>;
+  setEditType?: Dispatch<SetStateAction<'optout' | 'editPicture'>>;
 }
 
 const MyPageTop = ({
@@ -17,6 +18,7 @@ const MyPageTop = ({
   email,
   cash,
   setModal,
+  setEditType,
 }: MyPageTopProps) => {
   const cx = classNames.bind(styles);
 
@@ -24,6 +26,7 @@ const MyPageTop = ({
     <div>
       <div className={cx('cover-wrapper')}>
         <CategoryCover
+          setEditType={setEditType}
           setModal={setModal}
           mypage={true}
           category={username}

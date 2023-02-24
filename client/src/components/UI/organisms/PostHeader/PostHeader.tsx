@@ -53,6 +53,7 @@ const PostHeader = () => {
   };
 
   const handleUpload = async () => {
+    console.log(data);
     if (!validateInputs()) {
       toast.error('모든 필드를 입력해주세요.');
     } else {

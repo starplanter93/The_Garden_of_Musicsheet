@@ -1,9 +1,10 @@
 import classNames from 'classnames/bind';
 import { updateProfile } from 'firebase/auth';
-import { useState, Dispatch, SetStateAction } from 'react';
+import { memo, useState, Dispatch, SetStateAction } from 'react';
 import { auth } from '../../../../firebase/firebase';
 import { Button, Icon, ImgLayout, Text } from '../../atoms';
 import styles from './categoryCover.module.scss';
+import { updateUserName } from '../../../../firebase/firebase';
 
 interface CategoryCoverProps {
   category: string;
@@ -12,6 +13,7 @@ interface CategoryCoverProps {
   artist?: string;
   mypage?: boolean;
   setModal?: Dispatch<SetStateAction<boolean>>;
+  setEditType?: Dispatch<SetStateAction<'optout' | 'editPicture'>>;
 }
 
 const CategoryCover = ({
@@ -21,22 +23,35 @@ const CategoryCover = ({
   title,
   artist,
   setModal,
+  setEditType,
 }: CategoryCoverProps) => {
   const cx = classNames.bind(styles);
   const [editmode, setEditMode] = useState(false);
   const [username, setUsername] = useState(category);
 
-  const handleNameSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleNameSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (auth.currentUser && e.key === 'Enter') {
-      updateProfile(auth.currentUser, { displayName: username });
+      await updateProfile(auth.currentUser, { displayName: username });
+      await updateUserName(auth.currentUser.uid, username);
       setEditMode(false);
-      console.log(auth.currentUser);
+      window.location.reload();
+    }
+  };
+  const handleNameChange = () => {
+    setEditMode(true);
+  };
+
+  const handleEditPicture = () => {
+    if (setModal && setEditType) {
+      setModal(true);
+      setEditType('editPicture');
     }
   };
 
   const handleOptOut = () => {
-    if (setModal) {
+    if (setModal && setEditType) {
       setModal(true);
+      setEditType('optout');
     }
   };
 
@@ -69,6 +84,13 @@ const CategoryCover = ({
                   <Text size="txlg" weight="bold">
                     {username}
                   </Text>
+                  <Button
+                    size="tiny"
+                    theme="transparent"
+                    onClick={handleNameChange}
+                  >
+                    <Icon icon="BiPencil" size="s" />
+                  </Button>
                 </div>
               )}
               <Text size="lg" color="gray">
@@ -82,11 +104,18 @@ const CategoryCover = ({
                   <Text size="lg" color="gray">
                     {artist}
                   </Text>
-                  <Text size="lg" color="gray">
-                    원
-                  </Text>
                 </div>
-                <div>
+                <div className={cx('edit')}>
+                  <Button
+                    size="m"
+                    theme="tertiary"
+                    onClick={() => handleEditPicture()}
+                  >
+                    <>
+                      <Icon icon="MdOutlineSettings" color="gray" size="xs" />
+                      <Text color="gray">프로필 사진 변경</Text>
+                    </>
+                  </Button>
                   <Button
                     size="s"
                     theme="transparent"
@@ -131,4 +160,4 @@ const CategoryCover = ({
   );
 };
 
-export default CategoryCover;
+export default memo(CategoryCover);
