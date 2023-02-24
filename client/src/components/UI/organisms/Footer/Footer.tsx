@@ -1,9 +1,15 @@
 import classNames from 'classnames/bind';
+import { useState } from 'react';
 import { Icon, Logo, Text } from '../../atoms';
 import styles from './footer.module.scss';
 
 const Footer = () => {
   const cx = classNames.bind(styles);
+  const [isHidden, setIsHidden] = useState(true);
+
+  const handleToggle = () => {
+    setIsHidden(!isHidden);
+  };
 
   return (
     <footer>
@@ -20,9 +26,13 @@ const Footer = () => {
               <Icon icon="BsGithub" size="xs" />
               <Text weight="medium">Team GitHub</Text>
             </a>
-            <div className={cx('github-member')}>
+            <div
+              className={cx('github-member')}
+              role="button"
+              onClick={handleToggle}
+            >
               Members GitHub
-              <ul className={cx('hide')}>
+              <ul className={cx(isHidden && 'hide')}>
                 <li>
                   <a href="https://github.com/seungmin2ee">Seungmin2ee</a>
                 </li>
