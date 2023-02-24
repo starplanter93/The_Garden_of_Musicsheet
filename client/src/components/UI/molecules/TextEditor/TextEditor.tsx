@@ -6,17 +6,26 @@ import styles from './textEditor.module.scss';
 import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
 import { setDetail } from '../../../../redux/PostSlice';
+
 interface TextEditorProps {
   text: string;
+  description?: string;
 }
 
-const TextEditor = ({ text }: TextEditorProps) => {
+const TextEditor = ({ text, description }: TextEditorProps) => {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
   const [value, setValue] = useState('');
+
+  // 수정 페이지에서만 동작하는 이펙트
+  useEffect(() => {
+    if (description) setValue(description);
+  }, []);
+
   useEffect(() => {
     dispatch(setDetail(value));
   }, [value]);
+
   return (
     <div className={cx('wrapper')}>
       <div className={cx('text')}>

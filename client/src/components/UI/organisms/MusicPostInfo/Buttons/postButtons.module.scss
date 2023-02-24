@@ -1,3 +1,5 @@
+@import '/src/utils/utils';
+
 .buttons {
   display: flex;
   margin-bottom: 2rem;
@@ -11,4 +13,10 @@
 
 .h2 {
   margin-bottom: 2rem;
+
+  &.editmode {
+    span {
+      color: $gray;
+    }
+  }
 }

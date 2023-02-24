@@ -18,6 +18,7 @@ import {
   updateDoc,
   getDoc,
   arrayUnion,
+  DocumentReference,
 } from 'firebase/firestore/lite';
 import { Score, StateType } from '../redux/PostSlice';
 import { ScoreInfoType } from '../components/pages/Main/Main';
@@ -296,6 +297,58 @@ export async function userInitData(uid: string) {
   await setDoc(ref, { cash: '1000000', isActive: true });
 
   return snapshot.data();
+}
+
+/** 게시글 수정 api */
+export async function updateScore(data: StateType, scoreId: string) {
+  /** 업데이트된 scores 배열을 반환합니다 */
+  const editedScores = async (ref: DocumentReference<DocumentData>) => {
+    const snapshot = await getDoc(ref);
+
+    if (snapshot.exists()) {
+      const scoresData: ScoreInfoType[] = await (snapshot.data().scores ??
+        snapshot.data().posts);
+      const filteredData = scoresData.filter(
+        (score: ScoreInfoType) => score.scoreId !== scoreId
+      );
+      const updatedScore = { ...data.scores[0], scoreId };
+      return [...filteredData, updatedScore];
+    }
+  };
+
+  /** 한글명 악기타입을 영문으로 변환합니다 */
+  const convertDocName = (instType: string) => {
+    const instrumnetList = [
+      ['피아노', 'piano'],
+      ['일렉 기타', 'electric'],
+      ['어쿠스틱 기타', 'acoustic'],
+      ['베이스', 'bass'],
+      ['드럼', 'drum'],
+    ];
+    const convertedName = instrumnetList.filter(
+      (el) => el[0] === instType
+    )[0][1];
+
+    return convertedName;
+  };
+
+  // update music
+  const docName = `${data.songName}-${data.artist}`;
+  const musicRef = doc(db, 'music', docName);
+  const updatedMusicScores = await editedScores(musicRef);
+  await updateDoc(musicRef, { scores: updatedMusicScores });
+
+  // update instrument
+  const instDocName = convertDocName(data.scores[0].instType);
+  const instRef = doc(db, 'instrument', instDocName);
+  const updatedInstScores = await editedScores(instRef);
+  await updateDoc(instRef, { scores: updatedInstScores });
+
+  // update user
+  const userDocName = `${data.scores[0].authorId}`;
+  const userRef = doc(db, 'user', userDocName);
+  const updatedUserScores = await editedScores(userRef);
+  await updateDoc(userRef, { posts: updatedUserScores });
 }
 
 export async function updateUserName(uid: string, newName: string) {
