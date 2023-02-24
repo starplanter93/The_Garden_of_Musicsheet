@@ -54,6 +54,7 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
         switch (response.status) {
           default:
             setSearchData(response);
+            console.log(searchData);
             break;
           case 401:
             refreshToken();
@@ -90,26 +91,28 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
         >
           <div className={cx('dropdown')}>
             {searchData.map((el: any, idx: number) => {
-              return (
-                <div
-                  onClick={() => handleOnClick(el)}
-                  role="button"
-                  key={idx}
-                  className={cx('dropdown-result')}
-                >
-                  <div className={cx('result-img')}>
-                    <img
-                      width="50px"
-                      src={el.album.images[0]?.url}
-                      alt="album-cover"
-                    />
+              console.log(el);
+              if (el !== null)
+                return (
+                  <div
+                    onClick={() => handleOnClick(el)}
+                    role="button"
+                    key={idx}
+                    className={cx('dropdown-result')}
+                  >
+                    <div className={cx('result-img')}>
+                      <img
+                        width="50px"
+                        src={el.album.images[0]?.url}
+                        alt="album-cover"
+                      />
+                    </div>
+                    <div className={cx('result-info')}>
+                      <span>{el.name}</span>
+                      <span>{el.artists[0].name}</span>
+                    </div>
                   </div>
-                  <div className={cx('result-info')}>
-                    <span>{el.name}</span>
-                    <span>{el.artists[0].name}</span>
-                  </div>
-                </div>
-              );
+                );
             })}
           </div>
         </div>
