@@ -23,7 +23,7 @@ export const handleUserLogin = async (email: string, password: string) => {
           ? toast.error('탈퇴한 회원이에요!')
           : localStorage.setItem('authorization', user.uid);
         localStorage.setItem('refresh', user.refreshToken);
-        response = snapshot.data().isOptout;
+        response = user;
       }
     })
     .catch((error) => {
