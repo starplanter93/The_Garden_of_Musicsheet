@@ -50,7 +50,7 @@ const MyPage = () => {
           <div className={cx('wrapper')}>
             {data.map((el: DocumentData, idx: number) => (
               <div className={cx('wrapper')} key={idx}>
-                <ScoreList score={el} />
+                <ScoreList score={el} buttonEvent="edit" />
               </div>
             ))}
           </div>

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styles from './postSidebar.module.scss';
 import classNames from 'classnames/bind';
 import { Button, Icon, Text } from '../../atoms';
@@ -6,20 +6,38 @@ import { useDispatch } from 'react-redux';
 import { setFile } from '../../../../redux/FileSlice';
 import { postPDF } from '../../../../firebase/firebase';
 import { setDownloadURL } from '../../../../redux/PostSlice';
+import { ThreeDots } from 'react-loader-spinner';
 
-const PostSidebar = () => {
+interface PostSidebarProps {
+  url?: string;
+}
+
+const PostSidebar = ({ url }: PostSidebarProps) => {
   const dispatch = useDispatch();
   const cx = classNames.bind(styles);
   const [fileName, setFileName] = useState('');
+  const [isPending, setIsPending] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // 수정 페이지에서만 동작하는 이펙트
+  useEffect(() => {
+    if (url) {
+      const decodedURI = decodeURI(url);
+      const uploadedFile = decodedURI.match(/(%2F)(.+)\?/) as RegExpMatchArray;
+      setFileName(uploadedFile[2]);
+      dispatch(setDownloadURL(url));
+    }
+  }, []);
 
   const handleFileUpload = async (e: any) => {
     if (e.target.files.length > 0) {
       const [file] = e.target.files;
       if (file.type === 'application/pdf') {
         try {
+          setIsPending(true);
           const sheetURL = await postPDF(file);
           dispatch(setDownloadURL(sheetURL));
+          setIsPending(false);
         } catch (err) {
           console.log(err);
         }
@@ -60,7 +78,7 @@ const PostSidebar = () => {
           <div>
             <Button theme="tertiary" size="s" onClick={handleButtonClick}>
               <>
-                <Icon icon="MdUpload" />
+                <Icon icon="MdUpload" size="s" />
                 <Text>파일 선택</Text>
               </>
             </Button>
@@ -83,22 +101,38 @@ const PostSidebar = () => {
             *
           </Text>
         </div>
-        {fileName && (
+        {!isPending && fileName && (
           <div className={cx('box')}>
             <div className={cx('file-name')}>
               <span>{fileName}</span>
               <Button
                 size="tiny"
-                theme="transparent"
+                theme="secondary"
                 onClick={() => {
                   setFileName('');
                 }}
               >
-                <Icon icon="FaTrash" />
+                <Icon icon="FaTrash" size="xs" color="gray" />
               </Button>
             </div>
           </div>
         )}
+        {isPending && (
+          <div className={cx('box', 'loading')}>
+            <div className={cx('loading-spinner')}>
+              <ThreeDots width="40" height="40" color="#a5a5a5" />
+            </div>
+            <Text color="gray" weight="medium">
+              Uploading file...
+            </Text>
+          </div>
+        )}
+        <div className={cx('upload-info')}>
+          <Icon icon="MdInfoOutline" size="xs" color="gray" />
+          <Text size="s" weight="medium" color="gray">
+            한개의 악보 파일(.pdf)만 업로드할 수 있습니다.
+          </Text>
+        </div>
       </div>
     </div>
   );

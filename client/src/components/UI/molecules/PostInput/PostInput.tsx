@@ -16,11 +16,14 @@ import {
   setAlbumImg,
   setScoreName,
 } from '../../../../redux/PostSlice';
+import { ScoreInfoType } from '../../../pages/Main/Main';
+import { useLocation } from 'react-router-dom';
 
 interface PostInputProps {
   text: string;
   placeholder?: string;
   type: 'input' | 'dropdown';
+  value?: ScoreInfoType;
 }
 
 interface SelectedDataProps {
@@ -29,27 +32,37 @@ interface SelectedDataProps {
   albumCover: string;
 }
 
-const PostInput = ({ type, text, placeholder }: PostInputProps) => {
+const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
   const [isFocused, setIsFocused] = useState(false);
   const [userInput, setUserInput] = useState(''); // 곡 제목에서 받아온 걸 넣어주면 될 듯
   const [searchData, setSearchData] = useState([]);
   const [selectedData, setSelectedData] = useState<SelectedDataProps>();
 
+  // 수정 페이지에서만 동작하는 이펙트
+  useEffect(() => {
+    if (value) {
+      if (text === '악보 제목') setUserInput(value.scoreName);
+      else if (text === '가격') setUserInput(value.price);
+      else if (text === '유튜브 주소 (선택)') setUserInput(value.youtubeURL);
+
+      setSelectedData({
+        songName: value.songName,
+        artist: value.artist,
+        albumCover: value.albumImg,
+      });
+    }
+  }, []);
+
   useEffect(() => {
     if (userInput.length > 0) {
       // if (text === '곡 제목') dispatch(setSongName(userInput));
       // if (text === '원곡자') dispatch(setArtist(userInput));
-      if (text === '악보 제목') {
-        dispatch(setScoreName(userInput));
-      }
-      if (text === '가격') {
-        dispatch(setPrice(userInput));
-      }
-      if (text === '유튜브 주소 (선택)') {
-        dispatch(setURL(userInput));
-      }
+      if (text === '악보 제목') dispatch(setScoreName(userInput));
+      else if (text === '가격') dispatch(setPrice(userInput));
+      else if (text === '유튜브 주소 (선택)') dispatch(setURL(userInput));
       getSearchData(userInput).then((response) => {
         switch (response.status) {
           default:
@@ -84,7 +97,7 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
   }, [selectedData]);
 
   const AutoComplete = () => {
-    if (userInput) {
+    if (userInput && isFocused) {
       return (
         <div
           className={cx(selectedData ? 'dropdown-wrapper' : 'dropdown-default')}
@@ -138,7 +151,7 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
               <Text size="s">{selectedData?.artist}</Text>
             </div>
           </div>
-          <div>
+          <div className={cx('delete-btn')}>
             <Button
               size="tiny"
               theme="transparent"
@@ -173,6 +186,7 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
             size="l"
             setIsFocused={setIsFocused}
             setUserInput={setUserInput}
+            userInput={userInput}
             placeholder={placeholder}
           />
         </div>
@@ -180,7 +194,7 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
     );
   } else if (type === 'dropdown') {
     return (
-      <div className={cx('wrapper')}>
+      <div className={cx('wrapper', pathname.includes('/edit') && 'editmode')}>
         <div className={cx('text')}>
           <Text weight="regular" size="m">
             {text}
@@ -189,21 +203,25 @@ const PostInput = ({ type, text, placeholder }: PostInputProps) => {
             *
           </Text>
         </div>
-        <div className={cx(selectedData ? 'search' : 'default')}>
-          <div className={cx('icon')}>
-            <Icon icon="BiSearch" color="gray" />
-          </div>
-          <div className={cx('input')}>
-            <Input
-              theme="icon-input-no-label"
-              size="m"
-              setIsFocused={setIsFocused}
-              setUserInput={setUserInput}
-              placeholder={placeholder}
-            />
-          </div>
-        </div>
-        <AutoComplete />
+        {pathname.includes('/edit') || (
+          <>
+            <div className={cx(selectedData ? 'search' : 'default')}>
+              <div className={cx('icon')}>
+                <Icon icon="BiSearch" color="gray" />
+              </div>
+              <div className={cx('input')}>
+                <Input
+                  theme="icon-input-no-label"
+                  size="m"
+                  setIsFocused={setIsFocused}
+                  setUserInput={setUserInput}
+                  placeholder={placeholder}
+                />
+              </div>
+            </div>
+            <AutoComplete />
+          </>
+        )}
         <Selection />
       </div>
     );

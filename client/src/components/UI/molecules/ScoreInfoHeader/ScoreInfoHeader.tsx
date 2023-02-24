@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, Button } from '../../atoms';
 import styles from './scoreinfoheader.module.scss';
 import classNames from 'classnames/bind';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface ScoreInfoHeaderProps {
   scoreName: string;
@@ -11,6 +12,8 @@ interface ScoreInfoHeaderProps {
 
 function ScoreInfoHeader({ scoreName, singer, date }: ScoreInfoHeaderProps) {
   const cx = classNames.bind(styles);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const formattedDate = new Intl.DateTimeFormat('ko-kr').format(new Date(date));
 
   return (
@@ -23,7 +26,13 @@ function ScoreInfoHeader({ scoreName, singer, date }: ScoreInfoHeaderProps) {
         <Text size="m">{formattedDate}</Text>
       </div>
       <div className={cx('button-wrapper')}>
-        <Button theme="transparent" size="auto">
+        <Button
+          theme="transparent"
+          size="auto"
+          onClick={() => {
+            navigate(`/scores/edit${pathname}`);
+          }}
+        >
           <Text color="gray">수정</Text>
         </Button>
         <Button theme="transparent" size="auto">

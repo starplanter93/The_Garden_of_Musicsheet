@@ -25,7 +25,7 @@ const UserMenu = ({ setDropdown }: UserMenuProps) => {
   };
 
   const handleUpload = () => {
-    navigate('/posts/postmusic');
+    navigate('/scores/post');
   };
 
   const handleMyPage = () => {
