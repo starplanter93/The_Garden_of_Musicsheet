@@ -20,7 +20,7 @@ import {
   arrayUnion,
   DocumentReference,
 } from 'firebase/firestore/lite';
-import { StateType } from '../redux/PostSlice';
+import { Score, StateType } from '../redux/PostSlice';
 import { ScoreInfoType } from '../components/pages/Main/Main';
 
 const firebaseConfig = {
