@@ -1,15 +1,37 @@
 import { Button, Text } from '../../../atoms';
 import classNames from 'classnames/bind';
 import styles from './postButtons.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setInstType } from '../../../../../redux/PostSlice';
 import { instType } from '../../../../../redux/PostSlice';
+import { useLocation } from 'react-router-dom';
 
-const PostButtons = () => {
+interface PostButtonsProps {
+  value?: string;
+}
+
+const PostButtons = ({ value }: PostButtonsProps) => {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const [clickedButton, setClickedButton] = useState<number | null>(null);
+  const buttons = [
+    { label: '피아노', index: 0 },
+    { label: '일렉 기타', index: 1 },
+    { label: '어쿠스틱 기타', index: 2 },
+    { label: '베이스', index: 3 },
+    { label: '드럼', index: 4 },
+  ];
+
+  // 수정 페이지에서만 동작하는 이펙트
+  useEffect(() => {
+    if (value) {
+      const index = buttons.filter((el) => el.label === value)[0].index;
+      setClickedButton(index);
+      dispatch(setInstType(value as instType));
+    }
+  }, []);
 
   const handleButtonClick = (index: number) => {
     if (clickedButton === index) {
@@ -20,14 +42,6 @@ const PostButtons = () => {
     }
   };
 
-  const buttons = [
-    { label: '피아노', index: 0 },
-    { label: '일렉 기타', index: 1 },
-    { label: '어쿠스틱 기타', index: 2 },
-    { label: '베이스', index: 3 },
-    { label: '드럼', index: 4 },
-  ];
-
   return (
     <div>
       <div className={cx('text')}>
@@ -36,7 +50,7 @@ const PostButtons = () => {
         </Text>
       </div>
       <div>
-        <div className={cx('h2')}>
+        <div className={cx('h2', pathname.includes('/edit') && 'editmode')}>
           <Text weight="regular" size="m">
             악기 종류
           </Text>
@@ -52,6 +66,7 @@ const PostButtons = () => {
               theme="toggle"
               onClick={() => handleButtonClick(button.index)}
               clicked={clickedButton === button.index}
+              disabled={pathname.includes('/edit') ? true : false}
             >
               {button.label}
             </Button>

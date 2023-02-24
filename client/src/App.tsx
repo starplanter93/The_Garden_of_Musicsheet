@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import {
+  EditScore,
   Instrument,
   InstrumentDetail,
   Layout,
@@ -24,14 +25,12 @@ function App() {
             <Route path="instrument" element={<Instrument />} />
             <Route path="instrument/:instType" element={<InstrumentDetail />} />
             <Route path="music/:songTitle" element={<MusicDetail />} />
-            <Route path="/scoreinfo" element={<ScoreInfo />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/:scoreName/:scoreId" element={<ScoreInfo />} />
-            {/* MainPage 등 */}
           </Route>
-          <Route path="/posts" element={<PostLayout />}>
-            <Route path="/posts/postmusic" element={<PostMusic />} />
-            {/* <Route path='/posts/edit/:scoreName/:scoreId'/> */}
+          <Route path="/scores" element={<PostLayout />}>
+            <Route path="post" element={<PostMusic />} />
+            <Route path="edit/:scoreName/:scoreId" element={<EditScore />} />
           </Route>
           <Route path="/auth" element={<Auth />}></Route>
           {/* NotFound */}

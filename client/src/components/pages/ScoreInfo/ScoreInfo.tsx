@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 import { getScoreByMusic } from '../../../firebase/firebase';
 import { useParams } from 'react-router';
 import { ScoreInfoType } from '../Main/Main';
+import { LoadingSpinner } from '../../UI/atoms';
 
 function ScoreInfo() {
   const cx = classNames.bind(styles);
@@ -31,7 +32,7 @@ function ScoreInfo() {
   }, []);
 
   if (scoreData === undefined) {
-    return <div>로딩중...</div>;
+    return <LoadingSpinner />;
   }
 
   return (

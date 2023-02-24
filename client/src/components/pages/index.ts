@@ -8,6 +8,7 @@ import MusicDetail from './MusicDetail/MusicDetail';
 import ScoreInfo from './ScoreInfo/ScoreInfo';
 import MyPage from './MyPage/MyPage';
 import PostLayout from './PostLayout/PostLayout';
+import EditScore from './EditScore/EditScore';
 
 export {
   PostLayout,
@@ -20,4 +21,5 @@ export {
   InstrumentDetail,
   MusicDetail,
   ScoreInfo,
+  EditScore,
 };

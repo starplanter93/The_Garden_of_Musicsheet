@@ -21,7 +21,7 @@ interface InputProps {
   size: 's' | 'm' | 'l';
   theme: 'basic' | 'icon-input' | 'icon-input-no-label';
   placeholder?: string | '이메일' | '비밀번호' | '비밀번호 확인' | '닉네임';
-  value?: string;
+  userInput?: string;
 }
 
 const Input = ({
@@ -30,9 +30,11 @@ const Input = ({
   size,
   setIsFocused,
   setUserInput,
+  userInput,
 }: InputProps) => {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
+
   const handleOnChange = (input: string) => {
     setUserInput(input);
 
@@ -55,17 +57,20 @@ const Input = ({
   };
 
   if (theme === 'basic') {
-    <input
-      className={cx('default-input', `${size}`)}
-      onChange={(e) => setUserInput(e.target.value)}
-      placeholder={placeholder}
-    ></input>;
-  }
-  if (theme === 'icon-input-no-label') {
+    return (
+      <input
+        className={cx('default-input', `${size}`)}
+        value={userInput}
+        onChange={(e) => setUserInput(e.target.value)}
+        placeholder={placeholder}
+      />
+    );
+  } else if (theme === 'icon-input-no-label') {
     return (
       <input
         className={cx('default-input', `${theme}`, `${size}`)}
         onChange={(e) => setUserInput(e.target.value)}
+        onClick={() => setIsFocused(true)}
         placeholder={placeholder}
       ></input>
     );
