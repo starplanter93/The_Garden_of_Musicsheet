@@ -11,6 +11,7 @@ interface ButtonProps {
     | 'toggle'
     | 'dropdown'
     | 'cancel';
+
   size?: 'auto' | 'xl' | 'l' | 'm' | 's' | 'xs' | 'tiny';
   clicked?: boolean;
   disabled?: boolean;

@@ -36,6 +36,7 @@ export interface Score {
   artist: string;
   albumImg: string;
   downloadURL: string;
+  isOptout: boolean;
 }
 
 export interface StateType {
@@ -72,6 +73,7 @@ const initialState: StateType = {
       artist: '',
       albumImg: '',
       downloadURL: '',
+      isOptout: false,
     },
   ],
 };

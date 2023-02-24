@@ -35,9 +35,9 @@ function App() {
             <Route path="/:scoreName/:scoreId" element={<ScoreInfo />} />
             {/* MainPage 등 */}
           </Route>
-          <Route path="/postmusic" element={<PostLayout />}>
-            <Route path="/postmusic" element={<PostMusic />} />
-            {/* <Route path='/edit/:scoreName/:scoreId'/> */}
+          <Route path="/posts" element={<PostLayout />}>
+            <Route path="/posts/postmusic" element={<PostMusic />} />
+            {/* <Route path='/posts/edit/:scoreName/:scoreId'/> */}
           </Route>
           <Route path="/auth" element={<Auth />}></Route>
           <Route path="/test" element={<Test />}></Route>
