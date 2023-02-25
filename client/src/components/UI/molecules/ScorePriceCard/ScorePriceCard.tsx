@@ -5,9 +5,10 @@ import classNames from 'classnames/bind';
 
 interface ScorePriceCardProps {
   price: string;
+  updateCart: () => void;
 }
 
-function ScorePriceCard({ price }: ScorePriceCardProps) {
+function ScorePriceCard({ price, updateCart }: ScorePriceCardProps) {
   const cx = classNames.bind(styles);
   const formattedPrice = new Intl.NumberFormat('ko-kr').format(Number(price));
   return (
@@ -15,7 +16,7 @@ function ScorePriceCard({ price }: ScorePriceCardProps) {
       <Text size="xlg" weight="bold">
         {`${formattedPrice}원`}
       </Text>
-      <Button size="auto">
+      <Button size="auto" onClick={updateCart}>
         <>
           <Icon icon="MdOutlineShoppingBag" color="white" />
           <Text color="white">장바구니 담기</Text>

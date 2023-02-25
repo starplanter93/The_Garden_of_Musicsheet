@@ -7,11 +7,18 @@ import { getScoreByMusic } from '../../../firebase/firebase';
 import { useParams } from 'react-router';
 import { ScoreInfoType } from '../Main/Main';
 import { LoadingSpinner } from '../../UI/atoms';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateCartItems } from '../../../redux/ModalSlice';
+import { RootState } from '../../../redux/store';
 
 function ScoreInfo() {
   const cx = classNames.bind(styles);
   const [scoreData, setScoreData] = useState<ScoreInfoType>();
   const { scoreName, scoreId } = useParams();
+  const dispatch = useDispatch();
+  const cartItems = useSelector(
+    (state: RootState) => state.modalState
+  ).cartItems;
   const dummyData = {
     scoreImg1:
       'https://firebasestorage.googleapis.com/v0/b/garden-of-musicsheet.appspot.com/o/if%20i%20could%20be%20a%20constellation%231.png?alt=media&token=5f6f761a-104d-4317-ad8d-03feb5c018fb',
@@ -19,6 +26,31 @@ function ScoreInfo() {
       'https://firebasestorage.googleapis.com/v0/b/garden-of-musicsheet.appspot.com/o/if%20i%20could%20be%20a%20constellation%232.png?alt=media&token=7338efea-878a-4762-a0a7-1d121e405a24',
     page: '7',
   };
+
+  function updateCart() {
+    if (scoreData) {
+      // cartItems.filter((cartItem) => {
+      //   console.log(cartItem);
+      //   if (
+      //     cartItem.scoreName !== scoreData.scoreName &&
+      //     cartItem.scoreId !== scoreData.scoreId
+      //   ) {
+      //     dispatch(updateCartItems(scoreData));
+      //   } else {
+      //     alert('이미 장바구니에 등록되어 있습니다.');
+      //   }
+      // });
+      const existingItem = cartItems.find(
+        (item) => item.scoreName === scoreData.scoreName
+      );
+      if (existingItem) {
+        alert('이미 장바구니에 들어 있습니다.');
+      } else {
+        dispatch(updateCartItems(scoreData));
+        alert('장바구니에 추가되었습니다.');
+      }
+    }
+  }
 
   async function fetchScoreData() {
     if (scoreName && scoreId) {
@@ -58,6 +90,7 @@ function ScoreInfo() {
         price={scoreData.price}
         author={scoreData.author}
         profileImg={scoreData.author_profile}
+        updateCart={updateCart}
       />
       <aside></aside>
     </div>

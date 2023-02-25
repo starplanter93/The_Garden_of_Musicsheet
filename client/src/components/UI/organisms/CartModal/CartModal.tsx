@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 function CartModal() {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
+
   function cartModalCloser() {
     dispatch(cartModalHandler());
   }

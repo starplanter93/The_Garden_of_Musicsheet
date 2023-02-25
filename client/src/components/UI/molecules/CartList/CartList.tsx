@@ -3,16 +3,24 @@ import { Text, Button, Icon } from '../../atoms';
 import styles from './cartList.module.scss';
 import classNames from 'classnames/bind';
 
-function CartList() {
+interface CartItemType {
+  scoreName: string;
+  artist: string;
+  author: string;
+  price: string;
+  scoreId: string;
+}
+
+function CartList({ scoreName, artist, author, price, scoreId }: CartItemType) {
   const cx = classNames.bind(styles);
   return (
     <li className={cx('cart-list')}>
       <div className={cx('title-wrapper')}>
-        <Text weight="semibold">사건의 지평선 핑거스타일 악보</Text>
-        <Text color="gray">윤하</Text>
+        <Text weight="semibold">{scoreName}</Text>
+        <Text color="gray">{artist}</Text>
       </div>
-      <Text color="gray">97세어쿠스틱마스터김창식</Text>
-      <Text weight="semibold">3,900원</Text>
+      <Text color="gray">{author}</Text>
+      <Text weight="semibold">{`${Number(price).toLocaleString()}원`}</Text>
       <Button theme="secondary" size="tiny">
         <Icon size="xs" color="gray" icon="FaTrash" />
       </Button>
