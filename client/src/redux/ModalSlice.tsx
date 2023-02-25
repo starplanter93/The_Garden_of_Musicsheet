@@ -68,10 +68,29 @@ export const modalSlice = createSlice({
       // 그러므로 redux에서는 업데이트 로직만 사용하고, 중복체크는 이를 사용하는 컴포넌트에서 하는게 맞는 듯.
       state.cartItems.push(action.payload);
     },
+
+    // // filter을 사용하면 새 배열이 리턴됨. 이 새 배열을 state에 추가해서 리턴해줘야 올바르게 작동.
+    // // 따라서 아래 코드는 제대로 작동안함.
+    // deleteCartItem(state: CartStateType, action: PayloadAction<string>) {
+    //   state.cartItems.filter((cartItem) => {
+    //     return cartItem.scoreName !== action.payload;
+    //   });
+    // },
+    deleteCartItem(state: CartStateType, action: PayloadAction<string>) {
+      const scoreNameToDelete = action.payload;
+      const newCartItems = state.cartItems.filter((cartItem) => {
+        return cartItem.scoreName !== scoreNameToDelete;
+      });
+      return {
+        ...state,
+        cartItems: newCartItems,
+      };
+    },
   },
 });
 
-export const { cartModalHandler, updateCartItems } = modalSlice.actions;
+export const { cartModalHandler, updateCartItems, deleteCartItem } =
+  modalSlice.actions;
 
 const modalReducer: Reducer<typeof initialState> = modalSlice.reducer;
 
