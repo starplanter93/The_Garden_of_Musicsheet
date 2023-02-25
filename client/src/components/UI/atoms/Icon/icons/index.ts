@@ -27,6 +27,7 @@ import {
   BsMusicNoteBeamed,
   BsArrowLeft,
   BsDot,
+  BsGithub,
 } from 'react-icons/bs';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import { CgUserList } from 'react-icons/cg';
@@ -66,4 +67,5 @@ export {
   SlArrowRight,
   CgUserList,
   HiChevronDoubleRight,
+  BsGithub,
 };

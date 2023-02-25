@@ -13,6 +13,7 @@ import ScoreInfoAside from './ScoreInfoAside/ScoreInfoAside';
 import ScoreInfoMain from './ScoreInfoMain/ScoreInfoMain';
 import MyPageTop from './MyPageTop/MyPageTop';
 import PostHeader from './PostHeader/PostHeader';
+import Footer from './Footer/Footer';
 
 export {
   PostHeader,
@@ -30,4 +31,5 @@ export {
   CategoryDetail,
   ScoreInfoAside,
   ScoreInfoMain,
+  Footer,
 };
