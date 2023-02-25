@@ -610,3 +610,33 @@ export async function getUserCash(uid: string) {
     return snapshot.data();
   }
 }
+
+export async function syncUserData() {
+  const ref = collection(db, 'music');
+  const snapshot = await getDocs(ref);
+  const list = snapshot.docs.map((doc: DocumentData) => doc.data());
+
+  for (let i = 0; i < list.length; i++) {
+    for (let j = 0; j < list[i].scores.length; j++) {
+      if (list[i].scores[j].author === '연수동 꿀성대 준일') {
+        const score = list[i].scores[j];
+        console.log(score.author);
+        const songName = `${score.songName}-${score.artist}`;
+        const infoRef = doc(db, 'music', songName);
+        const snapshot = await getDoc(infoRef);
+        // const songName = `${list[i][j].songName}-${list[i][j].artist}`;
+
+        if (snapshot.exists()) {
+          const { scores } = snapshot.data();
+          // console.log(scores);
+          // const scoresWithId = scores.filter(
+          //   (obj: Score) => obj.authorId === uid
+          // );
+        }
+        // scoresWithId.forEach((obj: Score) => (obj.isOptout = true));
+
+        // await updateDoc(infoRef, { scores: scores });
+      }
+    }
+  }
+}
