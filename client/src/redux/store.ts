@@ -10,6 +10,8 @@ import regReducer from './RegSlice';
 import userReducer from './UserSlice';
 import PostReducer from './PostSlice';
 import FileReducer from './FileSlice';
+import FooterReducer from './FooterSlice';
+
 const persistConfig = {
   // storage에 저장할 명칭
   key: 'user',
@@ -30,6 +32,7 @@ export const store = configureStore({
     userLoginInput: loginReducer,
     postInfo: PostReducer,
     pdfFile: FileReducer,
+    showFooter: FooterReducer,
   },
 
   middleware: (getDefaultMiddleware) =>
