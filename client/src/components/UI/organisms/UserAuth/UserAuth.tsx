@@ -42,7 +42,6 @@ const UserAuth = ({ type }: UserAuthProps) => {
     ) {
       await handleUserLogin(userLoginData.email, userLoginData.password).then(
         (response) => {
-          console.log(response);
           if (typeof response !== 'undefined') {
             const { displayName, email, phoneNumber, photoURL } = response;
             dispatch(userInfo({ displayName, email, phoneNumber, photoURL }));
@@ -65,7 +64,12 @@ const UserAuth = ({ type }: UserAuthProps) => {
   };
 
   const handleOauth = async () => {
-    await handleGoogleLogin();
+    await handleGoogleLogin().then((response) => {
+      if (typeof response !== 'undefined') {
+        const { displayName, email, phoneNumber, photoURL } = response;
+        dispatch(userInfo({ displayName, email, phoneNumber, photoURL }));
+      }
+    });
     navigate('/');
   };
 

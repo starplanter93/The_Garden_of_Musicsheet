@@ -62,7 +62,6 @@ export const handleRegisterUser = async (
       }
     })
     .catch((error) => {
-      toast.error('이미 가입한 회원이세요!');
       console.log(error.code);
     });
 
@@ -72,10 +71,18 @@ export const handleRegisterUser = async (
 export const handleGoogleLogin = async () => {
   let response;
   await signInWithPopup(auth, provider)
-    .then((data) => {
+    .then(async (data) => {
       const credential = GoogleAuthProvider.credentialFromResult(data);
       const token = credential?.accessToken;
       const user = data.user;
+      const ref = doc(db, 'user', user.uid);
+      const snapshot = await getDoc(ref);
+      if (!snapshot.exists()) {
+        userInitData(user.uid);
+        updateProfile(user, {
+          photoURL: Avatar(),
+        });
+      }
       response = user;
       if (token) localStorage.setItem('authorization', token);
       if (user.refreshToken) localStorage.setItem('refresh', user.refreshToken);

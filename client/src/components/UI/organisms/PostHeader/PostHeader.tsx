@@ -53,15 +53,16 @@ const PostHeader = () => {
   };
 
   const handleUpload = async () => {
-    console.log(data);
     if (!validateInputs()) {
       toast.error('모든 필드를 입력해주세요.');
     } else {
       if (pathname.includes('/edit') && scoreId) {
         await updateScore(data, scoreId);
-      } else await getMusicData(data.songName, data);
+      } else {
+        const scoreId = await getMusicData(data.songName, data);
+        navigate(`/${data.songName}-${data.artist}/${scoreId}`);
+      }
 
-      navigate('/');
       dispatch(initializeState());
       toast.success('악보 등록 성공!');
     }

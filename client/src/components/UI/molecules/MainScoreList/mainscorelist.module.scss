@@ -7,6 +7,11 @@
   width: 100%;
   max-width: #{560 / $font-size}rem;
   padding: 0.5rem 0.75rem;
+  &:hover {
+    background-color: $gray-white;
+    transition: all 0.1s ease-in;
+    border-radius: 10px;
+  }
 
   .profileimg-wrapper {
     min-width: #{50 / $font-size}rem;
