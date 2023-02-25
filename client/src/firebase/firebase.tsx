@@ -612,31 +612,41 @@ export async function getUserCash(uid: string) {
 }
 
 export async function syncUserData() {
+  //uid 를 인자로 받아서 해당 인자로 구성된 music score 를 찾아내어 하나로 만들고 user Table 로 푸시
+  const uid = 'RyoN30gCa9gFF8o1nxKLD36vd892';
   const ref = collection(db, 'music');
   const snapshot = await getDocs(ref);
   const list = snapshot.docs.map((doc: DocumentData) => doc.data());
 
+  const syncArr = [];
+
   for (let i = 0; i < list.length; i++) {
     for (let j = 0; j < list[i].scores.length; j++) {
-      if (list[i].scores[j].author === '연수동 꿀성대 준일') {
+      if (list[i].scores[j].authorId === uid) {
         const score = list[i].scores[j];
-        console.log(score.author);
         const songName = `${score.songName}-${score.artist}`;
         const infoRef = doc(db, 'music', songName);
         const snapshot = await getDoc(infoRef);
-        // const songName = `${list[i][j].songName}-${list[i][j].artist}`;
 
         if (snapshot.exists()) {
           const { scores } = snapshot.data();
-          // console.log(scores);
-          // const scoresWithId = scores.filter(
-          //   (obj: Score) => obj.authorId === uid
-          // );
+          const scoresWithId = scores.filter(
+            (obj: Score) => obj.authorId === uid
+          );
+          syncArr.push(scoresWithId[0]);
         }
-        // scoresWithId.forEach((obj: Score) => (obj.isOptout = true));
 
         // await updateDoc(infoRef, { scores: scores });
       }
     }
   }
+
+  const testRef = doc(db, 'user', uid);
+  const testSnap = await getDoc(testRef);
+
+  if (testSnap.exists()) {
+    await updateDoc(testRef, { posts: syncArr });
+  }
+
+  console.log(syncArr);
 }

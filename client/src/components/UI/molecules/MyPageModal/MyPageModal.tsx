@@ -6,6 +6,7 @@ import { auth, userOptout } from '../../../../firebase/firebase';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { deleteUser, updateCurrentUser, updateProfile } from 'firebase/auth';
+import { ThreeDots } from 'react-loader-spinner';
 import { persistor } from '../../../../redux/store';
 import {
   postProfilePicture,
@@ -27,6 +28,7 @@ const MyPageModal = ({ type, setModal }: MyPageModalProps) => {
   const user = auth.currentUser;
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState('');
+  const [isPending, setIsPending] = useState(false);
 
   if (type === 'optout') {
     const handleOptOut = async () => {
@@ -91,8 +93,10 @@ const MyPageModal = ({ type, setModal }: MyPageModalProps) => {
         console.log(file);
         if (file) {
           try {
+            setIsPending(true);
             const sheetURL = await postProfilePicture(user.uid, file);
             setProfilePicture(sheetURL);
+            setIsPending(false);
           } catch (err) {
             console.log(err);
           }
@@ -120,6 +124,16 @@ const MyPageModal = ({ type, setModal }: MyPageModalProps) => {
           <div className={cx('body')}>
             <ImgLayout alt="profile-picture" size="lg" src={profilePicture} />
           </div>
+          {isPending && (
+            <div className={cx('loading')}>
+              <div className={cx('loading-spinner')}>
+                <ThreeDots width="40" height="40" color="#a5a5a5" />
+              </div>
+              <Text color="gray" weight="medium">
+                Uploading file...
+              </Text>
+            </div>
+          )}
           <div className={cx('footer')}>
             <Button
               theme="secondary"
