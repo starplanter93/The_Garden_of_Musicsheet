@@ -1,6 +1,6 @@
 import './layout.module.scss';
 import { Outlet } from 'react-router-dom';
-import { Header } from '../../UI/organisms';
+import { Footer, Header } from '../../UI/organisms';
 
 const Layout = () => {
   return (
@@ -9,7 +9,7 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
-      {/* Footer */}
+      <Footer />
     </>
   );
 };
