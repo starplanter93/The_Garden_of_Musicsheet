@@ -82,6 +82,15 @@ export async function getScoresByCategory(colName: string, docName: string) {
 //   console.log(snapshot.data());
 //   return snapshot.data();
 // }
+function calculateScoreId(savedData: any, data: any): string {
+  if (savedData === undefined) {
+    return '0';
+  } else {
+    const lastScore = savedData.scores[savedData.scores.length - 1];
+    const nextScoreId = parseInt(lastScore.scoreId) + 1;
+    return nextScoreId.toString();
+  }
+}
 
 export async function getMusicData(songName: string, data: StateType) {
   const name = `${songName}-${data.artist}`;
@@ -93,19 +102,10 @@ export async function getMusicData(songName: string, data: StateType) {
   const colSnap = await getDocs(colRef);
 
   const list = colSnap.docs.map((doc: DocumentData) => doc.data());
-  // const lastIdx =
-  //   colSnap.docs.map((doc: DocumentData) => doc.data()).length - 1;
 
-  if (savedData === undefined) {
-    data = { ...data };
-    data.scores = [{ ...data.scores[0], scoreId: '0' }];
-  } else {
-    const lastScore = savedData.scores[savedData.scores.length - 1];
-    console.log(savedData.scores);
-    const nextScoreId = parseInt(lastScore.scoreId) + 1;
-    data = { ...data };
-    data.scores = [{ ...data.scores[0], scoreId: nextScoreId.toString() }];
-  }
+  const scoreId = calculateScoreId(savedData, data);
+  data = { ...data };
+  data.scores = [{ ...data.scores[0], scoreId }];
 
   if (savedData && savedData.artist === data.artist) {
     // update
@@ -115,14 +115,13 @@ export async function getMusicData(songName: string, data: StateType) {
   } else if (!infoSnapshot.exists()) {
     console.log('너 처음이구나?');
     data = { ...data };
-    // data.songId = (Number(list[lastIdx].songId) + 1).toString();
     data.songId = list.length.toString();
     postData(name, data);
   }
 
   await savingUserPost(data);
 
-  return infoSnapshot.data();
+  return scoreId;
 }
 
 /** 해당 곡으로 만들어진 문서가 없으면 아래 함수가 작동하여 initialize 됩니다*/

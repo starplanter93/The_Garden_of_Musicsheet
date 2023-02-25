@@ -67,7 +67,6 @@ const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
         switch (response.status) {
           default:
             setSearchData(response);
-            console.log(searchData);
             break;
           case 401:
             refreshToken();
@@ -104,7 +103,6 @@ const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
         >
           <div className={cx('dropdown')}>
             {searchData.map((el: any, idx: number) => {
-              console.log(el);
               if (el !== null)
                 return (
                   <div
