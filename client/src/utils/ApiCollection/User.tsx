@@ -24,6 +24,11 @@ export const handleUserLogin = async (email: string, password: string) => {
           : localStorage.setItem('authorization', user.uid);
         localStorage.setItem('refresh', user.refreshToken);
         response = user;
+      } else {
+        userInitData(user.uid);
+        localStorage.setItem('authorization', user.uid);
+        localStorage.setItem('refresh', user.refreshToken);
+        response = user;
       }
     })
     .catch((error) => {
