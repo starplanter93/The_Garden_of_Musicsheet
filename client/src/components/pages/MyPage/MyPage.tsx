@@ -46,7 +46,6 @@ const MyPage = () => {
     if (!localStorage.getItem('authorization')) {
       navigate('/auth');
     }
-    console.log(user?.uid);
   }, [user]);
 
   const UserData = () => {
