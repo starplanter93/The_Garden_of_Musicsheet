@@ -82,15 +82,17 @@ export async function getScoresByCategory(colName: string, docName: string) {
 //   console.log(snapshot.data());
 //   return snapshot.data();
 // }
-function calculateScoreId(savedData: any, data: any): string {
-  if (savedData === undefined) {
-    return '0';
-  } else {
-    const lastScore = savedData.scores[savedData.scores.length - 1];
-    const nextScoreId = parseInt(lastScore.scoreId) + 1;
-    return nextScoreId.toString();
-  }
-}
+
+// function calculateScoreId(savedData: any, list: any): string {
+//   if (savedData === undefined) {
+//     return '0';
+//   } else {
+//     // const lastScore = savedData.scores[savedData.scores.length - 1];
+//     // const nextScoreId = parseInt(lastScore.scoreId) + 1;
+//     // return nextScoreId.toString();
+//     return list.length.toString();
+//   }
+// }
 
 export async function getMusicData(songName: string, data: StateType) {
   const name = `${songName}-${data.artist}`;
@@ -103,7 +105,7 @@ export async function getMusicData(songName: string, data: StateType) {
 
   const list = colSnap.docs.map((doc: DocumentData) => doc.data());
 
-  const scoreId = calculateScoreId(savedData, data);
+  const scoreId = list.length.toString();
   data = { ...data };
   data.scores = [{ ...data.scores[0], scoreId }];
 
@@ -204,7 +206,6 @@ export async function postPDF(file: any) {
       (snapshot: any) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
         switch (snapshot.state) {
           case 'paused':
             console.log('Upload is paused');
@@ -220,7 +221,6 @@ export async function postPDF(file: any) {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log('File available at', downloadURL);
           sheetURL = downloadURL;
           resolve(sheetURL);
         });
