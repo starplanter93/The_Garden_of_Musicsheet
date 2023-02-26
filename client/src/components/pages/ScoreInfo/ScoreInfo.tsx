@@ -7,19 +7,12 @@ import { getScoreByMusic } from '../../../firebase/firebase';
 import { useParams } from 'react-router';
 import { ScoreInfoType } from '../Main/Main';
 import { LoadingSpinner } from '../../UI/atoms';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateCartItems } from '../../../redux/ModalSlice';
-import { RootState } from '../../../redux/store';
 import { updateCart } from '../../../firebase/firebase';
 
 function ScoreInfo() {
   const cx = classNames.bind(styles);
   const [scoreData, setScoreData] = useState<ScoreInfoType>();
   const { scoreName, scoreId } = useParams();
-  const dispatch = useDispatch();
-  const cartItems = useSelector(
-    (state: RootState) => state.modalState
-  ).cartItems;
   const dummyData = {
     scoreImg1:
       'https://firebasestorage.googleapis.com/v0/b/garden-of-musicsheet.appspot.com/o/if%20i%20could%20be%20a%20constellation%231.png?alt=media&token=5f6f761a-104d-4317-ad8d-03feb5c018fb',

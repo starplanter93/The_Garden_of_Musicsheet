@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CartHeader, CartBody, CartFooter } from '../../molecules';
 import classNames from 'classnames/bind';
 import styles from './cartModal.module.scss';
 import { cartModalHandler } from '../../../../redux/ModalSlice';
 import { useDispatch } from 'react-redux';
+import { getCart } from '../../../../firebase/firebase';
+import { ScoreInfoType } from '../../../pages/Main/Main';
 
 function CartModal() {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
+  const [cartItems, setCartItems] = useState<ScoreInfoType[]>();
 
   function cartModalCloser() {
     dispatch(cartModalHandler());
   }
+
+  useEffect(() => {
+    getCart('XmX1jT6EOZgQrM66Ppq6nKz1lCA2').then((data) => {
+      if (data) {
+        setCartItems(data.cartItems);
+      }
+    });
+  }, []);
+
   return (
     <div className={cx('backdrop')} onClick={cartModalCloser}>
       <section
@@ -22,7 +34,7 @@ function CartModal() {
       >
         <CartHeader />
         <div className={cx('cart-body-wrapper')}>
-          <CartBody />
+          {cartItems && <CartBody cartItems={cartItems} />}
         </div>
         <CartFooter />
       </section>

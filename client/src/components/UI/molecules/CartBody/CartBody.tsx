@@ -2,15 +2,12 @@ import React from 'react';
 import CartList from '../CartList/CartList';
 import styles from './cartBody.module.scss';
 import classNames from 'classnames/bind';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../../redux/store';
 import { v4 as uuidv4 } from 'uuid';
+import { ScoreInfoType } from '../../../pages/Main/Main';
 
-function CartBody() {
+function CartBody({ cartItems }: { cartItems: ScoreInfoType[] }) {
   const cx = classNames.bind(styles);
-  const cartItems = useSelector(
-    (state: RootState) => state.modalState
-  ).cartItems;
+
   return (
     <ul className={cx('cart-body')}>
       {cartItems &&

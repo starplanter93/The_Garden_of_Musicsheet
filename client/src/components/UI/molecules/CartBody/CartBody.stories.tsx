@@ -6,6 +6,8 @@ export default {
   component: CartBody,
 } as ComponentMeta<typeof CartBody>;
 
-const Template: ComponentStory<typeof CartBody> = () => <CartBody />;
+const Template: ComponentStory<typeof CartBody> = ({ cartItems }) => (
+  <CartBody cartItems={cartItems} />
+);
 
 export const CartHeaderOptions = Template.bind({});
