@@ -15,7 +15,7 @@ function CartFooter() {
   }, 0);
   const countItems = cartItems.length;
   return (
-    <footer className={cx('cart-footer')}>
+    <div className={cx('cart-footer')}>
       <div className={cx('text-wrapper')}>
         <Text>{`총 주문 가격 (${countItems})`}</Text>
         <Text size="xlg" weight="bold">
@@ -25,7 +25,7 @@ function CartFooter() {
       <Button size="auto">
         <Text color="white">결제하기</Text>
       </Button>
-    </footer>
+    </div>
   );
 }
 
