@@ -1,4 +1,5 @@
 @import '/src/utils/utils';
+
 @font-face {
   font-family: 'designhouseOTFLight00';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff')
@@ -39,6 +40,12 @@
         margin-top: 0.5rem;
         font-size: 2rem;
       }
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    span {
+      display: none;
     }
   }
 }

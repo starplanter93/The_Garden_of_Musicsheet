@@ -12,6 +12,8 @@ import PostReducer from './PostSlice';
 import FileReducer from './FileSlice';
 import ModalReducer from './ModalSlice';
 
+import FooterReducer from './FooterSlice';
+
 const persistConfig = {
   // storage에 저장할 명칭
   key: 'user',
@@ -33,6 +35,7 @@ export const store = configureStore({
     postInfo: PostReducer,
     pdfFile: FileReducer,
     modalState: ModalReducer,
+    showFooter: FooterReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

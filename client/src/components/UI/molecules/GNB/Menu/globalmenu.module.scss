@@ -1,23 +1,23 @@
 @import '/src/utils/utils';
 
 .menu-lists {
-    display: flex;
-    align-items: center;
-    .menu-list {
-        margin: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  .menu-list {
+    margin: 0 1.5rem;
 
-        a {
-            display: flex;
-            align-items: center;
-        
-            span {
-                padding-left: 5px;
-            }
-        }
+    a {
+      display: flex;
+      align-items: center;
 
-        &:hover {
-            transform: scale(1.03);
-            transition: all .1s ease-in;
-        }
+      span {
+        padding-left: 5px;
+      }
     }
+
+    &:hover {
+      transform: scale(1.03);
+      transition: all 0.1s ease-in;
+    }
+  }
 }

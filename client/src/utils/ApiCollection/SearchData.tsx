@@ -9,7 +9,7 @@ export const getSearchData = async (userInput: string) => {
       params: {
         q: userInput,
         type: 'track',
-        limit: 10,
+        limit: 5,
       },
     });
     return response.data.tracks.items;

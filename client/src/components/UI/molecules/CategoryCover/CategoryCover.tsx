@@ -5,7 +5,8 @@ import { auth } from '../../../../firebase/firebase';
 import { Button, Icon, ImgLayout, Text } from '../../atoms';
 import styles from './categoryCover.module.scss';
 import { updateUserName } from '../../../../firebase/firebase';
-
+import { useDispatch } from 'react-redux';
+import { setUserName } from '../../../../redux/UserSlice';
 interface CategoryCoverProps {
   category: string;
   thumbnail: string;
@@ -28,12 +29,13 @@ const CategoryCover = ({
   const cx = classNames.bind(styles);
   const [editmode, setEditMode] = useState(false);
   const [username, setUsername] = useState(category);
-
+  const dispatch = useDispatch();
   const handleNameSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (auth.currentUser && e.key === 'Enter') {
       await updateProfile(auth.currentUser, { displayName: username });
       await updateUserName(auth.currentUser.uid, username);
       setEditMode(false);
+      dispatch(setUserName(username));
       window.location.reload();
     }
   };

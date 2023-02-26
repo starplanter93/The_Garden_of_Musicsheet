@@ -15,6 +15,8 @@ import {
 
 import classNames from 'classnames/bind';
 import styles from './main.module.scss';
+import { useDispatch } from 'react-redux';
+import { showFooter } from '../../../redux/FooterSlice';
 
 export type MusicData = {
   artist: string;
@@ -52,6 +54,11 @@ function Main() {
   const [key, setKey] = useState<DocumentData>(); // 마지막으로 불러온 스냅샷 상태
   const [noMore, setNoMore] = useState(false); // 추가로 요청할 데이터 없다는 flag
   const target = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(showFooter(noMore));
+  }, [noMore]);
 
   const firebaseConfig = {
     apiKey: 'AIzaSyAZ4hRKbN3-Hq3w2v07pS-4KBikVP-4Wi0',

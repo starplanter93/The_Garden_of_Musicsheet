@@ -83,6 +83,17 @@ export async function getScoresByCategory(colName: string, docName: string) {
 //   return snapshot.data();
 // }
 
+// function calculateScoreId(savedData: any, list: any): string {
+//   if (savedData === undefined) {
+//     return '0';
+//   } else {
+//     // const lastScore = savedData.scores[savedData.scores.length - 1];
+//     // const nextScoreId = parseInt(lastScore.scoreId) + 1;
+//     // return nextScoreId.toString();
+//     return list.length.toString();
+//   }
+// }
+
 export async function getMusicData(songName: string, data: StateType) {
   const name = `${songName}-${data.artist}`;
   const info = doc(db, 'music', name);
@@ -93,19 +104,10 @@ export async function getMusicData(songName: string, data: StateType) {
   const colSnap = await getDocs(colRef);
 
   const list = colSnap.docs.map((doc: DocumentData) => doc.data());
-  // const lastIdx =
-  //   colSnap.docs.map((doc: DocumentData) => doc.data()).length - 1;
 
-  if (savedData === undefined) {
-    data = { ...data };
-    data.scores = [{ ...data.scores[0], scoreId: '0' }];
-  } else {
-    const lastScore = savedData.scores[savedData.scores.length - 1];
-    console.log(savedData.scores);
-    const nextScoreId = parseInt(lastScore.scoreId) + 1;
-    data = { ...data };
-    data.scores = [{ ...data.scores[0], scoreId: nextScoreId.toString() }];
-  }
+  const scoreId = list.length.toString();
+  data = { ...data };
+  data.scores = [{ ...data.scores[0], scoreId }];
 
   if (savedData && savedData.artist === data.artist) {
     // update
@@ -115,14 +117,13 @@ export async function getMusicData(songName: string, data: StateType) {
   } else if (!infoSnapshot.exists()) {
     console.log('너 처음이구나?');
     data = { ...data };
-    // data.songId = (Number(list[lastIdx].songId) + 1).toString();
     data.songId = list.length.toString();
     postData(name, data);
   }
 
   await savingUserPost(data);
 
-  return infoSnapshot.data();
+  return scoreId;
 }
 
 /** 해당 곡으로 만들어진 문서가 없으면 아래 함수가 작동하여 initialize 됩니다*/
@@ -205,7 +206,6 @@ export async function postPDF(file: any) {
       (snapshot: any) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
         switch (snapshot.state) {
           case 'paused':
             console.log('Upload is paused');
@@ -221,7 +221,6 @@ export async function postPDF(file: any) {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log('File available at', downloadURL);
           sheetURL = downloadURL;
           resolve(sheetURL);
         });
@@ -609,4 +608,44 @@ export async function getUserCash(uid: string) {
   if (snapshot.exists()) {
     return snapshot.data();
   }
+}
+
+export async function syncUserData() {
+  //uid 를 인자로 받아서 해당 인자로 구성된 music score 를 찾아내어 하나로 만들고 user Table 로 푸시
+  const uid = 'RyoN30gCa9gFF8o1nxKLD36vd892';
+  const ref = collection(db, 'music');
+  const snapshot = await getDocs(ref);
+  const list = snapshot.docs.map((doc: DocumentData) => doc.data());
+
+  const syncArr = [];
+
+  for (let i = 0; i < list.length; i++) {
+    for (let j = 0; j < list[i].scores.length; j++) {
+      if (list[i].scores[j].authorId === uid) {
+        const score = list[i].scores[j];
+        const songName = `${score.songName}-${score.artist}`;
+        const infoRef = doc(db, 'music', songName);
+        const snapshot = await getDoc(infoRef);
+
+        if (snapshot.exists()) {
+          const { scores } = snapshot.data();
+          const scoresWithId = scores.filter(
+            (obj: Score) => obj.authorId === uid
+          );
+          syncArr.push(scoresWithId[0]);
+        }
+
+        // await updateDoc(infoRef, { scores: scores });
+      }
+    }
+  }
+
+  const testRef = doc(db, 'user', uid);
+  const testSnap = await getDoc(testRef);
+
+  if (testSnap.exists()) {
+    await updateDoc(testRef, { posts: syncArr });
+  }
+
+  console.log(syncArr);
 }

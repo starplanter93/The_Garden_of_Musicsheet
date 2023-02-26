@@ -3,7 +3,12 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../firebase/firebase';
 import { User } from 'firebase/auth';
-import { ScoreList, TabMenu, MyPageModal } from '../../UI/molecules';
+import {
+  ScoreList,
+  TabMenu,
+  MyPageModal,
+  Pagination,
+} from '../../UI/molecules';
 import { getUserArticle } from '../../../firebase/firebase';
 import { DocumentData } from 'firebase/firestore/lite';
 import classNames from 'classnames/bind';
@@ -54,6 +59,11 @@ const MyPage = () => {
               </div>
             ))}
           </div>
+          <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalLists={data.length}
+          />
         </div>
       );
     } else if (data && clickedTab === '구매한 악보') {
@@ -66,6 +76,11 @@ const MyPage = () => {
               </div>
             ))}
           </div>
+          <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalLists={data.length}
+          />
         </div>
       );
     } else return null;
