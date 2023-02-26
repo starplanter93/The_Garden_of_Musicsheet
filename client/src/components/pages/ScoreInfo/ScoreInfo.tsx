@@ -10,6 +10,7 @@ import { LoadingSpinner } from '../../UI/atoms';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCartItems } from '../../../redux/ModalSlice';
 import { RootState } from '../../../redux/store';
+import { updateCart } from '../../../firebase/firebase';
 
 function ScoreInfo() {
   const cx = classNames.bind(styles);
@@ -27,28 +28,20 @@ function ScoreInfo() {
     page: '7',
   };
 
-  function updateCart() {
+  function updateCartItem() {
+    // if (scoreData) {
+    //   const existingItem = cartItems.find(
+    //     (item) => item.scoreName === scoreData.scoreName
+    //   );
+    //   if (existingItem) {
+    //     alert('이미 장바구니에 들어 있습니다.');
+    //   } else {
+    //     dispatch(updateCartItems(scoreData));
+    //     alert('장바구니에 추가되었습니다.');
+    //   }
+    // }
     if (scoreData) {
-      // cartItems.filter((cartItem) => {
-      //   console.log(cartItem);
-      //   if (
-      //     cartItem.scoreName !== scoreData.scoreName &&
-      //     cartItem.scoreId !== scoreData.scoreId
-      //   ) {
-      //     dispatch(updateCartItems(scoreData));
-      //   } else {
-      //     alert('이미 장바구니에 등록되어 있습니다.');
-      //   }
-      // });
-      const existingItem = cartItems.find(
-        (item) => item.scoreName === scoreData.scoreName
-      );
-      if (existingItem) {
-        alert('이미 장바구니에 들어 있습니다.');
-      } else {
-        dispatch(updateCartItems(scoreData));
-        alert('장바구니에 추가되었습니다.');
-      }
+      updateCart('XmX1jT6EOZgQrM66Ppq6nKz1lCA2', scoreData);
     }
   }
 
@@ -90,7 +83,7 @@ function ScoreInfo() {
         price={scoreData.price}
         author={scoreData.author}
         profileImg={scoreData.author_profile}
-        updateCart={updateCart}
+        updateCart={updateCartItem}
       />
       <aside></aside>
     </div>
