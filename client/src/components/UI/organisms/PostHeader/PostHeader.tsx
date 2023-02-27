@@ -69,7 +69,7 @@ const PostHeader = () => {
   };
 
   return (
-    <header>
+    <header className={cx('header')}>
       <nav className={cx('nav-post')}>
         <Button size="s" theme="transparent" onClick={() => handleIsPost()}>
           <div className={cx('upload')}>
