@@ -21,6 +21,7 @@ function CartFooter({ cartItems, setCartItems }: CartItemsProps) {
   function purchase() {
     purchaseCartItems(cartItems, totalPrice);
     setCartItems([]);
+    history.go(0);
   }
 
   return (

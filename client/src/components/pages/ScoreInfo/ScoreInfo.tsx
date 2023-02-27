@@ -65,31 +65,35 @@ function ScoreInfo() {
 
   return (
     <div className={cx('scoreinfo')}>
-      <div>
-        <ScoreInfoHeader
-          scoreName={scoreData.scoreName}
-          singer={scoreData.artist}
-          date={scoreData.createdAt}
-        />
-        <ScoreInfoMain
-          scoreImg1={dummyData.scoreImg1}
-          scoreImg2={dummyData.scoreImg2}
-          instrument={scoreData.instType}
-          difficulty={scoreData.difficulty}
-          page={dummyData.page}
-          scoreType={scoreData.sheetType}
-          scoreExplain={scoreData.detail}
-          youtubeURL={scoreData.youtubeURL}
-        />
-      </div>
-      <ScoreInfoAside
-        price={scoreData.price}
-        author={scoreData.author}
-        profileImg={scoreData.author_profile}
-        updateCart={updateCartItem}
-        scoreId={scoreData.scoreId}
-      />
-      <aside></aside>
+      {scoreData && (
+        <>
+          <div>
+            <ScoreInfoHeader
+              scoreName={scoreData.scoreName}
+              singer={scoreData.artist}
+              date={scoreData.createdAt}
+            />
+            <ScoreInfoMain
+              scoreImg1={dummyData.scoreImg1}
+              scoreImg2={dummyData.scoreImg2}
+              instrument={scoreData.instType}
+              difficulty={scoreData.difficulty}
+              page={dummyData.page}
+              scoreType={scoreData.sheetType}
+              scoreExplain={scoreData.detail}
+              youtubeURL={scoreData.youtubeURL}
+            />
+          </div>
+          <ScoreInfoAside
+            price={scoreData.price}
+            author={scoreData.author}
+            profileImg={scoreData.author_profile}
+            updateCart={updateCartItem}
+            scoreId={scoreData.scoreId}
+          />
+          <aside></aside>
+        </>
+      )}
     </div>
   );
 }
