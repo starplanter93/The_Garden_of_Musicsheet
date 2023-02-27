@@ -8,7 +8,7 @@ import { useParams } from 'react-router';
 import { ScoreInfoType } from '../Main/Main';
 import { LoadingSpinner } from '../../UI/atoms';
 import { updateCart, getCart } from '../../../firebase/firebase';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import { countCartItem } from '../../../redux/ModalSlice';
@@ -34,10 +34,11 @@ function ScoreInfo() {
         if (data) {
           dispatch(countCartItem(data.cartItems.length));
           data.cartItems.length === 0
-            ? updateCart(scoreData)
+            ? (updateCart(scoreData), notify())
             : data.cartItems.forEach((cartItem: ScoreInfoType) => {
                 if (cartItem.scoreId !== scoreData.scoreId) {
                   updateCart(scoreData);
+                  notify();
                 } else {
                   alert('이미 장바구니에 있는 악보입니다.');
                 }
@@ -89,7 +90,6 @@ function ScoreInfo() {
         scoreId={scoreData.scoreId}
       />
       <aside></aside>
-      <ToastContainer />
     </div>
   );
 }
