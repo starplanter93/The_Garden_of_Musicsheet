@@ -101,6 +101,26 @@ export async function deleteCartItem(scoreId: string) {
   }
 }
 
+/** 장바구니에서 악보 구매 */
+export async function purchaseCartItems(
+  cartItems: ScoreInfoType[],
+  totalPrice: number
+) {
+  if (auth.currentUser !== null) {
+    const userInfoRef = doc(db, 'user', auth.currentUser.uid);
+    const snapshot = await getDoc(userInfoRef);
+    let calculatedCash;
+    if (snapshot.exists()) {
+      calculatedCash = parseInt(snapshot.data().cash) - totalPrice;
+    }
+    await updateDoc(userInfoRef, {
+      cash: calculatedCash,
+      purchasedScores: arrayUnion(...cartItems),
+      cartItems: [],
+    });
+  }
+}
+
 // 곡 상세페이지, 악기 상세페이지 데이터 api
 export async function getScoresByCategory(colName: string, docName: string) {
   const ref = doc(db, colName, docName);
