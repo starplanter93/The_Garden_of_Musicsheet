@@ -121,6 +121,17 @@ export async function purchaseCartItems(
   }
 }
 
+/** 구입한 악보리스트 불러오기 */
+export async function getPurchasedScores() {
+  if (auth.currentUser !== null) {
+    const userInfoRef = doc(db, 'user', auth.currentUser.uid);
+    const snapshot = await getDoc(userInfoRef);
+    if (snapshot.exists()) {
+      return snapshot.data().purchasedScores;
+    }
+  }
+}
+
 // 곡 상세페이지, 악기 상세페이지 데이터 api
 export async function getScoresByCategory(colName: string, docName: string) {
   const ref = doc(db, colName, docName);

@@ -86,6 +86,7 @@ function ScoreInfo() {
         author={scoreData.author}
         profileImg={scoreData.author_profile}
         updateCart={updateCartItem}
+        scoreId={scoreData.scoreId}
       />
       <aside></aside>
       <ToastContainer />
