@@ -17,7 +17,7 @@ function CartModal() {
   }
 
   useEffect(() => {
-    getCart('XmX1jT6EOZgQrM66Ppq6nKz1lCA2').then((data) => {
+    getCart().then((data) => {
       if (data) {
         setCartItems(data.cartItems);
       }

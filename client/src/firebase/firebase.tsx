@@ -67,9 +67,8 @@ export async function getScoreByMusic(docName: string, scoreId: string) {
 
 /** 장바구니에 악보 추가 */
 export async function updateCart(scoreInfo: ScoreInfoType) {
-  let userInfoRef;
   if (auth.currentUser !== null) {
-    userInfoRef = doc(db, 'user', auth.currentUser.uid);
+    const userInfoRef = doc(db, 'user', auth.currentUser.uid);
     await updateDoc(userInfoRef, { cartItems: arrayUnion(scoreInfo) });
     const snapshot = await getDoc(userInfoRef);
     if (snapshot.exists()) {
@@ -83,26 +82,30 @@ export async function updateCart(scoreInfo: ScoreInfoType) {
 }
 
 /** 장바구니에 담은 악보 get */
-export async function getCart(userId: string) {
-  const ref = doc(db, 'user', userId);
-  const snapshot = await getDoc(ref);
-  if (snapshot.exists()) {
-    return snapshot.data();
+export async function getCart() {
+  if (auth.currentUser !== null) {
+    const ref = doc(db, 'user', auth.currentUser.uid);
+    const snapshot = await getDoc(ref);
+    if (snapshot.exists()) {
+      return snapshot.data();
+    }
   }
 }
 
 /** 장바구니에서 악보 delete */
-export async function deleteCartItem(userId: string, scoreId: string) {
-  const userInfoRef = doc(db, 'user', userId);
-  const snapshot = await getDoc(userInfoRef);
-  if (snapshot.exists()) {
-    const deletedCartList = snapshot
-      .data()
-      .cartItems.filter((cartItem: ScoreInfoType) => {
-        return cartItem.scoreId !== scoreId;
-      });
-    await updateDoc(userInfoRef, { cartItems: deletedCartList });
-    return deletedCartList;
+export async function deleteCartItem(scoreId: string) {
+  if (auth.currentUser !== null) {
+    const userInfoRef = doc(db, 'user', auth.currentUser.uid);
+    const snapshot = await getDoc(userInfoRef);
+    if (snapshot.exists()) {
+      const deletedCartList = snapshot
+        .data()
+        .cartItems.filter((cartItem: ScoreInfoType) => {
+          return cartItem.scoreId !== scoreId;
+        });
+      await updateDoc(userInfoRef, { cartItems: deletedCartList });
+      return deletedCartList;
+    }
   }
 }
 

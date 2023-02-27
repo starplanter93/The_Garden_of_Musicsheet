@@ -24,9 +24,7 @@ function CartList({
 }: CartItemType) {
   const cx = classNames.bind(styles);
   function deleteItem() {
-    deleteCartItem('XmX1jT6EOZgQrM66Ppq6nKz1lCA2', scoreId).then((data) =>
-      setCartItems(data)
-    );
+    deleteCartItem(scoreId).then((data) => setCartItems(data));
   }
 
   return (
