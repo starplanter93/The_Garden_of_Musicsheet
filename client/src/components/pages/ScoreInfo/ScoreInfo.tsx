@@ -7,9 +7,12 @@ import { getScoreByMusic } from '../../../firebase/firebase';
 import { useParams } from 'react-router';
 import { ScoreInfoType } from '../Main/Main';
 import { LoadingSpinner } from '../../UI/atoms';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router';
 
 function ScoreInfo() {
   const cx = classNames.bind(styles);
+  const navigate = useNavigate();
   const [scoreData, setScoreData] = useState<ScoreInfoType>();
   const { scoreName, scoreId } = useParams();
   const dummyData = {
@@ -21,14 +24,30 @@ function ScoreInfo() {
   };
 
   async function fetchScoreData() {
-    if (scoreName && scoreId) {
-      const [data] = await getScoreByMusic(scoreName, scoreId);
-      setScoreData(data);
+    if (!scoreName || !scoreId) {
+      throw new Error('scoreName or scoreId is falsy');
     }
+
+    const [data] = await getScoreByMusic(scoreName, scoreId);
+
+    if (data.isDeleted) {
+      throw new Error('삭제된 게시글이에요');
+    }
+
+    setScoreData(data);
   }
 
   useEffect(() => {
-    fetchScoreData();
+    async function fetchData() {
+      try {
+        await fetchScoreData();
+      } catch (error: any) {
+        toast.error(error.message);
+        navigate('/');
+      }
+    }
+
+    fetchData();
   }, []);
 
   if (scoreData === undefined) {
