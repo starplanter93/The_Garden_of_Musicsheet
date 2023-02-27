@@ -38,7 +38,7 @@ function CartModal() {
             <CartBody cartItems={cartItems} setCartItems={setCartItems} />
           )}
         </div>
-        <CartFooter />
+        <CartFooter cartItems={cartItems} />
       </section>
     </div>
   );

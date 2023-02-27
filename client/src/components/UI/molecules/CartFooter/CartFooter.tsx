@@ -2,14 +2,14 @@ import React from 'react';
 import { Button, Text } from '../../atoms';
 import styles from './cartFooter.module.scss';
 import classNames from 'classnames/bind';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../../redux/store';
+import { ScoreInfoType } from '../../../pages/Main/Main';
 
-function CartFooter() {
+interface CartItemsProps {
+  cartItems: ScoreInfoType[];
+}
+
+function CartFooter({ cartItems }: CartItemsProps) {
   const cx = classNames.bind(styles);
-  const cartItems = useSelector(
-    (state: RootState) => state.modalState
-  ).cartItems;
   const totalPrice = cartItems.reduce((acc, cur) => {
     return acc + Number(cur.price);
   }, 0);
