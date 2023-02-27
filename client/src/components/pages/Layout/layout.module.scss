@@ -2,5 +2,5 @@
 
 main {
     padding-top: #{70/$font-size}rem;
-    min-height: calc(100vh - 227.33px);
+    min-height: calc(100vh - #{227.33/$font-size}rem);
 }
