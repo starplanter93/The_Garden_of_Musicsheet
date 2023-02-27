@@ -25,6 +25,7 @@ export type MusicData = {
   albumImg: string;
   songName: string;
   songId: number | null;
+  isDeleted: boolean;
 }[];
 
 export interface ScoreInfoType {

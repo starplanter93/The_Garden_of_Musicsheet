@@ -7,6 +7,26 @@ import { MusicData } from '../../../pages/Main/Main';
 function MainGrid({ musicData }: { musicData: MusicData }) {
   const cx = classNames.bind(styles);
 
+  console.log(musicData);
+
+  const HandleDeletedData = () => {
+    const validData = musicData.filter((data) => !data.isDeleted);
+
+    return (
+      <>
+        {validData.map((data) => (
+          <MainSongSection
+            key={data.songId}
+            songTitle={data.songName}
+            singer={data.artist}
+            albumImg={data.albumImg}
+            scores={data.scores}
+          />
+        ))}
+      </>
+    );
+  };
+
   return (
     <div className={cx('main-content-wrapper')}>
       <div className={cx('main-content-grid')}>
@@ -15,18 +35,7 @@ function MainGrid({ musicData }: { musicData: MusicData }) {
             곡
           </Text>
         </h1>
-        {musicData &&
-          musicData.map((el) => {
-            return (
-              <MainSongSection
-                key={el.songId}
-                songTitle={el.songName}
-                singer={el.artist}
-                albumImg={el.albumImg}
-                scores={el.scores}
-              />
-            );
-          })}
+        <HandleDeletedData />
       </div>
     </div>
   );
