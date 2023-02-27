@@ -12,3 +12,25 @@ const Template: ComponentStory<typeof CartFooter> = ({
 }) => <CartFooter cartItems={cartItems} setCartItems={setCartItems} />;
 
 export const CartHeaderOptions = Template.bind({});
+CartHeaderOptions.args = {
+  cartItems: [
+    {
+      albumImg: '',
+      artist: '',
+      author: '',
+      authorId: '',
+      author_profile: '',
+      createdAt: '',
+      detail: '',
+      difficulty: '',
+      downloadURL: '',
+      instType: '',
+      price: '',
+      scoreId: '',
+      scoreName: '',
+      sheetType: '',
+      songName: '',
+      youtubeURL: '',
+    },
+  ],
+};
