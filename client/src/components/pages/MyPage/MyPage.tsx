@@ -1,5 +1,5 @@
 import { MyPageTop } from '../../UI/organisms';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../firebase/firebase';
 import { User } from 'firebase/auth';
@@ -48,16 +48,38 @@ const MyPage = () => {
     }
   }, [user]);
 
+  const UploadedData = ({
+    clickedTab,
+  }: {
+    clickedTab: '등록한 악보' | '구매한 악보';
+  }): ReactElement | null => {
+    if (!data) {
+      return null;
+    }
+
+    const filteredData = data.filter((el: DocumentData) => !el.isDeleted);
+
+    if (clickedTab === '등록한 악보') {
+      return filteredData.map((el: DocumentData, idx: number) => (
+        <div className={cx('wrapper')} key={idx}>
+          <ScoreList score={el} buttonEvent="edit" />
+        </div>
+      ));
+    }
+
+    return data.map((el: DocumentData, idx: number) => (
+      <div className={cx('wrapper')} key={idx}>
+        <ScoreList score={el} buttonEvent="download" />
+      </div>
+    ));
+  };
+
   const UserData = () => {
     if (data && clickedTab === '등록한 악보') {
       return (
         <div className={cx('container')}>
           <div className={cx('wrapper')}>
-            {data.map((el: DocumentData, idx: number) => (
-              <div className={cx('wrapper')} key={idx}>
-                <ScoreList score={el} buttonEvent="edit" />
-              </div>
-            ))}
+            <UploadedData clickedTab="등록한 악보" />
           </div>
           <Pagination
             currentPage={currentPage}
@@ -70,11 +92,7 @@ const MyPage = () => {
       return (
         <div className={cx('container')}>
           <div className={cx('wrapper')}>
-            {data.map((el: DocumentData, idx: number) => (
-              <div className={cx('wrapper')} key={idx}>
-                <ScoreList score={el} buttonEvent="download" />
-              </div>
-            ))}
+            <UploadedData clickedTab="구매한 악보" />
           </div>
           <Pagination
             currentPage={currentPage}

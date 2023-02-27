@@ -7,8 +7,6 @@ import { MusicData } from '../../../pages/Main/Main';
 function MainGrid({ musicData }: { musicData: MusicData }) {
   const cx = classNames.bind(styles);
 
-  console.log(musicData);
-
   const HandleDeletedData = () => {
     const validData = musicData.filter((data) => !data.isDeleted);
 

@@ -118,8 +118,6 @@ function Main() {
     }
   }, [musicArr, key]);
 
-  console.log(musicArr);
-
   // 지정된 요소가 화면에 보일때 실행할 콜백함수
   const onIntersect: IntersectionObserverCallback = useCallback(
     async ([entry], observer) => {

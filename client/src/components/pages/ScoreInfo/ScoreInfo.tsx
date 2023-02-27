@@ -24,30 +24,19 @@ function ScoreInfo() {
   };
 
   async function fetchScoreData() {
-    if (!scoreName || !scoreId) {
-      throw new Error('scoreName or scoreId is falsy');
+    if (scoreName && scoreId) {
+      const [data] = await getScoreByMusic(scoreName, scoreId);
+      if (data.isDeleted) {
+        toast.error('삭제된 게시글이에요');
+        navigate('/');
+      } else {
+        setScoreData(data);
+      }
     }
-
-    const [data] = await getScoreByMusic(scoreName, scoreId);
-
-    if (data.isDeleted) {
-      throw new Error('삭제된 게시글이에요');
-    }
-
-    setScoreData(data);
   }
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        await fetchScoreData();
-      } catch (error: any) {
-        toast.error(error.message);
-        navigate('/');
-      }
-    }
-
-    fetchData();
+    fetchScoreData();
   }, []);
 
   if (scoreData === undefined) {
