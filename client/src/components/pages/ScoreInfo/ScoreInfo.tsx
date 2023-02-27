@@ -9,7 +9,6 @@ import { ScoreInfoType } from '../Main/Main';
 import { LoadingSpinner } from '../../UI/atoms';
 import { updateCart, getCart } from '../../../firebase/firebase';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import { countCartItem } from '../../../redux/ModalSlice';
 
@@ -32,13 +31,21 @@ function ScoreInfo() {
     if (scoreData) {
       getCart().then((data) => {
         if (data) {
-          dispatch(countCartItem(data.cartItems.length));
           data.cartItems.length === 0
-            ? (updateCart(scoreData), notify())
+            ? updateCart(scoreData).then((updatedData) => {
+                if (updatedData) {
+                  dispatch(countCartItem(updatedData.cartItems.length));
+                  notify();
+                }
+              })
             : data.cartItems.forEach((cartItem: ScoreInfoType) => {
                 if (cartItem.scoreId !== scoreData.scoreId) {
-                  updateCart(scoreData);
-                  notify();
+                  updateCart(scoreData).then((updatedData) => {
+                    if (updatedData) {
+                      dispatch(countCartItem(updatedData.cartItems.length));
+                      notify();
+                    }
+                  });
                 } else {
                   alert('이미 장바구니에 있는 악보입니다.');
                 }

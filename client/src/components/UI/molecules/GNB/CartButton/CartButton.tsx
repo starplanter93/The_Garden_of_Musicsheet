@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './cartButton.module.scss';
 import classNames from 'classnames/bind';
 import { Button, Icon, Text } from '../../../atoms';
 import { cartModalHandler } from '../../../../../redux/ModalSlice';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../redux/store';
+import { getCart } from '../../../../../firebase/firebase';
 
 // Todo: 장바구니에 담긴 개수
 const CartButton = () => {
   const cx = classNames.bind(styles);
+  const [countCart, setCountCart] = useState<number>(0);
   const dispatch = useDispatch();
   const countCartItems = useSelector(
     (state: RootState) => state.modalState.countCartItems
@@ -18,6 +19,14 @@ const CartButton = () => {
     dispatch(cartModalHandler());
   }
 
+  useEffect(() => {
+    getCart().then((data) => {
+      if (data) {
+        setCountCart(data.cartItems.length);
+      }
+    });
+  }, []);
+
   return (
     <div className={cx('cartbutton-wrapper')}>
       <Button theme="transparent" size="auto" onClick={cartModalOpener}>
@@ -25,7 +34,7 @@ const CartButton = () => {
       </Button>
       <span className={cx('bubble')}>
         <Text size="s" weight="medium">
-          {`${countCartItems}`}
+          {`${countCart}`}
         </Text>
       </span>
     </div>

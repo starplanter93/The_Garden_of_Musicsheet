@@ -70,14 +70,18 @@ export async function updateCart(scoreInfo: ScoreInfoType) {
   if (auth.currentUser !== null) {
     const userInfoRef = doc(db, 'user', auth.currentUser.uid);
     await updateDoc(userInfoRef, { cartItems: arrayUnion(scoreInfo) });
+    const snapshot = await getDoc(userInfoRef);
+    if (snapshot.exists()) {
+      return snapshot.data();
+    }
   }
 }
 
 /** 장바구니에 담은 악보 get */
 export async function getCart() {
   if (auth.currentUser !== null) {
-    const ref = doc(db, 'user', auth.currentUser.uid);
-    const snapshot = await getDoc(ref);
+    const userInfoRef = doc(db, 'user', auth.currentUser.uid);
+    const snapshot = await getDoc(userInfoRef);
     if (snapshot.exists()) {
       return snapshot.data();
     }
