@@ -4,6 +4,7 @@ import { ScoreInfoType } from '../components/pages/Main/Main';
 export interface CartStateType {
   isCartModalOpened: boolean;
   cartItems: ScoreInfoType[];
+  countCartItems: number;
 }
 
 const initialState: CartStateType = {
@@ -25,6 +26,7 @@ const initialState: CartStateType = {
   // songName: '',
   // youtubeURL: '',
   cartItems: [],
+  countCartItems: 0,
 };
 
 export const modalSlice = createSlice({
@@ -35,6 +37,9 @@ export const modalSlice = createSlice({
       const newState = { ...state };
       newState.isCartModalOpened = !newState.isCartModalOpened;
       return newState;
+    },
+    countCartItem(state: CartStateType, action: PayloadAction<number>) {
+      state.countCartItems = action.payload;
     },
     updateCartItems(
       state: CartStateType,
@@ -89,8 +94,12 @@ export const modalSlice = createSlice({
   },
 });
 
-export const { cartModalHandler, updateCartItems, deleteCartItem } =
-  modalSlice.actions;
+export const {
+  cartModalHandler,
+  countCartItem,
+  updateCartItems,
+  deleteCartItem,
+} = modalSlice.actions;
 
 const modalReducer: Reducer<typeof initialState> = modalSlice.reducer;
 

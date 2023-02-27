@@ -10,11 +10,14 @@ import { LoadingSpinner } from '../../UI/atoms';
 import { updateCart, getCart } from '../../../firebase/firebase';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { countCartItem } from '../../../redux/ModalSlice';
 
 function ScoreInfo() {
   const cx = classNames.bind(styles);
   const [scoreData, setScoreData] = useState<ScoreInfoType>();
   const { scoreName, scoreId } = useParams();
+  const dispatch = useDispatch();
   const dummyData = {
     scoreImg1:
       'https://firebasestorage.googleapis.com/v0/b/garden-of-musicsheet.appspot.com/o/if%20i%20could%20be%20a%20constellation%231.png?alt=media&token=5f6f761a-104d-4317-ad8d-03feb5c018fb',
@@ -29,6 +32,7 @@ function ScoreInfo() {
     if (scoreData) {
       getCart().then((data) => {
         if (data) {
+          dispatch(countCartItem(data.cartItems.length));
           data.cartItems.length === 0
             ? updateCart(scoreData)
             : data.cartItems.forEach((cartItem: ScoreInfoType) => {
