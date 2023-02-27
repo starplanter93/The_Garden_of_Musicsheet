@@ -17,6 +17,7 @@ import classNames from 'classnames/bind';
 import styles from './main.module.scss';
 import { useDispatch } from 'react-redux';
 import { showFooter } from '../../../redux/FooterSlice';
+import Spinner from '../../../utils/Spinner/Spinner';
 
 export type MusicData = {
   artist: string;
@@ -43,18 +44,18 @@ export interface ScoreInfoType {
   sheetType: string;
   songName: string;
   youtubeURL: string;
+  isDeleted: boolean;
 }
 
 function Main() {
   const cx = classNames.bind(styles);
 
-  const [musicArr, setMusicArr] = useState<MusicData>([
-    { artist: '', scores: [], albumImg: '', songName: '', songId: null },
-  ]);
+  const [musicArr, setMusicArr] = useState<MusicData>([]);
   const [key, setKey] = useState<DocumentData>(); // 마지막으로 불러온 스냅샷 상태
   const [noMore, setNoMore] = useState(false); // 추가로 요청할 데이터 없다는 flag
   const target = useRef() as React.MutableRefObject<HTMLDivElement>;
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     dispatch(showFooter(noMore));
@@ -83,6 +84,7 @@ function Main() {
       const docsArray = snap.docs.map((doc: DocumentData) => doc.data());
       // 문서 저장
       setMusicArr(docsArray);
+      setLoading(!loading);
       // 커서로 사용할 마지막 문서 스냅샷 저장
       setKey(snap.docs[snap.docs.length - 1]);
     } catch (err) {
@@ -114,6 +116,8 @@ function Main() {
       console.log(err);
     }
   }, [musicArr, key]);
+
+  console.log(musicArr);
 
   // 지정된 요소가 화면에 보일때 실행할 콜백함수
   const onIntersect: IntersectionObserverCallback = useCallback(
@@ -150,7 +154,13 @@ function Main() {
   return (
     <>
       <Carousel />
-      <MainGrid musicData={musicArr} />
+      {loading ? (
+        <>
+          <MainGrid musicData={musicArr} />
+        </>
+      ) : (
+        <Spinner />
+      )}
       <div className={cx('target')} ref={target}></div>
     </>
   );
