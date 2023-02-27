@@ -7,7 +7,9 @@ import { getScoreByMusic } from '../../../firebase/firebase';
 import { useParams } from 'react-router';
 import { ScoreInfoType } from '../Main/Main';
 import { LoadingSpinner } from '../../UI/atoms';
-import { updateCart } from '../../../firebase/firebase';
+import { updateCart, getCart } from '../../../firebase/firebase';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ScoreInfo() {
   const cx = classNames.bind(styles);
@@ -21,20 +23,23 @@ function ScoreInfo() {
     page: '7',
   };
 
+  const notify = () => toast('장바구니에 추가되었습니다.');
+
   function updateCartItem() {
-    // if (scoreData) {
-    //   const existingItem = cartItems.find(
-    //     (item) => item.scoreName === scoreData.scoreName
-    //   );
-    //   if (existingItem) {
-    //     alert('이미 장바구니에 들어 있습니다.');
-    //   } else {
-    //     dispatch(updateCartItems(scoreData));
-    //     alert('장바구니에 추가되었습니다.');
-    //   }
-    // }
     if (scoreData) {
-      updateCart(scoreData);
+      getCart().then((data) => {
+        if (data) {
+          data.cartItems.length === 0
+            ? updateCart(scoreData)
+            : data.cartItems.forEach((cartItem: ScoreInfoType) => {
+                if (cartItem.scoreId !== scoreData.scoreId) {
+                  updateCart(scoreData);
+                } else {
+                  alert('이미 장바구니에 있는 악보입니다.');
+                }
+              });
+        }
+      });
     }
   }
 
@@ -79,6 +84,7 @@ function ScoreInfo() {
         updateCart={updateCartItem}
       />
       <aside></aside>
+      <ToastContainer />
     </div>
   );
 }

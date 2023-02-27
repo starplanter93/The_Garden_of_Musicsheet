@@ -70,14 +70,6 @@ export async function updateCart(scoreInfo: ScoreInfoType) {
   if (auth.currentUser !== null) {
     const userInfoRef = doc(db, 'user', auth.currentUser.uid);
     await updateDoc(userInfoRef, { cartItems: arrayUnion(scoreInfo) });
-    const snapshot = await getDoc(userInfoRef);
-    if (snapshot.exists()) {
-      snapshot.data().cartItems.forEach((cartItem: ScoreInfoType) => {
-        if (cartItem.scoreId === scoreInfo.scoreId) {
-          alert('이미 장바구니에 있는 악보입니다.');
-        }
-      });
-    }
   }
 }
 
