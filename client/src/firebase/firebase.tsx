@@ -67,8 +67,16 @@ export async function getScoreByMusic(docName: string, scoreId: string) {
 
 /** 장바구니에 악보 추가 */
 export async function updateCart(userId: string, scoreInfo: ScoreInfoType) {
-  const infoRef = doc(db, 'user', userId);
-  await updateDoc(infoRef, { cartItems: arrayUnion(scoreInfo) });
+  const userInfoRef = doc(db, 'user', userId);
+  await updateDoc(userInfoRef, { cartItems: arrayUnion(scoreInfo) });
+  const snapshot = await getDoc(userInfoRef);
+  if (snapshot.exists()) {
+    snapshot.data().cartItems.forEach((cartItem: ScoreInfoType) => {
+      if (cartItem.scoreId === scoreInfo.scoreId) {
+        alert('이미 장바구니에 있는 악보입니다.');
+      }
+    });
+  }
 }
 
 /** 장바구니에 담은 악보 get */
@@ -79,6 +87,8 @@ export async function getCart(userId: string) {
     return snapshot.data();
   }
 }
+
+/** 장바구니에서 악보 delete */
 
 // 곡 상세페이지, 악기 상세페이지 데이터 api
 export async function getScoresByCategory(colName: string, docName: string) {
