@@ -601,6 +601,87 @@ export async function userOptout(uid: string) {
   }
 }
 
+// 유저가 게시글을 삭제하면, 해당 게시글의 id를 바탕으로 모든 컬렉션의 scores, posts의 isDeleted 값을 true로 만들어줌
+export async function deleteArticle(uid: string) {
+  /** user 컬렉션 수정 */
+
+  const userRef = doc(db, 'user', uid);
+  const userSnap = await getDoc(userRef);
+  if (userSnap.exists()) {
+    const { posts } = userSnap.data();
+    const scoresWithId = posts.filter((obj: Score) => obj.authorId === uid);
+    scoresWithId.forEach((obj: Score) => (obj.isDeleted = true));
+    await updateDoc(userRef, { posts: posts });
+  }
+  /** music 컬렉션 수정*/
+  const musicRef = collection(db, 'music');
+  const musicSnap = await getDocs(musicRef);
+  const musicList = musicSnap.docs.map((doc: DocumentData) => doc.data());
+  const musicArr = musicList.map((el) => el.scores);
+
+  for (let i = 0; i < musicArr.length; i++) {
+    for (let j = 0; j < musicArr[i].length; j++) {
+      if (musicArr[i][j].authorId === uid) {
+        const songName = `${musicArr[i][j].songName}-${musicArr[i][j].artist}`;
+        const infoRef = doc(db, 'music', songName);
+        const snapshot = await getDoc(infoRef);
+
+        if (snapshot.exists()) {
+          const { scores } = snapshot.data();
+          const scoresWithId = scores.filter(
+            (obj: Score) => obj.authorId === uid
+          );
+          scoresWithId.forEach((obj: Score) => (obj.isDeleted = true));
+
+          await updateDoc(infoRef, { scores: scores });
+        }
+      }
+    }
+  }
+  /** instrument 컬렉션 수정*/
+  const instRef = collection(db, 'instrument');
+  const instSnap = await getDocs(instRef);
+  const instList = instSnap.docs.map((doc: DocumentData) => doc.data());
+
+  const instArr = instList.map((el) => el.scores);
+
+  for (let i = 0; i < instArr.length; i++) {
+    for (let j = 0; j < instArr[i].length; j++) {
+      if (instArr[i][j].authorId === uid) {
+        const data = instArr[i][j];
+        let inst = data.instType;
+        if (inst === '피아노') {
+          inst = 'piano';
+        }
+        if (inst === '어쿠스틱 기타') {
+          inst = 'acoustic';
+        }
+        if (inst === '베이스') {
+          inst = 'bass';
+        }
+        if (inst === '드럼') {
+          inst = 'drum';
+        }
+        if (inst === '일렉 기타') {
+          inst = 'electric';
+        }
+
+        const infoRef = doc(db, 'instrument', inst);
+        const snapshot = await getDoc(infoRef);
+
+        if (snapshot.exists()) {
+          const { scores } = snapshot.data();
+          const scoresWithId = scores.filter(
+            (obj: Score) => obj.authorId === uid
+          );
+          scoresWithId.forEach((obj: Score) => (obj.isDeleted = true));
+
+          await updateDoc(infoRef, { scores: scores });
+        }
+      }
+    }
+  }
+}
 export async function getUserCash(uid: string) {
   const ref = doc(db, 'user', uid);
   const snapshot = await getDoc(ref);
