@@ -2,8 +2,9 @@ import { Text, Button } from '../../atoms';
 import styles from './scoreinfoheader.module.scss';
 import classNames from 'classnames/bind';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { deleteArticle, auth } from '../../../../firebase/firebase';
+import { auth, deleteArticle } from '../../../../firebase/firebase';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 interface ScoreInfoHeaderProps {
   scoreName: string;
   singer: string;
@@ -13,16 +14,18 @@ interface ScoreInfoHeaderProps {
 function ScoreInfoHeader({ scoreName, singer, date }: ScoreInfoHeaderProps) {
   const cx = classNames.bind(styles);
   const navigate = useNavigate();
+  const params = useParams();
   const { pathname } = useLocation();
   const formattedDate = new Intl.DateTimeFormat('ko-kr').format(new Date(date));
 
   const handleDeleteArticle = async () => {
     const user = auth.currentUser;
-    if (user) {
-      deleteArticle(user.uid);
+    if (user && params.scoreId) {
+      const scoreId = params.scoreId.toString();
+      deleteArticle(user.uid, scoreId);
     }
-    toast.success('삭제됐습니다!');
-    navigate('/');
+    // toast.success('삭제됐습니다!');
+    // navigate('/');
   };
 
   return (
