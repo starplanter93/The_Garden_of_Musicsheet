@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Text, Button, Icon } from '../../atoms';
 import styles from './cartList.module.scss';
 import classNames from 'classnames/bind';
-import { deleteCartItem } from '../../../../redux/ModalSlice';
-import { useDispatch } from 'react-redux';
+import { deleteCartItem } from '../../../../firebase/firebase';
+import { ScoreInfoType } from '../../../pages/Main/Main';
 
 interface CartItemType {
   scoreName: string;
@@ -11,13 +11,22 @@ interface CartItemType {
   author: string;
   price: string;
   scoreId: string;
+  setCartItems: Dispatch<SetStateAction<ScoreInfoType[]>>;
 }
 
-function CartList({ scoreName, artist, author, price, scoreId }: CartItemType) {
+function CartList({
+  scoreName,
+  artist,
+  author,
+  price,
+  scoreId,
+  setCartItems,
+}: CartItemType) {
   const cx = classNames.bind(styles);
-  const dispatch = useDispatch();
   function deleteItem() {
-    dispatch(deleteCartItem(scoreName));
+    deleteCartItem('XmX1jT6EOZgQrM66Ppq6nKz1lCA2', scoreId).then((data) =>
+      setCartItems(data)
+    );
   }
 
   return (

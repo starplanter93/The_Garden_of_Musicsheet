@@ -66,16 +66,19 @@ export async function getScoreByMusic(docName: string, scoreId: string) {
 }
 
 /** 장바구니에 악보 추가 */
-export async function updateCart(userId: string, scoreInfo: ScoreInfoType) {
-  const userInfoRef = doc(db, 'user', userId);
-  await updateDoc(userInfoRef, { cartItems: arrayUnion(scoreInfo) });
-  const snapshot = await getDoc(userInfoRef);
-  if (snapshot.exists()) {
-    snapshot.data().cartItems.forEach((cartItem: ScoreInfoType) => {
-      if (cartItem.scoreId === scoreInfo.scoreId) {
-        alert('이미 장바구니에 있는 악보입니다.');
-      }
-    });
+export async function updateCart(scoreInfo: ScoreInfoType) {
+  let userInfoRef;
+  if (auth.currentUser !== null) {
+    userInfoRef = doc(db, 'user', auth.currentUser.uid);
+    await updateDoc(userInfoRef, { cartItems: arrayUnion(scoreInfo) });
+    const snapshot = await getDoc(userInfoRef);
+    if (snapshot.exists()) {
+      snapshot.data().cartItems.forEach((cartItem: ScoreInfoType) => {
+        if (cartItem.scoreId === scoreInfo.scoreId) {
+          alert('이미 장바구니에 있는 악보입니다.');
+        }
+      });
+    }
   }
 }
 
@@ -89,6 +92,19 @@ export async function getCart(userId: string) {
 }
 
 /** 장바구니에서 악보 delete */
+export async function deleteCartItem(userId: string, scoreId: string) {
+  const userInfoRef = doc(db, 'user', userId);
+  const snapshot = await getDoc(userInfoRef);
+  if (snapshot.exists()) {
+    const deletedCartList = snapshot
+      .data()
+      .cartItems.filter((cartItem: ScoreInfoType) => {
+        return cartItem.scoreId !== scoreId;
+      });
+    await updateDoc(userInfoRef, { cartItems: deletedCartList });
+    return deletedCartList;
+  }
+}
 
 // 곡 상세페이지, 악기 상세페이지 데이터 api
 export async function getScoresByCategory(colName: string, docName: string) {

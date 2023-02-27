@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import CartList from '../CartList/CartList';
 import styles from './cartBody.module.scss';
 import classNames from 'classnames/bind';
 import { v4 as uuidv4 } from 'uuid';
 import { ScoreInfoType } from '../../../pages/Main/Main';
 
-function CartBody({ cartItems }: { cartItems: ScoreInfoType[] }) {
+interface SetCartItemsProps {
+  cartItems: ScoreInfoType[];
+  setCartItems: Dispatch<SetStateAction<ScoreInfoType[]>>;
+}
+
+function CartBody({ cartItems, setCartItems }: SetCartItemsProps) {
   const cx = classNames.bind(styles);
 
   return (
@@ -20,6 +25,7 @@ function CartBody({ cartItems }: { cartItems: ScoreInfoType[] }) {
               author={cartItem.author}
               price={cartItem.price}
               scoreId={cartItem.scoreId}
+              setCartItems={setCartItems}
             />
           );
         })}

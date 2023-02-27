@@ -34,7 +34,7 @@ function ScoreInfo() {
     //   }
     // }
     if (scoreData) {
-      updateCart('XmX1jT6EOZgQrM66Ppq6nKz1lCA2', scoreData);
+      updateCart(scoreData);
     }
   }
 

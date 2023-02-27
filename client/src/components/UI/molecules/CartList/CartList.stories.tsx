@@ -12,6 +12,7 @@ const Template: ComponentStory<typeof CartList> = ({
   author,
   price,
   scoreId,
+  setCartItems,
 }) => (
   <CartList
     scoreName={scoreName}
@@ -19,6 +20,7 @@ const Template: ComponentStory<typeof CartList> = ({
     author={author}
     price={price}
     scoreId={scoreId}
+    setCartItems={setCartItems}
   />
 );
 

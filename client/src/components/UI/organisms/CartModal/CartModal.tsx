@@ -10,7 +10,7 @@ import { ScoreInfoType } from '../../../pages/Main/Main';
 function CartModal() {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
-  const [cartItems, setCartItems] = useState<ScoreInfoType[]>();
+  const [cartItems, setCartItems] = useState<ScoreInfoType[]>([]);
 
   function cartModalCloser() {
     dispatch(cartModalHandler());
@@ -34,7 +34,9 @@ function CartModal() {
       >
         <CartHeader />
         <div className={cx('cart-body-wrapper')}>
-          {cartItems && <CartBody cartItems={cartItems} />}
+          {cartItems && (
+            <CartBody cartItems={cartItems} setCartItems={setCartItems} />
+          )}
         </div>
         <CartFooter />
       </section>
