@@ -106,8 +106,10 @@ export async function getMusicData(songName: string, data: StateType) {
 
   const list = colSnap.docs.map((doc: DocumentData) => doc.data());
 
-  const scoreId = list.length.toString();
-  data = { ...data };
+  const scoreId = list
+    .reduce((acc, curr) => acc + curr.scores.length, 0)
+    .toString();
+  data = { ...data, isDeleted: false };
   data.scores = [{ ...data.scores[0], scoreId }];
 
   if (savedData && savedData.artist === data.artist) {
@@ -158,7 +160,10 @@ async function postData(songName: string, data: StateType) {
 /** 해당 곡으로 만들어진 문서가 존재한다면 아래 함수가 작동하여 scores 배열을 업데이트 합니다 */
 async function updateData(songName: string, data: StateType) {
   const infoRef = doc(db, 'music', songName);
-  await updateDoc(infoRef, { scores: arrayUnion(data.scores[0]) });
+  await updateDoc(infoRef, {
+    scores: arrayUnion(data.scores[0]),
+    isDeleted: false,
+  });
 
   /** instrument collection 에 추가 */
   let inst = data.scores[0].instType;
@@ -181,15 +186,6 @@ async function updateData(songName: string, data: StateType) {
 
   const instRef = doc(db, 'instrument', inst);
   await updateDoc(instRef, { scores: arrayUnion(data.scores[0]) });
-
-  const user = auth.currentUser;
-
-  // if (user) {
-  //   const uid = user.uid;
-  //   const purchasedScore = data.scores[0];
-  //   const userRef = doc(db, 'user', uid);
-  //   await updateDoc(userRef, { purchasedList: arrayUnion(purchasedScore) });
-  // }
 }
 
 /** 악보파일 업로드 api 호출 */
@@ -355,11 +351,16 @@ export async function updateUserName(uid: string, newName: string) {
   /** user 컬렉션 수정 */
   const userRef = doc(db, 'user', uid);
   const userSnap = await getDoc(userRef);
+
   if (userSnap.exists()) {
     const { posts } = userSnap.data();
-    const scoresWithId = posts.filter((obj: Score) => obj.authorId === uid);
-    scoresWithId.forEach((obj: Score) => (obj.author = newName));
-    await updateDoc(userRef, { posts: posts });
+    if (posts === undefined) {
+      return;
+    } else {
+      const scoresWithId = posts.filter((obj: Score) => obj.authorId === uid);
+      scoresWithId.forEach((obj: Score) => (obj.author = newName));
+      await updateDoc(userRef, { posts: posts });
+    }
   }
 
   /** music 컬렉션 수정*/
@@ -523,82 +524,64 @@ export async function updateUserPicture(uid: string, image: string) {
 // 유저가 회원탈퇴를 진행하면 music, inst, user 컬렉션 내에 모든 scores,posts 의 isOptout 값을 true로 만들어줌
 export async function userOptout(uid: string) {
   /** user 컬렉션 수정 */
-
   const userRef = doc(db, 'user', uid);
   const userSnap = await getDoc(userRef);
+
   if (userSnap.exists()) {
     const { posts } = userSnap.data();
     const scoresWithId = posts.filter((obj: Score) => obj.authorId === uid);
     scoresWithId.forEach((obj: Score) => (obj.isOptout = true));
-    await updateDoc(userRef, { posts: posts, isActive: false });
+
+    await updateDoc(userRef, { posts, isActive: false });
   }
+
   /** music 컬렉션 수정*/
   const musicRef = collection(db, 'music');
   const musicSnap = await getDocs(musicRef);
   const musicList = musicSnap.docs.map((doc: DocumentData) => doc.data());
-  const musicArr = musicList.map((el) => el.scores);
 
-  for (let i = 0; i < musicArr.length; i++) {
-    for (let j = 0; j < musicArr[i].length; j++) {
-      if (musicArr[i][j].authorId === uid) {
-        const songName = `${musicArr[i][j].songName}-${musicArr[i][j].artist}`;
-        const infoRef = doc(db, 'music', songName);
-        const snapshot = await getDoc(infoRef);
+  for (const { scores } of musicList) {
+    const scoresWithId = scores.filter((obj: Score) => obj.authorId === uid);
+    scoresWithId.forEach((obj: Score) => (obj.isOptout = true));
 
-        if (snapshot.exists()) {
-          const { scores } = snapshot.data();
-          const scoresWithId = scores.filter(
-            (obj: Score) => obj.authorId === uid
-          );
-          scoresWithId.forEach((obj: Score) => (obj.isOptout = true));
+    const batch = writeBatch(db);
+    const infoRefs = scoresWithId.map(({ songName, artist }: Score) =>
+      doc(db, 'music', `${songName}-${artist}`)
+    );
 
-          await updateDoc(infoRef, { scores: scores });
-        }
-      }
+    for (let i = 0; i < scoresWithId.length; i++) {
+      batch.update(infoRefs[i], { scores: scores });
     }
+
+    await batch.commit();
   }
+
   /** instrument 컬렉션 수정*/
   const instRef = collection(db, 'instrument');
   const instSnap = await getDocs(instRef);
   const instList = instSnap.docs.map((doc: DocumentData) => doc.data());
 
-  const instArr = instList.map((el) => el.scores);
+  for (const { scores } of instList) {
+    const scoresWithId = scores.filter((obj: Score) => obj.authorId === uid);
+    scoresWithId.forEach((obj: Score) => (obj.isOptout = true));
 
-  for (let i = 0; i < instArr.length; i++) {
-    for (let j = 0; j < instArr[i].length; j++) {
-      if (instArr[i][j].authorId === uid) {
-        const data = instArr[i][j];
-        let inst = data.instType;
-        if (inst === '피아노') {
-          inst = 'piano';
-        }
-        if (inst === '어쿠스틱 기타') {
-          inst = 'acoustic';
-        }
-        if (inst === '베이스') {
-          inst = 'bass';
-        }
-        if (inst === '드럼') {
-          inst = 'drum';
-        }
-        if (inst === '일렉 기타') {
-          inst = 'electric';
-        }
+    const batch = writeBatch(db);
+    const instType = scoresWithId.map(({ instType }: Score) => {
+      if (instType === '피아노') return 'piano';
+      if (instType === '어쿠스틱 기타') return 'acoustic';
+      if (instType === '베이스') return 'bass';
+      if (instType === '드럼') return 'drum';
+      if (instType === '일렉 기타') return 'electric';
+    });
+    const infoRefs = instType.map((inst: string) =>
+      doc(db, 'instrument', inst)
+    );
 
-        const infoRef = doc(db, 'instrument', inst);
-        const snapshot = await getDoc(infoRef);
-
-        if (snapshot.exists()) {
-          const { scores } = snapshot.data();
-          const scoresWithId = scores.filter(
-            (obj: Score) => obj.authorId === uid
-          );
-          scoresWithId.forEach((obj: Score) => (obj.isOptout = true));
-
-          await updateDoc(infoRef, { scores: scores });
-        }
-      }
+    for (let i = 0; i < scoresWithId.length; i++) {
+      batch.update(infoRefs[i], { scores: scores });
     }
+
+    await batch.commit();
   }
 }
 
@@ -638,6 +621,11 @@ export async function deleteArticle(uid: string, scoreId: string) {
       return score;
     });
     batch.update(doc.ref, { scores: updatedScores });
+    if (updatedScores.every((score: Score) => score.isDeleted)) {
+      batch.update(doc.ref, { isDeleted: true });
+    } else {
+      batch.update(doc.ref, { isDeleted: false });
+    }
   }
 
   // Update instrument collection
