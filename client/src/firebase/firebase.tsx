@@ -20,6 +20,10 @@ import {
   arrayUnion,
   DocumentReference,
   writeBatch,
+  query,
+  limit,
+  orderBy,
+  startAfter,
 } from 'firebase/firestore/lite';
 import { Score, StateType } from '../redux/PostSlice';
 import { ScoreInfoType } from '../components/pages/Main/Main';
@@ -40,13 +44,6 @@ export const db = getFirestore(app);
 export const auth = getAuth();
 
 export const provider = new GoogleAuthProvider();
-
-export async function getDocument() {
-  const ref = collection(db, 'test');
-  const snapshot = await getDocs(ref);
-  const list = snapshot.docs.map((doc: DocumentData) => doc.data());
-  return list;
-}
 
 export async function getMusics() {
   const ref = collection(db, 'music');
@@ -692,4 +689,46 @@ export async function syncUserData() {
   }
 
   console.log(syncArr);
+}
+
+export async function getMainPageData() {
+  const queryRef = query(
+    collection(db, 'music'),
+    orderBy('songId'), // 최신 작성순으로 정렬
+    limit(8)
+  );
+  try {
+    const snap = await getDocs(queryRef);
+    const docsArray = snap.docs.map((doc: DocumentData) => doc.data());
+    return { docsArray, key: snap.docs[snap.docs.length - 1] };
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getMoreMainData(key: DocumentData) {
+  if (key !== undefined) {
+    const queryRef = query(
+      collection(db, 'music'),
+      orderBy('songId'),
+      startAfter(key), // 마지막 커서 기준으로 추가 요청을 보내도록 쿼리 전송
+      limit(6)
+    );
+    try {
+      if (queryRef !== undefined) {
+        const snap = await getDocs(queryRef);
+        const docsArray = snap.docs.map((doc: DocumentData) => doc.data());
+        if (snap.empty) {
+          return { docsArray, noMore: snap.empty };
+        } else
+          return {
+            docsArray,
+            key: snap.docs[snap.docs.length - 1],
+            noMore: snap.empty,
+          };
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
