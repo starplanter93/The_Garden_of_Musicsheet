@@ -5,6 +5,7 @@ import { Text } from '../../atoms';
 import { useEffect, useState } from 'react';
 import { DocumentData } from 'firebase/firestore/lite';
 import { v4 as uuid } from 'uuid';
+import { ScoreInfoType } from '../../../pages/Main/Main';
 
 interface CategoryDetailProps {
   category: string;
@@ -26,6 +27,9 @@ const CategoryDetail = ({
   const [tabGroupArr, setTabGroupArr] = useState<string[]>([]);
 
   useEffect(() => {
+    scoresByCategory = scoresByCategory
+      .filter((el: ScoreInfoType) => !el.isDeleted)
+      .filter((el: ScoreInfoType) => !el.isOptout);
     let currentData: DocumentData;
     if (clickedTab === '전체') {
       setTotalLists(scoresByCategory?.length);

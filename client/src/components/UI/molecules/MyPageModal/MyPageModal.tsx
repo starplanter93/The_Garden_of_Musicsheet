@@ -2,16 +2,17 @@ import styles from './myPageModal.module.scss';
 import classNames from 'classnames/bind';
 import { Button, ImgLayout, Text } from '../../atoms';
 import { Dispatch, SetStateAction, useRef, useState } from 'react';
-import { auth, userOptout } from '../../../../firebase/firebase';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
-import { deleteUser, updateCurrentUser, updateProfile } from 'firebase/auth';
-import { ThreeDots } from 'react-loader-spinner';
-import { persistor } from '../../../../redux/store';
 import {
+  auth,
+  userOptout,
   postProfilePicture,
   updateUserPicture,
 } from '../../../../firebase/firebase';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { updateProfile } from 'firebase/auth';
+import { ThreeDots } from 'react-loader-spinner';
+import { persistor } from '../../../../redux/store';
 import { useDispatch } from 'react-redux';
 import { setFile } from '../../../../redux/FileSlice';
 import { setUserProfilePicture } from '../../../../redux/UserSlice';

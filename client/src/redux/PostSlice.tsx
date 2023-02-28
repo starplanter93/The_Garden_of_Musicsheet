@@ -37,6 +37,7 @@ export interface Score {
   albumImg: string;
   downloadURL: string;
   isOptout: boolean;
+  isDeleted: boolean;
 }
 
 export interface StateType {
@@ -74,6 +75,7 @@ const initialState: StateType = {
       albumImg: '',
       downloadURL: '',
       isOptout: false,
+      isDeleted: false,
     },
   ],
 };
@@ -138,9 +140,7 @@ export const PostSlice = createSlice({
     setDownloadURL: (state: StateType, action: PayloadAction<string>) => {
       state.scores[0].downloadURL = action.payload;
     },
-    initializeState: (state: StateType) => {
-      return (state = initialState);
-    },
+    initializeState: () => initialState,
   },
 });
 
