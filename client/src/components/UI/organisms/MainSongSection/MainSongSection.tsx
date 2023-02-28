@@ -29,14 +29,14 @@ function MainSongSection({
 // price,
 MainSongSectionProps) {
   const cx = classNames.bind(styles);
-
+  if (scores) scores = scores.slice(-3);
   return (
     <section className={cx('container')}>
       <SongTitle songTitle={songTitle} singer={singer} albumImg={albumImg} />
       <div className={cx('scorelist-wrapper')}>
         {scores &&
           scores.map((el, idx) => {
-            if (idx < 3) {
+            if (idx < 3 && el.isDeleted === false && el.isOptout === false) {
               return (
                 <MainScoreList
                   key={el.scoreId}

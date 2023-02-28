@@ -1,7 +1,6 @@
 import styles from './userMenu.module.scss';
 import classNames from 'classnames/bind';
 import { Button, Icon, Text } from '../../../atoms';
-import { useDispatch } from 'react-redux';
 import { auth } from '../../../../../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
 import { persistor } from '../../../../../redux/store';
@@ -13,7 +12,6 @@ interface UserMenuProps {
 
 const UserMenu = ({ setDropdown }: UserMenuProps) => {
   const cx = classNames.bind(styles);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {

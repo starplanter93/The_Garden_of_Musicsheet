@@ -12,9 +12,11 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { countCartItem } from '../../../redux/ModalSlice';
 import { auth } from '../../../firebase/firebase';
+import { useNavigate } from 'react-router';
 
 function ScoreInfo() {
   const cx = classNames.bind(styles);
+  const navigate = useNavigate();
   const [scoreData, setScoreData] = useState<ScoreInfoType>();
   const { scoreName, scoreId } = useParams();
   const dispatch = useDispatch();
@@ -69,7 +71,12 @@ function ScoreInfo() {
   async function fetchScoreData() {
     if (scoreName && scoreId) {
       const [data] = await getScoreByMusic(scoreName, scoreId);
-      setScoreData(data);
+      if (data.isDeleted) {
+        toast.error('삭제된 게시글이에요');
+        navigate('/');
+      } else {
+        setScoreData(data);
+      }
     }
   }
 

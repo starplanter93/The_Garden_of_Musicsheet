@@ -36,12 +36,16 @@
       .bottom {
         display: flex;
         justify-content: space-between;
+        @media screen and (max-width: 500px) {
+          flex-direction: column;
+        }
         .cash {
           display: flex;
           align-items: center;
         }
         .edit {
           display: flex;
+          align-items: center;
         }
       }
     }

@@ -1,7 +1,6 @@
 import { MyPageTop } from '../../UI/organisms';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../../firebase/firebase';
 import { User } from 'firebase/auth';
 import {
   ScoreList,
@@ -9,15 +8,67 @@ import {
   MyPageModal,
   Pagination,
 } from '../../UI/molecules';
-import { getUserArticle } from '../../../firebase/firebase';
+import { getUserArticle, auth, getUserCash } from '../../../firebase/firebase';
 import { DocumentData } from 'firebase/firestore/lite';
 import classNames from 'classnames/bind';
 import styles from './myPage.module.scss';
 import Spinner from '../../../utils/Spinner/Spinner';
-import { getUserCash } from '../../../firebase/firebase';
+const cx = classNames.bind(styles);
+
+type UploadedDataProps = {
+  clickedTab: '등록한 악보' | '구매한 악보';
+  data: DocumentData[];
+};
+
+const UploadedData = ({ clickedTab, data }: UploadedDataProps) => {
+  const filteredData = data.filter((el: DocumentData) => !el.isDeleted);
+
+  return (
+    <>
+      {clickedTab === '등록한 악보' && (
+        <>
+          {filteredData.map((el: DocumentData, idx: number) => (
+            <div className={cx('wrapper')} key={idx}>
+              <ScoreList score={el} buttonEvent="edit" />
+            </div>
+          ))}
+        </>
+      )}
+      {clickedTab === '구매한 악보' && (
+        <>
+          {data.map((el: DocumentData, idx: number) => (
+            <div className={cx('wrapper')} key={idx}>
+              <ScoreList score={el} buttonEvent="download" />
+            </div>
+          ))}
+        </>
+      )}
+    </>
+  );
+};
+
+const UserData = ({ data, clickedTab, currentPage, setCurrentPage }: any) => {
+  return (
+    <>
+      {data && (
+        <>
+          <div className={cx('container')}>
+            <div className={cx('wrapper')}>
+              <UploadedData clickedTab={clickedTab} data={data} />
+            </div>
+            <Pagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              totalLists={data.length}
+            />
+          </div>
+        </>
+      )}
+    </>
+  );
+};
 
 const MyPage = () => {
-  const cx = classNames.bind(styles);
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
@@ -48,44 +99,6 @@ const MyPage = () => {
     }
   }, [user]);
 
-  const UserData = () => {
-    if (data && clickedTab === '등록한 악보') {
-      return (
-        <div className={cx('container')}>
-          <div className={cx('wrapper')}>
-            {data.map((el: DocumentData, idx: number) => (
-              <div className={cx('wrapper')} key={idx}>
-                <ScoreList score={el} buttonEvent="edit" />
-              </div>
-            ))}
-          </div>
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            totalLists={data.length}
-          />
-        </div>
-      );
-    } else if (data && clickedTab === '구매한 악보') {
-      return (
-        <div className={cx('container')}>
-          <div className={cx('wrapper')}>
-            {data.map((el: DocumentData, idx: number) => (
-              <div className={cx('wrapper')} key={idx}>
-                <ScoreList score={el} buttonEvent="download" />
-              </div>
-            ))}
-          </div>
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            totalLists={data.length}
-          />
-        </div>
-      );
-    } else return null;
-  };
-
   if (loading) {
     return <Spinner />;
   }
@@ -113,7 +126,12 @@ const MyPage = () => {
                 tabGroupArr={['등록한 악보', '구매한 악보']}
                 setCurrentPage={setCurrentPage}
               />
-              <UserData />
+              <UserData
+                data={data}
+                clickedTab={clickedTab}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
             </>
           )}
         </div>
