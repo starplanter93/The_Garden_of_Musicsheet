@@ -41,12 +41,14 @@ function ScoreInfo() {
       if (user) {
         if (scoreData) {
           getCart(user.uid).then((data) => {
+            if (data && data.cartItems === undefined) {
+              data.cartItems = [];
+            }
             if (data) {
               data.cartItems.length === 0
                 ? updateCart(scoreData).then((updatedData) => {
                     if (updatedData) {
                       dispatch(countCartItem(updatedData.cartItems.length));
-                      notify();
                     }
                   })
                 : data.cartItems.forEach((cartItem: ScoreInfoType) => {
@@ -54,7 +56,6 @@ function ScoreInfo() {
                       updateCart(scoreData).then((updatedData) => {
                         if (updatedData) {
                           dispatch(countCartItem(updatedData.cartItems.length));
-                          notify();
                         }
                       });
                     } else {

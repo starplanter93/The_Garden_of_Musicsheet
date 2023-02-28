@@ -21,6 +21,9 @@ function ScorePriceCard({ price, updateCart, scoreId }: ScorePriceCardProps) {
   useEffect(() => {
     setIsLoading(true);
     getPurchasedScores().then((scores) => {
+      if (scores === undefined) {
+        scores = [];
+      }
       scores.length === 0
         ? setIsLoading(false)
         : scores.forEach((score: ScoreInfoType) => {
@@ -37,6 +40,9 @@ function ScorePriceCard({ price, updateCart, scoreId }: ScorePriceCardProps) {
   function putScoreToCart() {
     setIsLoading(true);
     getPurchasedScores().then((scores) => {
+      if (scores === undefined) {
+        scores = [];
+      }
       scores.length === 0
         ? (updateCart(), setIsLoading(false))
         : scores.forEach((score: ScoreInfoType) => {
