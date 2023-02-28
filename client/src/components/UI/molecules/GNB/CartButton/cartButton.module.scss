@@ -1,19 +1,34 @@
 @import '/src//utils/utils';
 
 .cartbutton-wrapper {
-    display: flex;
-    align-items: center;
-    position: relative;
+  display: flex;
+  align-items: center;
+  position: relative;
 
-    .bubble {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background-color: $light-green;
-        position: absolute;
-        top: -3px;
-        left: 1.2rem;
-        text-align: center;
-        overflow: hidden;
+  .bubble {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: $light-green;
+    position: absolute;
+    top: -3px;
+    left: 1.2rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  @include mobile {
+    button span svg {
+      width: 2.5rem;
     }
+  }
+}
+
+@include mobile {
+  .cartbutton-wrapper {
+    .bubble {
+      width: 16px;
+      height: 16px;
+    }
+  }
 }

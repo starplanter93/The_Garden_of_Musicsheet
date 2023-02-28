@@ -17,3 +17,38 @@
     align-items: center;
   }
 }
+
+@include mobile {
+  .header {
+    height: 5rem;
+
+    nav {
+      padding: 0 1rem;
+
+      h1 {
+        a {
+          padding: 0 1rem 0 5px;
+
+          img {
+            width: 1.4rem;
+          }
+
+          span {
+            display: none;
+          }
+        }
+      }
+
+      .login-button {
+        button {
+          width: 6.2rem;
+          height: 2.7rem;
+
+          span {
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+  }
+}
