@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-
 import classNames from 'classnames/bind';
 import styles from './PostMusic.module.scss';
 import { DropDown, TextEditor, PostSidebar } from '../../UI/molecules';
