@@ -1,8 +1,15 @@
 import React from 'react';
-import { CartModal } from '../UI/organisms';
+import { LoadingSpinner } from '../UI/atoms';
+import classNames from 'classnames/bind';
+import styles from './test.module.scss';
 
 function Test() {
-  return <CartModal />;
+  const cx = classNames.bind(styles);
+  return (
+    <div className={cx('loading-wrapper')}>
+      <LoadingSpinner />
+    </div>
+  );
 }
 
 export default Test;

@@ -4,7 +4,6 @@ import styles from './scorepricecard.module.scss';
 import classNames from 'classnames/bind';
 import { getPurchasedScores } from '../../../../firebase/firebase';
 import { ScoreInfoType } from '../../../pages/Main/Main';
-import { LoadingSpinner } from '../../atoms';
 
 interface ScorePriceCardProps {
   price: string;
@@ -35,19 +34,27 @@ function ScorePriceCard({ price, updateCart, scoreId }: ScorePriceCardProps) {
     });
   }, []);
 
+  function putScoreToCart() {
+    setIsLoading(true);
+    updateCart();
+    setIsLoading(false);
+  }
+
   return (
     <div className={cx('price-card')}>
       <Text size="xlg" weight="bold">
         {`${formattedPrice}원`}
       </Text>
       {isLoading ? (
-        <LoadingSpinner />
+        <Button disabled={true}>
+          <Text color="white">로딩중</Text>
+        </Button>
       ) : isPurchased ? (
         <Button disabled={true}>
           <Text color="white">구매 완료</Text>
         </Button>
       ) : (
-        <Button size="auto" onClick={updateCart}>
+        <Button size="auto" onClick={putScoreToCart}>
           <>
             <Icon icon="MdOutlineShoppingBag" color="white" />
             <Text color="white">장바구니 담기</Text>
