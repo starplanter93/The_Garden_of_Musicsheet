@@ -34,22 +34,25 @@ function CartModal() {
   }, [user]);
 
   return (
-    <div className={cx('backdrop')} onClick={cartModalCloser}>
-      <section
-        className={cx('cart-modal')}
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        <CartHeader />
-        <div className={cx('cart-body-wrapper')}>
-          {cartItems && (
-            <CartBody cartItems={cartItems} setCartItems={setCartItems} />
-          )}
-        </div>
-        <CartFooter cartItems={cartItems} setCartItems={setCartItems} />
-      </section>
-    </div>
+    <>
+      <div className={cx('modal-backdrop', 'show')}> </div>
+      <div className={cx('modal-container')} onClick={cartModalCloser}>
+        <section
+          className={cx('cart-modal', 'show')}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          <CartHeader />
+          <div className={cx('cart-body-wrapper')}>
+            {cartItems && (
+              <CartBody cartItems={cartItems} setCartItems={setCartItems} />
+            )}
+          </div>
+          <CartFooter cartItems={cartItems} setCartItems={setCartItems} />
+        </section>
+      </div>
+    </>
   );
 }
 
