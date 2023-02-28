@@ -77,24 +77,6 @@ export async function getScoresByCategory(colName: string, docName: string) {
   return {};
 }
 
-// export async function getMusic(songName: string) {
-//   const ref = doc(db, 'test', songName);
-//   const snapshot = await getDoc(ref);
-//   console.log(snapshot.data());
-//   return snapshot.data();
-// }
-
-// function calculateScoreId(savedData: any, list: any): string {
-//   if (savedData === undefined) {
-//     return '0';
-//   } else {
-//     // const lastScore = savedData.scores[savedData.scores.length - 1];
-//     // const nextScoreId = parseInt(lastScore.scoreId) + 1;
-//     // return nextScoreId.toString();
-//     return list.length.toString();
-//   }
-// }
-
 export async function getMusicData(songName: string, data: StateType) {
   const name = `${songName}-${data.artist}`;
   const info = doc(db, 'music', name);
@@ -523,7 +505,9 @@ export async function updateUserPicture(uid: string, image: string) {
 
 // 유저가 회원탈퇴를 진행하면 music, inst, user 컬렉션 내에 모든 scores,posts 의 isOptout 값을 true로 만들어줌
 export async function userOptout(uid: string) {
-  /** user 컬렉션 수정 */
+  const batch = writeBatch(db);
+
+  // User collection
   const userRef = doc(db, 'user', uid);
   const userSnap = await getDoc(userRef);
 
@@ -532,57 +516,72 @@ export async function userOptout(uid: string) {
     const scoresWithId = posts.filter((obj: Score) => obj.authorId === uid);
     scoresWithId.forEach((obj: Score) => (obj.isOptout = true));
 
-    await updateDoc(userRef, { posts, isActive: false });
+    batch.update(userRef, { posts, isActive: false });
   }
 
-  /** music 컬렉션 수정*/
+  // Music collection
   const musicRef = collection(db, 'music');
   const musicSnap = await getDocs(musicRef);
-  const musicList = musicSnap.docs.map((doc: DocumentData) => doc.data());
 
-  for (const { scores } of musicList) {
+  for (const musicDoc of musicSnap.docs) {
+    const { scores } = musicDoc.data();
     const scoresWithId = scores.filter((obj: Score) => obj.authorId === uid);
     scoresWithId.forEach((obj: Score) => (obj.isOptout = true));
 
-    const batch = writeBatch(db);
-    const infoRefs = scoresWithId.map(({ songName, artist }: Score) =>
-      doc(db, 'music', `${songName}-${artist}`)
-    );
+    const updatedScores = [...scores, ...scoresWithId];
+    const isDeleted = updatedScores.every((score: Score) => score.isOptout);
 
-    for (let i = 0; i < scoresWithId.length; i++) {
-      batch.update(infoRefs[i], { scores: scores });
-    }
-
-    await batch.commit();
+    batch.update(musicDoc.ref, { scores: updatedScores, isDeleted });
   }
 
-  /** instrument 컬렉션 수정*/
+  // Instrument collection
   const instRef = collection(db, 'instrument');
   const instSnap = await getDocs(instRef);
-  const instList = instSnap.docs.map((doc: DocumentData) => doc.data());
 
-  for (const { scores } of instList) {
+  for (const instDoc of instSnap.docs) {
+    const { scores } = instDoc.data();
+
+    if (!scores) {
+      continue;
+    }
+
     const scoresWithId = scores.filter((obj: Score) => obj.authorId === uid);
     scoresWithId.forEach((obj: Score) => (obj.isOptout = true));
 
-    const batch = writeBatch(db);
-    const instType = scoresWithId.map(({ instType }: Score) => {
-      if (instType === '피아노') return 'piano';
-      if (instType === '어쿠스틱 기타') return 'acoustic';
-      if (instType === '베이스') return 'bass';
-      if (instType === '드럼') return 'drum';
-      if (instType === '일렉 기타') return 'electric';
-    });
-    const infoRefs = instType.map((inst: string) =>
-      doc(db, 'instrument', inst)
-    );
+    const instType = scoresWithId
+      .map(({ instType }: Score) => {
+        switch (instType) {
+          case '피아노':
+            return 'piano';
+          case '어쿠스틱 기타':
+            return 'acoustic';
+          case '베이스':
+            return 'bass';
+          case '드럼':
+            return 'drum';
+          case '일렉 기타':
+            return 'electric';
+          default:
+            return null;
+        }
+      })
+      .filter((inst: Array<string>) => inst !== null);
 
-    for (let i = 0; i < scoresWithId.length; i++) {
-      batch.update(infoRefs[i], { scores: scores });
+    if (instType.length > 0) {
+      const infoRefs = instType.map((inst: string) =>
+        doc(db, 'instrument', inst)
+      );
+
+      const updatedScores = [...scores, ...scoresWithId];
+      const isDeleted = updatedScores.every((score: Score) => score.isOptout);
+
+      for (let i = 0; i < infoRefs.length; i++) {
+        batch.update(infoRefs[i], { scores: updatedScores, isDeleted });
+      }
     }
-
-    await batch.commit();
   }
+
+  await batch.commit();
 }
 
 // 유저가 게시글을 삭제하면, 해당 게시글의 id를 바탕으로 모든 컬렉션의 scores, posts의 isDeleted 값을 true로 만들어줌
@@ -621,6 +620,7 @@ export async function deleteArticle(uid: string, scoreId: string) {
       return score;
     });
     batch.update(doc.ref, { scores: updatedScores });
+    // music collection의 해당 악보들의 isDeleted 값이 전부 true라면
     if (updatedScores.every((score: Score) => score.isDeleted)) {
       batch.update(doc.ref, { isDeleted: true });
     } else {

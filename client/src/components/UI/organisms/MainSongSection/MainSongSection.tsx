@@ -29,7 +29,7 @@ function MainSongSection({
 // price,
 MainSongSectionProps) {
   const cx = classNames.bind(styles);
-
+  scores = scores.slice(-3);
   return (
     <section className={cx('container')}>
       <SongTitle songTitle={songTitle} singer={singer} albumImg={albumImg} />
