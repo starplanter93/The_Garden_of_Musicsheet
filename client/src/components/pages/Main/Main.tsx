@@ -101,13 +101,7 @@ function Main() {
   return (
     <>
       <Carousel />
-      {!loading ? (
-        <>
-          <MainGrid musicData={musicArr} />
-        </>
-      ) : (
-        <Spinner />
-      )}
+      {!loading ? <MainGrid musicData={musicArr} /> : <Spinner />}
       <div className={cx('target')} ref={target}></div>
     </>
   );

@@ -3,6 +3,7 @@ import { Text } from '../../atoms';
 import styles from './maingrid.module.scss';
 import classNames from 'classnames/bind';
 import { MusicData } from '../../../pages/Main/Main';
+import { v4 as uuidv4 } from 'uuid';
 
 function MainGrid({ musicData }: { musicData: MusicData }) {
   const cx = classNames.bind(styles);
@@ -14,7 +15,7 @@ function MainGrid({ musicData }: { musicData: MusicData }) {
       <>
         {validData.map((data) => (
           <MainSongSection
-            key={data.songId}
+            key={uuidv4()}
             songTitle={data.songName}
             singer={data.artist}
             albumImg={data.albumImg}

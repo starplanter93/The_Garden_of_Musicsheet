@@ -1,7 +1,6 @@
 import { MyPageTop } from '../../UI/organisms';
-import { useState, useEffect, ReactElement } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../../firebase/firebase';
 import { User } from 'firebase/auth';
 import {
   ScoreList,
@@ -9,12 +8,11 @@ import {
   MyPageModal,
   Pagination,
 } from '../../UI/molecules';
-import { getUserArticle } from '../../../firebase/firebase';
+import { getUserArticle, auth, getUserCash } from '../../../firebase/firebase';
 import { DocumentData } from 'firebase/firestore/lite';
 import classNames from 'classnames/bind';
 import styles from './myPage.module.scss';
 import Spinner from '../../../utils/Spinner/Spinner';
-import { getUserCash } from '../../../firebase/firebase';
 const cx = classNames.bind(styles);
 
 type UploadedDataProps = {
