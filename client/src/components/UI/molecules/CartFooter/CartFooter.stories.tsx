@@ -31,6 +31,8 @@ CartHeaderOptions.args = {
       sheetType: '',
       songName: '',
       youtubeURL: '',
+      isDeleted: false,
+      isOptout: false,
     },
   ],
 };
