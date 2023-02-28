@@ -8,10 +8,6 @@
   height: 100vh;
   z-index: 3;
   background: black;
-  transition: opacity 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.modal-backdrop.show {
   opacity: 0.5;
 }
 
@@ -30,7 +26,7 @@
     position: absolute;
     z-index: 4;
     right: -100%;
-    transition: right 2s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: right 0.3s cubic-bezier(0.23, 1, 0.32, 1);
     width: 40%;
     min-width: #{300 / $font-size}rem;
     height: 100%;

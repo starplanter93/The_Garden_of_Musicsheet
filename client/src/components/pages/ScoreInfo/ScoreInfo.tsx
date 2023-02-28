@@ -26,7 +26,13 @@ function ScoreInfo() {
     page: '7',
   };
 
-  const notify = () => toast('장바구니에 추가되었습니다.');
+  const notify = () =>
+    toast('장바구니에 추가되었습니다.', {
+      autoClose: 300,
+      closeOnClick: true,
+      pauseOnHover: false,
+      type: 'success',
+    });
 
   function updateCartItem() {
     auth.onAuthStateChanged((user) => {

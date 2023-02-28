@@ -14,6 +14,7 @@ function CartModal() {
   const dispatch = useDispatch();
   const [cartItems, setCartItems] = useState<ScoreInfoType[]>([]);
   const [user, setUser] = useState<User | null>(null);
+  const [show, setShow] = useState<string>('');
 
   function cartModalCloser() {
     dispatch(cartModalHandler());
@@ -33,12 +34,16 @@ function CartModal() {
     return unsubscribe;
   }, [user]);
 
+  useEffect(() => {
+    setShow('show');
+  }, []);
+
   return (
     <>
-      <div className={cx('modal-backdrop', 'show')}> </div>
+      <div className={cx('modal-backdrop')}> </div>
       <div className={cx('modal-container')} onClick={cartModalCloser}>
         <section
-          className={cx('cart-modal', 'show')}
+          className={cx('cart-modal', { show })}
           onClick={(e) => {
             e.stopPropagation();
           }}
