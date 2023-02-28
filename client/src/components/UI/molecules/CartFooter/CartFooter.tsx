@@ -1,9 +1,14 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Button, Text } from '../../atoms';
 import styles from './cartFooter.module.scss';
 import classNames from 'classnames/bind';
 import { ScoreInfoType } from '../../../pages/Main/Main';
 import { purchaseCartItems } from '../../../../firebase/firebase';
+import { useDispatch } from 'react-redux';
+import { cartModalHandler, countCartItem } from '../../../../redux/ModalSlice';
+import { getCart } from '../../../../firebase/firebase';
+import { auth } from '../../../../firebase/firebase';
+import { toast } from 'react-toastify';
 
 interface CartItemsProps {
   cartItems: ScoreInfoType[];
@@ -12,16 +17,38 @@ interface CartItemsProps {
 
 function CartFooter({ cartItems, setCartItems }: CartItemsProps) {
   const cx = classNames.bind(styles);
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const totalPrice = cartItems.reduce((acc, cur) => {
     return acc + Number(cur.price);
   }, 0);
   const countItems = cartItems.length;
 
-  function purchase() {
-    purchaseCartItems(cartItems, totalPrice);
+  const notify = () =>
+    toast('구매 성공!', {
+      autoClose: 300,
+      closeOnClick: true,
+      pauseOnHover: false,
+      type: 'success',
+    });
+
+  async function purchase() {
+    setIsLoading(true);
+    await purchaseCartItems(cartItems, totalPrice);
     setCartItems([]);
-    history.go(0);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        getCart(user.uid).then((data) => {
+          if (data) {
+            dispatch(countCartItem(data.cartItems.length));
+          }
+        });
+      }
+    });
+    setIsLoading(false);
+    notify();
+    dispatch(cartModalHandler());
   }
 
   return (
@@ -32,9 +59,16 @@ function CartFooter({ cartItems, setCartItems }: CartItemsProps) {
           {`${Number(totalPrice).toLocaleString()}원`}
         </Text>
       </div>
-      <Button size="auto" onClick={purchase}>
-        <Text color="white">결제하기</Text>
-      </Button>
+
+      {isLoading ? (
+        <Button size="auto" disabled={true}>
+          <Text color="white">로딩중</Text>
+        </Button>
+      ) : (
+        <Button size="auto" onClick={purchase}>
+          <Text color="white">결제하기</Text>
+        </Button>
+      )}
     </div>
   );
 }

@@ -32,11 +32,25 @@ function ScorePriceCard({ price, updateCart, scoreId }: ScorePriceCardProps) {
             }
           });
     });
-  }, []);
+  }, [isPurchased]);
 
   function putScoreToCart() {
     setIsLoading(true);
-    updateCart();
+    getPurchasedScores().then((scores) => {
+      scores.length === 0
+        ? (updateCart(), setIsLoading(false))
+        : scores.forEach((score: ScoreInfoType) => {
+            if (score.scoreId === scoreId) {
+              setIsLoading(false);
+              setIsPurchased(true);
+              alert('이미 구매한 악보입니다.');
+            } else {
+              updateCart();
+              setIsLoading(false);
+            }
+          });
+    });
+
     setIsLoading(false);
   }
 
@@ -46,11 +60,11 @@ function ScorePriceCard({ price, updateCart, scoreId }: ScorePriceCardProps) {
         {`${formattedPrice}원`}
       </Text>
       {isLoading ? (
-        <Button disabled={true}>
+        <Button size="auto" disabled={true}>
           <Text color="white">로딩중</Text>
         </Button>
       ) : isPurchased ? (
-        <Button disabled={true}>
+        <Button size="auto" disabled={true}>
           <Text color="white">구매 완료</Text>
         </Button>
       ) : (
