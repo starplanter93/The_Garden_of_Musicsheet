@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { Auth, getAuth, GoogleAuthProvider } from 'firebase/auth';
 import {
   getStorage,
   ref,
@@ -60,6 +60,77 @@ export async function getScoreByMusic(docName: string, scoreId: string) {
       return score.scoreId === scoreId;
     });
     return scoreData;
+  }
+}
+
+/** 장바구니에 악보 추가 */
+export async function updateCart(scoreInfo: ScoreInfoType) {
+  if (auth.currentUser !== null) {
+    const userInfoRef = doc(db, 'user', auth.currentUser.uid);
+    await updateDoc(userInfoRef, { cartItems: arrayUnion(scoreInfo) });
+    const snapshot = await getDoc(userInfoRef);
+    if (snapshot.exists()) {
+      return snapshot.data();
+    }
+  }
+}
+
+/** 장바구니에 담은 악보 get */
+export async function getCart(uid: string) {
+  if (uid !== null) {
+    const userInfoRef = doc(db, 'user', uid);
+    const snapshot = await getDoc(userInfoRef);
+    if (snapshot.exists()) {
+      return snapshot.data();
+    }
+  }
+}
+
+/** 장바구니에서 악보 delete */
+export async function deleteCartItem(scoreId: string) {
+  if (auth.currentUser !== null) {
+    const userInfoRef = doc(db, 'user', auth.currentUser.uid);
+    const snapshot = await getDoc(userInfoRef);
+    if (snapshot.exists()) {
+      const deletedCartList = snapshot
+        .data()
+        .cartItems.filter((cartItem: ScoreInfoType) => {
+          return cartItem.scoreId !== scoreId;
+        });
+      await updateDoc(userInfoRef, { cartItems: deletedCartList });
+      return deletedCartList;
+    }
+  }
+}
+
+/** 장바구니에서 악보 구매 */
+export async function purchaseCartItems(
+  cartItems: ScoreInfoType[],
+  totalPrice: number
+) {
+  if (auth.currentUser !== null) {
+    const userInfoRef = doc(db, 'user', auth.currentUser.uid);
+    const snapshot = await getDoc(userInfoRef);
+    let calculatedCash;
+    if (snapshot.exists()) {
+      calculatedCash = parseInt(snapshot.data().cash) - totalPrice;
+    }
+    await updateDoc(userInfoRef, {
+      cash: calculatedCash,
+      purchasedScores: arrayUnion(...cartItems),
+      cartItems: [],
+    });
+  }
+}
+
+/** 구입한 악보리스트 불러오기 */
+export async function getPurchasedScores() {
+  if (auth.currentUser !== null) {
+    const userInfoRef = doc(db, 'user', auth.currentUser.uid);
+    const snapshot = await getDoc(userInfoRef);
+    if (snapshot.exists()) {
+      return snapshot.data().purchasedScores;
+    }
   }
 }
 

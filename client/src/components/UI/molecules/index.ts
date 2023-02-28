@@ -25,6 +25,11 @@ import TabMenu from './TabMenu/TabMenu';
 import UserCard from './UserCard/UserCard';
 import MyPageModal from './MyPageModal/MyPageModal';
 
+import CartHeader from './CartHeader/CartHeader';
+import CartFooter from './CartFooter/CartFooter';
+import CartList from './CartList/CartList';
+import CartBody from './CartBody/CartBody';
+
 export {
   MyPageModal,
   PostSidebar,
@@ -51,4 +56,8 @@ export {
   ScoreInfoExplain,
   ScorePriceCard,
   UserCard,
+  CartHeader,
+  CartFooter,
+  CartList,
+  CartBody,
 };
