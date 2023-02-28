@@ -8,7 +8,7 @@ function MainGrid({ musicData }: { musicData: MusicData }) {
   const cx = classNames.bind(styles);
 
   const HandleDeletedData = () => {
-    const validData = musicData.filter((data) => !data.isDeleted);
+    const validData = (musicData ?? []).filter((data) => !data.isDeleted);
 
     return (
       <>
