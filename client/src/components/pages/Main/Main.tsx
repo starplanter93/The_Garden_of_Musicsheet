@@ -46,6 +46,7 @@ export interface ScoreInfoType {
   songName: string;
   youtubeURL: string;
   isDeleted: boolean;
+  isOptout: boolean;
 }
 
 function Main() {

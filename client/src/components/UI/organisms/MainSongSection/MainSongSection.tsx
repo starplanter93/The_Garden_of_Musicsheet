@@ -36,7 +36,7 @@ MainSongSectionProps) {
       <div className={cx('scorelist-wrapper')}>
         {scores &&
           scores.map((el, idx) => {
-            if (idx < 3 && el.isDeleted === false) {
+            if (idx < 3 && el.isDeleted === false && el.isOptout === false) {
               return (
                 <MainScoreList
                   key={el.scoreId}

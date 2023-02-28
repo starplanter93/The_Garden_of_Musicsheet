@@ -24,7 +24,7 @@ function ScoreInfoHeader({ scoreName, singer, date }: ScoreInfoHeaderProps) {
       const scoreId = params.scoreId.toString();
       deleteArticle(user.uid, scoreId);
     }
-    toast.success('삭제됐습니다!');
+    toast.success('삭제했습니다!');
     navigate('/');
   };
 
