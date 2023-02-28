@@ -6,10 +6,13 @@ import { cartModalHandler } from '../../../../../redux/ModalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../redux/store';
 import { getCart } from '../../../../../firebase/firebase';
+import { auth } from '../../../../../firebase/firebase';
+import { User } from 'firebase/auth';
 
 // Todo: 장바구니에 담긴 개수
 const CartButton = () => {
   const cx = classNames.bind(styles);
+  const [user, setUser] = useState<User | null>(null);
   const [countCart, setCountCart] = useState<number>(0);
   const dispatch = useDispatch();
   const countCartItems = useSelector(
@@ -20,12 +23,20 @@ const CartButton = () => {
   }
 
   useEffect(() => {
-    getCart().then((data) => {
-      if (data) {
-        setCountCart(data.cartItems.length);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user as User);
+      if (user) {
+        getCart(user.uid).then(
+          (data) => data && setCountCart(data.cartItems.length)
+        );
       }
+      // getCart(auth).then((data) => {
+      //   if (data) {
+      //     setCountCart(data.cartItems.length);
+      //   }
     });
-  }, []);
+    return unsubscribe;
+  }, [countCart, user, countCartItems]);
 
   return (
     <div className={cx('cartbutton-wrapper')}>

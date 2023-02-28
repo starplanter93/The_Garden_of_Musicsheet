@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { Auth, getAuth, GoogleAuthProvider } from 'firebase/auth';
 import {
   getStorage,
   ref,
@@ -78,9 +78,9 @@ export async function updateCart(scoreInfo: ScoreInfoType) {
 }
 
 /** 장바구니에 담은 악보 get */
-export async function getCart() {
-  if (auth.currentUser !== null) {
-    const userInfoRef = doc(db, 'user', auth.currentUser.uid);
+export async function getCart(uid: string) {
+  if (uid !== null) {
+    const userInfoRef = doc(db, 'user', uid);
     const snapshot = await getDoc(userInfoRef);
     if (snapshot.exists()) {
       return snapshot.data();

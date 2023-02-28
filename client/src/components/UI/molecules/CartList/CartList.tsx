@@ -4,6 +4,8 @@ import styles from './cartList.module.scss';
 import classNames from 'classnames/bind';
 import { deleteCartItem } from '../../../../firebase/firebase';
 import { ScoreInfoType } from '../../../pages/Main/Main';
+import { useDispatch } from 'react-redux';
+import { countCartItem } from '../../../../redux/ModalSlice';
 
 interface CartItemType {
   scoreName: string;
@@ -23,8 +25,13 @@ function CartList({
   setCartItems,
 }: CartItemType) {
   const cx = classNames.bind(styles);
+  const dispatch = useDispatch();
+
   function deleteItem() {
-    deleteCartItem(scoreId).then((data) => setCartItems(data));
+    deleteCartItem(scoreId).then((data) => {
+      setCartItems(data);
+      dispatch(countCartItem(data.length));
+    });
   }
 
   return (

@@ -22,14 +22,16 @@ function ScorePriceCard({ price, updateCart, scoreId }: ScorePriceCardProps) {
   useEffect(() => {
     setIsLoading(true);
     getPurchasedScores().then((scores) => {
-      scores.forEach((score: ScoreInfoType) => {
-        if (score.scoreId === scoreId) {
-          setIsLoading(false);
-          setIsPurchased(true);
-        } else {
-          setIsLoading(false);
-        }
-      });
+      scores.length === 0
+        ? setIsLoading(false)
+        : scores.forEach((score: ScoreInfoType) => {
+            if (score.scoreId === scoreId) {
+              setIsLoading(false);
+              setIsPurchased(true);
+            } else {
+              setIsLoading(false);
+            }
+          });
     });
   }, []);
 

@@ -6,23 +6,32 @@ import { cartModalHandler } from '../../../../redux/ModalSlice';
 import { useDispatch } from 'react-redux';
 import { getCart } from '../../../../firebase/firebase';
 import { ScoreInfoType } from '../../../pages/Main/Main';
+import { auth } from '../../../../firebase/firebase';
+import { User } from 'firebase/auth';
 
 function CartModal() {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
   const [cartItems, setCartItems] = useState<ScoreInfoType[]>([]);
+  const [user, setUser] = useState<User | null>(null);
 
   function cartModalCloser() {
     dispatch(cartModalHandler());
   }
 
   useEffect(() => {
-    getCart().then((data) => {
-      if (data) {
-        setCartItems(data.cartItems);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user as User);
+      if (user) {
+        getCart(user.uid).then((data) => {
+          if (data) {
+            setCartItems(data.cartItems);
+          }
+        });
       }
     });
-  }, []);
+    return unsubscribe;
+  }, [user]);
 
   return (
     <div className={cx('backdrop')} onClick={cartModalCloser}>

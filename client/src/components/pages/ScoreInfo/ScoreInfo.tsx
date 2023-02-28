@@ -11,6 +11,7 @@ import { updateCart, getCart } from '../../../firebase/firebase';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { countCartItem } from '../../../redux/ModalSlice';
+import { auth } from '../../../firebase/firebase';
 
 function ScoreInfo() {
   const cx = classNames.bind(styles);
@@ -28,31 +29,35 @@ function ScoreInfo() {
   const notify = () => toast('장바구니에 추가되었습니다.');
 
   function updateCartItem() {
-    if (scoreData) {
-      getCart().then((data) => {
-        if (data) {
-          data.cartItems.length === 0
-            ? updateCart(scoreData).then((updatedData) => {
-                if (updatedData) {
-                  dispatch(countCartItem(updatedData.cartItems.length));
-                  notify();
-                }
-              })
-            : data.cartItems.forEach((cartItem: ScoreInfoType) => {
-                if (cartItem.scoreId !== scoreData.scoreId) {
-                  updateCart(scoreData).then((updatedData) => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        if (scoreData) {
+          getCart(user.uid).then((data) => {
+            if (data) {
+              data.cartItems.length === 0
+                ? updateCart(scoreData).then((updatedData) => {
                     if (updatedData) {
                       dispatch(countCartItem(updatedData.cartItems.length));
                       notify();
                     }
+                  })
+                : data.cartItems.forEach((cartItem: ScoreInfoType) => {
+                    if (cartItem.scoreId !== scoreData.scoreId) {
+                      updateCart(scoreData).then((updatedData) => {
+                        if (updatedData) {
+                          dispatch(countCartItem(updatedData.cartItems.length));
+                          notify();
+                        }
+                      });
+                    } else {
+                      alert('이미 장바구니에 있는 악보입니다.');
+                    }
                   });
-                } else {
-                  alert('이미 장바구니에 있는 악보입니다.');
-                }
-              });
+            }
+          });
         }
-      });
-    }
+      }
+    });
   }
 
   async function fetchScoreData() {
