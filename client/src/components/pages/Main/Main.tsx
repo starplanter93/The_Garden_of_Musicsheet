@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { MainGrid } from '../../UI/organisms';
-import { Carousel } from '../../UI/organisms';
+import { MainGrid, Carousel } from '../../UI/organisms';
 import { DocumentData } from 'firebase/firestore/lite';
 import classNames from 'classnames/bind';
 import styles from './main.module.scss';
