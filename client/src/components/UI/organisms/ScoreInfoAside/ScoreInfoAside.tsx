@@ -7,13 +7,21 @@ interface ScoreInfoAsideProps {
   price: string;
   author: string;
   profileImg: string;
+  scoreId: string;
+  updateCart: () => void;
 }
 
-function ScoreInfoAside({ price, author, profileImg }: ScoreInfoAsideProps) {
+function ScoreInfoAside({
+  price,
+  author,
+  profileImg,
+  scoreId,
+  updateCart,
+}: ScoreInfoAsideProps) {
   const cx = classNames.bind(styles);
   return (
     <aside className={cx('scoreinfo-aside')}>
-      <ScorePriceCard price={price} />
+      <ScorePriceCard price={price} updateCart={updateCart} scoreId={scoreId} />
       <UserCard author={author} profileImg={profileImg} />
     </aside>
   );

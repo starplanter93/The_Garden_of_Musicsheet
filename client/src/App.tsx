@@ -13,12 +13,18 @@ import { Auth, PostMusic } from './components/pages';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Test from './components/pages/Test';
 import { PostLayout } from './components/pages';
+import { useSelector } from 'react-redux';
+import { CartModal } from './components/UI/organisms';
+import { RootState } from './redux/store';
 
 function App() {
+  const isCartModalOpened = useSelector((state: RootState) => state.modalState);
   return (
     <>
       <BrowserRouter>
+        {isCartModalOpened.isCartModalOpened && <CartModal />}
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Main />} />
@@ -33,6 +39,7 @@ function App() {
             <Route path="edit/:scoreName/:scoreId" element={<EditScore />} />
           </Route>
           <Route path="/auth" element={<Auth />}></Route>
+          <Route path="/test" element={<Test />}></Route>
           {/* NotFound */}
         </Routes>
       </BrowserRouter>

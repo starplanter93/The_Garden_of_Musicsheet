@@ -10,6 +10,8 @@ import regReducer from './RegSlice';
 import userReducer from './UserSlice';
 import PostReducer from './PostSlice';
 import FileReducer from './FileSlice';
+import ModalReducer from './ModalSlice';
+
 import FooterReducer from './FooterSlice';
 
 const persistConfig = {
@@ -32,6 +34,7 @@ export const store = configureStore({
     userLoginInput: loginReducer,
     postInfo: PostReducer,
     pdfFile: FileReducer,
+    modalState: ModalReducer,
     showFooter: FooterReducer,
   },
 

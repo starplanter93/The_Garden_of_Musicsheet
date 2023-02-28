@@ -7,11 +7,19 @@ import { getScoreByMusic } from '../../../firebase/firebase';
 import { useParams } from 'react-router';
 import { ScoreInfoType } from '../Main/Main';
 import { LoadingSpinner } from '../../UI/atoms';
+import { updateCart, getCart } from '../../../firebase/firebase';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { countCartItem } from '../../../redux/ModalSlice';
+import { auth } from '../../../firebase/firebase';
+import { useNavigate } from 'react-router';
 
 function ScoreInfo() {
   const cx = classNames.bind(styles);
+  const navigate = useNavigate();
   const [scoreData, setScoreData] = useState<ScoreInfoType>();
   const { scoreName, scoreId } = useParams();
+  const dispatch = useDispatch();
   const dummyData = {
     scoreImg1:
       'https://firebasestorage.googleapis.com/v0/b/garden-of-musicsheet.appspot.com/o/if%20i%20could%20be%20a%20constellation%231.png?alt=media&token=5f6f761a-104d-4317-ad8d-03feb5c018fb',
@@ -20,10 +28,56 @@ function ScoreInfo() {
     page: '7',
   };
 
+  const notify = () =>
+    toast('장바구니에 추가되었습니다.', {
+      autoClose: 300,
+      closeOnClick: true,
+      pauseOnHover: false,
+      type: 'success',
+    });
+
+  function updateCartItem() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        if (scoreData) {
+          getCart(user.uid).then((data) => {
+            if (data && data.cartItems === undefined) {
+              data.cartItems = [];
+            }
+            if (data) {
+              data.cartItems.length === 0
+                ? updateCart(scoreData).then((updatedData) => {
+                    if (updatedData) {
+                      dispatch(countCartItem(updatedData.cartItems.length));
+                    }
+                  })
+                : data.cartItems.forEach((cartItem: ScoreInfoType) => {
+                    if (cartItem.scoreId !== scoreData.scoreId) {
+                      updateCart(scoreData).then((updatedData) => {
+                        if (updatedData) {
+                          dispatch(countCartItem(updatedData.cartItems.length));
+                        }
+                      });
+                    } else {
+                      alert('이미 장바구니에 있는 악보입니다.');
+                    }
+                  });
+            }
+          });
+        }
+      }
+    });
+  }
+
   async function fetchScoreData() {
     if (scoreName && scoreId) {
       const [data] = await getScoreByMusic(scoreName, scoreId);
-      setScoreData(data);
+      if (data.isDeleted) {
+        toast.error('삭제된 게시글이에요');
+        navigate('/');
+      } else {
+        setScoreData(data);
+      }
     }
   }
 
@@ -37,29 +91,35 @@ function ScoreInfo() {
 
   return (
     <div className={cx('scoreinfo')}>
-      <div>
-        <ScoreInfoHeader
-          scoreName={scoreData.scoreName}
-          singer={scoreData.artist}
-          date={scoreData.createdAt}
-        />
-        <ScoreInfoMain
-          scoreImg1={dummyData.scoreImg1}
-          scoreImg2={dummyData.scoreImg2}
-          instrument={scoreData.instType}
-          difficulty={scoreData.difficulty}
-          page={dummyData.page}
-          scoreType={scoreData.sheetType}
-          scoreExplain={scoreData.detail}
-          youtubeURL={scoreData.youtubeURL}
-        />
-      </div>
-      <ScoreInfoAside
-        price={scoreData.price}
-        author={scoreData.author}
-        profileImg={scoreData.author_profile}
-      />
-      <aside></aside>
+      {scoreData && (
+        <>
+          <div>
+            <ScoreInfoHeader
+              scoreName={scoreData.scoreName}
+              singer={scoreData.artist}
+              date={scoreData.createdAt}
+            />
+            <ScoreInfoMain
+              scoreImg1={dummyData.scoreImg1}
+              scoreImg2={dummyData.scoreImg2}
+              instrument={scoreData.instType}
+              difficulty={scoreData.difficulty}
+              page={dummyData.page}
+              scoreType={scoreData.sheetType}
+              scoreExplain={scoreData.detail}
+              youtubeURL={scoreData.youtubeURL}
+            />
+          </div>
+          <ScoreInfoAside
+            price={scoreData.price}
+            author={scoreData.author}
+            profileImg={scoreData.author_profile}
+            updateCart={updateCartItem}
+            scoreId={scoreData.scoreId}
+          />
+          <aside></aside>
+        </>
+      )}
     </div>
   );
 }

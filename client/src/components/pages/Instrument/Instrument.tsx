@@ -2,11 +2,9 @@ import classNames from 'classnames/bind';
 import { Text } from '../../UI/atoms';
 import { InstrumentLists } from '../../UI/organisms';
 import styles from './instrument.module.scss';
-import { useDispatch } from 'react-redux';
 
 const Instrument = () => {
   const cx = classNames.bind(styles);
-  const dispatch = useDispatch();
 
   return (
     <section className={cx('container')}>

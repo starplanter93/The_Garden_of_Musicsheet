@@ -55,7 +55,12 @@ const UserAuth = ({ type }: UserAuthProps) => {
           userRegData.email,
           userRegData.password,
           userRegData.nickname
-        );
+        ).then((response) => {
+          if (typeof response !== 'undefined') {
+            const { displayName, email, phoneNumber, photoURL } = response;
+            dispatch(userInfo({ displayName, email, phoneNumber, photoURL }));
+          }
+        });
         localStorage.getItem('authorization') ? navigate('/') : null;
       } catch (err) {
         console.log(err);

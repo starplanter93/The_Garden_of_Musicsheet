@@ -13,6 +13,7 @@ import ScoreInfoAside from './ScoreInfoAside/ScoreInfoAside';
 import ScoreInfoMain from './ScoreInfoMain/ScoreInfoMain';
 import MyPageTop from './MyPageTop/MyPageTop';
 import PostHeader from './PostHeader/PostHeader';
+import CartModal from './CartModal/CartModal';
 import Footer from './Footer/Footer';
 
 export {
@@ -31,5 +32,6 @@ export {
   CategoryDetail,
   ScoreInfoAside,
   ScoreInfoMain,
+  CartModal,
   Footer,
 };

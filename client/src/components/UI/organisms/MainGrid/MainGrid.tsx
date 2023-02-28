@@ -3,9 +3,28 @@ import { Text } from '../../atoms';
 import styles from './maingrid.module.scss';
 import classNames from 'classnames/bind';
 import { MusicData } from '../../../pages/Main/Main';
+import { v4 as uuidv4 } from 'uuid';
 
 function MainGrid({ musicData }: { musicData: MusicData }) {
   const cx = classNames.bind(styles);
+
+  const HandleDeletedData = () => {
+    const validData = (musicData ?? []).filter((data) => !data.isDeleted);
+
+    return (
+      <>
+        {validData.map((data) => (
+          <MainSongSection
+            key={uuidv4()}
+            songTitle={data.songName}
+            singer={data.artist}
+            albumImg={data.albumImg}
+            scores={data.scores}
+          />
+        ))}
+      </>
+    );
+  };
 
   return (
     <div className={cx('main-content-wrapper')}>
@@ -15,18 +34,7 @@ function MainGrid({ musicData }: { musicData: MusicData }) {
             곡
           </Text>
         </h1>
-        {musicData &&
-          musicData.map((el) => {
-            return (
-              <MainSongSection
-                key={el.songId}
-                songTitle={el.songName}
-                singer={el.artist}
-                albumImg={el.albumImg}
-                scores={el.scores}
-              />
-            );
-          })}
+        <HandleDeletedData />
       </div>
     </div>
   );

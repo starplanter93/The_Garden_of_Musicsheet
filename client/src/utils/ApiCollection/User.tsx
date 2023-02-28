@@ -24,6 +24,11 @@ export const handleUserLogin = async (email: string, password: string) => {
           : localStorage.setItem('authorization', user.uid);
         localStorage.setItem('refresh', user.refreshToken);
         response = user;
+      } else {
+        userInitData(user.uid);
+        localStorage.setItem('authorization', user.uid);
+        localStorage.setItem('refresh', user.refreshToken);
+        response = user;
       }
     })
     .catch((error) => {
@@ -45,27 +50,31 @@ export const handleRegisterUser = async (
   password: any,
   nickname: any
 ) => {
+  let response;
   await createUserWithEmailAndPassword(auth, email, password)
     .then(async (userCredential) => {
       const user = userCredential.user;
       const ref = doc(db, 'user', user.uid);
       const snapshot = await getDoc(ref);
+      response = user;
       if (snapshot.exists()) {
         toast.error('이미 가입한 회원이세요!');
       } else {
-        userInitData(user.uid);
-        updateProfile(user, {
+        await userInitData(user.uid);
+        await updateProfile(user, {
           displayName: nickname,
           photoURL: Avatar(),
         });
-        handleUserLogin(email, password);
+        localStorage.setItem('authorization', user.uid);
+        localStorage.setItem('refresh', user.refreshToken);
+        await handleUserLogin(email, password);
       }
     })
     .catch((error) => {
       console.log(error.code);
     });
 
-  return;
+  return response;
 };
 
 export const handleGoogleLogin = async () => {
