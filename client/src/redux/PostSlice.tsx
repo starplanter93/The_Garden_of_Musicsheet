@@ -140,9 +140,7 @@ export const PostSlice = createSlice({
     setDownloadURL: (state: StateType, action: PayloadAction<string>) => {
       state.scores[0].downloadURL = action.payload;
     },
-    initializeState: (state: StateType) => {
-      return (state = initialState);
-    },
+    initializeState: () => initialState,
   },
 });
 
