@@ -38,34 +38,26 @@ function ScoreInfo() {
 
   function updateCartItem() {
     auth.onAuthStateChanged((user) => {
-      if (user) {
-        if (scoreData) {
-          getCart(user.uid).then((data) => {
-            if (data && data.cartItems === undefined) {
-              data.cartItems = [];
-            }
-            if (data) {
-              data.cartItems.length === 0
-                ? updateCart(scoreData).then((updatedData) => {
-                    if (updatedData) {
-                      dispatch(countCartItem(updatedData.cartItems.length));
-                    }
-                  })
-                : data.cartItems.forEach((cartItem: ScoreInfoType) => {
-                    if (cartItem.scoreId !== scoreData.scoreId) {
-                      updateCart(scoreData).then((updatedData) => {
-                        if (updatedData) {
-                          dispatch(countCartItem(updatedData.cartItems.length));
-                        }
-                      });
-                    } else {
-                      alert('이미 장바구니에 있는 악보입니다.');
-                    }
-                  });
-            }
-          });
-        }
+      if (!user || !scoreData) {
+        return;
       }
+      getCart(user.uid).then((data) => {
+        const cartItems = data?.cartItems || [];
+        if (
+          cartItems.find(
+            (item: ScoreInfoType) => item.scoreId === scoreData.scoreId
+          )
+        ) {
+          alert('이미 장바구니에 있는 악보입니다.');
+          return;
+        }
+        updateCart(scoreData).then((updatedData) => {
+          if (updatedData) {
+            dispatch(countCartItem(updatedData.cartItems.length));
+            notify();
+          }
+        });
+      });
     });
   }
 
