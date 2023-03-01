@@ -4,6 +4,7 @@ import styles from './scorepricecard.module.scss';
 import classNames from 'classnames/bind';
 import { getPurchasedScores } from '../../../../firebase/firebase';
 import { ScoreInfoType } from '../../../pages/Main/Main';
+import { auth } from '../../../../firebase/firebase';
 
 interface ScorePriceCardProps {
   price: string;
@@ -15,6 +16,7 @@ function ScorePriceCard({ price, updateCart, scoreId }: ScorePriceCardProps) {
   const cx = classNames.bind(styles);
   const [isPurchased, setIsPurchased] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
 
   const formattedPrice = new Intl.NumberFormat('ko-kr').format(Number(price));
 
@@ -35,6 +37,16 @@ function ScorePriceCard({ price, updateCart, scoreId }: ScorePriceCardProps) {
             }
           });
     });
+
+    const user = auth.onAuthStateChanged((user) => {
+      if (user === null) {
+        setIsLogin(false);
+      } else {
+        setIsLogin(true);
+      }
+    });
+
+    return user;
   }, [isPurchased]);
 
   function putScoreToCart() {
@@ -43,11 +55,9 @@ function ScorePriceCard({ price, updateCart, scoreId }: ScorePriceCardProps) {
       if (scores === undefined) {
         scores = [];
       }
-
       const isScoreAlreadyPurchased = scores.some(
         (score: ScoreInfoType) => score.scoreId === scoreId
       );
-
       if (isScoreAlreadyPurchased) {
         setIsLoading(false);
         setIsPurchased(true);
@@ -64,20 +74,26 @@ function ScorePriceCard({ price, updateCart, scoreId }: ScorePriceCardProps) {
       <Text size="xlg" weight="bold">
         {`${formattedPrice}원`}
       </Text>
-      {isLoading ? (
-        <Button size="auto" disabled={true}>
-          <Text color="white">로딩중</Text>
-        </Button>
-      ) : isPurchased ? (
-        <Button size="auto" disabled={true}>
-          <Text color="white">구매 완료</Text>
-        </Button>
+      {isLogin ? (
+        isLoading ? (
+          <Button size="auto" disabled={true}>
+            <Text color="white">로딩중</Text>
+          </Button>
+        ) : isPurchased ? (
+          <Button size="auto" disabled={true}>
+            <Text color="white">구매 완료</Text>
+          </Button>
+        ) : (
+          <Button size="auto" onClick={putScoreToCart}>
+            <>
+              <Icon icon="MdOutlineShoppingBag" color="white" />
+              <Text color="white">장바구니 담기</Text>
+            </>
+          </Button>
+        )
       ) : (
-        <Button size="auto" onClick={putScoreToCart}>
-          <>
-            <Icon icon="MdOutlineShoppingBag" color="white" />
-            <Text color="white">장바구니 담기</Text>
-          </>
+        <Button size="auto" disabled={true}>
+          <Text color="white">로그인 해주세요</Text>
         </Button>
       )}
     </div>
