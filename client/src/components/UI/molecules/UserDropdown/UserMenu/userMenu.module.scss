@@ -1,21 +1,39 @@
 @import '/src/utils/utils';
 
 .usermenu-wrapper {
-    max-width: #{280/$font-size}rem;
-    min-width: #{280/$font-size}rem;
+  max-width: #{280/$font-size}rem;
+  min-width: #{280/$font-size}rem;
 
-    ul {
-        li {
-            padding: 10px 1rem;
-            border-bottom: 1px solid $light-gray;
+  ul {
+    li {
+      padding: 10px 1rem;
+      border-bottom: 1px solid $light-gray;
 
-            &:last-child {
-                border: none;
-            }
+      &:last-child {
+        border: none;
+      }
 
-            button span:first-child {
-                padding-right: 10px;
-            }
-        }
+      button span:first-child {
+        padding-right: 10px;
+      }
     }
+  }
+}
+
+@include mobile {
+  .usermenu-wrapper {
+    max-width: 19rem;
+    min-width: 19rem;
+
+    >ul>li>button>span{
+
+      &:last-child {
+        font-size: 1.2rem;
+      }
+
+      &:first-child > svg {
+        width: 1.8rem;
+      }
+    }
+  }
 }

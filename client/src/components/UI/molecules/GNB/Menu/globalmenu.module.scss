@@ -3,6 +3,7 @@
 .menu-lists {
   display: flex;
   align-items: center;
+
   .menu-list {
     margin: 0 1.5rem;
 
@@ -20,4 +21,42 @@
       transition: all 0.1s ease-in;
     }
   }
+}
+
+@include mobile {
+  .menu-lists {
+    flex: 1;
+    justify-content: center;
+
+    .menu-list {
+      min-width: 5.5rem;
+      margin: 0;
+      margin-left: 2rem;
+
+      a {
+        justify-content: center;
+
+        span {
+          &:first-child {
+            svg {
+              width: 2rem;
+            }
+          }
+
+          &:last-child {
+            font-size: 1.4rem;
+          }
+        }
+      }
+
+      &:last-child {
+        margin-left: 2rem;
+
+        > a > span > svg {
+          width: 1.8rem;
+        }
+      }
+    }
+  }
+
 }

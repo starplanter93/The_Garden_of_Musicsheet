@@ -13,3 +13,11 @@ $font-semibold: 600;
 $font-bold: 700;
 
 $font-size: 16;
+
+$breakpoint-mobile: 767px;
+
+@mixin mobile {
+    @media screen and (max-width: $breakpoint-mobile) {
+        @content;
+    }
+}

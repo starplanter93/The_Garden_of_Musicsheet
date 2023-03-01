@@ -11,7 +11,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <header className={cx('main-header')}>
+    <header className={cx('header')}>
       <nav>
         <Logo type="pc" />
         <GlobalMenu />

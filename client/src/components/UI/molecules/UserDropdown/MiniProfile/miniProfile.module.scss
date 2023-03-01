@@ -1,37 +1,80 @@
 @import '/src/utils/utils';
 
 .profile-wrapper {
-    max-width: #{280/$font-size}rem;
-    min-width: #{280/$font-size}rem;
+	max-width: #{280/$font-size}rem;
+	min-width: #{280/$font-size}rem;
 
-    .profile-info {
-        display: flex;
-        padding: 1rem;
+	.profile-info {
+		display: flex;
+		padding: 1rem;
 
-        div:nth-child(2) {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-left: 1rem;
+		div:first-child {
+			min-width: #{50/$font-size}rem;
+		}
 
-            span:first-child {
-                line-height: 1.5;
-            }
-        }
-    }
+		div:nth-child(2) {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			padding-left: 1rem;
+			overflow: hidden;
 
-    .profile-cash {
-        display: flex;
-        align-items: center;
-        border: {
-            top: 2px solid $light-gray;
-            bottom: 2px solid $light-gray;
-        }
-        padding: 10px 1rem;
+			span {
+				display: block;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				
+				&:first-child {
+					line-height: 1.5;
+				}
+			}
+		}
+	}
 
-        span:nth-child(2) {
-            padding: 0 1rem 0 2px;
-        }
-    }
+	.profile-cash {
+		display: flex;
+		align-items: center;
+
+		border: {
+			top: 2px solid $light-gray;
+			bottom: 2px solid $light-gray;
+		}
+
+		padding: 10px 1rem;
+
+		span:nth-child(2) {
+			padding: 0 1rem 0 2px;
+		}
+	}
+}
+
+@include mobile {
+	.profile-wrapper {
+		max-width: 19rem;
+		min-width: 19rem;
+
+		.profile-info {
+			div:nth-child(2) {
+				span {
+					font-size: 1.2rem;
+
+					&:last-child {
+						font-size: 1.1rem;
+					}
+				}
+			}
+		}
+
+		.profile-cash {
+			span {
+				font-size: 1.2rem;
+
+				svg {
+					width: 1.8rem;
+				}
+			}
+		}
+	}
 }

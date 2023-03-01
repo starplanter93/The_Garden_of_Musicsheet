@@ -1,100 +1,137 @@
 @import '/src/utils/utils';
 
 footer {
+  width: 100%;
+  display: flex;
+  margin-top: 5rem;
+  padding: 0 4rem;
+  background-color: $gray-white;
+
+  .container {
     width: 100%;
     display: flex;
-    margin-top: 5rem;
-    padding: 0 4rem;
-    background-color: $gray-white;
+    flex-direction: column;
+
+    .top,
+    .bottom {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .top {
+      padding: 2rem 10px 1.4rem;
+      border-bottom: 1px solid $white;
+
+      .github {
+        display: flex;
+        align-items: center;
+
+        .github-team {
+          display: flex;
+          align-items: center;
+          margin: 0 1rem;
+          padding: 4px 10px 6px 5px;
+          border-bottom: 3px solid $light-green;
+
+          >span {
+            padding-left: 5px;
+          }
+        }
+
+        .github-member {
+          position: relative;
+          padding: 6px 2rem 6px 10px;
+          font-weight: 500;
+          border-bottom: 3px solid $deep-green;
+          cursor: pointer;
+
+          &::after {
+            position: absolute;
+            right: 5px;
+            top: 12px;
+            content: '';
+            width: 0;
+            height: 0;
+
+            border: {
+              bottom: 7px solid $deep-green;
+              left: 7px solid transparent;
+              right: 7px solid transparent;
+            }
+          }
+
+          >ul {
+            display: block;
+            position: absolute;
+            right: 0;
+            bottom: 2.3rem;
+            padding: 10px;
+            background-color: $white;
+            border: 1px solid $gray-white;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+
+            >li {
+              text-align: center;
+
+              &:hover {
+                background-color: $gray-white;
+              }
+
+              >a {
+                display: block;
+                padding: 12px 1.5rem;
+                font-weight: 500;
+              }
+            }
+
+            &.hide {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    .bottom {
+      padding: 1rem 10px 1.3rem;
+    }
+
+  }
+}
+
+@include mobile {
+  footer {
+    padding: 0 1rem;
+    margin-top: 4rem;
 
     .container {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
+      .top {
 
-        .top,
-        .bottom {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
+        h1 {
+          min-width: 90px;
         }
 
-        .top {
-            padding: 2rem 10px 1.4rem;
-            border-bottom: 1px solid $white;
+        .github {
+          .github-team {
+            padding: 4px 6px 4px 0;
+            margin: 0 10px;
+          }
 
-            .github {
-                display: flex;
-                align-items: center;
+          .github-member {
+            padding: 5px 1.8rem 4px 6px;
 
-                .github-team {
-                    display: flex;
-                    align-items: center;
-                    margin: 0 1rem;
-                    padding: 4px 10px 6px 5px;
-                    border-bottom: 3px solid $light-green;
-
-                    > span {
-                        padding-left: 5px;
-                    }
-                }
-
-                .github-member {
-                    position: relative;
-                    padding: 6px 2rem 6px 10px;
-                    font-weight: 500;
-                    border-bottom: 3px solid $deep-green;
-                    cursor: pointer;
-
-                    &::after {
-                        position: absolute;
-                        right: 5px;
-                        top: 12px;
-                        content: '';
-                        width: 0;
-                        height: 0;
-                        border-bottom: 7px solid $deep-green;
-                        border-left: 7px solid transparent;
-                        border-right: 7px solid transparent;
-                    }
-
-                    > ul {
-                        display: block;
-                        position: absolute;
-                        right: 0;
-                        bottom: 2.3rem;
-                        padding: 10px;
-                        background-color: $white;
-                        border: 1px solid $gray-white;
-                        border-radius: 10px;
-                        box-shadow: 0 0 5px rgba(0,0,0,.1);
-
-                        > li {
-                            
-                            text-align: center;
-
-                            &:hover {
-                                background-color: $gray-white;
-                            }
-
-                            > a {
-                                display: block;
-                                padding: 12px 1.5rem;
-                                font-weight: 500;
-                            }
-                        }
-
-                        &.hide {
-                            display: none;
-                        }
-                    }
-                }
+            &::after {
+              border: {
+                bottom: 5px solid $deep-green;
+                left: 5px solid transparent;
+                right: 5px solid transparent;
+              }
             }
+          }
         }
-
-        .bottom {
-            padding: 1rem 10px 1.3rem;
-        }
-
+      }
     }
+  }
 }
