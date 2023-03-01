@@ -445,7 +445,9 @@ export async function updateUserName(uid: string, newName: string) {
   const instSnap = await getDocs(instRef);
   const instList = instSnap.docs.map((doc: DocumentData) => doc.data());
 
-  const instArr = instList.map((el) => el.scores);
+  const instArr = instList
+    .map((el) => el.scores)
+    .filter((el) => el !== undefined);
 
   for (let i = 0; i < instArr.length; i++) {
     for (let j = 0; j < instArr[i].length; j++) {
