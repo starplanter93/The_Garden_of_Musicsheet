@@ -22,6 +22,7 @@ module.exports = {
     'react/jsx-uses-react': 0,
     'no-unused-vars': 'off',
     'react/prop-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'prettier/prettier': [
       'error',
       {

@@ -14,7 +14,6 @@ export const getSearchData = async (userInput: string) => {
     });
     return response.data.tracks.items;
   } catch (err: any) {
-    console.log('리프레쉬');
     return err.response;
   }
 };

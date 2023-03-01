@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from 'firebase/app';
-import { Auth, getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import {
   getStorage,
   ref,
@@ -164,11 +164,9 @@ export async function getMusicData(songName: string, data: StateType) {
 
   if (savedData && savedData.artist === data.artist) {
     // update
-    console.log('검증 완료');
     data.scores = { ...data.scores };
     updateData(name, data);
   } else if (!infoSnapshot.exists()) {
-    console.log('너 처음이구나?');
     data = { ...data };
     data.songId = list.length.toString();
     postData(name, data);
@@ -251,8 +249,6 @@ export async function postPDF(file: any) {
     uploadTask.on(
       'state_changed',
       (snapshot: any) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         switch (snapshot.state) {
           case 'paused':
             console.log('Upload is paused');
@@ -758,8 +754,6 @@ export async function syncUserData() {
   if (testSnap.exists()) {
     await updateDoc(testRef, { posts: syncArr });
   }
-
-  console.log(syncArr);
 }
 
 export async function getMainPageData() {
