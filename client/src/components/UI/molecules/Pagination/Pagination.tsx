@@ -44,20 +44,16 @@ const Pagination = ({
   const handlePrev = () => {
     if (!prevActive) return;
 
-    // setIsPending(true);
     setCurrentPage(pageGroup[0] - 5);
   };
 
   const handlePage = (e: MouseEvent<HTMLButtonElement>) => {
     if (Number((e.target as HTMLButtonElement).value) === currentPage) return;
-    // setIsPending(true);
     setCurrentPage(Number((e.target as HTMLButtonElement).value));
   };
 
   const handleNext = () => {
     if (!nextActive) return;
-
-    // setIsPending(true);
     setCurrentPage(pageGroup[0] + 5);
   };
 
