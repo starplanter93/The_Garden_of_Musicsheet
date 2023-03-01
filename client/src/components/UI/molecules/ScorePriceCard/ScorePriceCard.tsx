@@ -43,21 +43,20 @@ function ScorePriceCard({ price, updateCart, scoreId }: ScorePriceCardProps) {
       if (scores === undefined) {
         scores = [];
       }
-      scores.length === 0
-        ? (updateCart(), setIsLoading(false))
-        : scores.forEach((score: ScoreInfoType) => {
-            if (score.scoreId === scoreId) {
-              setIsLoading(false);
-              setIsPurchased(true);
-              alert('이미 구매한 악보입니다.');
-            } else {
-              updateCart();
-              setIsLoading(false);
-            }
-          });
-    });
 
-    setIsLoading(false);
+      const isScoreAlreadyPurchased = scores.some(
+        (score: ScoreInfoType) => score.scoreId === scoreId
+      );
+
+      if (isScoreAlreadyPurchased) {
+        setIsLoading(false);
+        setIsPurchased(true);
+        alert('이미 구매한 악보입니다.');
+      } else {
+        updateCart();
+        setIsLoading(false);
+      }
+    });
   }
 
   return (
