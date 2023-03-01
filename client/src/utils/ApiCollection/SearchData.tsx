@@ -47,42 +47,4 @@ export const refreshToken = () => {
     console.log(err);
     return err;
   }
-
-  // axios
-  //   .post(
-  //     `https://accounts.spotify.com/api/token?grant_type=refresh_token&refresh_token=${token.refresh_token}`,
-  //     {
-  //       headers: {
-  //         'Content-Type': 'application/x-www-form-urlencoded',
-  //         Authorization:
-  //           'Basic YTViMTU1NWZhZTBkNDBmNTg2Y2ZiZTgxMWEzNzRmOTY6Nzg5ZDc3MDQ5ZjRhNGIxMmFlOWFkOGYwM2EzZjJjNjA=',
-  //       },
-  //     }
-  //   )
-  //   .then(function (response) {
-  //     console.log(JSON.stringify(response.data));
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-  // try {
-  //   const response = await axios.post(
-  //     `https://accounts.spotify.com/api/token?grant_type=refresh_token&refresh_token=${token.refresh_token}`,
-  //     {
-  //       headers: {
-  //         'Content-Type': 'application/x-www-form-urlencoded',
-  //         Authorization:
-  //           'Basic YTViMTU1NWZhZTBkNDBmNTg2Y2ZiZTgxMWEzNzRmOTY6Nzg5ZDc3MDQ5ZjRhNGIxMmFlOWFkOGYwM2EzZjJjNjA=',
-  //       },
-  //       body: {
-  //         refresh_token: token.refresh_token,
-  //       },
-  //     }
-  //   );
-  //   console.log(response);
-  //   return response;
-  // } catch (err: any) {
-  //   console.log(err);
-  //   return err;
-  // }
 };

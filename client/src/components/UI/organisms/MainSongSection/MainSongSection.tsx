@@ -8,12 +8,6 @@ interface MainSongSectionProps {
   singer: string;
   albumImg?: string;
   scores: ScoreInfoType[];
-  // scoreName: string;
-  // scoreWriter: string;
-  // profileImg?: string;
-  // instrument: string;
-  // difficulty: string;
-  // price: string;
 }
 
 function MainSongSection({
@@ -21,13 +15,7 @@ function MainSongSection({
   singer,
   albumImg,
   scores,
-}: // scoreName,
-// scoreWriter,
-// profileImg,
-// instrument,
-// difficulty,
-// price,
-MainSongSectionProps) {
+}: MainSongSectionProps) {
   const cx = classNames.bind(styles);
   if (scores) scores = scores.slice(-3);
   return (

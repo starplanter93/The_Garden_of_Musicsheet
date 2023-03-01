@@ -742,8 +742,6 @@ export async function syncUserData() {
           );
           syncArr.push(scoresWithId[0]);
         }
-
-        // await updateDoc(infoRef, { scores: scores });
       }
     }
   }

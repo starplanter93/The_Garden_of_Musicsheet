@@ -58,8 +58,6 @@ const PostInput = ({ type, text, placeholder, value }: PostInputProps) => {
 
   useEffect(() => {
     if (userInput.length > 0) {
-      // if (text === '곡 제목') dispatch(setSongName(userInput));
-      // if (text === '원곡자') dispatch(setArtist(userInput));
       if (text === '악보 제목') dispatch(setScoreName(userInput));
       else if (text === '가격') dispatch(setPrice(userInput));
       else if (text === '유튜브 주소 (선택)') dispatch(setURL(userInput));
