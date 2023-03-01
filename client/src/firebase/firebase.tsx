@@ -719,7 +719,8 @@ export async function getUserCash(uid: string) {
   const snapshot = await getDoc(ref);
 
   if (snapshot.exists()) {
-    return snapshot.data();
+    const cash = snapshot.data().cash;
+    return cash;
   }
 }
 

@@ -6,6 +6,7 @@ interface StateType {
   email: string;
   phoneNumber: string;
   photoURL: string;
+  cash: string;
 }
 
 const initialState: StateType = {
@@ -13,6 +14,7 @@ const initialState: StateType = {
   email: '',
   phoneNumber: '',
   photoURL: '',
+  cash: '',
 };
 
 export const userSlice = createSlice({
@@ -34,6 +36,10 @@ export const userSlice = createSlice({
       state.displayName = action.payload;
       return state;
     },
+    setCash: (state: StateType, action: PayloadAction<string>) => {
+      state.cash = action.payload;
+      return state;
+    },
   },
   // initialState로 초기화
   extraReducers: (builder) => {
@@ -45,7 +51,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { userInfo, setUserProfilePicture, setUserName } =
+export const { userInfo, setUserProfilePicture, setUserName, setCash } =
   userSlice.actions;
 
 const userReducer: Reducer<typeof initialState> = userSlice.reducer;
