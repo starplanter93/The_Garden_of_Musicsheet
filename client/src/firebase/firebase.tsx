@@ -66,7 +66,6 @@ export async function getScoreByMusic(docName: string, scoreId: string) {
 /** 장바구니에 악보 추가 */
 export async function updateCart(scoreInfo: ScoreInfoType) {
   if (auth.currentUser !== null) {
-    console.log(scoreInfo);
     const userInfoRef = doc(db, 'user', auth.currentUser.uid);
     await updateDoc(userInfoRef, { cartItems: arrayUnion(scoreInfo) });
     const snapshot = await getDoc(userInfoRef);
