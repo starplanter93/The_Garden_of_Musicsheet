@@ -35,6 +35,24 @@
 
 
 @include mobile {
+  .cover-wrapper {
+    padding: 1.5rem;
+
+    >div>div {
+      &:first-child>div {
+        width: 10rem;
+        height: 10rem;
+      }
+      &:last-child {
+        padding: 10px 0 1rem 1.5rem;
+        >ul>li:nth-child(2) {
+          padding-top: 1.5rem;
+        }
+      }
+    }
+
+  }
+
   .container {
     padding: 0 10px;
     margin-top: 2rem;
