@@ -63,7 +63,7 @@ const CategoryCover = ({
         <div className={cx('cover-img')}>
           <ImgLayout
             shape="round"
-            size="lg"
+            size="mypage"
             src={thumbnail}
             alt="커버 이미지"
           />

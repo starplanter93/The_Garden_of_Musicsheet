@@ -5,7 +5,7 @@ import defaultImg from '../../../../assets/default-image.jpg';
 
 interface ImgLayoutProps {
   shape?: 'round' | 'square';
-  size?: 'lg' | 'm' | 's' | 'responsive';
+  size?: 'lg' | 'm' | 's' | 'responsive' | 'mypage';
   src?: string | undefined;
   alt: string;
 }

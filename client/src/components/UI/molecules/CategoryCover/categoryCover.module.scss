@@ -9,9 +9,6 @@
   .user-info {
     flex: 1;
     padding: 10px 0 1rem 3rem;
-    @media screen and (max-width: 575px) {
-      flex-direction: column;
-    }
 
     ul {
       width: 100%;
@@ -28,26 +25,26 @@
           align-items: center;
           .name-input {
             border: none;
-            border-bottom: 2px solid green;
+            border-bottom: 2px solid $deep-green;
             background-color: transparent;
             font-size: 1.75rem;
             font-weight: 700;
             outline: none;
+            @include mobile {
+              font-size: 1.5rem;
+            }
           }
         }
       }
       .bottom {
         display: flex;
         justify-content: space-between;
-        @media screen and (max-width: 575px) {
-          flex-direction: column;
-        }
+
         .cash {
           display: flex;
           align-items: center;
         }
         .edit {
-          margin-top: 2rem;
           display: flex;
           align-items: center;
         }
@@ -83,5 +80,26 @@
         }
       }
     }
+  }
+}
+
+@include mobile {
+  .cover-img {
+    display: flex;
+    align-items: center;
+  }
+  .user-info > ul > li > .username {
+    > span {
+      font-size: 1.5rem;
+    }
+  }
+  .user-info > ul > li > .username > button > span > svg {
+    font-size: 1.5rem;
+  }
+  .user-info > ul > .bottom {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
 }
