@@ -20,6 +20,12 @@
     z-index: 1;
     top: 14px;
     left: -152px;
+    @include mobile {
+      position: absolute;
+      z-index: 1;
+      top: 10px;
+      left: -112px;
+    }
   }
 }
 

@@ -9,6 +9,9 @@
   .user-info {
     flex: 1;
     padding: 10px 0 1rem 3rem;
+    @media screen and (max-width: 575px) {
+      flex-direction: column;
+    }
 
     ul {
       width: 100%;
@@ -36,7 +39,7 @@
       .bottom {
         display: flex;
         justify-content: space-between;
-        @media screen and (max-width: 500px) {
+        @media screen and (max-width: 575px) {
           flex-direction: column;
         }
         .cash {
@@ -44,6 +47,7 @@
           align-items: center;
         }
         .edit {
+          margin-top: 2rem;
           display: flex;
           align-items: center;
         }
