@@ -9,7 +9,6 @@ import { getCart } from '../../../../../firebase/firebase';
 import { auth } from '../../../../../firebase/firebase';
 import { User } from 'firebase/auth';
 
-// Todo: 장바구니에 담긴 개수
 const CartButton = () => {
   const cx = classNames.bind(styles);
   const [user, setUser] = useState<User | null>(null);
@@ -30,10 +29,6 @@ const CartButton = () => {
           (data) => data && setCountCart(data.cartItems.length)
         );
       }
-      // getCart(auth).then((data) => {
-      //   if (data) {
-      //     setCountCart(data.cartItems.length);
-      //   }
     });
     return unsubscribe;
   }, [countCart, user, countCartItems]);

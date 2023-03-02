@@ -28,14 +28,12 @@ const MyPageModal = ({ type, setModal }: MyPageModalProps) => {
   const navigate = useNavigate();
   const user = auth.currentUser;
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [fileName, setFileName] = useState('');
   const [isPending, setIsPending] = useState(false);
 
   if (type === 'optout') {
     const handleOptOut = async () => {
       if (user)
         try {
-          // deleteUser(user);
           await userOptout(user.uid);
           await auth.signOut();
           await persistor.purge();
@@ -91,7 +89,6 @@ const MyPageModal = ({ type, setModal }: MyPageModalProps) => {
     const handleFileUpload = async (e: any) => {
       if (e.target.files.length > 0) {
         const [file] = e.target.files;
-        console.log(file);
         if (file) {
           try {
             setIsPending(true);
@@ -101,7 +98,6 @@ const MyPageModal = ({ type, setModal }: MyPageModalProps) => {
           } catch (err) {
             console.log(err);
           }
-          setFileName(file.name);
         } else {
           alert('이미지 파일만 업로드 가능합니다.');
         }
