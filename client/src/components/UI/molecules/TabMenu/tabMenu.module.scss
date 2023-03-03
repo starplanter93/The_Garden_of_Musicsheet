@@ -86,3 +86,17 @@
     }
   }
 }
+
+@include mobile {
+  .wrapper {
+    padding: 0 2rem 0 1.5rem;
+
+    .tabs {
+      padding-top: 0;
+
+      .tab {
+        margin-left: 0;
+      }
+    }
+  }
+}
