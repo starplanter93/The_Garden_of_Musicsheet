@@ -14,10 +14,10 @@ export const Default = Template.bind({});
 Default.args = {
   tabGroupArr: [
     '전체',
-    '피아노',
     '일렉 기타',
     '어쿠스틱 기타',
     '베이스',
     '드럼',
+    '피아노',
   ],
 };
