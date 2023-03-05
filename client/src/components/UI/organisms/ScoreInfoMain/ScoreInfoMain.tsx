@@ -47,7 +47,7 @@ function ScoreInfoMain({
   };
 
   const opts: YouTubeProps['opts'] = {
-    width: '700',
+    width: '100%',
     height: '400',
     playerVars: {
       autoplay: 1,
