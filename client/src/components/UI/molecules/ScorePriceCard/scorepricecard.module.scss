@@ -12,10 +12,6 @@
   justify-content: space-between;
   background: $white;
 
-  // @include mobile {
-  //   width: 80%;
-  // }
-
   > span {
     padding-left: 0.5rem;
   }
@@ -23,5 +19,9 @@
   button {
     width: 17.5rem;
     height: 3rem;
+    @include mobile {
+      width: 100%;
+      // width: 25rem;
+    }
   }
 }

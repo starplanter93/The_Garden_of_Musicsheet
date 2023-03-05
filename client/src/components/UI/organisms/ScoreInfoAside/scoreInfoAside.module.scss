@@ -2,8 +2,10 @@
 
 .scoreinfo-aside {
   @include mobile {
+    display: flex;
+    flex-wrap: wrap-reverse;
     width: 100%;
-    max-width: 426px;
+    max-width: 375px;
   }
   > div {
     margin-top: 1rem;
