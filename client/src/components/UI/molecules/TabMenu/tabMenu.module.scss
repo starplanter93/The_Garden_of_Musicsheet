@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   background-color: #d9eddf;
+  padding: 0 2.4rem;
 
   .tabs {
     width: 100%;
@@ -15,9 +16,18 @@
     position: relative;
 
     .tab {
+      flex: none;
       position: relative;
-      margin: 0 1rem;
+      margin: 0 5px;
       padding: 0 1rem;
+
+      &:first-child {
+        margin-left: 0;
+      }
+      &:nth-child(4) {
+        margin-right: 0;
+        padding-right: 5px;
+      }
 
       span:last-child {
         &:hover {
@@ -48,9 +58,44 @@
           }
         }
 
-        span:last-child {
+        span:first-child {
           color: $black;
         }
+      }
+
+      .more-tab {
+        display: none;
+        position: absolute;
+        top: 2.5rem;
+        left: 0;
+        width: 6rem;
+        padding: 5px 10px 5px 1.2rem;
+        background-color: $white;
+        box-shadow: 0 0 10px rgba($black, .15);
+        border-radius: 10px;
+        border: 1px solid $gray-white;
+
+        >li {
+          padding: 10px 0;
+        }
+
+        &.show {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+@include mobile {
+  .wrapper {
+    padding: 0 2rem 0 1.5rem;
+
+    .tabs {
+      padding-top: 0;
+
+      .tab {
+        margin-left: 0;
       }
     }
   }
