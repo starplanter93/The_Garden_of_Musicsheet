@@ -12,6 +12,10 @@
   justify-content: space-between;
   background: $white;
 
+  // @include mobile {
+  //   width: 80%;
+  // }
+
   > span {
     padding-left: 0.5rem;
   }

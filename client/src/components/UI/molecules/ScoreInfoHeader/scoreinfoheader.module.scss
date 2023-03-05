@@ -11,6 +11,13 @@
 
     span {
       margin: 0.25rem 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      word-break: break-all;
+      margin: 0.25rem 0.5rem;
     }
   }
 

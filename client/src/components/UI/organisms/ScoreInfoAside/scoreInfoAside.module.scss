@@ -1,7 +1,14 @@
 @import '/src/utils/utils';
 
 .scoreinfo-aside {
+  @include mobile {
+    width: 100%;
+    max-width: 426px;
+  }
   > div {
     margin-top: 1rem;
+    @include mobile {
+      width: 100%;
+    }
   }
 }

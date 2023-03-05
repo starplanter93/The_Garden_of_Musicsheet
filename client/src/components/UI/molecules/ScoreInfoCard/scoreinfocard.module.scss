@@ -11,6 +11,10 @@
   .scoreinfo-item {
     display: flex;
     margin: 1rem 0;
+    @media screen and (max-width: 399px) {
+      width: 50%;
+      justify-content: center;
+    }
     span {
       display: flex;
       align-items: center;
