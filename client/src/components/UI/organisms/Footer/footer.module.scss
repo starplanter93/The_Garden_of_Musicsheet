@@ -108,7 +108,6 @@ footer {
 
     .container {
       .top {
-
         h1 {
           min-width: 90px;
         }
@@ -116,19 +115,11 @@ footer {
         .github {
           .github-team {
             padding: 4px 6px 4px 0;
-            margin: 0 10px;
+            margin: 0;
           }
 
           .github-member {
-            padding: 5px 1.8rem 4px 6px;
-
-            &::after {
-              border: {
-                bottom: 5px solid $deep-green;
-                left: 5px solid transparent;
-                right: 5px solid transparent;
-              }
-            }
+            display: none;
           }
         }
       }

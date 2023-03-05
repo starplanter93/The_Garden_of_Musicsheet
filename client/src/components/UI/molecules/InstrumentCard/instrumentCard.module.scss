@@ -1,26 +1,38 @@
 @import '/src/utils/utils';
 
 .instrument-card {
-    width: 100%;
-    max-width: #{272/$font-size}rem;
-    display: flex;
-    flex-direction: column;
-    padding: #{20/$font-size}rem;
-    background-color: $white;
-    border-radius: 1.5rem;
-    text-align: left;
-    border: 1px solid $gray-white;
-    box-shadow: 0 0 12px rgba(0,0,0, .05);
-    cursor: pointer;
+  width: 100%;
+  max-width: #{272/$font-size}rem;
+  display: flex;
+  flex-direction: column;
+  padding: #{20/$font-size}rem;
+  background-color: $white;
+  border-radius: 1.5rem;
+  text-align: left;
+  border: 1px solid $gray-white;
+  box-shadow: 0 0 12px rgba(0, 0, 0, .05);
+  cursor: pointer;
 
-    .instrument-type {
-        margin: #{20/$font-size}rem 0 5px;
-        padding-left: 5px;
-    } 
+  .instrument-type {
+    margin: #{20/$font-size}rem 0 5px;
+    padding-left: 5px;
+  }
 
-    &:hover {
-        margin-top: -10px;
-        box-shadow: 0 0 12px 10px rgba(0,0,0, .05);
-        transition: all .1s ease-in;
-    }
+  &:hover {
+    margin-top: -10px;
+    box-shadow: 0 0 12px 10px rgba(0, 0, 0, .05);
+    transition: all .1s ease-in;
+  }
+
+  @media screen and (min-width: #{$breakpoint-mobile + 1px}) and (max-width: 1023px) {
+    max-width: 18rem;
+  }
+
+  @include mobile {
+    max-width: 19rem;
+  }
+
+  @media screen and (max-width: 549px) {
+    max-width: 20.5rem;
+  }
 }

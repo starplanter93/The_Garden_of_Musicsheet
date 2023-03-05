@@ -11,7 +11,7 @@
 TypeScript와 React를 기반으로 하며 Atomic Design Pattern을 적용한 UI 개발을 시도하고 있습니다.🤔
 <br><br><br>
 
-<a href='https://github.com/starplanter93/The_Garden_of_Musicsheet'>🧸 배포 링크는 준비중입니다! 🧸</a>
+🧸 <a href='http://gardenmusicdev.s3-website.ap-northeast-2.amazonaws.com/'><b>악보의 정원 바로가기 →</b></a>
 <br><br>
 🎨 <a href='https://www.figma.com/file/TXlyRfgbgeJIvvuyNKCa8e/%EC%95%85%EB%B3%B4%EC%9D%98-%EC%A0%95%EC%9B%90?node-id=0%3A1&t=0UDShpJynGiBpiqK-1'>Figma 바로가기 →</a>
 <br><br>
