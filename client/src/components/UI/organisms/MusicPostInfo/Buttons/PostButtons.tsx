@@ -43,7 +43,7 @@ const PostButtons = ({ value }: PostButtonsProps) => {
   };
 
   return (
-    <div>
+    <>
       <div className={cx('text')}>
         <Text weight="semibold" size="xlg">
           악보 정보
@@ -73,7 +73,7 @@ const PostButtons = ({ value }: PostButtonsProps) => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

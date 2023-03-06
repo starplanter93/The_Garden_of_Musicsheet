@@ -4,10 +4,17 @@ import { Button, Icon, Text } from '../../atoms';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { auth, getMusicData, updateScore } from '../../../../firebase/firebase';
+import {
+  auth,
+  getMusicData,
+  updateScore,
+  postPDF,
+} from '../../../../firebase/firebase';
 import { setUserInfo, initializeState } from '../../../../redux/PostSlice';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { setDownloadURL } from '../../../../redux/PostSlice';
+import { setFile } from '../../../../redux/FileSlice';
 
 const PostHeader = () => {
   const cx = classNames.bind(styles);
@@ -15,6 +22,9 @@ const PostHeader = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const { scoreId } = useParams();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [fileName, setFileName] = useState('');
+  const [isPending, setIsPending] = useState(false);
 
   const data = useSelector((state: RootState) => state.postInfo);
 
@@ -69,6 +79,32 @@ const PostHeader = () => {
     }
   };
 
+  const handleButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileUpload = async (e: any) => {
+    if (e.target.files.length > 0) {
+      const [file] = e.target.files;
+      if (file.type === 'application/pdf') {
+        try {
+          setIsPending(true);
+          const sheetURL = await postPDF(file);
+          dispatch(setDownloadURL(sheetURL));
+          setIsPending(false);
+        } catch (err) {
+          console.log(err);
+        }
+        setFileName(file.name);
+      } else {
+        alert('Only .pdf files are supported.');
+      }
+      dispatch(setFile(file));
+    }
+  };
+
   return (
     <header className={cx('header')}>
       <nav className={cx('nav-post')}>
@@ -78,14 +114,31 @@ const PostHeader = () => {
             <Text>뒤로 가기</Text>
           </div>
         </Button>
-        <Button size="s" onClick={() => handleUpload()}>
-          <div className={cx('save')}>
-            <Icon icon="MdOutlineCheck" color="white" />
-            <Text color="white">
-              {pathname.includes('/edit') ? '수정하기' : '저장하기'}
-            </Text>
+        <div className={cx('right-btn')}>
+          <div className={cx('file-upload')}>
+            <Button theme="tertiary" size="s" onClick={handleButtonClick}>
+              <>
+                <Icon icon="MdUpload" />
+                <Text>파일 선택</Text>
+              </>
+            </Button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              style={{ display: 'none' }}
+              onChange={(e) => handleFileUpload(e)}
+              accept="application/pdf"
+            />
           </div>
-        </Button>
+          <Button size="s" onClick={() => handleUpload()}>
+            <div className={cx('save')}>
+              <Icon icon="MdOutlineCheck" color="white" />
+              <Text color="white">
+                {pathname.includes('/edit') ? '수정하기' : '저장하기'}
+              </Text>
+            </div>
+          </Button>
+        </div>
       </nav>
     </header>
   );

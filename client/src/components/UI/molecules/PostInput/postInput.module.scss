@@ -1,8 +1,16 @@
 @import '../../../../utils/utils';
 
 .wrapper {
+  width: auto;
   .text {
     margin-bottom: 2rem;
+    @include mobile {
+      width: 20rem;
+      display: flex;
+      > input {
+        width: 100%;
+      }
+    }
   }
   .default {
     position: relative;
@@ -27,6 +35,21 @@
       position: relative;
       display: flex;
       justify-content: center;
+    }
+    @include mobile {
+      width: 100%;
+      margin-bottom: 2rem;
+      input {
+        width: 214px;
+        position: relative;
+        padding-left: 2.5rem;
+      }
+      .icon {
+        position: absolute;
+        z-index: 1;
+        top: 38px;
+        left: 16px;
+      }
     }
   }
 
@@ -54,6 +77,20 @@
       display: flex;
       justify-content: center;
     }
+    @include mobile {
+      width: 100%;
+      input {
+        width: 214px;
+        position: relative;
+        padding-left: 2.5rem;
+      }
+      .icon {
+        position: absolute;
+        z-index: 1;
+        top: 38px;
+        left: 16px;
+      }
+    }
   }
 
   .selected-result {
@@ -70,6 +107,9 @@
     border: 2px solid $gray-white;
     border-top: none;
     margin-bottom: 2rem;
+    @include mobile {
+      width: auto;
+    }
 
     .result-info-icon {
       display: flex;
@@ -101,6 +141,9 @@
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       :hover {
         background-color: $gray-white;
+      }
+      @include mobile {
+        width: 17rem;
       }
 
       .dropdown-result {
@@ -173,16 +216,15 @@
 
   &.editmode {
     .text {
-       span {
+      span {
         color: $gray;
       }
     }
 
-    .selected-result{
-
+    .selected-result {
       border-radius: 10px;
       border: 2px solid $light-gray;
-      
+
       .delete-btn {
         display: none;
       }

@@ -32,6 +32,12 @@
   width: 18.75rem;
   border-radius: 10px;
   padding: 0.25rem;
+
+  @include mobile {
+    position: relative;
+    top: 0;
+  }
+
   :hover {
     background-color: rgba($light-green, 0.6);
     border-radius: 8px;
