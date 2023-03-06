@@ -45,7 +45,8 @@ const PostHeader = () => {
       !scores[0].sheetType ||
       !scores[0].detail ||
       !scores[0].price ||
-      !scores[0].downloadURL
+      !scores[0].downloadURL ||
+      !scores[0].scoreName
     ) {
       return false;
     }

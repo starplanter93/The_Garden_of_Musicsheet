@@ -19,5 +19,9 @@
   button {
     width: 17.5rem;
     height: 3rem;
+    @include mobile {
+      width: 100%;
+      // width: 25rem;
+    }
   }
 }

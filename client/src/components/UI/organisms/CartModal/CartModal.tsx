@@ -36,6 +36,8 @@ function CartModal() {
 
   useEffect(() => {
     setShow('show');
+    document.body.setAttribute('style', 'overflow: hidden;');
+    return () => document.body.setAttribute('style', 'overflow: auto;');
   }, []);
 
   return (
