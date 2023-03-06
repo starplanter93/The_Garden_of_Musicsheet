@@ -3,23 +3,13 @@ import classNames from 'classnames/bind';
 import { Icon, ImgLayout, Text } from '../../../atoms';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../redux/store';
-import { memo, useEffect, useState } from 'react';
-import { auth } from '../../../../../firebase/firebase';
-import { getUserCash } from '../../../../../firebase/firebase';
+import { memo } from 'react';
 
 const MiniProfile = () => {
   const cx = classNames.bind(styles);
-  const { photoURL, displayName, email } = useSelector(
+  const { photoURL, displayName, email, cash } = useSelector(
     (state: RootState) => state.user.userReducer
   );
-  const [cash, setCash] = useState('1000000');
-
-  useEffect(() => {
-    const user = auth.currentUser;
-    if (user && user.photoURL) {
-      getUserCash(user.uid).then((el) => el && setCash(el.cash));
-    }
-  }, [auth]);
 
   return (
     <div className={cx('profile-wrapper')}>

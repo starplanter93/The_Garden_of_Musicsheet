@@ -28,6 +28,15 @@
       width: 3.125rem;
       height: 3.125rem;
     }
+  } @else if ($class = 'mypage') {
+    &.#{$class} {
+      width: 14.25rem;
+      height: 14.25rem;
+      @include mobile {
+        width: 7.5rem;
+        height: 7.5rem;
+      }
+    }
   } @else if ($class = 'responsive') {
     &.#{$class} {
       position: relative;
@@ -53,6 +62,7 @@
   @include img-size('m');
   @include img-size('s');
   @include img-size('responsive');
+  @include img-size('mypage');
   img {
     object-fit: cover;
     width: 100%;

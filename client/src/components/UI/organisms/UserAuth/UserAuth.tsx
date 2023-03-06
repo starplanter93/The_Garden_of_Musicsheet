@@ -12,6 +12,7 @@ import {
 } from '../../../../utils/utils';
 import { useNavigate } from 'react-router-dom';
 import { userInfo } from '../../../../redux/UserSlice';
+import { getUserCash } from '../../../../firebase/firebase';
 
 interface UserAuthProps {
   type: 'Login' | 'SignUp';
@@ -43,8 +44,19 @@ const UserAuth = ({ type }: UserAuthProps) => {
       await handleUserLogin(userLoginData.email, userLoginData.password).then(
         (response) => {
           if (typeof response !== 'undefined') {
-            const { displayName, email, phoneNumber, photoURL } = response;
-            dispatch(userInfo({ displayName, email, phoneNumber, photoURL }));
+            const { displayName, email, phoneNumber, photoURL, uid } = response;
+
+            getUserCash(uid).then((el) => {
+              dispatch(
+                userInfo({
+                  displayName,
+                  email,
+                  phoneNumber,
+                  photoURL,
+                  cash: el,
+                })
+              );
+            });
           }
         }
       );
@@ -57,8 +69,18 @@ const UserAuth = ({ type }: UserAuthProps) => {
           userRegData.nickname
         ).then((response) => {
           if (typeof response !== 'undefined') {
-            const { displayName, email, phoneNumber, photoURL } = response;
-            dispatch(userInfo({ displayName, email, phoneNumber, photoURL }));
+            const { displayName, email, phoneNumber, photoURL, uid } = response;
+            getUserCash(uid).then((el) => {
+              dispatch(
+                userInfo({
+                  displayName,
+                  email,
+                  phoneNumber,
+                  photoURL,
+                  cash: el,
+                })
+              );
+            });
           }
         });
         localStorage.getItem('authorization') ? navigate('/') : null;
@@ -71,8 +93,18 @@ const UserAuth = ({ type }: UserAuthProps) => {
   const handleOauth = async () => {
     await handleGoogleLogin().then((response) => {
       if (typeof response !== 'undefined') {
-        const { displayName, email, phoneNumber, photoURL } = response;
-        dispatch(userInfo({ displayName, email, phoneNumber, photoURL }));
+        const { displayName, email, phoneNumber, photoURL, uid } = response;
+        getUserCash(uid).then((el) => {
+          dispatch(
+            userInfo({
+              displayName,
+              email,
+              phoneNumber,
+              photoURL,
+              cash: el,
+            })
+          );
+        });
       }
     });
     navigate('/');

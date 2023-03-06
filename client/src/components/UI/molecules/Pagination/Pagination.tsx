@@ -23,6 +23,7 @@ const Pagination = ({
   const cx = classNames.bind(styles);
   const listPerpage = 5;
   const totalPages = Math.ceil(totalLists / listPerpage);
+
   let totalPageArr = [1];
   if (totalPages > 1) {
     totalPageArr = Array(totalPages)
