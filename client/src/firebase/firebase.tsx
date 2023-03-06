@@ -440,7 +440,9 @@ export async function updateUserName(uid: string, newName: string) {
   const instSnap = await getDocs(instRef);
   const instList = instSnap.docs.map((doc: DocumentData) => doc.data());
 
-  const instArr = instList.map((el) => el.scores);
+  const instArr = instList
+    .map((el) => el.scores)
+    .filter((el) => el !== undefined);
 
   for (let i = 0; i < instArr.length; i++) {
     for (let j = 0; j < instArr[i].length; j++) {
@@ -685,7 +687,9 @@ export async function deleteArticle(uid: string, scoreId: string) {
     });
     batch.update(doc.ref, { scores: updatedScores });
     // music collection의 해당 악보들의 isDeleted 값이 전부 true라면
-    if (updatedScores.every((score: Score) => score.isDeleted)) {
+    if (
+      updatedScores.every((score: Score) => score.isDeleted || score.isOptout)
+    ) {
       batch.update(doc.ref, { isDeleted: true });
     } else {
       batch.update(doc.ref, { isDeleted: false });
@@ -714,7 +718,8 @@ export async function getUserCash(uid: string) {
   const snapshot = await getDoc(ref);
 
   if (snapshot.exists()) {
-    return snapshot.data();
+    const cash = snapshot.data().cash;
+    return cash;
   }
 }
 

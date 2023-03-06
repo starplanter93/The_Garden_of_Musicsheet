@@ -4,7 +4,6 @@ import { GlobalMenu } from '../../molecules';
 import UtilityMenu from '../UtilityMenu/UtilityMenu';
 import { Button, Logo, Text } from '../../atoms';
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
 
 const Header = () => {
   const cx = classNames.bind(styles);
@@ -31,4 +30,4 @@ const Header = () => {
   );
 };
 
-export default React.memo(Header);
+export default Header;

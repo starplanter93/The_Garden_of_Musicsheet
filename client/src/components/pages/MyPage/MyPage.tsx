@@ -1,5 +1,5 @@
 import { MyPageTop } from '../../UI/organisms';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User } from 'firebase/auth';
 import {
@@ -8,15 +8,18 @@ import {
   MyPageModal,
   Pagination,
 } from '../../UI/molecules';
-import { getUserArticle, auth, getUserCash } from '../../../firebase/firebase';
+import { getUserArticle, auth } from '../../../firebase/firebase';
 import { DocumentData } from 'firebase/firestore/lite';
 import classNames from 'classnames/bind';
 import styles from './myPage.module.scss';
 import Spinner from '../../../utils/Spinner/Spinner';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+
 const cx = classNames.bind(styles);
 
 type UploadedDataProps = {
-  clickedTab: '등록한 악보' | '구매한 악보';
+  clickedTab: string;
   data: DocumentData[];
 };
 
@@ -36,7 +39,7 @@ const UploadedData = ({ clickedTab, data }: UploadedDataProps) => {
       )}
       {clickedTab === '구매한 악보' && (
         <>
-          {data.map((el: DocumentData, idx: number) => (
+          {filteredData.map((el: DocumentData, idx: number) => (
             <div className={cx('wrapper')} key={idx}>
               <ScoreList score={el} buttonEvent="download" />
             </div>
@@ -47,22 +50,32 @@ const UploadedData = ({ clickedTab, data }: UploadedDataProps) => {
   );
 };
 
-const UserData = ({ data, clickedTab, currentPage, setCurrentPage }: any) => {
+const UserData = ({
+  data,
+  clickedTab,
+  currentPage,
+  setCurrentPage,
+  totalLists,
+}: {
+  data: DocumentData[];
+  clickedTab: string;
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+  totalLists: number;
+}) => {
   return (
     <>
       {data && (
-        <>
-          <div className={cx('container')}>
-            <div className={cx('wrapper')}>
-              <UploadedData clickedTab={clickedTab} data={data} />
-            </div>
-            <Pagination
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              totalLists={data.length}
-            />
+        <div className={cx('container')}>
+          <div className={cx('wrapper')}>
+            <UploadedData clickedTab={clickedTab} data={data} />
           </div>
-        </>
+          <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalLists={totalLists}
+          />
+        </div>
       )}
     </>
   );
@@ -74,30 +87,56 @@ const MyPage = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
   const [data, setData] = useState<DocumentData | undefined>([]);
-  const [clickedTab, setClickedTab] = useState('등록한 악보');
+  const [clickedTab, setClickedTab] = useState<string>('등록한 악보');
   const [currentPage, setCurrentPage] = useState(1);
   const [modal, setModal] = useState(false);
-  const [cash, setCash] = useState('');
   const [editType, setEditType] = useState<'optout' | 'editPicture'>('optout');
+  const { cash } = useSelector((state: RootState) => state.user.userReducer);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user as User);
-      if (user) {
+      if (user && clickedTab === '등록한 악보') {
         getUserArticle(user.uid).then((el) => el && setData(el.posts));
-        getUserCash(user.uid).then((el) => el && setCash(el.cash));
+      }
+      if (user && clickedTab === '구매한 악보') {
+        getUserArticle(user.uid).then(
+          (el) => el && setData(el.purchasedScores)
+        );
       }
       setLoading(false);
     });
-
     return unsubscribe;
-  }, []);
+  }, [clickedTab]);
 
   useEffect(() => {
     if (!localStorage.getItem('authorization')) {
       navigate('/auth');
     }
   }, [user]);
+
+  const [totalLists, setTotalLists] = useState(0);
+  const [scores, setScores] = useState<DocumentData[]>([]);
+
+  useEffect(() => {
+    let currentData: DocumentData[] = [];
+
+    if (clickedTab === '등록한 악보') {
+      setTotalLists(data?.length);
+      currentData = data?.slice(
+        (currentPage - 1) * 5,
+        5 + (currentPage - 1) * 5
+      );
+      setScores(currentData);
+    } else if (clickedTab === '구매한 악보') {
+      setTotalLists(data?.length);
+      currentData = data?.slice(
+        (currentPage - 1) * 5,
+        5 + (currentPage - 1) * 5
+      );
+      setScores(currentData);
+    }
+  }, [currentPage, data, clickedTab]);
 
   if (loading) {
     return <Spinner />;
@@ -127,10 +166,11 @@ const MyPage = () => {
                 setCurrentPage={setCurrentPage}
               />
               <UserData
-                data={data}
+                data={scores}
                 clickedTab={clickedTab}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
+                totalLists={totalLists}
               />
             </>
           )}
