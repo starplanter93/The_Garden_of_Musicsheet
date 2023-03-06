@@ -1,3 +1,4 @@
+import React from 'react';
 import { Text, Button } from '../../atoms';
 import styles from './scoreinfoheader.module.scss';
 import classNames from 'classnames/bind';
@@ -9,9 +10,17 @@ interface ScoreInfoHeaderProps {
   scoreName: string;
   singer: string;
   date: string | number;
+  authorId: string;
+  uid: string | undefined;
 }
 
-function ScoreInfoHeader({ scoreName, singer, date }: ScoreInfoHeaderProps) {
+function ScoreInfoHeader({
+  scoreName,
+  singer,
+  date,
+  authorId,
+  uid,
+}: ScoreInfoHeaderProps) {
   const cx = classNames.bind(styles);
   const navigate = useNavigate();
   const params = useParams();
@@ -37,24 +46,26 @@ function ScoreInfoHeader({ scoreName, singer, date }: ScoreInfoHeaderProps) {
         <Text size="m">{singer}</Text>
         <Text size="m">{formattedDate}</Text>
       </div>
-      <div className={cx('button-wrapper')}>
-        <Button
-          theme="transparent"
-          size="auto"
-          onClick={() => {
-            navigate(`/scores/edit${pathname}`);
-          }}
-        >
-          <Text color="gray">수정</Text>
-        </Button>
-        <Button
-          theme="transparent"
-          size="auto"
-          onClick={() => handleDeleteArticle()}
-        >
-          <Text color="gray">삭제</Text>
-        </Button>
-      </div>
+      {uid === authorId && (
+        <div className={cx('button-wrapper')}>
+          <Button
+            theme="transparent"
+            size="auto"
+            onClick={() => {
+              navigate(`/scores/edit${pathname}`);
+            }}
+          >
+            <Text color="gray">수정</Text>
+          </Button>
+          <Button
+            theme="transparent"
+            size="auto"
+            onClick={() => handleDeleteArticle()}
+          >
+            <Text color="gray">삭제</Text>
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
