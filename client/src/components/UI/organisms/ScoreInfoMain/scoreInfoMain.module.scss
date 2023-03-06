@@ -4,7 +4,7 @@
   > div {
     margin-top: 2.5rem;
 
-    @include mobile {
+    @media screen and (max-width: 1050px) {
       > iframe {
         height: auto;
         min-height: 250px;
@@ -12,14 +12,14 @@
     }
 
     > img:nth-child(2) {
-      @include mobile {
+      @media screen and (max-width: 1050px) {
         display: none;
       }
     }
   }
 
   > div:nth-child(1) {
-    @include mobile {
+    @media screen and (max-width: 1050px) {
       justify-content: center;
     }
   }
