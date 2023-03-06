@@ -39,7 +39,7 @@ const UploadedData = ({ clickedTab, data }: UploadedDataProps) => {
       )}
       {clickedTab === '구매한 악보' && (
         <>
-          {data.map((el: DocumentData, idx: number) => (
+          {filteredData.map((el: DocumentData, idx: number) => (
             <div className={cx('wrapper')} key={idx}>
               <ScoreList score={el} buttonEvent="download" />
             </div>
