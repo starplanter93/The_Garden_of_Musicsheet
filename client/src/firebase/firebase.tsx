@@ -687,7 +687,9 @@ export async function deleteArticle(uid: string, scoreId: string) {
     });
     batch.update(doc.ref, { scores: updatedScores });
     // music collection의 해당 악보들의 isDeleted 값이 전부 true라면
-    if (updatedScores.every((score: Score) => score.isDeleted)) {
+    if (
+      updatedScores.every((score: Score) => score.isDeleted || score.isOptout)
+    ) {
       batch.update(doc.ref, { isDeleted: true });
     } else {
       batch.update(doc.ref, { isDeleted: false });
