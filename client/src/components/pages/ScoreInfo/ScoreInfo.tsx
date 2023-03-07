@@ -13,11 +13,13 @@ import { useDispatch } from 'react-redux';
 import { countCartItem } from '../../../redux/ModalSlice';
 import { auth } from '../../../firebase/firebase';
 import { useNavigate } from 'react-router';
+import { User } from 'firebase/auth';
 
 function ScoreInfo() {
   const cx = classNames.bind(styles);
   const navigate = useNavigate();
   const [scoreData, setScoreData] = useState<ScoreInfoType>();
+  const [user, setUser] = useState<User | null>(null);
   const { scoreName, scoreId } = useParams();
   const dispatch = useDispatch();
   const dummyData = {
@@ -75,6 +77,10 @@ function ScoreInfo() {
 
   useEffect(() => {
     fetchScoreData();
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user as User);
+    });
+    return unsubscribe;
   }, []);
 
   if (scoreData === undefined) {
@@ -90,6 +96,8 @@ function ScoreInfo() {
               scoreName={scoreData.scoreName}
               singer={scoreData.artist}
               date={scoreData.createdAt}
+              authorId={scoreData.authorId}
+              uid={user?.uid}
             />
             <ScoreInfoMain
               scoreImg1={dummyData.scoreImg1}
