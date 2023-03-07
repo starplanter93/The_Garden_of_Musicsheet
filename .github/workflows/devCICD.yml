@@ -12,6 +12,18 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
 
+      - name: Generate Environment Variables File
+        run: |
+          echo "REACT_APP_BASIC=$REACT_APP_BASIC" >> .env
+          echo "REACT_APP_CLIENT=$REACT_APP_CLIENT" >> .env
+          echo "REACT_APP_REFRESH=$REACT_APP_REFRESH" >> .env
+          echo "REACT_APP_SECRET=$REACT_APP_SECRET" >> .env
+        env:
+          REACT_APP_BASIC: ${{ secrets.REACT_APP_BASIC }}
+          REACT_APP_CLIENT: ${{ secrets.REACT_APP_CLIENT }}
+          REACT_APP_REFRESH: ${{ secrets.REACT_APP_REFRESH }}
+          REACT_APP_SECRET: ${{ secrets.REACT_APP_SECRET }}
+
       - name: Install Dependencies
         run: npm install
         working-directory: ./client
