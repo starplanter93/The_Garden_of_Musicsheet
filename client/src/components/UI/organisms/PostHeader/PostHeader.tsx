@@ -59,6 +59,7 @@ const PostHeader = () => {
     } else {
       if (pathname.includes('/edit') && scoreId) {
         await updateScore(data, scoreId);
+        navigate(`/${data.songName}-${data.artist}/${scoreId}`);
       } else {
         const scoreId = await getMusicData(data.songName, data);
         navigate(`/${data.songName}-${data.artist}/${scoreId}`);
