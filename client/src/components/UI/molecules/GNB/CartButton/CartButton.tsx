@@ -26,7 +26,7 @@ const CartButton = () => {
       setUser(user as User);
       if (user) {
         getCart(user.uid).then(
-          (data) => data && setCountCart(data.cartItems.length)
+          (data) => data?.cartItems && setCountCart(data.cartItems.length)
         );
       }
     });
