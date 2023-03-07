@@ -9,6 +9,7 @@ import { cartModalHandler, countCartItem } from '../../../../redux/ModalSlice';
 import { getCart } from '../../../../firebase/firebase';
 import { auth } from '../../../../firebase/firebase';
 import { toast } from 'react-toastify';
+import { setCash } from '../../../../redux/UserSlice';
 
 interface CartItemsProps {
   cartItems: ScoreInfoType[];
@@ -39,6 +40,7 @@ function CartFooter({ cartItems, setCartItems }: CartItemsProps) {
         getCart(user.uid).then((data) => {
           if (data) {
             dispatch(countCartItem(data.cartItems.length));
+            dispatch(setCash(data.cash));
           }
         });
       }
@@ -72,9 +74,13 @@ function CartFooter({ cartItems, setCartItems }: CartItemsProps) {
         <Button size="auto" disabled={true}>
           <Text color="white">로딩중</Text>
         </Button>
-      ) : (
+      ) : countItems > 0 ? (
         <Button size="auto" onClick={purchase}>
           <Text color="white">결제하기</Text>
+        </Button>
+      ) : (
+        <Button size="auto" disabled={true}>
+          <Text color="white">악보를 담아주세요</Text>
         </Button>
       )}
     </div>
