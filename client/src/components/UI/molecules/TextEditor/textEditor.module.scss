@@ -16,7 +16,7 @@
     display: flex;
     flex-direction: column;
     @include mobile {
-      width: 240px;
+      width: 100%;
     }
   }
 }
@@ -25,7 +25,7 @@
   .ql-editor {
     height: 15rem;
     @include mobile {
-      height: auto;
+      height: 12rem;
     }
   }
 }

@@ -5,10 +5,12 @@
   .text {
     margin-bottom: 2rem;
     @include mobile {
-      width: 20rem;
+      margin-bottom: 1rem;
+      width: 100%;
       display: flex;
       > input {
         width: 100%;
+        margin-bottom: 2rem;
       }
     }
   }
@@ -40,7 +42,7 @@
       width: 100%;
       margin-bottom: 2rem;
       input {
-        width: 214px;
+        width: 22rem;
         position: relative;
         padding-left: 2.5rem;
       }
@@ -48,7 +50,7 @@
         position: absolute;
         z-index: 1;
         top: 38px;
-        left: 16px;
+        left: 28px;
       }
     }
   }
@@ -80,7 +82,7 @@
     @include mobile {
       width: 100%;
       input {
-        width: 214px;
+        width: 22rem;
         position: relative;
         padding-left: 2.5rem;
       }
@@ -88,7 +90,7 @@
         position: absolute;
         z-index: 1;
         top: 38px;
-        left: 16px;
+        left: 28px;
       }
     }
   }
@@ -108,7 +110,7 @@
     border-top: none;
     margin-bottom: 2rem;
     @include mobile {
-      width: auto;
+      width: 100%;
     }
 
     .result-info-icon {
@@ -143,7 +145,8 @@
         background-color: $gray-white;
       }
       @include mobile {
-        width: 17rem;
+        width: 22rem;
+        left: 2.1rem;
       }
 
       .dropdown-result {

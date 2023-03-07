@@ -2,6 +2,9 @@
 
 .text {
   margin-bottom: 2rem;
+  @include mobile {
+    margin-bottom: 1rem;
+  }
 }
 
 .default {
