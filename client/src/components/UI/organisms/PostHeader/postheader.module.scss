@@ -26,6 +26,19 @@
       display: flex;
       align-items: center;
     }
+    .right-btn {
+      @media screen and (max-width: 1240px) {
+        display: flex;
+        justify-content: space-between;
+        width: 16rem;
+      }
+      .file-upload {
+        display: none;
+        @media screen and (max-width: 1240px) {
+          display: flex;
+        }
+      }
+    }
   }
 }
 

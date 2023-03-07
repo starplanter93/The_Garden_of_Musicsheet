@@ -6,6 +6,15 @@
   display: flex;
   justify-content: space-between;
   padding-left: 2rem;
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+  }
+  @media screen and (max-width: 1240px) {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0;
+  }
 
   > aside {
     position: sticky;
@@ -16,6 +25,14 @@
     margin-left: 1rem;
     border-left: 1px solid $gray-white;
     background-color: #fafafa;
+    @media screen and (max-width: 1240px) {
+      // width: 100%;
+      // display: flex;
+      // height: auto;
+      // margin-left: 0;
+      // justify-content: center;
+      display: none;
+    }
   }
 
   .container {
@@ -32,18 +49,41 @@
       border: 2px solid $gray-white;
       border-radius: 10px;
       padding: 1rem 3rem;
+      @media screen and (max-width: 1240px) {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
 
       .dropdown-wrapper {
         display: flex;
         margin-bottom: 2rem;
-        
-        .dropdown-left, .dropdown-right {
+
+        .dropdown-left,
+        .dropdown-right {
           position: relative;
         }
         .dropdown-right {
           display: flex;
           margin-left: 2rem;
           flex-direction: column;
+        }
+
+        @include mobile {
+          width: auto;
+          display: flex;
+          flex-direction: column;
+
+          .dropdown-right {
+            display: flex;
+            margin-left: 0;
+            margin-top: 2rem;
+            flex-direction: column;
+          }
+          .dropdown-right > button,
+          .dropdown-left > button {
+            width: 100%;
+          }
         }
       }
     }
@@ -54,6 +94,16 @@
       border: 2px solid $gray-white;
       border-radius: 10px;
       padding: 1rem 3rem;
+      @media screen and (max-width: 1240px) {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+      }
+      @include mobile {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
     }
 
     .sale-info {
@@ -61,8 +111,11 @@
       margin-top: 2rem;
       border: 2px solid $gray-white;
       border-radius: 10px;
-      padding: 1rem 3rem;;
+      padding: 1rem 3rem;
       margin-bottom: 4rem;
+      @media screen and (max-width: 1240px) {
+        width: 100%;
+      }
     }
   }
 }

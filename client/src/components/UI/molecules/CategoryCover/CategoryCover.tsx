@@ -7,6 +7,7 @@ import styles from './categoryCover.module.scss';
 import { updateUserName } from '../../../../firebase/firebase';
 import { useDispatch } from 'react-redux';
 import { setUserName } from '../../../../redux/UserSlice';
+import { ThreeDots } from 'react-loader-spinner';
 interface CategoryCoverProps {
   category: string;
   thumbnail: string;
@@ -29,13 +30,16 @@ const CategoryCover = ({
   const cx = classNames.bind(styles);
   const [editmode, setEditMode] = useState(false);
   const [username, setUsername] = useState(category);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const handleNameSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (auth.currentUser && e.key === 'Enter') {
+      setIsLoading(true);
       await updateProfile(auth.currentUser, { displayName: username });
       await updateUserName(auth.currentUser.uid, username);
       setEditMode(false);
       dispatch(setUserName(username));
+      setIsLoading(false);
       window.location.reload();
     }
   };
@@ -57,6 +61,10 @@ const CategoryCover = ({
     }
   };
 
+  const handleCancel = () => {
+    setEditMode(false);
+  };
+
   if (mypage) {
     return (
       <div className={cx('category-cover')}>
@@ -68,68 +76,81 @@ const CategoryCover = ({
             alt="커버 이미지"
           />
         </div>
-        <div className={cx('user-info')}>
-          <ul>
-            <li className={cx('top')}>
-              {editmode ? (
-                <div className={cx('username')}>
-                  <input
-                    className={cx('name-input')}
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    onKeyDown={(e) => handleNameSubmit(e)}
-                    autoFocus
-                  />
-                </div>
-              ) : (
-                <div className={cx('username')}>
-                  <Text size="txlg" weight="bold">
-                    {username}
-                  </Text>
-                  <Button
-                    size="tiny"
-                    theme="transparent"
-                    onClick={handleNameChange}
-                  >
-                    <Icon icon="BiPencil" size="s" />
-                  </Button>
-                </div>
-              )}
-              <Text size="lg" color="gray">
-                {title}
-              </Text>
-            </li>
-            {artist && (
-              <li className={cx('bottom')}>
-                <div className={cx('cash')}>
-                  <Icon icon="BiCoin" color="gray" size="s" />
-                  <Text size="lg" color="gray">
-                    {artist}
-                  </Text>
-                </div>
-                <div className={cx('edit')}>
-                  <Button
-                    size="m"
-                    theme="tertiary"
-                    onClick={() => handleEditPicture()}
-                  >
-                    <>
-                      <Icon icon="MdOutlineSettings" color="gray" size="xs" />
-                      <Text color="gray">프로필 사진 변경</Text>
-                    </>
-                  </Button>
-                  <Button
-                    size="s"
-                    theme="transparent"
-                    onClick={() => handleOptOut()}
-                  >
-                    <Text color="gray">회원탈퇴</Text>
-                  </Button>
-                </div>
+        {isLoading ? (
+          <div className={cx('spinner')}>
+            <ThreeDots width="80" height="80" color="#a5a5a5" />
+          </div>
+        ) : (
+          <div className={cx('user-info')}>
+            <ul>
+              <li className={cx('top')}>
+                {editmode ? (
+                  <div className={cx('username')}>
+                    <input
+                      className={cx('name-input')}
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      onKeyDown={(e) => handleNameSubmit(e)}
+                      autoFocus
+                    />
+                    <Button
+                      size="tiny"
+                      theme="transparent"
+                      onClick={handleCancel}
+                    >
+                      <Icon icon="MdOutlineCancel" size="s" />
+                    </Button>
+                  </div>
+                ) : (
+                  <div className={cx('username')}>
+                    <Text size="txlg" weight="bold">
+                      {username}
+                    </Text>
+                    <Button
+                      size="tiny"
+                      theme="transparent"
+                      onClick={handleNameChange}
+                    >
+                      <Icon icon="BiPencil" size="s" />
+                    </Button>
+                  </div>
+                )}
+                <Text size="lg" color="gray">
+                  {title}
+                </Text>
               </li>
-            )}
-          </ul>
-        </div>
+              {artist && (
+                <li className={cx('bottom')}>
+                  <div className={cx('cash')}>
+                    <Icon icon="BiCoin" color="gray" size="s" />
+                    <Text size="lg" color="gray">
+                      {artist}
+                    </Text>
+                  </div>
+                  <div className={cx('edit')}>
+                    <Button
+                      size="m"
+                      theme="tertiary"
+                      onClick={() => handleEditPicture()}
+                    >
+                      <>
+                        <Icon icon="MdOutlineSettings" color="gray" size="xs" />
+                        <Text color="gray">프로필 사진 변경</Text>
+                      </>
+                    </Button>
+                    <Button
+                      size="s"
+                      theme="transparent"
+                      onClick={() => handleOptOut()}
+                    >
+                      <Text color="gray">회원탈퇴</Text>
+                    </Button>
+                  </div>
+                </li>
+              )}
+            </ul>
+          </div>
+        )}
       </div>
     );
   }

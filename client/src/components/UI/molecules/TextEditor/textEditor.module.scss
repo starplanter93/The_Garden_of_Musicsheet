@@ -1,5 +1,7 @@
+@import '/src/utils/utils';
+
 .wrapper {
-  width: 40rem;
+  width: auto;
   margin-bottom: 2rem;
 
   .text {
@@ -13,11 +15,17 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    @include mobile {
+      width: 100%;
+    }
   }
 }
 
 :global {
-  .ql-editor{
+  .ql-editor {
     height: 15rem;
+    @include mobile {
+      height: 12rem;
+    }
   }
 }
