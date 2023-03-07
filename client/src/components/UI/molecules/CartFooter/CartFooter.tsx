@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState, useEffect } from 'react';
 import { Button, Text } from '../../atoms';
 import styles from './cartFooter.module.scss';
 import classNames from 'classnames/bind';
@@ -19,11 +19,8 @@ function CartFooter({ cartItems, setCartItems }: CartItemsProps) {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const totalPrice = cartItems.reduce((acc, cur) => {
-    return acc + Number(cur.price);
-  }, 0);
-  const countItems = cartItems.length;
+  const [countItems, setCountItems] = useState<number>(0);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
 
   const notify = () =>
     toast('구매 성공!', {
@@ -50,6 +47,17 @@ function CartFooter({ cartItems, setCartItems }: CartItemsProps) {
     notify();
     dispatch(cartModalHandler());
   }
+
+  useEffect(() => {
+    if (cartItems) {
+      setCountItems(cartItems.length);
+      setTotalPrice(
+        cartItems.reduce((acc, cur) => {
+          return acc + Number(cur.price);
+        }, 0)
+      );
+    }
+  }, [cartItems]);
 
   return (
     <div className={cx('cart-footer')}>
