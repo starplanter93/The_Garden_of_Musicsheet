@@ -29,7 +29,7 @@
         padding-right: 5px;
       }
 
-      span:last-child {
+      span {
         &:hover {
           color: $light-green;
           transition: all 0.1s ease-in;
@@ -58,7 +58,7 @@
           }
         }
 
-        span:first-child {
+        span {
           color: $black;
         }
       }
@@ -67,16 +67,30 @@
         display: none;
         position: absolute;
         top: 2.5rem;
-        left: 0;
-        width: 6rem;
-        padding: 5px 10px 5px 1.2rem;
+        right: -1.5rem;
+        padding: 5px 0;
         background-color: $white;
         box-shadow: 0 0 10px rgba($black, .15);
         border-radius: 10px;
         border: 1px solid $gray-white;
 
         >li {
-          padding: 10px 0;
+          margin: 5px 0;
+          width: 9rem;
+          height: 2.5rem;
+
+          &:hover {
+            background-color: $gray-white;
+          }
+
+          button {
+            width: 100%;
+            line-height: 2.5rem;
+            
+            span {
+              width: 100%;
+            }
+          }
         }
 
         &.show {

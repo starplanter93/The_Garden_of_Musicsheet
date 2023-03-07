@@ -91,7 +91,7 @@ export default function Carousel() {
               <Button
                 theme="tertiary"
                 size="auto"
-                onClick={() => navigate('/music/Kick Back-Yonezu Kenshi')}
+                onClick={() => navigate('/music/KICK BACK-Kenshi Yonezu')}
               >
                 <>
                   <Text color="white">악보 보기</Text>
