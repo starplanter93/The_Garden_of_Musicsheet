@@ -34,6 +34,7 @@ const Input = ({
 }: InputProps) => {
   const cx = classNames.bind(styles);
   const dispatch = useDispatch();
+  const regExp = /[0-9]/g;
 
   const handleOnChange = (input: string) => {
     setUserInput(input);
@@ -57,6 +58,29 @@ const Input = ({
   };
 
   if (theme === 'basic') {
+    if (placeholder === '원 단위') {
+      const numberInputOnWheelPreventChange = (e: any) => {
+        e.target.blur();
+        e.stopPropagation();
+        setTimeout(() => {
+          e.target.focus();
+        }, 0);
+      };
+      return (
+        <input
+          className={cx('default-input', `${size}`)}
+          value={userInput}
+          onWheel={numberInputOnWheelPreventChange}
+          onChange={(e) => {
+            if (regExp.test(e.target.value)) {
+              setUserInput(e.target.value);
+            } else setUserInput('');
+          }}
+          placeholder={placeholder}
+          type="number"
+        />
+      );
+    }
     return (
       <input
         className={cx('default-input', `${size}`)}
