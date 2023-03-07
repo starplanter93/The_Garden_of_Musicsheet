@@ -12,7 +12,7 @@ import {
 } from '../../../../firebase/firebase';
 import { setUserInfo, initializeState } from '../../../../redux/PostSlice';
 import { toast } from 'react-toastify';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { setDownloadURL } from '../../../../redux/PostSlice';
 import { setFile } from '../../../../redux/FileSlice';
 
@@ -23,8 +23,6 @@ const PostHeader = () => {
   const { pathname } = useLocation();
   const { scoreId } = useParams();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [fileName, setFileName] = useState('');
-  const [isPending, setIsPending] = useState(false);
 
   const data = useSelector((state: RootState) => state.postInfo);
 
@@ -90,14 +88,11 @@ const PostHeader = () => {
       const [file] = e.target.files;
       if (file.type === 'application/pdf') {
         try {
-          setIsPending(true);
           const sheetURL = await postPDF(file);
           dispatch(setDownloadURL(sheetURL));
-          setIsPending(false);
         } catch (err) {
           console.log(err);
         }
-        setFileName(file.name);
       } else {
         alert('Only .pdf files are supported.');
       }

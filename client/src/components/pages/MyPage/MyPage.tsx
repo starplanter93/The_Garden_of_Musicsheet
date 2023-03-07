@@ -91,6 +91,8 @@ const MyPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [modal, setModal] = useState(false);
   const [editType, setEditType] = useState<'optout' | 'editPicture'>('optout');
+  const [totalLists, setTotalLists] = useState(0);
+  const [scores, setScores] = useState<DocumentData[]>([]);
   const { cash } = useSelector((state: RootState) => state.user.userReducer);
 
   useEffect(() => {
@@ -114,9 +116,6 @@ const MyPage = () => {
       navigate('/auth');
     }
   }, [user]);
-
-  const [totalLists, setTotalLists] = useState(0);
-  const [scores, setScores] = useState<DocumentData[]>([]);
 
   useEffect(() => {
     let currentData: DocumentData[] = [];
