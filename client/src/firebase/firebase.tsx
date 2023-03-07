@@ -491,9 +491,11 @@ export async function updateUserPicture(uid: string, image: string) {
   const userSnap = await getDoc(userRef);
   if (userSnap.exists()) {
     const { posts } = userSnap.data();
-    const scoresWithId = posts.filter((obj: Score) => obj.authorId === uid);
-    scoresWithId.forEach((obj: Score) => (obj.author_profile = image));
-    await updateDoc(userRef, { posts: posts });
+    if (posts !== undefined) {
+      const scoresWithId = posts.filter((obj: Score) => obj.authorId === uid);
+      scoresWithId.forEach((obj: Score) => (obj.author_profile = image));
+      await updateDoc(userRef, { posts: posts });
+    }
   }
 
   /** music 컬렉션 수정*/
