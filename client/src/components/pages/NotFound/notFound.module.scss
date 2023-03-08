@@ -1,0 +1,23 @@
+@import '/src/utils/utils';
+
+.error-img {
+  width: 18vw;
+  min-width: 20rem;
+  margin: 4rem;
+  @media screen and (max-width: 549px) {
+    margin: 2rem;
+  }
+}
+
+.text-wrapper {
+  margin-left: 1rem;
+}
+
+.link-to-main {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $black;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}

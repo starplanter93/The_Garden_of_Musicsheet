@@ -7,13 +7,13 @@ import {
   MusicDetail,
   MyPage,
   ScoreInfo,
+  NotFound,
 } from './components/pages';
 import { Main } from './components/pages';
 import { Auth, PostMusic } from './components/pages';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Test from './components/pages/Test';
 import { PostLayout } from './components/pages';
 import { useSelector } from 'react-redux';
 import { CartModal } from './components/UI/organisms';
@@ -39,8 +39,7 @@ function App() {
             <Route path="edit/:scoreName/:scoreId" element={<EditScore />} />
           </Route>
           <Route path="/auth" element={<Auth />}></Route>
-          <Route path="/test" element={<Test />}></Route>
-          {/* NotFound */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer position="top-center" />

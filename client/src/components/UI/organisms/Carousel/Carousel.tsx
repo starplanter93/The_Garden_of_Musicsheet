@@ -53,7 +53,7 @@ export default function Carousel() {
                 </>
               </Button>
             </div>
-            <img src={albumImgs[0]} />
+            <img src={albumImgs[0]} alt="albumImgs0" />
           </div>
         </SwiperSlide>
         <SwiperSlide>
@@ -76,7 +76,7 @@ export default function Carousel() {
                 </>
               </Button>
             </div>
-            <img src={albumImgs[1]} />
+            <img src={albumImgs[1]} alt="albumImgs1" />
           </div>
         </SwiperSlide>
         <SwiperSlide>
@@ -99,7 +99,7 @@ export default function Carousel() {
                 </>
               </Button>
             </div>
-            <img src={albumImgs[2]} />
+            <img src={albumImgs[2]} alt="albumImgs2" />
           </div>
         </SwiperSlide>
       </Swiper>
