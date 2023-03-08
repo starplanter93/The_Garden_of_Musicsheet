@@ -581,10 +581,14 @@ export async function userOptout(uid: string) {
 
   if (userSnap.exists()) {
     const { posts } = userSnap.data();
-    const scoresWithId = posts.filter((obj: Score) => obj.authorId === uid);
-    scoresWithId.forEach((obj: Score) => (obj.isOptout = true));
+    if (posts !== undefined) {
+      const scoresWithId = posts.filter((obj: Score) => obj.authorId === uid);
+      scoresWithId.forEach((obj: Score) => (obj.isOptout = true));
 
-    batch.update(userRef, { posts, isActive: false });
+      batch.update(userRef, { posts, isActive: false });
+    } else {
+      batch.update(userRef, { isActive: false });
+    }
   }
 
   // Music collection

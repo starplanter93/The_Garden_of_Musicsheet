@@ -4,13 +4,15 @@ import { CategoryCover } from '../../molecules';
 import { Dispatch, SetStateAction } from 'react';
 
 interface MyPageTopProps {
-  username: string; // userName
-  photoURL: string; // photoURL
-  email: string; // email
+  username: string;
+  photoURL: string;
+  email: string;
   cash: string;
   setModal?: Dispatch<SetStateAction<boolean>>;
   setEditType?: Dispatch<SetStateAction<'optout' | 'editPicture'>>;
 }
+
+const cx = classNames.bind(styles);
 
 const MyPageTop = ({
   username,
@@ -20,21 +22,17 @@ const MyPageTop = ({
   setModal,
   setEditType,
 }: MyPageTopProps) => {
-  const cx = classNames.bind(styles);
-
   return (
-    <div>
-      <div className={cx('cover-wrapper')}>
-        <CategoryCover
-          setEditType={setEditType}
-          setModal={setModal}
-          mypage={true}
-          category={username}
-          thumbnail={photoURL}
-          title={email}
-          artist={cash}
-        />
-      </div>
+    <div className={cx('cover-wrapper')}>
+      <CategoryCover
+        setEditType={setEditType}
+        setModal={setModal}
+        mypage
+        category={username}
+        thumbnail={photoURL}
+        title={email}
+        artist={cash}
+      />
     </div>
   );
 };

@@ -11,12 +11,14 @@ const PostMusic = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setTimeout(() => {
+    const checkCurrentUser = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       if (!auth.currentUser) {
         navigate('/auth');
       }
-    }, 2000);
-  }, []);
+    };
+    checkCurrentUser();
+  }, [navigate]);
 
   return (
     <div className={cx('wrapper')}>

@@ -26,26 +26,17 @@ type UploadedDataProps = {
 const UploadedData = ({ clickedTab, data }: UploadedDataProps) => {
   const filteredData = data.filter((el: DocumentData) => !el.isDeleted);
 
+  const renderScoreList = (buttonEvent: 'edit' | 'download') =>
+    filteredData.map((el: DocumentData, idx: number) => (
+      <div className={cx('wrapper')} key={idx}>
+        <ScoreList score={el} buttonEvent={buttonEvent} />
+      </div>
+    ));
+
   return (
     <>
-      {clickedTab === '등록한 악보' && (
-        <>
-          {filteredData.map((el: DocumentData, idx: number) => (
-            <div className={cx('wrapper')} key={idx}>
-              <ScoreList score={el} buttonEvent="edit" />
-            </div>
-          ))}
-        </>
-      )}
-      {clickedTab === '구매한 악보' && (
-        <>
-          {filteredData.map((el: DocumentData, idx: number) => (
-            <div className={cx('wrapper')} key={idx}>
-              <ScoreList score={el} buttonEvent="download" />
-            </div>
-          ))}
-        </>
-      )}
+      {clickedTab === '등록한 악보' && <>{renderScoreList('edit')}</>}
+      {clickedTab === '구매한 악보' && <>{renderScoreList('download')}</>}
     </>
   );
 };
@@ -81,6 +72,8 @@ const UserData = ({
   );
 };
 
+const ITEMS_PER_PAGE = 5;
+
 const MyPage = () => {
   const navigate = useNavigate();
 
@@ -96,15 +89,15 @@ const MyPage = () => {
   const { cash } = useSelector((state: RootState) => state.user.userReducer);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user as User);
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      setUser(user);
       if (user && clickedTab === '등록한 악보') {
-        getUserArticle(user.uid).then((el) => el && setData(el.posts));
+        const el = await getUserArticle(user.uid);
+        setData(el?.posts ?? []);
       }
       if (user && clickedTab === '구매한 악보') {
-        getUserArticle(user.uid).then(
-          (el) => el && setData(el.purchasedScores)
-        );
+        const el = await getUserArticle(user.uid);
+        setData(el?.purchasedScores ?? []);
       }
       setLoading(false);
     });
@@ -118,68 +111,55 @@ const MyPage = () => {
   }, [user]);
 
   useEffect(() => {
-    let currentData: DocumentData[] = [];
-
-    if (clickedTab === '등록한 악보') {
-      setTotalLists(data?.length);
-      currentData = data?.slice(
-        (currentPage - 1) * 5,
-        5 + (currentPage - 1) * 5
-      );
-      setScores(currentData);
-    } else if (clickedTab === '구매한 악보') {
-      setTotalLists(data?.length);
-      currentData = data?.slice(
-        (currentPage - 1) * 5,
-        5 + (currentPage - 1) * 5
-      );
-      setScores(currentData);
-    }
+    const filteredData = data?.filter((el: DocumentData) => !el.isDeleted);
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const currentData = filteredData.slice(startIndex, endIndex);
+    setTotalLists(filteredData.length);
+    setScores(currentData);
   }, [currentPage, data, clickedTab]);
 
   if (loading) {
     return <Spinner />;
   }
 
-  if (user) {
-    const username = user.displayName;
-    const email = user.email;
-    const photoURL = user.photoURL;
-
-    return (
-      <>
-        <div className={cx('background')}>
-          {username && email && photoURL && (
-            <>
-              <MyPageTop
-                username={username}
-                email={email}
-                photoURL={photoURL}
-                cash={`${Number(cash).toLocaleString()}원`}
-                setModal={setModal}
-                setEditType={setEditType}
-              />
-              <TabMenu
-                setClickedTab={setClickedTab}
-                tabGroupArr={['등록한 악보', '구매한 악보']}
-                setCurrentPage={setCurrentPage}
-              />
-              <UserData
-                data={scores}
-                clickedTab={clickedTab}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                totalLists={totalLists}
-              />
-            </>
-          )}
-        </div>
-        {modal && <MyPageModal setModal={setModal} type={editType} />}
-      </>
-    );
-  } else {
+  if (!user) {
     return null;
   }
+
+  const { displayName: username, email, photoURL } = user;
+
+  return (
+    <>
+      <div className={cx('background')}>
+        {username && email && photoURL && (
+          <>
+            <MyPageTop
+              username={username}
+              email={email}
+              photoURL={photoURL}
+              cash={`${Number(cash).toLocaleString()}원`}
+              setModal={setModal}
+              setEditType={setEditType}
+            />
+            <TabMenu
+              setClickedTab={setClickedTab}
+              tabGroupArr={['등록한 악보', '구매한 악보']}
+              setCurrentPage={setCurrentPage}
+            />
+            <UserData
+              data={scores}
+              clickedTab={clickedTab}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              totalLists={totalLists}
+            />
+          </>
+        )}
+      </div>
+      {modal && <MyPageModal setModal={setModal} type={editType} />}
+    </>
+  );
 };
 
 export default MyPage;
