@@ -16,6 +16,7 @@ const PostButtons = ({ value }: PostButtonsProps) => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const [clickedButton, setClickedButton] = useState<number | null>(null);
+
   const buttons = [
     { label: '피아노', index: 0 },
     { label: '일렉 기타', index: 1 },
@@ -24,23 +25,20 @@ const PostButtons = ({ value }: PostButtonsProps) => {
     { label: '드럼', index: 4 },
   ];
 
-  // 수정 페이지에서만 동작하는 이펙트
   useEffect(() => {
     if (value) {
-      const index = buttons.filter((el) => el.label === value)[0].index;
-      setClickedButton(index);
+      const index = buttons.find((el) => el.label === value)?.index;
+      setClickedButton(index ?? null);
       dispatch(setInstType(value as instType));
     }
-  }, []);
+  }, [value, dispatch, buttons]);
 
   const handleButtonClick = (index: number) => {
-    if (clickedButton === index) {
-      setClickedButton(null);
-    } else {
-      setClickedButton(index);
-      dispatch(setInstType(buttons[index].label as instType));
-    }
+    setClickedButton(clickedButton === index ? null : index);
+    dispatch(setInstType(buttons[index].label as instType));
   };
+
+  const isDisabled = pathname.includes('/edit');
 
   return (
     <>
@@ -66,7 +64,7 @@ const PostButtons = ({ value }: PostButtonsProps) => {
               theme="toggle"
               onClick={() => handleButtonClick(button.index)}
               clicked={clickedButton === button.index}
-              disabled={pathname.includes('/edit') ? true : false}
+              disabled={isDisabled}
             >
               {button.label}
             </Button>
