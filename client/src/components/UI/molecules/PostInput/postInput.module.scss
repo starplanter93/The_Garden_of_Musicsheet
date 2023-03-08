@@ -38,11 +38,16 @@
       display: flex;
       justify-content: center;
     }
+    > div {
+      @include mobile {
+        width: 95%;
+      }
+    }
     @include mobile {
       width: 100%;
       margin-bottom: 2rem;
       input {
-        width: 22rem;
+        width: 100%;
         position: relative;
         padding-left: 2.5rem;
       }
@@ -50,7 +55,7 @@
         position: absolute;
         z-index: 1;
         top: 38px;
-        left: 28px;
+        left: 16px;
       }
     }
   }
@@ -82,9 +87,12 @@
     @include mobile {
       width: 100%;
       input {
-        width: 22rem;
+        width: 100%;
         position: relative;
         padding-left: 2.5rem;
+        > input {
+          width: 100%;
+        }
       }
       .icon {
         position: absolute;

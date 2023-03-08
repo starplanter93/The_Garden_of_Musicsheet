@@ -6,7 +6,7 @@ const LoadingSpinner = () => {
   const cx = classNames.bind(styles);
   return (
     <div className={cx('container')}>
-      <Oval secondaryColor="#a5a5a5" color="#eeefef" />
+      <Oval width="30" height="30" secondaryColor="#a5a5a5" color="#eeefef" />
     </div>
   );
 };

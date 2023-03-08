@@ -19,7 +19,9 @@ function MainGrid({ musicData }: { musicData: MusicData }) {
             songTitle={data.songName}
             singer={data.artist}
             albumImg={data.albumImg}
-            scores={data.scores}
+            scores={data.scores.filter(
+              (el) => el.isDeleted === false && el.isOptout === false
+            )}
           />
         ))}
       </>
