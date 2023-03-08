@@ -7,39 +7,30 @@ import { v4 as uuidv4 } from 'uuid';
 
 function MainGrid({ musicData }: { musicData: MusicData }) {
   const cx = classNames.bind(styles);
-
-  const HandleDeletedData = () => {
-    const validData = (musicData ?? []).filter((data) => !data.isDeleted);
+  if (musicData) {
+    const validData = musicData.filter((data) => !data.isDeleted);
 
     return (
-      <>
-        {validData.map((data) => (
-          <MainSongSection
-            key={uuidv4()}
-            songTitle={data.songName}
-            singer={data.artist}
-            albumImg={data.albumImg}
-            scores={data.scores.filter(
-              (el) => el.isDeleted === false && el.isOptout === false
-            )}
-          />
-        ))}
-      </>
-    );
-  };
-
-  return (
-    <div className={cx('main-content-wrapper')}>
-      <div className={cx('main-content-grid')}>
-        <h1 className={cx('main-content-header')}>
-          <Text size="xlg" weight="semibold">
-            곡
-          </Text>
-        </h1>
-        <HandleDeletedData />
+      <div className={cx('main-content-wrapper')}>
+        <div className={cx('main-content-grid')}>
+          <h1 className={cx('main-content-header')}>
+            <Text size="xlg" weight="semibold">
+              곡
+            </Text>
+          </h1>
+          {validData.map((data) => (
+            <MainSongSection
+              key={uuidv4()}
+              songTitle={data.songName}
+              singer={data.artist}
+              albumImg={data.albumImg}
+              scores={data.scores.filter((el) => !el.isDeleted && !el.isOptout)}
+            />
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else return null;
 }
 
 export default MainGrid;
