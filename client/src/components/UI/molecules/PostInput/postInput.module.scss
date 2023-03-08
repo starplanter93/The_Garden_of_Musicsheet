@@ -153,8 +153,7 @@
         background-color: $gray-white;
       }
       @include mobile {
-        width: 22rem;
-        left: 2.1rem;
+        width: 90%;
       }
 
       .dropdown-result {
