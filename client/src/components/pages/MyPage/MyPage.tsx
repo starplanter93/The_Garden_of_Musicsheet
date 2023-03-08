@@ -119,13 +119,11 @@ const MyPage = () => {
 
   useEffect(() => {
     let currentData: DocumentData[] = [];
-
     if (clickedTab === '등록한 악보') {
-      setTotalLists(data?.length);
-      currentData = data?.slice(
-        (currentPage - 1) * 5,
-        5 + (currentPage - 1) * 5
-      );
+      currentData = data
+        ?.filter((el: DocumentData) => !el.isDeleted)
+        .slice((currentPage - 1) * 5, 5 + (currentPage - 1) * 5);
+      setTotalLists(data?.filter((el: DocumentData) => !el.isDeleted).length);
       setScores(currentData);
     } else if (clickedTab === '구매한 악보') {
       setTotalLists(data?.length);
