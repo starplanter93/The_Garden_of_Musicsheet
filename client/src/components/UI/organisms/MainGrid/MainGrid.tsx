@@ -9,7 +9,6 @@ function MainGrid({ musicData }: { musicData: MusicData }) {
   const cx = classNames.bind(styles);
   if (musicData) {
     const validData = musicData.filter((data) => !data.isDeleted);
-
     return (
       <div className={cx('main-content-wrapper')}>
         <div className={cx('main-content-grid')}>
