@@ -13,22 +13,21 @@ TypeScript와 React를 기반으로 하고, DB와 백엔드는 Firebase를 사�
 또한 Atomic Design Pattern을 활용하여 컴포넌트 기반의 개발을 위해 노력하였습니다.🤔
 <br><br><br>
 
-🧸 <a href='http://gardenmusicdev.s3-website.ap-northeast-2.amazonaws.com/'><b>배포 페이지 바로가기 →</b></a>
+🏠 <a href='http://gardenmusicdev.s3-website.ap-northeast-2.amazonaws.com/'><b>배포 페이지 바로가기 →</b></a>
 <br><br>
 🎨 <a href='https://www.figma.com/file/TXlyRfgbgeJIvvuyNKCa8e/%EC%95%85%EB%B3%B4%EC%9D%98-%EC%A0%95%EC%9B%90?node-id=0%3A1&t=0UDShpJynGiBpiqK-1'>Figma 바로가기 →</a>
 <br><br>
 
-## 🛠 Stacks
+## 🛠 기술 스택
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=fff"/> <img src="https://img.shields.io/badge/React-222222?style=flat-square&logo=React&logoColor=61DAFB"/> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=redux&logoColor=fff"/>  <img src="https://img.shields.io/badge/Scss-CC6699?style=flat-square&logo=sass&logoColor=fff"/> <img src="https://img.shields.io/badge/StoryBook-FF4785?style=flat-square&logo=storybook&logoColor=fff"/> <img src="https://img.shields.io/badge/Firebase-051e34?style=flat-square&logo=Firebase&logoColor=FFCA28"/> <img src="https://img.shields.io/badge/GitHub Actions-2088FF?style=flat-square&logo=GitHub Actions&logoColor=fff"/> <img src="https://img.shields.io/badge/Amazon S3-569A31?style=flat-square&logo=Amazon S3&logoColor=fff"/>
 
 <br>
 
-## 악보 공유 / 판매 서비스 소개
--자신이 만든 악보를 자유롭게 공유 혹은 판매할 수 있는 서비스입니다.
+## 🔍 악보 공유 / 판매 서비스 소개
+```
+자신이 만든 악보를 자유롭게 공유 혹은 판매할 수 있는 서비스입니다.
+```
 
-<br>
-
-## 🔍 Overview
 |메인페이지|메인페이지 무한스크롤|
 |:--:|:--:|
 |<img width="1390px" alt="메인페이지" src="https://user-images.githubusercontent.com/107888594/223385168-3ed6ee09-f07e-4f2d-b8d8-638db7f9410e.png">|<img alt="메인페이지 무한스크롤" src="https://user-images.githubusercontent.com/107888594/223405569-ab2378d8-4948-4307-8f38-c747d6e956e2.gif">|
@@ -99,12 +98,17 @@ TypeScript와 React를 기반으로 하고, DB와 백엔드는 Firebase를 사�
 > - google Oauth를 통해 구글 아이디로 쉽게 회원가입과 로그인이 가능합니다.
 <br>
 
+|메인페이지 반응형|악기페이지 반응형|
+|:--:|:--:|
+|![메인페이지반응형](https://user-images.githubusercontent.com/107888594/223703920-aa52589b-6709-49d6-b9a3-f704a09ef056.gif)|![악기페이지반응형](https://user-images.githubusercontent.com/107888594/223704552-e89f9fe4-3775-4fdb-8016-281662d8bac7.gif)|
 8. 모바일 반응형 구현
 > - 모바일에서도 사용할 수 있도록 각 페이지에 모바일 반응형 css 구현하였습니다.
 
+
+
 <br>
 
-## 🚀 Team Member
+## 🧸 팀원 소개
 |<img src="https://avatars.githubusercontent.com/u/76644123?v=4" width="150px">|<img src="https://avatars.githubusercontent.com/u/107591946?v=4" width="150px"/>|<img src="https://avatars.githubusercontent.com/u/107888594?v=4" width="150px">|
 |:--:|:--:|:--:|
 |[Ethan Jeong](https://github.com/EthanJcoding)|[starplanter93](https://github.com/starplanter93)|[seungmin2ee](https://github.com/seungmin2ee)|
@@ -112,17 +116,17 @@ TypeScript와 React를 기반으로 하고, DB와 백엔드는 Firebase를 사�
 
 <br>
 
-## 프로젝트 구동 방법
+## 🚀 프로젝트 실행 방법
 레포지토리를 클론 한 후, client 디렉토리에서
 ```jsx
 npm install
 npm start
 ```
-단, spotify api를 이용해야하기 때문에 게시글 작성에서 저작권 검색기능은 배포 주소에서만 확인할 수 있습니다.
+📍 단, spotify api를 이용해야하기 때문에 게시글 작성에서 저작권 검색기능은 배포 주소에서만 확인할 수 있습니다.
 
 <br>
 
-## CI / CD 파이프라인
+## 💎 CI / CD 파이프라인
 
 1. 각 브랜치에서 원격 레포지토리로 push가 이루어질 때마다 github action을 통해 자동으로 chromatic에 스토리북 파일 배포
 > - 팀원이 PR을 승인하기 전에 chromatic으로 해당 PR의 스토리북을 바로 열람하고 확인 가능합니다.
