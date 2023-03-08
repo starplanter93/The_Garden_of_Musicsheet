@@ -33,7 +33,6 @@ const CategoryDetail = ({
     let currentData: DocumentData;
     if (clickedTab === '전체') {
       setTotalLists(scoresByCategory?.length);
-      console.log(totalLists);
       currentData = scoresByCategory?.slice(
         (currentPage - 1) * 5,
         5 + (currentPage - 1) * 5

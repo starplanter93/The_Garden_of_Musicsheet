@@ -113,6 +113,7 @@ function ScoreInfo() {
           <ScoreInfoAside
             price={scoreData.price}
             author={scoreData.author}
+            authorId={scoreData.authorId}
             profileImg={scoreData.author_profile}
             updateCart={updateCartItem}
             scoreId={scoreData.scoreId}
