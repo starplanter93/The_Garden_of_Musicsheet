@@ -9,14 +9,21 @@ import { auth } from '../../../../firebase/firebase';
 interface ScorePriceCardProps {
   price: string;
   scoreId: string;
+  authorId: string;
   updateCart: () => void;
 }
 
-function ScorePriceCard({ price, updateCart, scoreId }: ScorePriceCardProps) {
+function ScorePriceCard({
+  price,
+  updateCart,
+  scoreId,
+  authorId,
+}: ScorePriceCardProps) {
   const cx = classNames.bind(styles);
   const [isPurchased, setIsPurchased] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [uid, setUid] = useState<string>('');
 
   const formattedPrice = new Intl.NumberFormat('ko-kr').format(Number(price));
 
@@ -43,6 +50,7 @@ function ScorePriceCard({ price, updateCart, scoreId }: ScorePriceCardProps) {
         setIsLogin(false);
       } else {
         setIsLogin(true);
+        setUid(user.uid);
       }
     });
 
@@ -78,6 +86,10 @@ function ScorePriceCard({ price, updateCart, scoreId }: ScorePriceCardProps) {
         isLoading ? (
           <Button size="auto" disabled={true}>
             <Text color="white">로딩중</Text>
+          </Button>
+        ) : uid === authorId ? (
+          <Button size="auto" disabled={true}>
+            <Text color="white">내가 올린 악보입니다</Text>
           </Button>
         ) : isPurchased ? (
           <Button size="auto" disabled={true}>
