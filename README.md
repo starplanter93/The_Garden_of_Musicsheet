@@ -1,11 +1,3 @@
-## 🧸 팀원 소개
-|<img src="https://avatars.githubusercontent.com/u/76644123?v=4" width="150px">|<img src="https://avatars.githubusercontent.com/u/107591946?v=4" width="150px"/>|<img src="https://avatars.githubusercontent.com/u/107888594?v=4" width="150px">|
-|:--:|:--:|:--:|
-|[Ethan Jeong](https://github.com/EthanJcoding)|[starplanter93](https://github.com/starplanter93)|[seungmin2ee](https://github.com/seungmin2ee)|
-|Front|Front|Front|
-
-<br>
-
 <img width="358" alt="image" src="https://user-images.githubusercontent.com/107888594/219731270-1911bcb1-d545-4a16-8490-37b7569a17fb.png">
 
 ```
@@ -27,6 +19,14 @@ TypeScript와 React를 기반으로 하고, DB와 백엔드는 Firebase를 사�
 
 ## 🛠 Stacks
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=fff"/> <img src="https://img.shields.io/badge/React-222222?style=flat-square&logo=React&logoColor=61DAFB"/> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=redux&logoColor=fff"/>  <img src="https://img.shields.io/badge/Scss-CC6699?style=flat-square&logo=sass&logoColor=fff"/> <img src="https://img.shields.io/badge/StoryBook-FF4785?style=flat-square&logo=storybook&logoColor=fff"/> <img src="https://img.shields.io/badge/Firebase-051e34?style=flat-square&logo=Firebase&logoColor=FFCA28"/> <img src="https://img.shields.io/badge/GitHub Actions-2088FF?style=flat-square&logo=GitHub Actions&logoColor=fff"/> <img src="https://img.shields.io/badge/Amazon S3-569A31?style=flat-square&logo=Amazon S3&logoColor=fff"/>
+
+<br>
+
+## 🧸 팀원 소개
+|<img src="https://avatars.githubusercontent.com/u/76644123?v=4" width="150px">|<img src="https://avatars.githubusercontent.com/u/107591946?v=4" width="150px"/>|<img src="https://avatars.githubusercontent.com/u/107888594?v=4" width="150px">|
+|:--:|:--:|:--:|
+|[Ethan Jeong](https://github.com/EthanJcoding)|[starplanter93](https://github.com/starplanter93)|[seungmin2ee](https://github.com/seungmin2ee)|
+|Front|Front|Front|
 
 <br>
 
