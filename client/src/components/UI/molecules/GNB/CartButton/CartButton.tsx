@@ -3,8 +3,7 @@ import styles from './cartButton.module.scss';
 import classNames from 'classnames/bind';
 import { Button, Icon, Text } from '../../../atoms';
 import { cartModalHandler } from '../../../../../redux/ModalSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../../redux/store';
+import { useDispatch } from 'react-redux';
 import { getCart } from '../../../../../firebase/firebase';
 import { auth } from '../../../../../firebase/firebase';
 import { User } from 'firebase/auth';
@@ -14,9 +13,6 @@ const CartButton = () => {
   const [user, setUser] = useState<User | null>(null);
   const [countCart, setCountCart] = useState<number>(0);
   const dispatch = useDispatch();
-  const countCartItems = useSelector(
-    (state: RootState) => state.modalState.countCartItems
-  );
   function cartModalOpener() {
     dispatch(cartModalHandler());
   }
@@ -24,14 +20,15 @@ const CartButton = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user as User);
-      if (user) {
-        getCart(user.uid).then(
-          (data) => data?.cartItems && setCountCart(data.cartItems.length)
-        );
-      }
     });
     return unsubscribe;
-  }, [countCart, user, countCartItems]);
+  }, [user]);
+
+  if (user) {
+    getCart(user.uid).then(
+      (data) => data?.cartItems && setCountCart(data.cartItems.length)
+    );
+  }
 
   return (
     <div className={cx('cartbutton-wrapper')}>
