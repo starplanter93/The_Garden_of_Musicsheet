@@ -1,3 +1,10 @@
+## 🧸 팀원 소개
+|<img src="https://avatars.githubusercontent.com/u/76644123?v=4" width="150px">|<img src="https://avatars.githubusercontent.com/u/107591946?v=4" width="150px"/>|<img src="https://avatars.githubusercontent.com/u/107888594?v=4" width="150px">|
+|:--:|:--:|:--:|
+|[Ethan Jeong](https://github.com/EthanJcoding)|[starplanter93](https://github.com/starplanter93)|[seungmin2ee](https://github.com/seungmin2ee)|
+|Front|Front|Front|
+
+<br>
 
 <img width="358" alt="image" src="https://user-images.githubusercontent.com/107888594/219731270-1911bcb1-d545-4a16-8490-37b7569a17fb.png">
 
@@ -13,7 +20,7 @@ TypeScript와 React를 기반으로 하고, DB와 백엔드는 Firebase를 사�
 또한 Atomic Design Pattern을 활용하여 컴포넌트 기반의 개발을 위해 노력하였습니다.🤔
 <br><br><br>
 
-🧸 <a href='http://gardenmusicdev.s3-website.ap-northeast-2.amazonaws.com/'><b>배포 페이지 바로가기 →</b></a>
+🏠 <a href='http://gardenmusicdev.s3-website.ap-northeast-2.amazonaws.com/'><b>배포 페이지 바로가기 →</b></a>
 <br><br>
 🎨 <a href='https://www.figma.com/file/TXlyRfgbgeJIvvuyNKCa8e/%EC%95%85%EB%B3%B4%EC%9D%98-%EC%A0%95%EC%9B%90?node-id=0%3A1&t=0UDShpJynGiBpiqK-1'>Figma 바로가기 →</a>
 <br><br>
@@ -23,12 +30,10 @@ TypeScript와 React를 기반으로 하고, DB와 백엔드는 Firebase를 사�
 
 <br>
 
-## 악보 공유 / 판매 서비스 소개
--자신이 만든 악보를 자유롭게 공유 혹은 판매할 수 있는 서비스입니다.
-
-<br>
-
-## 🔍 Overview
+## 🔍 악보 공유 / 판매 서비스 소개
+```
+자신이 만든 악보를 자유롭게 공유 혹은 판매할 수 있는 서비스입니다.
+```
 |메인페이지|메인페이지 무한스크롤|
 |:--:|:--:|
 |<img width="1390px" alt="메인페이지" src="https://user-images.githubusercontent.com/107888594/223385168-3ed6ee09-f07e-4f2d-b8d8-638db7f9410e.png">|<img alt="메인페이지 무한스크롤" src="https://user-images.githubusercontent.com/107888594/223405569-ab2378d8-4948-4307-8f38-c747d6e956e2.gif">|
@@ -104,39 +109,7 @@ TypeScript와 React를 기반으로 하고, DB와 백엔드는 Firebase를 사�
 
 <br>
 
-## 🚀 Team Member
-|<img src="https://avatars.githubusercontent.com/u/76644123?v=4" width="150px">|<img src="https://avatars.githubusercontent.com/u/107591946?v=4" width="150px"/>|<img src="https://avatars.githubusercontent.com/u/107888594?v=4" width="150px">|
-|:--:|:--:|:--:|
-|[Ethan Jeong](https://github.com/EthanJcoding)|[starplanter93](https://github.com/starplanter93)|[seungmin2ee](https://github.com/seungmin2ee)|
-|Front|Front|Front|
-
-<br>
-
-## 프로젝트 구동 방법
-레포지토리를 클론 한 후, client 디렉토리에서
-```jsx
-npm install
-npm start
-```
-단, spotify api를 이용해야하기 때문에 게시글 작성에서 저작권 검색기능은 배포 주소에서만 확인할 수 있습니다.
-
-<br>
-
-## CI / CD 파이프라인
-
-1. 각 브랜치에서 원격 레포지토리로 push가 이루어질 때마다 github action을 통해 자동으로 chromatic에 스토리북 파일 배포
-> - 팀원이 PR을 승인하기 전에 chromatic으로 해당 PR의 스토리북을 바로 열람하고 확인 가능합니다.
-
-2. dev와 main 브랜치에 push가 이루어지면 github action을 통해 자동으로 aws S3에 배포
-> - 먼저 dev브랜치에서 분기한 각 팀원의 브랜치가 PR승인을 받고 머지되면 자동으로 배포가 되고, 사전에 설정한 dev도메인을 통해 배포결과를 확인할 수 있습니다.
-> - push 시, 로컬에 저장된 환경변수의 경우 예외처리되어 원격 레포지토리에는 들어가지 않으며, 환경변수가 반드시 필요한 경우에는 github secret을 통해 저장하고, github action이 저장된 secret을 참조하여 배포하도록 하였습니다.
-> - dev도메인에서 문제가 발생하지 않는다면 dev브랜치를 main브랜치로 머지하여, 설정한 메인 도메인에 자동으로 최종 배포가 되도록 하였습니다.
-
-
-
-<br>
-
-## 유저 플로우
+## 🧭 유저 플로우
 <details>
 <summary>Figjam 확인하기</summary>
   <img width="1200" alt="image" src="https://user-images.githubusercontent.com/76644123/223922572-36274078-d4c5-4c6c-8059-1e4c75c8d424.jpeg">
@@ -144,7 +117,7 @@ npm start
 
 <br>
 
-## Firestore DB
+## 👩‍💻 Firestore DB
 
 1. Firebase authentication 을 사용하여 유저가 입력한 이메일과 비밀번호 또는 Google 계정으로 계정을 만들 수 있습니다.
 2. 회원가입을 완료하면 Firestore user 컬렉션 필드의 해당 유저의 UID를 key값으로 하는 document가 생성이되고 초기값인 'cash' , 'isActive' , 'cartItems' 필드가 생성됩니다. 
@@ -173,4 +146,27 @@ npm start
 <summary><h4>회원 탈퇴</h4></summary>
 <img width="600" alt="스크린샷 2023-03-09 오후 2 09 25" src="https://user-images.githubusercontent.com/76644123/223928656-4de3bf7c-4157-4af0-bde9-0dd1bde8d164.gif">
 </details>
+
+
+<br>
+
+## 🚀 프로젝트 실행 방법
+레포지토리를 클론 한 후, client 디렉토리에서
+```jsx
+npm install
+npm start
+```
+📍 단, spotify api를 이용해야하기 때문에 게시글 작성에서 저작권 검색기능은 배포 주소에서만 확인할 수 있습니다.
+
+<br>
+
+## 💎 CI / CD 파이프라인
+
+1. 각 브랜치에서 원격 레포지토리로 push가 이루어질 때마다 github action을 통해 자동으로 chromatic에 스토리북 파일 배포
+> - 팀원이 PR을 승인하기 전에 chromatic으로 해당 PR의 스토리북을 바로 열람하고 확인 가능합니다.
+
+2. dev와 main 브랜치에 push가 이루어지면 github action을 통해 자동으로 aws S3에 배포
+> - 먼저 dev브랜치에서 분기한 각 팀원의 브랜치가 PR승인을 받고 머지되면 자동으로 배포가 되고, 사전에 설정한 dev도메인을 통해 배포결과를 확인할 수 있습니다.
+> - push 시, 로컬에 저장된 환경변수의 경우 예외처리되어 원격 레포지토리에는 들어가지 않으며, 환경변수가 반드시 필요한 경우에는 github secret을 통해 저장하고, github action이 저장된 secret을 참조하여 배포하도록 하였습니다.
+> - dev도메인에서 문제가 발생하지 않는다면 dev브랜치를 main브랜치로 머지하여, 설정한 메인 도메인에 자동으로 최종 배포가 되도록 하였습니다.
 
