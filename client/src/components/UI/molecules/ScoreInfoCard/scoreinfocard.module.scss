@@ -1,0 +1,28 @@
+@import '/src/utils/utils';
+
+.scoreinfo-wrapper {
+  display: flex;
+  max-width: #{700 / $font-size}rem;
+  justify-content: space-between;
+  border: 2px solid $light-gray;
+  border-radius: 1rem;
+  padding: 0.5rem 2rem;
+  flex-wrap: wrap;
+  .scoreinfo-item {
+    display: flex;
+    margin: 1rem 0;
+    @media screen and (max-width: 910px) {
+      width: 50%;
+      justify-content: center;
+    }
+    span {
+      display: flex;
+      align-items: center;
+      margin-right: 1rem;
+    }
+    .text-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

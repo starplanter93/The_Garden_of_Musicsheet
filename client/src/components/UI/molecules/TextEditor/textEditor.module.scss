@@ -1,0 +1,31 @@
+@import '/src/utils/utils';
+
+.wrapper {
+  width: auto;
+  margin-bottom: 2rem;
+
+  .text {
+    margin-bottom: 2rem;
+  }
+
+  .editor {
+    width: 39.75rem;
+    max-height: 20rem;
+    overflow: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    @include mobile {
+      width: 100%;
+    }
+  }
+}
+
+:global {
+  .ql-editor {
+    height: 15rem;
+    @include mobile {
+      height: 12rem;
+    }
+  }
+}

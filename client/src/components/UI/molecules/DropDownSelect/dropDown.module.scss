@@ -1,0 +1,55 @@
+@import '../../../../utils/utils';
+
+.text {
+  margin-bottom: 2rem;
+  @include mobile {
+    margin-bottom: 1rem;
+  }
+}
+
+.default {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 1rem;
+
+  .opened {
+    transition: all 0.4s ease;
+    transform: rotate(360deg);
+  }
+  .closed {
+    transition: all 0.4s ease;
+    transform: rotate(180deg);
+  }
+}
+.options {
+  position: absolute;
+  top: 6.8rem;
+  margin-top: 4px;
+  background-color: $gray-white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 18.75rem;
+  border-radius: 10px;
+  padding: 0.25rem;
+
+  @include mobile {
+    position: relative;
+    top: 0;
+  }
+
+  :hover {
+    background-color: rgba($light-green, 0.6);
+    border-radius: 8px;
+  }
+
+  .option {
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,47 @@
+@import '/src/utils/utils';
+
+.buttons {
+    margin-top: 2rem;
+    display: flex;
+
+    button {
+        margin: 0 5px;
+        font-size: 1.2rem;
+        color: $gray;
+        border: none;
+        background: none;
+        border-radius: 1rem;
+        cursor: pointer;
+
+        &.active {
+            box-shadow: 0 4px 8px 0 rgba($black, .1);
+        }
+
+        &.page {
+            width: 3rem;
+            height: 3rem;
+
+            &:hover {
+                color: $light-green;
+                transition: all .1s ease-in;
+            }
+
+            &.active {
+                background-color: $light-green;
+                color: $white;
+            }
+
+        }
+
+        &.prev,
+        &.next {
+            padding: 5px 8px;
+            margin: 0 2rem;
+            cursor: not-allowed;
+
+            &.active {
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+@import '/src/utils/utils';
+
+@font-face {
+  font-family: 'designhouseOTFLight00';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.logo {
+  a {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 1rem;
+      padding-bottom: 2px;
+    }
+
+    span {
+      color: $deep-green;
+      font: {
+        family: 'designhouseOTFLight00';
+        weight: bold;
+        size: 1.5rem;
+      }
+    }
+  }
+
+  &.mobile {
+    a {
+      flex-direction: column;
+
+      img {
+        width: 4rem;
+        padding-bottom: 0.5rem;
+      }
+      span {
+        margin-top: 0.5rem;
+        font-size: 2rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@import '/src/utils/utils';
+
+.background {
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 #{28.4 / $font-size}rem;
+  margin-top: 3rem;
+  justify-content: space-between;
+
+  .wrapper {
+    width: 100%;
+    max-width: 1220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+  }
+}

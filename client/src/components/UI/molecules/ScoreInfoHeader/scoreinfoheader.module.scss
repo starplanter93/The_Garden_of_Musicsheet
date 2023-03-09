@@ -1,0 +1,41 @@
+@import '/src/utils/utils';
+
+.songinfo-header {
+  display: flex;
+  max-width: #{700 / $font-size}rem;
+
+  .text-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    span {
+      margin: 0.25rem 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      word-break: break-all;
+      margin: 0.25rem 0.5rem;
+    }
+  }
+
+  .button-wrapper {
+    display: flex;
+    align-items: flex-end;
+
+    button {
+      width: 2.5rem;
+      height: 1.5rem;
+    }
+
+    button:nth-child(1) {
+      margin-right: 0.5rem;
+    }
+
+    span {
+      margin: 0.25rem 0;
+    }
+  }
+}

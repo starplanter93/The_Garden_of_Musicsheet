@@ -1,0 +1,39 @@
+@import '/src/utils/utils';
+
+.buttons {
+  display: flex;
+  margin-bottom: 2rem;
+  width: 100%;
+  justify-content: space-between;
+
+  @include mobile {
+    width: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+    & > button:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.text {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  display: flex;
+}
+
+.h2 {
+  margin-bottom: 2rem;
+  display: flex;
+  @include mobile {
+    margin-bottom: 1rem;
+  }
+
+  &.editmode {
+    span {
+      color: $gray;
+    }
+  }
+}

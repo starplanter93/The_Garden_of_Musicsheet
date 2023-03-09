@@ -1,0 +1,17 @@
+@import '/src/utils/utils';
+
+.scoreinfo-aside {
+  @include mobile {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    width: 100%;
+    max-width: 375px;
+    padding: 1rem;
+  }
+  > div {
+    margin-top: 1rem;
+    @include mobile {
+      width: 100%;
+    }
+  }
+}

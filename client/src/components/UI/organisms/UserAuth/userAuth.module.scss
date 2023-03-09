@@ -1,0 +1,73 @@
+@import '../../../../utils/utils';
+
+.userAuth {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  border: 2px solid $gray-white;
+  border-radius: 1.5rem;
+  align-items: center;
+  width: 40rem;
+
+  .userAuth__logo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo__Text {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    span {
+      color: $deep-green;
+      font: {
+        family: 'designhouseOTFLight00';
+        weight: bold;
+        size: 2.5rem;
+      }
+    }
+  }
+
+  .userAuth__btn {
+    margin-bottom: 4rem;
+  }
+
+  .userAuth__register__btn {
+    margin-top: 2rem;
+    padding-left: 13.5rem;
+    :hover {
+      color: $light-green;
+    }
+  }
+
+  hr {
+    width: 100%;
+    border: 0;
+    height: 2px;
+    background: $light-gray;
+    margin-bottom: 4rem;
+    margin-top: 4rem;
+  }
+}
+
+.userAuth__oauth__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  .userAuth__oauth__btn--icon {
+    display: flex;
+    padding-left: 2rem;
+  }
+  .userAuth__oauth__btn--text {
+    flex: 1;
+    padding-right: 2rem;
+  }
+}

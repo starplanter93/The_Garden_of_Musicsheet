@@ -1,0 +1,13 @@
+@import '/src/utils/utils';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 36rem;
+  justify-self: center;
+
+  .scorelist-wrapper {
+    margin-top: 0.5rem;
+  }
+}

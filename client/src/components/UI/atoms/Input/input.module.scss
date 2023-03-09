@@ -1,0 +1,48 @@
+@import '../../../../utils/utils';
+
+@mixin input-size($class, $width) {
+  &.#{$class} {
+    width: #{$width/$font-size}rem;
+    height: 3.75rem;
+  }
+}
+
+.default-input {
+  padding-left: 2rem;
+  font-size: 1rem;
+  background-color: white;
+  outline: 0;
+  border-radius: 0.5rem;
+  color: $black;
+  border: 2px solid $gray;
+  width: 20.75rem;
+  height: 3.75rem;
+
+  &.icon-input {
+    position: absolute;
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+    padding-top: 0.75rem;
+    line-height: 1.5rem;
+  }
+  &.icon-input-no-label {
+    position: absolute;
+    padding-left: 3.5rem;
+  }
+
+  &:focus {
+    border: 2px solid $deep-green;
+    transition: all 0.1s ease-in;
+  }
+}
+
+@include input-size(l, 636);
+@include input-size(m, 600);
+@include input-size(s, 332);
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

@@ -1,0 +1,22 @@
+@import '/src/utils/utils';
+
+.instrument-lists {
+  width: 100%;
+  max-width: #{1220/$font-size}rem;
+  display: flex;
+  flex-wrap: wrap;
+
+  .instrument-list {
+    flex-basis: 25%;
+    padding: 0 1rem 2rem;
+
+    @media screen and (min-width: 550px) and (max-width: 1023px) {
+      flex-basis: 33.3%;
+    }
+
+    @media screen and (max-width: 549px) {
+      flex-basis: 50%;
+      padding: 0 7px 2rem;
+    }
+  }
+}

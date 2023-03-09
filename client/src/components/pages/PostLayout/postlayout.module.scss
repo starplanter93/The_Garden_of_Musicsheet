@@ -1,0 +1,13 @@
+@import '/src/utils/utils';
+
+.post-main {
+  padding-top: #{70 / $font-size}rem;
+
+  @include mobile {
+    padding-top: 5rem;
+
+    min-height: calc(100vh);
+    // Footer 넣는 경우
+    // min-height: calc(100vh - 13.33rem);
+  }
+}

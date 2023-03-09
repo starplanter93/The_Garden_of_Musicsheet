@@ -1,0 +1,21 @@
+@import '../../../../utils/utils';
+
+.label {
+  position: absolute;
+  left: -108px;
+  top: 20px;
+  pointer-events: none;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  color: $gray;
+  @include mobile {
+    position: absolute;
+    left: -81px;
+    top: 15px;
+  }
+}
+
+.label--focused {
+  top: 8px;
+  font-size: 0.75rem;
+}

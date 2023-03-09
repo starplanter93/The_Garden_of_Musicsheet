@@ -1,0 +1,23 @@
+$white: #fffdfc;
+$light-green: #52d681;
+$deep-green: #00ad7c;
+$gray-white: #f4f4f5;
+$light-gray: #eeefef;
+$gray: #a5a5a5;
+$black: #3a3a3a;
+$blue: #006cba;
+$red: #f24e1e;
+
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+
+$font-size: 16;
+
+$breakpoint-mobile: 767px;
+
+@mixin mobile {
+  @media screen and (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}

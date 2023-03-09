@@ -1,0 +1,53 @@
+@import '/src/utils/utils';
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  background: black;
+  opacity: 0.5;
+}
+
+.modal-container {
+  display: flex;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  .cart-modal {
+    background-color: $white;
+    position: absolute;
+    z-index: 4;
+    right: -100%;
+    transition: right 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    width: 40%;
+    min-width: #{300 / $font-size}rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @include mobile {
+      width: 60%;
+    }
+
+    @media screen and (max-width: 550px) {
+      width: 100%;
+    }
+
+    .cart-body-wrapper {
+      flex: 1;
+      overflow-y: auto;
+    }
+  }
+
+  .cart-modal.show {
+    right: 0;
+  }
+}

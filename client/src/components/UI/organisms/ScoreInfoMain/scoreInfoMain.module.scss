@@ -1,0 +1,26 @@
+@import '/src/utils/utils';
+
+.scoreinfo-main {
+  > div {
+    margin-top: 2.5rem;
+
+    @media screen and (max-width: 1050px) {
+      > iframe {
+        height: auto;
+        min-height: 250px;
+      }
+    }
+
+    > img:nth-child(2) {
+      @media screen and (max-width: 1050px) {
+        display: none;
+      }
+    }
+  }
+
+  > div:nth-child(1) {
+    @media screen and (max-width: 1050px) {
+      justify-content: center;
+    }
+  }
+}
