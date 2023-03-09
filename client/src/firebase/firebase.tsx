@@ -45,13 +45,6 @@ export const auth = getAuth();
 
 export const provider = new GoogleAuthProvider();
 
-export async function getMusics() {
-  const ref = collection(db, 'music');
-  const snapshot = await getDocs(ref);
-  const list = snapshot.docs.map((doc: DocumentData) => doc.data());
-  return list;
-}
-
 export async function getScoreByMusic(docName: string, scoreId: string) {
   const ref = doc(db, 'music', docName);
   const snapshot = await getDoc(ref);
@@ -168,7 +161,7 @@ export async function getMusicData(songName: string, data: StateType) {
     updateData(name, data);
   } else if (!infoSnapshot.exists()) {
     data = { ...data };
-    data.songId = list.length.toString();
+    data.songId = list.length;
     postData(name, data);
   }
 
@@ -768,7 +761,7 @@ export async function syncUserData() {
 export async function getMainPageData() {
   const queryRef = query(
     collection(db, 'music'),
-    orderBy('songId'), // 최신 작성순으로 정렬
+    orderBy('songId', 'desc'), // 최신 작성순으로 정렬
     limit(8)
   );
   try {
@@ -784,7 +777,7 @@ export async function getMoreMainData(key: DocumentData) {
   if (key !== undefined) {
     const queryRef = query(
       collection(db, 'music'),
-      orderBy('songId'),
+      orderBy('songId', 'desc'),
       startAfter(key), // 마지막 커서 기준으로 추가 요청을 보내도록 쿼리 전송
       limit(6)
     );
