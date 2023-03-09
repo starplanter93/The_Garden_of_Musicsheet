@@ -41,7 +41,7 @@ export interface Score {
 }
 
 export interface StateType {
-  songId: string;
+  songId: number;
   albumImg: string;
   songName: string;
   artist: string;
@@ -51,7 +51,7 @@ export interface StateType {
 
 // initalState 생성
 const initialState: StateType = {
-  songId: '',
+  songId: 0,
   albumImg: '',
   songName: '',
   artist: '',
