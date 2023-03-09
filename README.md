@@ -1,4 +1,3 @@
-
 <img width="358" alt="image" src="https://user-images.githubusercontent.com/107888594/219731270-1911bcb1-d545-4a16-8490-37b7569a17fb.png">
 
 ```
@@ -18,8 +17,16 @@ TypeScript와 React를 기반으로 하고, DB와 백엔드는 Firebase를 사�
 🎨 <a href='https://www.figma.com/file/TXlyRfgbgeJIvvuyNKCa8e/%EC%95%85%EB%B3%B4%EC%9D%98-%EC%A0%95%EC%9B%90?node-id=0%3A1&t=0UDShpJynGiBpiqK-1'>Figma 바로가기 →</a>
 <br><br>
 
-## 🛠 기술 스택
+## 🛠 Stacks
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=fff"/> <img src="https://img.shields.io/badge/React-222222?style=flat-square&logo=React&logoColor=61DAFB"/> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=redux&logoColor=fff"/>  <img src="https://img.shields.io/badge/Scss-CC6699?style=flat-square&logo=sass&logoColor=fff"/> <img src="https://img.shields.io/badge/StoryBook-FF4785?style=flat-square&logo=storybook&logoColor=fff"/> <img src="https://img.shields.io/badge/Firebase-051e34?style=flat-square&logo=Firebase&logoColor=FFCA28"/> <img src="https://img.shields.io/badge/GitHub Actions-2088FF?style=flat-square&logo=GitHub Actions&logoColor=fff"/> <img src="https://img.shields.io/badge/Amazon S3-569A31?style=flat-square&logo=Amazon S3&logoColor=fff"/>
+
+<br>
+
+## 🧸 팀원 소개
+|<img src="https://avatars.githubusercontent.com/u/76644123?v=4" width="150px">|<img src="https://avatars.githubusercontent.com/u/107591946?v=4" width="150px"/>|<img src="https://avatars.githubusercontent.com/u/107888594?v=4" width="150px">|
+|:--:|:--:|:--:|
+|[Ethan Jeong](https://github.com/EthanJcoding)|[starplanter93](https://github.com/starplanter93)|[seungmin2ee](https://github.com/seungmin2ee)|
+|Front|Front|Front|
 
 <br>
 
@@ -27,7 +34,6 @@ TypeScript와 React를 기반으로 하고, DB와 백엔드는 Firebase를 사�
 ```
 자신이 만든 악보를 자유롭게 공유 혹은 판매할 수 있는 서비스입니다.
 ```
-
 |메인페이지|메인페이지 무한스크롤|
 |:--:|:--:|
 |<img width="1390px" alt="메인페이지" src="https://user-images.githubusercontent.com/107888594/223385168-3ed6ee09-f07e-4f2d-b8d8-638db7f9410e.png">|<img alt="메인페이지 무한스크롤" src="https://user-images.githubusercontent.com/107888594/223405569-ab2378d8-4948-4307-8f38-c747d6e956e2.gif">|
@@ -98,21 +104,49 @@ TypeScript와 React를 기반으로 하고, DB와 백엔드는 Firebase를 사�
 > - google Oauth를 통해 구글 아이디로 쉽게 회원가입과 로그인이 가능합니다.
 <br>
 
-|메인페이지 반응형|악기페이지 반응형|
-|:--:|:--:|
-|![메인페이지반응형](https://user-images.githubusercontent.com/107888594/223703920-aa52589b-6709-49d6-b9a3-f704a09ef056.gif)|![악기페이지반응형](https://user-images.githubusercontent.com/107888594/223704552-e89f9fe4-3775-4fdb-8016-281662d8bac7.gif)|
 8. 모바일 반응형 구현
 > - 모바일에서도 사용할 수 있도록 각 페이지에 모바일 반응형 css 구현하였습니다.
 
+<br>
 
+## 🧭 유저 플로우
+<details>
+<summary>Figjam 확인하기</summary>
+  <img width="1200" alt="image" src="https://user-images.githubusercontent.com/76644123/223922572-36274078-d4c5-4c6c-8059-1e4c75c8d424.jpeg">
+</details>
 
 <br>
 
-## 🧸 팀원 소개
-|<img src="https://avatars.githubusercontent.com/u/76644123?v=4" width="150px">|<img src="https://avatars.githubusercontent.com/u/107591946?v=4" width="150px"/>|<img src="https://avatars.githubusercontent.com/u/107888594?v=4" width="150px">|
-|:--:|:--:|:--:|
-|[Ethan Jeong](https://github.com/EthanJcoding)|[starplanter93](https://github.com/starplanter93)|[seungmin2ee](https://github.com/seungmin2ee)|
-|Front|Front|Front|
+## 👩‍💻 Firestore DB
+
+1. Firebase authentication 을 사용하여 유저가 입력한 이메일과 비밀번호 또는 Google 계정으로 계정을 만들 수 있습니다.
+2. 회원가입을 완료하면 Firestore user 컬렉션 필드의 해당 유저의 UID를 key값으로 하는 document가 생성이되고 초기값인 'cash' , 'isActive' , 'cartItems' 필드가 생성됩니다. 
+<details>
+<summary><h4>User collection</h4></summary>
+<img width="800" alt="스크린샷 2023-03-08 오후 5 54 32" src="https://user-images.githubusercontent.com/76644123/223924623-810faf3c-95df-40b1-8fd6-4fd8a713580f.png">
+</details>
+
+3. 로그인을 한 유저는 악보를 업로드 할 수 있습니다. "곡 제목 - 가수" 를 키 값으로 music 컬렉션에 document가 생성되고, 입력받은 인풋들로 이루어진 필드가 생성됩니다. 마찬가지로 instrument 컬렉션에 해당 악보의 악기에 맞춰서 'Drum' , 'Bass' , 'Guitar' , 'Piano' , 'Electric' document의 scores 배열 필드로 들어갑니다.
+> - 게시글에 .pdf파일을 첨부할 때 해당 파일을 Firebase Storage에 저장하고 다운로드 url을 악보가 저장되는 시점에 'downloadURL' 이라는 필드의 값으로 넘겨줍니다.
+> - 게시글 CRUD는 해당 게시글의 id를 바탕으로 전부 3개의 컬렉션을 순회하여 데이터를 컨트롤합니다.
+<details>
+<summary><h4>Music collection</h4></summary>
+<img width="800" alt="스크린샷 2023-03-09 오후 2 09 25" src="https://user-images.githubusercontent.com/76644123/223926223-addf16cc-9663-4ccd-97ff-8c541a1003c8.png">
+</details>
+
+4. 유저가 장바구니에 악보를 추가하거나 결제를 할 경우, 마이페이지에서 해당 업데이트 내용을 받기위해 user 컬렉션의 cartItems 필드 또는 purchasedScores 필드가 업데이트 됩니다.
+5. 회원 탈퇴시 유저가 업로드한 모든 작성글의 isOptout 값이 true가 되어 사이트내에서 확인이 불가능하게 만들어 줬습니다. 이미 구매한 유저들을 위해서 구매한 내역에는 그대로 남아있어 여전히 악보파일을 다운로드 받을 수 있습니다.
+<details>
+<summary><h4>OptOut</h4></summary>
+<img width="600" alt="스크린샷 2023-03-09 오후 2 09 25" src="https://user-images.githubusercontent.com/76644123/223929358-8df00685-763c-499e-8a14-4b95c1333b82.gif">
+</details>
+
+6. 회원 탈퇴시 해당 authentication 정보를 완전히 삭제하지 않고 그 유저가 다시 로그인을 한다면 탈퇴한 회원임을 알려줍니다.
+<details>
+<summary><h4>회원 탈퇴</h4></summary>
+<img width="600" alt="스크린샷 2023-03-09 오후 2 09 25" src="https://user-images.githubusercontent.com/76644123/223928656-4de3bf7c-4157-4af0-bde9-0dd1bde8d164.gif">
+</details>
+
 
 <br>
 
@@ -135,3 +169,4 @@ npm start
 > - 먼저 dev브랜치에서 분기한 각 팀원의 브랜치가 PR승인을 받고 머지되면 자동으로 배포가 되고, 사전에 설정한 dev도메인을 통해 배포결과를 확인할 수 있습니다.
 > - push 시, 로컬에 저장된 환경변수의 경우 예외처리되어 원격 레포지토리에는 들어가지 않으며, 환경변수가 반드시 필요한 경우에는 github secret을 통해 저장하고, github action이 저장된 secret을 참조하여 배포하도록 하였습니다.
 > - dev도메인에서 문제가 발생하지 않는다면 dev브랜치를 main브랜치로 머지하여, 설정한 메인 도메인에 자동으로 최종 배포가 되도록 하였습니다.
+
