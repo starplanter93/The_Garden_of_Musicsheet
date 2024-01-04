@@ -12,7 +12,7 @@ TypeScript와 React를 기반으로 하고, DB와 백엔드는 Firebase를 사�
 또한 Atomic Design Pattern을 활용하여 컴포넌트 기반의 개발을 위해 노력하였습니다.🤔
 <br><br><br>
 
-🏠 <a href='http://gardenmusic.s3-website.ap-northeast-2.amazonaws.com/'><b>배포 페이지 바로가기 →</b></a>
+🏠 <a href="http://music-garden.s3-website.ap-northeast-2.amazonaws.com/"><b>배포 페이지 바로가기 →</b></a>
 <br><br>
 🎨 <a href='https://www.figma.com/file/TXlyRfgbgeJIvvuyNKCa8e/%EC%95%85%EB%B3%B4%EC%9D%98-%EC%A0%95%EC%9B%90?node-id=0%3A1&t=0UDShpJynGiBpiqK-1'>Figma 바로가기 →</a>
 <br><br>
