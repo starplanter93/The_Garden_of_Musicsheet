@@ -329,7 +329,7 @@ export async function getUserArticle(uid: string) {
 export async function userInitData(uid: string) {
   const ref = doc(db, 'user', uid);
   const snapshot = await getDoc(ref);
-  await setDoc(ref, { cash: '1000000', isActive: true, cartItems: [] });
+  await setDoc(ref, { cash: 1000000, isActive: true, cartItems: [] });
 
   return snapshot.data();
 }
